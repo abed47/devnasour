@@ -1,11 +1,11 @@
-<header>
-    <img src="../../../../../assets/images/logo.png" alt="">
+<header class="main-layout-header">
+    <img class="logo" src="../../../../../assets/images/logo.png" alt="devnasour logo">
     <nav>
-        <a href="/">Home</a>
-        <a href="/projects">Projects</a>
-        <a href="/shop">Shop</a>
-        <a href="/contact-us">Contact Us</a>
-        <a href="/about">About</a>
+        <a [routerLink]="['/']" [routerLinkActive]="'active'">Home</a>
+        <a [routerLink]="['/projects']" [routerLinkActive]="'active'">Projects</a>
+        <a routerLink="['/shop']" [routerLinkActive]="'active'">Shop</a>
+        <a [routerLink]="['/contact-us']" [routerLinkActive]="'active'">Contact Us</a>
+        <a [routerLink]="['/about']" [routerLinkActive]="'active'">About</a>
     </nav>
-    <button mat-button>hello</button>
+    <button class="btn secondary" mat-button (click)="moveToLogin()">Account login</button>
 </header>
