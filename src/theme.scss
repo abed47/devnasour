@@ -68,9 +68,9 @@ $md-mcgpalette0: (
 
 @include mat-core();
 
-$mat-theming-primary: mat-palette($md-mcgpalette0);
+$mat-theming-primary: mat-palette($md-mcgpalette1);
 
-$mat-theming-accent: mat-palette($md-mcgpalette1);
+$mat-theming-accent: mat-palette($md-mcgpalette0);
 
 $mat-theming-warn: mat-palette($mat-red);
 

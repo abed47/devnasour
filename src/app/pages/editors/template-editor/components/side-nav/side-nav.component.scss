@@ -1,0 +1,37 @@
+@import 'src/styles/styles.scss';
+
+.side-nav{
+    @include init-flex(column, center, center);
+    background-color: white;
+    width: 130px;
+    height: 100%;
+
+    .tool-container{
+        width: 100%;
+
+        @include init-flex(column, center, center);
+
+        .tool{
+            width: 100%;
+            height: 90px;
+            border-radius: 0px;
+            @include init-flex(column);
+
+            &.active{
+                background-color: rgba($color-secondary, .10);
+            }
+
+            img{
+                width: 30px;
+            }
+
+            p{
+                margin: 0px;
+                font-family: $font-base;
+                color: $color-primary;
+                font-size: 12px;
+                line-height: 2rem;
+            }
+        }
+    }
+}

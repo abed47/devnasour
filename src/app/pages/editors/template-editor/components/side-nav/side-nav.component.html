@@ -1,1 +1,41 @@
-<p>side-nav works!</p>
+<div class="side-nav">
+
+    <div class="tool-container">
+        
+        <button mat-button [class.active]="selectedTool === 'templates'" class="tool" (click)="changeTool('templates')">
+            <img src="assets/images/templates-icon.png" alt="icon"/>
+            <p>Templates</p>
+        </button>
+        
+        <button mat-button [class.active]="selectedTool === 'text'" class="tool" (click)="changeTool('text')">
+            <img src="assets/images/text-icon.png" alt="icon"/>
+            <p>Text</p>
+        </button>
+        
+        <button mat-button [class.active]="selectedTool === 'upload-photo'" class="tool" (click)="changeTool('upload-photo')">
+            <img src="assets/images/upload-photo-icon.png" alt="icon"/>
+            <p>Upload Photo</p>
+        </button>
+        
+        <button mat-button [class.active]="selectedTool === 'elements'" class="tool" (click)="changeTool('elements')">
+            <img src="assets/images/elements-icon.png" alt="icon"/>
+            <p>Elements</p>
+        </button>
+        
+        <button mat-button [class.active]="selectedTool === 'background'" class="tool" (click)="changeTool('background')">
+            <img src="assets/images/background-icon.png" alt="icon"/>
+            <p>Background</p>
+        </button>
+        
+        <button mat-button [class.active]="selectedTool === 'upload'" class="tool" (click)="changeTool('upload')">
+            <img src="assets/images/folder-icon.png" alt="icon"/>
+            <p>Upload</p>
+        </button>
+        
+        <button mat-button [class.active]="selectedTool === 'brush'" class="tool" (click)="changeTool('brush')">
+            <img src="assets/images/brush-icon.png" alt="icon"/>
+            <p>Brush</p>
+        </button>
+
+    </div>
+</div>
