@@ -5,22 +5,22 @@ import { TemplateEditorLayoutComponent } from './layouts/template-editor-layout/
 
 const routes: Routes = [
   {
+    path: 'template-editor',
+    component: TemplateEditorLayoutComponent,
+    children: [
+      {
+        path: '2d',
+        loadChildren: () => import('./modules/template-editor/template-editor.module').then(m => m.TemplateEditorModule)
+      }
+    ]
+  },
+  {
     path: '',
     component: MainLayoutComponent,
     children: [
       {
         path: '',
         loadChildren: () => import('./modules/pages/pages.module').then(m => m.PagesModule)
-      }
-    ]
-  },
-  {
-    path: '2d-editor',
-    component: TemplateEditorLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./modules/template-editor/template-editor.module').then(m => m.TemplateEditorModule)
       }
     ]
   }
