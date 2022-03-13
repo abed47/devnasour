@@ -1,3 +1,6 @@
+@import "src/styles/styles.scss";
+
+
 div.page-login{
     height: calc(100vh - 100px);
     display: flex;
@@ -24,6 +27,86 @@ div.page-login{
             left: 0;
             z-index: 3;
             background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            form{
+                width: 80%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 50px 0;
+
+                .f-box{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    a{
+                        color: black;
+                        border: none;
+                        text-decoration: none;
+                    }
+                }
+
+                h1{
+                    font-family: $font-bold;
+                    color: $color-primary;
+                    font-size: 40px;
+                    margin: 25px;
+                }
+
+                hr{
+                    width: 25%;
+                    border: none;
+                    border-bottom: 1px solid $color-secondary;
+                    margin-bottom: 50px;
+                }
+
+                .input{
+                    width: 100%;
+                    border-radius: 0px !important;
+
+                    .mat-form-field-outline-start, .mat-form-field-outline-end {
+                        border-radius: 0 !important;
+                    }
+                }
+
+                .btn{
+                    width: 100%;
+                    margin: 10px 0;
+                    border-radius: 0 !important;
+                    height: 50px;
+
+                    &.google{
+                        img{
+                            width: 40px;
+                        }
+                    }
+                    &.facebook{
+                        background-color: #3B5998 !important;
+                        img{
+                            width: 130px;
+                        }
+                    }
+                }
+
+                .register-text{
+                    color: #7A7A7A;
+                    font-size: 17px;
+                    font-family: $font-base;
+                    margin-top: 15px;
+
+                    a{
+                        color: $color-secondary;
+                        text-decoration: none;
+                    }
+                }
+            }
         }
 
         .r{

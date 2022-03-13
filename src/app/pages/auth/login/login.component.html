@@ -4,22 +4,22 @@
 
         <div class="l">
 
-            <form>
+            <form [formGroup]="loginForm">
                 <h1>Welcome Back!</h1>
 
                 <hr class="mt-5" />
 
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="input">
                     <mat-label>Email</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="email" style="border-radius: 0px;">
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="input">
                     <mat-label>Password</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="password" type="password">
                 </mat-form-field>
 
-                <div class="f-box">
+                <div class="f-box input">
                     <mat-checkbox color="primary" [checked]="true">
                         keep me logged in
                     </mat-checkbox>
@@ -27,15 +27,16 @@
                     <a [routerLink]="['/forgot-password']">Forgot Password?</a>
                 </div>
 
-                <button mat-raised-button filled color="accent" class="btn" >Log in</button>
-                <button mat-raised-button filled color="accent" class="btn google">
+                <button mat-raised-button filled color="accent" class="btn" (click)="onLoginSubmit()" >Log in</button>
+                
+                <button mat-raised-button filled class="btn google" (click)="onGoogleLogin()">
                     <img src="assets/images/google-logo.png" alt="login with google"/>
                     Sign in with google</button>
-                <button mat-raised-button filled color="accent" class="btn facebook" >
+                <button mat-raised-button filled color="accent" class="btn facebook" (click)="onFbLogin()" >
                     <img src="assets/images/facebook-logo.png" alt="login with facebook" />
                 </button>
 
-                <p>
+                <p class="register-text">
                     Don't have and account? <a routerLink="/register">Sign up!</a>
                 </p>
             </form>
