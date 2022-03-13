@@ -1,0 +1,80 @@
+$md-mcgpalette1: (
+    50 : #e0e0f0,
+    100 : #b3b3d9,
+    200 : #8080c0,
+    300 : #4d4da6,
+    400 : #262693,
+    500 : #000080,
+    600 : #000078,
+    700 : #00006d,
+    800 : #000063,
+    900 : #000050,
+    A100 : #8383ff,
+    A200 : #5050ff,
+    A400 : #1d1dff,
+    A700 : #0303ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$md-mcgpalette0: (
+    50 : #ffece0,
+    100 : #ffcfb3,
+    200 : #ffaf80,
+    300 : #ff8e4d,
+    400 : #ff7626,
+    500 : #ff5e00,
+    600 : #ff5600,
+    700 : #ff4c00,
+    800 : #ff4200,
+    900 : #ff3100,
+    A100 : #ffffff,
+    A200 : #fff4f2,
+    A400 : #ffc8bf,
+    A700 : #ffb2a6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$mat-theming-primary: mat-palette($md-mcgpalette0);
+
+$mat-theming-accent: mat-palette($md-mcgpalette1);
+
+$mat-theming-warn: mat-palette($mat-red);
+
+$mat-theming-theme: mat-light-theme($mat-theming-primary, $mat-theming-accent, $mat-theming-warn);
+$mat-theming-theme-dark: mat-dark-theme($mat-theming-primary, $mat-theming-accent, $mat-theming-warn);
+
+@include angular-material-theme($mat-theming-theme);

@@ -3,7 +3,41 @@
     <div class="inner-wrapper">
 
         <div class="l">
+
             <form>
+                <h1>Welcome Back!</h1>
+
+                <hr class="mt-5" />
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <div class="f-box">
+                    <mat-checkbox color="primary" [checked]="true">
+                        keep me logged in
+                    </mat-checkbox>
+
+                    <a [routerLink]="['/forgot-password']">Forgot Password?</a>
+                </div>
+
+                <button mat-raised-button filled color="accent" class="btn" >Log in</button>
+                <button mat-raised-button filled color="accent" class="btn google">
+                    <img src="assets/images/google-logo.png" alt="login with google"/>
+                    Sign in with google</button>
+                <button mat-raised-button filled color="accent" class="btn facebook" >
+                    <img src="assets/images/facebook-logo.png" alt="login with facebook" />
+                </button>
+
+                <p>
+                    Don't have and account? <a routerLink="/register">Sign up!</a>
+                </p>
             </form>
             
         </div>
