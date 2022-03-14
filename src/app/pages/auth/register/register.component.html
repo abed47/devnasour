@@ -2,7 +2,7 @@
 
     <div class="inner-wrapper">
         <div class="l">
-            <form>
+            <form [formGroup]="registerForm" (submit)="onSubmit()">
                 <h1>Join Us!</h1>
                 
                 <hr/>
@@ -10,41 +10,41 @@
                 <div class="form-group">
                     <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>
-                        <input type="text" matInput>
+                        <input type="text" matInput formControlName="firstName">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Last Name</mat-label>
-                        <input type="text" matInput>
+                        <input type="text" matInput formControlName="lastName">
                     </mat-form-field>
                 </div>
     
                 <mat-form-field appearance="outline" class="input">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput>
+                    <input type="email" matInput formControlName="email">
                 </mat-form-field>
     
                 <mat-form-field appearance="outline" class="input">
                     <mat-label>Phone</mat-label>
-                    <input type="tel" matInput>
+                    <input type="tel" matInput formControlName="phone">
                 </mat-form-field>
     
                 <mat-form-field appearance="outline" class="input">
                     <mat-label>Password</mat-label>
-                    <input type="password" matInput>
+                    <input type="password" matInput formControlName="password">
                 </mat-form-field>
     
                 <mat-form-field appearance="outline" class="input">
                     <mat-label>Confirm Password</mat-label>
-                    <input type="password" matInput>
+                    <input type="password" matInput formControlName="passwordConfirm">
                 </mat-form-field>
     
                 <div class="d-inline secondary">
-                    <mat-checkbox color="accent">Client</mat-checkbox>
-                    <mat-checkbox color="accent">Supplier</mat-checkbox>
+                    <mat-checkbox color="accent" [checked]="userType === 1" (change)="onUserTypeChange($event, 1)">Client</mat-checkbox>
+                    <mat-checkbox color="accent" [checked]="userType === 2" (change)="onUserTypeChange($event, 2)">Supplier</mat-checkbox>
                 </div>
     
                 <div class="d-inline">
-                    <mat-checkbox>I agree to <a routerLink="/privacy-policy">terms, privacy policy and fees</a></mat-checkbox>
+                    <mat-checkbox [checked]="acceptedTerms" (change)="onTermsAcceptanceChange()">I agree to <a routerLink="/privacy-policy">terms, privacy policy and fees</a></mat-checkbox>
                 </div>
     
                 <div class="d-inline">
