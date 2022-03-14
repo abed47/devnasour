@@ -20,14 +20,14 @@
                 </mat-form-field>
 
                 <div class="f-box input">
-                    <mat-checkbox color="primary" [checked]="true">
+                    <mat-checkbox color="accent" [checked]="true">
                         keep me logged in
                     </mat-checkbox>
 
                     <a [routerLink]="['/forgot-password']">Forgot Password?</a>
                 </div>
 
-                <button mat-raised-button filled color="accent" class="btn" (click)="onLoginSubmit()" >Log in</button>
+                <button mat-raised-button filled color="primary" class="btn" (click)="onLoginSubmit()" >Log in</button>
                 
                 <button mat-raised-button filled class="btn google" (click)="onGoogleLogin()">
                     <img src="assets/images/google-logo.png" alt="login with google"/>
@@ -49,7 +49,7 @@
         <div class="r">
             <img src="assets/images/login-img.png" alt="img" />
         </div>
-        
+
     </div>
 
 </div>
