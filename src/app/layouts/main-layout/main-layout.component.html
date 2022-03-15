@@ -1,5 +1,13 @@
-<main-top-nav></main-top-nav>
-<div class="page-content-wrapper">
-    <router-outlet></router-outlet>
-    <main-footer></main-footer>
-</div>
+
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+    <mat-drawer #drawer mode="over" (closed)="onSidenavClose()" [opened]="sidenavOpen" position="right" [position]="'end'">I'm a drawer</mat-drawer>
+    <mat-drawer-content>
+        
+        <main-top-nav></main-top-nav>
+        <div class="page-content-wrapper">
+            <router-outlet></router-outlet>
+            <main-footer></main-footer>
+        </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>

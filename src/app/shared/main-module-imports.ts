@@ -9,6 +9,7 @@ import { ContactUsComponent } from '../pages/contact-us/contact-us.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PrivacyPolicyComponent } from '../pages/privacy-policy/privacy-policy.component';
 import { TermsOfUseComponent } from '../pages/terms-of-use/terms-of-use.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 /**
  * @description imports and declarations for the main layout declarations
@@ -22,7 +23,8 @@ export default {
         MatCheckboxModule,
         MatInputModule,
         MatFormFieldModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSidenavModule
     ],
     declarations: [
         FooterComponent,
