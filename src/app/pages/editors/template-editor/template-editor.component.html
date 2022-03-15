@@ -1,8 +1,10 @@
-<div class="two-d-editor-container">
+<div class="two-d-editor-container" tabindex="9999" (keydown)="handleDeleteObject($event)">
   <two-d-top-nav></two-d-top-nav>
   <div class="wrapper">
     <two-d-side-nav></two-d-side-nav>
-    <div class="fab"></div>
+    <div class="fab">
+      <canvas width="500px" height="500px" id="fabricSurface"></canvas>
+    </div>
     <two-d-right-panel></two-d-right-panel>
   </div>
 </div>

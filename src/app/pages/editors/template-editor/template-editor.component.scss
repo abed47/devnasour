@@ -23,6 +23,11 @@
         @include init-flex(row, space-between);
         height: 100%;
         background-color: $light-grey;
+        
+        .fab{
+            padding-top: 120px;
+            box-sizing: border-box;
+        }
     }
     
     // &>*{
