@@ -55,3 +55,14 @@ main.page-readings{
         }
     }
 }
+
+@media only screen and (max-width: 700px) {
+    main.page-readings{
+
+        article.paper{
+            box-shadow: unset;
+            width: 100%;
+            padding: 0 20px;
+        }
+    }
+}
