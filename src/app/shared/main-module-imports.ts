@@ -5,7 +5,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from '../pages/auth/reset-password/reset-password.component';
-
+import { ContactUsComponent } from '../pages/contact-us/contact-us.component';
+import { MatSelectModule } from '@angular/material/select';
+import { PrivacyPolicyComponent } from '../pages/privacy-policy/privacy-policy.component';
+import { TermsOfUseComponent } from '../pages/terms-of-use/terms-of-use.component';
 
 /**
  * @description imports and declarations for the main layout declarations
@@ -18,10 +21,14 @@ export default {
         MatInputModule,
         MatCheckboxModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatSelectModule
     ],
     declarations: [
         FooterComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        ContactUsComponent,
+        PrivacyPolicyComponent,
+        TermsOfUseComponent
     ]
 }

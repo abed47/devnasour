@@ -1,0 +1,78 @@
+<div class="page-contact-us">
+    <h1 class="page-title">Contact Us!</h1>
+
+    <hr>
+
+    <p class="intro">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod </p>
+
+    <div class="form-wrapper">
+
+        <div class="l">
+
+            <form [formGroup]="contactF">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" color="accent">
+                        <mat-label>Name</mat-label>
+                        <input type="text" matInput formControlName="name">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline" color="accent">
+                        <mat-label>Your Email</mat-label>
+                        <input type="email" matInput formControlName="email">
+                    </mat-form-field>
+                </div>
+    
+                <div class="form-group">
+                    <mat-form-field appearance="outline" color="accent">
+                        <mat-label>Company Name</mat-label>
+                        <input type="text" matInput formControlName="company">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline" color="accent">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="country">
+                            <mat-option *ngFor="let item of countryList" [value]="item">{{item.countryNameEn}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    
+                <mat-form-field appearance="outline" color="accent" class="full-width">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput></textarea>
+                </mat-form-field>
+    
+    
+                <small>By submitting this form you agree to our terms and conditions and our Privacy Policy which explains how we may collect, use and disclose your personal information including to third parties.</small>
+    
+                <div class="submit-btn-c">
+                    <button mat-raised-button color="accent">Submit</button>
+                </div>
+            </form>
+
+        </div>
+
+
+        <div class="r">
+            <h1>Our Contact Details</h1>
+
+
+            <div class="section">
+                <h5>Address</h5>
+                <p>824 Bel Meadow Drive, 
+                    California, USA</p>
+            </div>
+
+            <div class="section">
+                <h5>Call Us</h5>
+                <p>+(00) 852 852 9633</p>
+                <p>+(00) 852 852 9633</p>
+            </div>
+
+            <div class="section">
+                <h5>Email Address</h5>
+                <p>info@Yourdomain.com</p>
+                <p>Support@Yourdomain.com</p>
+            </div>
+        </div>
+    </div>
+</div>
