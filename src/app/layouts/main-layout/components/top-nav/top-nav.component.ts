@@ -10,7 +10,6 @@ import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 })
 export class TopNavComponent implements OnInit, OnDestroy{
 
-  private sub: Subscription = null;
 
   constructor(private router: Router, private layoutUtils: LayoutUtilsService) { }
 
@@ -19,14 +18,16 @@ export class TopNavComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
 
   private loadSettings(){
-    this.sub = this.layoutUtils.getSidenavSub().subscribe(res => console.log(res));
   }
 
   public moveToLogin () {
     this.router.navigate(['/login']);
+  }
+
+  public toggleSidenav(){
+    this.layoutUtils.openSideNav();
   }
 }

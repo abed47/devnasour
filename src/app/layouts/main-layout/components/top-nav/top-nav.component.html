@@ -1,11 +1,12 @@
 <header class="main-layout-header">
     <img class="logo" src="../../../../../assets/images/logo.png" alt="devnasour logo">
-    <nav>
+    <nav class="links d-md">
         <a [routerLink]="['/']" [routerLinkActive]="'active'">Home</a>
         <a [routerLink]="['/projects']" [routerLinkActive]="'active'">Projects</a>
         <a routerLink="['/shop']" [routerLinkActive]="'active'">Shop</a>
         <a [routerLink]="['/contact-us']" [routerLinkActive]="'active'">Contact Us</a>
         <a [routerLink]="['/about']" [routerLinkActive]="'active'">About</a>
     </nav>
-    <button class="btn secondary" mat-button (click)="moveToLogin()">Account login</button>
+    <button class="btn secondary d-md" mat-button (click)="moveToLogin()">Account login</button>
+    <button mat-icon-button class="d-sm" (click)="toggleSidenav()"><img src="assets/images/sidenav-icon.png" alt="" /></button>
 </header>

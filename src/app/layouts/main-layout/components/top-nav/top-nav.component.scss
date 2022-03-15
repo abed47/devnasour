@@ -10,6 +10,9 @@
     box-sizing: border-box;
     padding: 30px 50px;
     max-height: 100px;
+    // box-shadow: 1px 2px 6px rgba(0, 0, 0, .20);
+
+    
 
     .logo{
         width: 140px;
@@ -39,5 +42,19 @@
             background-color: $color-secondary;
             color: $color-white;
         }
+    }
+
+    .d-sm{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .d-md{
+        display: none !important;
+    }
+
+    .d-sm{
+        display: block !important;
     }
 }
