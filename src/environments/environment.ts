@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: ''
+  apiUrl: '',
+  googleFontsKey: 'AIzaSyAunrk3iesN60PvMdOy98XMusbI4eKXorQ'
 };
 
 /*

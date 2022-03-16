@@ -1,4 +1,26 @@
 @import 'src/styles/styles.scss';
+@import "node_modules/sass-google-fonts/src/GoogleFonts.scss";
+
+@include google-font( 'Dancing Script' );
+@include google-font( 'Lato' );
+@include google-font( 'Acme' );
+@include google-font( 'Roboto' );
+@include google-font( 'Montserrat' );
+@include google-font( 'Oswald' );
+@include google-font( 'Amiri' );
+@include google-font( 'Ubuntu' );
+@include google-font( 'Raleway' );
+@include google-font( 'Playfair Display' );
+@include google-font( 'Lora' );
+@include google-font( 'Inconsolata' );
+@include google-font( 'Lobster' );
+@include google-font( 'Smokum' );
+@include google-font( 'Syne Mono' );
+@include google-font( 'Pacifico' );
+@include google-font( 'Shadows Into Light' );
+@include google-font( 'Permanent Marker' );
+@include google-font( 'Caveat' );
+@include google-font( 'Poppins' );
 
 .two-d-editor-container{
     @include init-flex(column);
@@ -13,7 +35,7 @@
         background-color: white;
     }
 
-    two-d-side-nav{
+    two-d-side-nav, two-d-right-panel{
         height: 100%;
     }
 

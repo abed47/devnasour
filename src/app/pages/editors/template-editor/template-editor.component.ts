@@ -3,6 +3,8 @@ import { fabric } from 'fabric';
 import { Subscription } from 'rxjs';
 import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 import { TowDTool } from 'src/app/shared/types';
+import FontPicker from 'font-picker';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-template-editor',
   templateUrl: './template-editor.component.html',
@@ -47,6 +49,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     this.fab.on('mouse:down', e => this.onCanvasClick(e));
 
+    // this.handleFonts();
   }
 
   private onCanvasClick(e: fabric.IEvent<MouseEvent>){

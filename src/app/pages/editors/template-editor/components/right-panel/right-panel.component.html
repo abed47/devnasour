@@ -1,1 +1,117 @@
-<p>right-panel works!</p>
+<div class="right-panel">
+    <div class="text-settings">
+        <div class="title">
+            <img src="assets/images/text-icon-primary.png" alt="text">
+            <h1>Text setting</h1>
+        </div>
+
+        <div class="dimensions-group">
+            <span class="g">
+                <input type="number" >
+                <p class="adornment">X</p>
+            </span>
+            <span class="g">
+                <input type="number" >
+                <p class="adornment">Y</p>
+            </span>
+            <span class="g">
+                <input type="number" >
+                <p class="adornment">W</p>
+            </span>
+            <span class="g">
+                <input type="number" >
+                <p class="adornment">H</p>
+            </span>
+        </div>
+
+        <div class="alignment-toggle">
+            <h1>Text Alignment</h1>
+
+            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard">
+                <mat-button-toggle class="btn" value="left" aria-label="Text align left">
+                  <mat-icon>format_align_left</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="center" aria-label="Text align center">
+                  <mat-icon>format_align_center</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="right" aria-label="Text align right">
+                  <mat-icon>format_align_right</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="justify" aria-label="Text align justify">
+                  <mat-icon>format_align_justify</mat-icon>
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+        </div>
+
+        <div class="alignment-toggle">
+            <h1>Alignment</h1>
+
+            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard">
+                <mat-button-toggle class="btn" value="left" aria-label="Text align left">
+                  <mat-icon>align_horizontal_left</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="center" aria-label="Text align center">
+                  <mat-icon>align_horizontal_center</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="right" aria-label="Text align right">
+                  <mat-icon>align_horizontal_right</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="justify" aria-label="Text align justify">
+                  <mat-icon>align_vertical_bottom</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="justify" aria-label="Text align justify">
+                  <mat-icon>align_vertical_top</mat-icon>
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+        </div>
+
+        <div class="font-settings">
+            <h1>Font</h1>
+
+            <ng-select class="select-field" [(ngModel)]="selectedFont">
+                <ng-option *ngFor="let item of fontList" [value]="item" class="itedm">
+                    <p [ngStyle]="{fontFamily: item, margin: 0}">{{item}}</p>
+                </ng-option>
+             </ng-select>
+        </div>
+
+        <div class="slider-with-input">
+            <h1>Font size</h1>
+
+            <div class="slider-container">
+                <mat-slider color="accent" [(ngModel)]="fontSize"></mat-slider>
+
+                <div class="input">
+                    <input type="number" [(ngModel)]="fontSize">
+                    <p class="adornment">px</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-with-input">
+            <h1>Opacity</h1>
+
+            <div class="slider-container">
+                <mat-slider color="accent" [(ngModel)]="opacity"></mat-slider>
+
+                <div class="input">
+                    <input type="number" [(ngModel)]="opacity">
+                    <p class="adornment">%</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool">
+            <h1>Color</h1>
+            <div class="color-input">
+                <mat-form-field appearance="outline" color="accent">
+                    <input matInput [ngxMatColorPicker]="picker" [value]="color">
+                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                    <ngx-mat-color-picker #picker [touchUi]="false" [color]="color"  defaultColor="#000080"></ngx-mat-color-picker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <button mat-button color="warn" class="delete-btn"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
+    </div>
+</div>

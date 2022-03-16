@@ -8,6 +8,14 @@ import {RightPanelComponent} from "../../pages/editors/template-editor/component
 import {SideNavComponent} from "../../pages/editors/template-editor/components/side-nav/side-nav.component";
 import {TopNavComponent} from "../../pages/editors/template-editor/components/top-nav/top-nav.component";
 import {MatButtonModule} from "@angular/material/button";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle'
+import { MatIconModule } from '@angular/material/icon'
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import {MatSliderModule} from '@angular/material/slider';
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 
 
 @NgModule({
@@ -21,7 +29,18 @@ import {MatButtonModule} from "@angular/material/button";
   imports: [
     CommonModule,
     TemplateEditorRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    NgSelectModule,
+    FormsModule,
+    MatSliderModule,
+    NgxMatColorPickerModule
+  ],
+  providers: [
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ],
   bootstrap: [TemplateEditorLayoutComponent]
 })
