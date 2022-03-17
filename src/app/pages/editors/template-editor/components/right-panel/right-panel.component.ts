@@ -1,13 +1,15 @@
 import { Color } from '@angular-material-components/color-picker';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 
 @Component({
   selector: 'two-d-right-panel',
   templateUrl: './right-panel.component.html',
   styleUrls: ['./right-panel.component.scss']
 })
-export class RightPanelComponent implements OnInit {
+export class RightPanelComponent implements OnInit, OnDestroy {
 
   public fontList = [
     'Dancing Script',
@@ -30,7 +32,9 @@ export class RightPanelComponent implements OnInit {
     'Permanent Marker',
     'Caveat',
     'Poppins'
-  ]
+  ];
+
+  public subscriptions: Subscription[] = [];
 
   public selectedFont = 'Poppins';
   public fontSize = 15;
@@ -38,16 +42,71 @@ export class RightPanelComponent implements OnInit {
   public color = new Color(0,0,80,1);
   public backgroundColor = '#000080';
   public touchUi = false;
+  public selectedType = "";
+  public objWidth = 0;
+  public objHeight = 0;
+  public ObjX = 0;
+  public ObjY = 0;
 
   public colorFc: AbstractControl = new FormControl(null);
 
-  constructor() { }
+  constructor(private editorService: TwoDEditorService) { }
 
   ngOnInit(): void {
+    this.loadSettings();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  public loadSettings(){
+    this.subscriptions.push(this.editorService.getObjectSubject().subscribe((r: any) => this.handleObjectEvent(r)));
+    this.subscriptions.push(this.editorService.getSelectionSubject().subscribe((r: any) => this.handleObjectSelection(r)));
   }
 
   public handleColorChange(e){
     console.log(e);
   }
 
+  public handleObjectSelection(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
+    console.log(e);
+    if(e.action === "selection"){
+      this.objHeight = e.object.height;
+      this.objWidth = e.object.width;
+      this.ObjY = e.object.top;
+      this.ObjX = e.object.left;
+      if(e?.object?.fontFamily) this.selectedFont = e.object.fontFamily;
+      return;
+    }
+  }
+
+  public handleObjectEvent(e: {actions: string, object: any, type: 'text' | 'image'| 'shape'}){
+    // console.log(e);
+  }
+
+  public onWidthChange(e){
+    this.objWidth = e.target.value;
+    this.editorService.updateObject("update", "update", {type: "width", value: e.target.value});
+  }
+
+  public onHeightChange(e){
+    this.objHeight = e.target.value;
+    this.editorService.updateObject("update", "update", {type: "height", value: e.target.value});
+  }
+
+  public onXChange(e){
+    this.ObjX = e.target.value;
+    this.editorService.updateObject("update", "update", {type: "left", value: e.target.value});
+  }
+
+  public onYChange(e){
+    this.ObjY = e.target.value;
+    this.editorService.updateObject("update", "update", {type: "top", value: e.target.value});
+  }
+
+  public onFontChange(e){
+    this.selectedFont = e;
+    this.editorService.updateObject("update", "update", {type: "font", value: e});
+  }
 }

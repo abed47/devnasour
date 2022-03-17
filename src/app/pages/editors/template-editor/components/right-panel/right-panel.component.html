@@ -7,19 +7,19 @@
 
         <div class="dimensions-group">
             <span class="g">
-                <input type="number" >
+                <input type="number" [value]="ObjX" (change)="onXChange($event)">
                 <p class="adornment">X</p>
             </span>
             <span class="g">
-                <input type="number" >
+                <input type="number" [value]="ObjY" (change)="onYChange($event)">
                 <p class="adornment">Y</p>
             </span>
             <span class="g">
-                <input type="number" >
+                <input type="number" [value]="objWidth" (change)="onWidthChange($event)">
                 <p class="adornment">W</p>
             </span>
             <span class="g">
-                <input type="number" >
+                <input type="number" [value]="objHeight" (change)="onHeightChange($event)">
                 <p class="adornment">H</p>
             </span>
         </div>
@@ -68,7 +68,7 @@
         <div class="font-settings">
             <h1>Font</h1>
 
-            <ng-select class="select-field" [(ngModel)]="selectedFont">
+            <ng-select class="select-field" [(ngModel)]="selectedFont" (change)="onFontChange($event)">
                 <ng-option *ngFor="let item of fontList" [value]="item" class="itedm">
                     <p [ngStyle]="{fontFamily: item, margin: 0}">{{item}}</p>
                 </ng-option>
