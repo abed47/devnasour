@@ -4,10 +4,15 @@ import { LoginComponent } from 'src/app/pages/auth/login/login.component';
 import { RegisterComponent } from 'src/app/pages/auth/register/register.component';
 import { ResetPasswordComponent } from 'src/app/pages/auth/reset-password/reset-password.component';
 import { ContactUsComponent } from 'src/app/pages/contact-us/contact-us.component';
+import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
 import { TermsOfUseComponent } from 'src/app/pages/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'login',
     component: LoginComponent

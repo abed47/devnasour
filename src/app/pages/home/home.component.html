@@ -1,0 +1,238 @@
+<main class="page-home">
+    <div class="page-container">
+        <header>
+            <div class="l">
+                <h5>The first Platform to offer online printing.</h5>
+                <h1>Printing services done right.</h1>
+                <hr>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil autem officiis eos</p>
+    
+                <div class="action-group">
+                    <button mat-raised-button color="accent" class="btn">Get started</button>
+                    <button mat-stroked-button color="accent" class="btn outlined">Contact Us</button>
+                </div>
+            </div>
+            <div class="r">
+                <div class="img-container">
+                    <img src="assets/images/shopping-bag.png" class="bg-image" alt="">
+                    <img src="assets/images/shopping-bag-1.png" class="bg-image-overlay">
+    
+                    <div class="quality-box">
+                        <img src="assets/images/primary-check-icon.png" alt="">
+                        <p>The highest quality</p>
+                    </div>
+    
+                    <div class="price-box">
+                        <img src="assets/images/secondary-check-icon.png" alt=""/>
+                        <p>The best price!</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="section-1">
+
+            <div class="l">
+                <article class="about-intro">
+                    <hr class="hr-1">
+                    <h1>The best printing solution for you</h1>
+
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+                    </p>
+                    
+                    <a routerLink="/about">Learn About Our Success <img src="assets/images/secondary-right-arrow.png" alt="right arrow icon"></a>
+                </article>
+
+                <div class="group-1">
+                    <article>
+                        <img src="assets/images/scaling-icon.png" alt="Scale your business icon">
+                        <h1>Scale your business</h1>
+                        <hr>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi quos officiis doloremque vero aspernatur</p>
+                    </article>
+                    <article>
+                        <img src="assets/images/premium-material-icon.png" alt="Scale your business icon">
+                        <h1>Premium materials</h1>
+                        <hr>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis architecto eaque nostrum asperiores</p>
+                    </article>
+                    <article>
+                        <img src="assets/images/high-quality-icon.png" alt="Scale your business icon">
+                        <h1>High Quality</h1>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod hic perspiciatis facilis nihil, dolorem ipsum nisi.</p>
+                    </article>
+                    <article>
+                        <img src="assets/images/product-ready-icon.png" alt="Scale your business icon">
+                        <h1>Product Ready</h1>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="r">
+                
+            </div>
+        </section>
+
+        <section class="section-banner">
+            <article *ngIf="bannerItems.length > 2" class="banner-item s">
+                <div class="l">
+                    <div class="img">
+                        <img [src]="bannerItems[0].photo" alt="">
+                    </div>
+                </div>
+                <div class="r">
+                    <hr>
+                    <h1>{{bannerItems[0].title}}</h1>
+                    <p>{{bannerItems[0].details}}</p>
+                    <a [href]="bannerItems[0].linkUrl">{{bannerItems[0].linkTitle}}  <img src="assets/images/secondary-right-arrow.png" alt=""></a>
+                </div>
+            </article>
+
+            <div class="banner-item m">
+                <swiper
+                    #swiperSlideShow
+                    [config]="swiperConfig"
+                    class="swiper-container"
+                >
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let item of midBannerItems">
+                        <article class="swiper-item">
+                            <h3 *ngIf="item?.subtitle">{{item.subtitle}}</h3>
+                            <h1>{{item.title}}</h1>
+                            <p>{{item.details}}</p>
+                            <img [src]="item.photo" alt="">
+                        </article>
+                    </div>
+                  </div>
+                </swiper>
+                <div class="banner-pagination">
+                    <div *ngFor="let item of midBannerItems; let i = index" [ngClass]="{'active': i === activeBannerIndex}" class="banner-pagination-item"></div>
+                </div>
+            </div>
+
+            <article *ngIf="bannerItems.length > 2" class="banner-item e">
+                <div class="l">
+                    <hr>
+                    <h1>{{bannerItems[0].title}}</h1>
+                    <p>{{bannerItems[0].details}}</p>
+                    <a [href]="bannerItems[0].linkUrl">{{bannerItems[0].linkTitle}} </a>
+                </div>
+                
+                <div class="r">
+                    <div class="img">
+                        <img [src]="bannerItems[0].photo" alt="">
+                    </div>
+                </div>
+                
+            </article>
+        </section>
+
+        <section class="onboarding">
+            <article class="l">
+                <h1>Acceleration Process to Grow Your Business</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+                </p>
+                <button mat-raised-button color="accent">START PRINTING</button>
+            </article>
+            <div class="r stepper">
+                
+                <div class="stepper-step">
+                    <div class="n">
+                        <p>1</p>
+                        <div class="vr"></div>
+                    </div>
+                    <div class="c">
+                        <h1>Choose your product</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stepper-step">
+                    <div class="n">
+                        <p>2</p>
+                        <div class="vr"></div>
+                    </div>
+                    <div class="c">
+                        <h1>Choose your design</h1>
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                    </div>
+                </div>
+
+                <div class="stepper-step">
+                    <div class="n">
+                        <p>3</p>
+                        <div class="vr"></div>
+                    </div>
+                    <div class="c">
+                        <h1>Print in bulk and sell</h1>
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="testimonial">
+
+            <h1 class="section-header">Don't Just Take our Work our it!</h1>
+
+            <div class="counters">
+                <div class="counter">
+                    <h1>570</h1>
+                    <p>Prints</p>
+                </div>
+                <div class="counter">
+                    <h1>570</h1>
+                    <p>Active Users</p>
+                </div>
+                <div class="counter">
+                    <h1>570</h1>
+                    <p>Positive Feedback</p>
+                </div>
+                <div class="counter">
+                    <h1>570</h1>
+                    <p>+ rating</p>
+                </div>
+            </div>
+
+            <div class="testimonials-wrapper">
+
+                <swiper [config]="testimonialSwiperConfig" class="testimonial-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" *ngFor="let item of testimonialsList">
+                            <div class="card">
+                                <img [src]="item.photo" alt="">
+    
+                                <div class="info">
+                                    <h1>{{item.title}}</h1>
+                                    <h3>{{item.subtitle}}</h3>
+                                    <p>{{item.details}}</p>
+                                    <star-rating value="5" totalStars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false"></star-rating>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </swiper>
+
+                <div class="about-intro">
+                    <h1>Join our happy users</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet
+                    </p>
+                    <button mat-raised-button color="accent">About Us</button>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+</main>

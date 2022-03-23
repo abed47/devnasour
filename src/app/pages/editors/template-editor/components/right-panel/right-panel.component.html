@@ -27,7 +27,7 @@
         <div class="alignment-toggle">
             <h1>Text Alignment</h1>
 
-            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard">
+            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard" (change)="onTextAlignChange($event)">
                 <mat-button-toggle class="btn" value="left" aria-label="Text align left">
                   <mat-icon>format_align_left</mat-icon>
                 </mat-button-toggle>
@@ -46,7 +46,7 @@
         <div class="alignment-toggle">
             <h1>Alignment</h1>
 
-            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard">
+            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard" >
                 <mat-button-toggle class="btn" value="left" aria-label="Text align left">
                   <mat-icon>align_horizontal_left</mat-icon>
                 </mat-button-toggle>
@@ -79,10 +79,10 @@
             <h1>Font size</h1>
 
             <div class="slider-container">
-                <mat-slider color="accent" [(ngModel)]="fontSize"></mat-slider>
+                <mat-slider color="accent" [(ngModel)]="fontSize" (change)="onFontSizeChange($event)"></mat-slider>
 
                 <div class="input">
-                    <input type="number" [(ngModel)]="fontSize">
+                    <input type="number" [(ngModel)]="fontSize" (change)="onFontSizeChange($event)">
                     <p class="adornment">px</p>
                 </div>
             </div>
@@ -92,10 +92,10 @@
             <h1>Opacity</h1>
 
             <div class="slider-container">
-                <mat-slider color="accent" [(ngModel)]="opacity"></mat-slider>
+                <mat-slider color="accent" [(ngModel)]="opacity" (change)="onOpacityChange($event)"></mat-slider>
 
                 <div class="input">
-                    <input type="number" [(ngModel)]="opacity">
+                    <input type="number" [(ngModel)]="opacity" (change)="onOpacityChange($event)">
                     <p class="adornment">%</p>
                 </div>
             </div>

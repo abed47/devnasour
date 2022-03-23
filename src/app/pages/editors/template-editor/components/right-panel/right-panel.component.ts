@@ -76,7 +76,9 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       this.objWidth = e.object.width;
       this.ObjY = e.object.top;
       this.ObjX = e.object.left;
+      if(e.object?.fontSize) this.fontSize = e.object.fontSize;
       if(e?.object?.fontFamily) this.selectedFont = e.object.fontFamily;
+      this.opacity = e.object.opacity * 100;
       return;
     }
   }
@@ -109,4 +111,25 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     this.selectedFont = e;
     this.editorService.updateObject("update", "update", {type: "font", value: e});
   }
+
+  public onFontSizeChange(e){
+    this.fontSize = e?.target?.value || e?.value || 0;
+    this.editorService.updateObject("update", "update", {type: "font-size", value: e?.target?.value || e?.value || 0})
+  }
+
+  public onOpacityChange(e){
+    this.opacity = e?.target?.value || e?.value || 0;
+    this.editorService.updateObject("update", "update", {type: "opacity", value: e?.target?.value || e?.value || 0})
+  }
+  
+  public onTextAlignChange(e){
+    // console.log(e);
+    this.editorService.updateObject("update", "update", {type: "text-align", value: e.value});
+  }
+
+  public onAlignChange(e){
+    console.log(e);
+    this.editorService.updateObject("update", "update", {type: "align", value: e.value});
+  }
+
 }

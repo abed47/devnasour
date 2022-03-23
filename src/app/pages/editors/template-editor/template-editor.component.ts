@@ -15,7 +15,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   private fab: fabric.Canvas;
   private subscriptions: Subscription[] = [];
   private selectedTool: TowDTool = "select";
-  public selectedObject: fabric.Object | fabric.IText = null;
+  public selectedObject: fabric.Object | fabric.IText | any = null;
   
 
   constructor(private editorService: TwoDEditorService) { }
@@ -61,8 +61,9 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     // this.handleFonts();
   }
 
-  private onCanvasClick(e: fabric.IEvent<MouseEvent>){
-    
+  private onCanvasClick(e: fabric.IEvent<MouseEvent> | any){
+    // console.log(e.isClick ===  false && e?.transform?.action === "drag")
+    // if(e.isClick ===  false && e?.transform?.action === "drag" && e.target) return;
     if(this.selectedObject !== null) return this.selectedObject = null;
 
     if(e.target !== null) {
@@ -103,14 +104,23 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   private handleObjectUpdate(e){
     // this.selectedObject.setCoords(true);
     // this.selectedObject.dirty = true;
-    let obj: any = this.selectedObject;
+    if(!this.selectedObject) return;
     if(e.object.type === "width") this.selectedObject.width = +e.object.value;
     if(e.object.type === "height") this.selectedObject.height = +e.object.value;
     if(e.object.type === "top") this.selectedObject.top = +e.object.value;
     if(e.object.type === "left") this.selectedObject.left = +e.object.value;
-    if(e.object.type === "font") obj.fontFamily = e.object.value;
-    // if(e.object.type === "font") this.selectedObject.set("font", "Dancing Script")
-    // console.log(this.selectedObject);
+    if(e.object.type === "font") this.selectedObject.fontFamily = e.object.value;
+    if(e.object.type === "font-size") this.selectedObject.fontSize = +e.object.value;
+    if(e.object.type === "opacity") this.selectedObject.opacity = +(e.object.value / 100);
+    if(e.object.type === "text-align") this.selectedObject.textAlign = e.object.value;
+    
+    if(e.object.type === "align") {
+      if(e.object.value === "left") this.selectedObject.left = 0;
+      if(e.object.value === "center"){}
+      if(e.object.value === "right"){}
+      if(e.object.value === "top"){}
+      if(e.object.value === "bottom"){}
+    }
     this.fab.renderAll();
     // this.fab.renderAndReset()
   }

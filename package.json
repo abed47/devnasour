@@ -36,8 +36,13 @@
     "fabric": "^5.2.1",
     "font-picker": "^3.5.1",
     "moment": "^2.29.1",
+    "ng-countup": "^1.8.5",
+    "ng-starrating": "^1.0.20",
+    "ngx-countup": "^7.3.3",
+    "ngx-useful-swiper": "^10.0.1",
     "rxjs": "~6.6.0",
     "sass-google-fonts": "^1.0.1",
+    "swiper": "^6.8.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
