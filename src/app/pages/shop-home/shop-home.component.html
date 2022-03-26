@@ -1,0 +1,13 @@
+<main class="shop-home">
+    <div class="swiper-container">
+        <swiper [config]="bannerConfig">
+            <div class="swiper-wrapper">
+                <div *ngFor="let item of bannerItems" class="swiper-slide" (click)="onItemClick(item.id)">
+                    <img [src]="item.photo" alt="">
+                    <h1>{{item.title}}</h1>
+                    <p>{{item.description}}</p>
+                </div>
+            </div>
+        </swiper>
+    </div>
+</main>

@@ -1,0 +1,18 @@
+<main class="shop-listing-home">
+    <div class="recommended-list">
+        <div *ngFor="let item of recommendedItemList" class="list-item">
+            <img [src]="item.photo" alt="">
+            
+            <div class="bottom">
+                <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
+                </ngx-material-rating>
+                
+                <div class="name">
+                    <h1>{{item.name}}</h1>
+    
+                    <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
