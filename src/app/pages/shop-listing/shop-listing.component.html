@@ -1,18 +1,74 @@
 <main class="shop-listing-home">
-    <div class="recommended-list">
-        <div *ngFor="let item of recommendedItemList" class="list-item">
-            <img [src]="item.photo" alt="">
-            
-            <div class="bottom">
-                <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
-                </ngx-material-rating>
+    <section class="banner-wrapper">
+        <swiper [config]="bannerConfig">
+            <div class="swiper-wrapper">
+                <a *ngFor="let item of bannerItems" [routerLink]="item.url"  class="swiper-slide" (click)="onItemClick(item.id)">
+                    <img [src]="item.photo" alt="">
+                </a>
+            </div>
+        </swiper>
+
+        <h1 class="section-title">We Offer Variety Of Items</h1>
+    </section>
+    <aside>
+        <div class="list-header">
+            <mat-icon class="icon">menu</mat-icon>
+            <h1>All Categories</h1>
+        </div>
+
+        <ul>
+            <li>  <p> <span class="circle"></span>Paper work <span class="new">new</span> </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work <span class="new">new</span> </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+        </ul>
+    </aside>
+    <div class="content">
+        <div class="recommended-list">
+            <div *ngFor="let item of recommendedItemList" class="list-item">
+                <img [src]="item.photo" alt="">
                 
-                <div class="name">
-                    <h1>{{item.name}}</h1>
-    
-                    <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                <div class="bottom">
+                    <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
+                    </ngx-material-rating>
+                    
+                    <div class="name">
+                        <h1>{{item.name}}</h1>
+        
+                        <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <section class="list-section">
+
+            <h1 class="section-title">Trending "Products".</h1>
+            
+            <div class="product-list">
+                <div *ngFor="let item of recommendedItemList" class="list-item">
+                    <img [src]="item.photo" alt="">
+                    
+                    <div class="bottom">
+                        <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
+                        </ngx-material-rating>
+                        
+                        <div class="name">
+                            <h1>{{item.name}}</h1>
+            
+                            <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </main>

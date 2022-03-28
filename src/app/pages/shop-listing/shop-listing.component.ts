@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-shop-listing',
@@ -6,6 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop-listing.component.scss']
 })
 export class ShopListingComponent implements OnInit {
+
+  public bannerItems = [
+    {
+      photo: 'assets/images/banner-img.png',
+      url: 'http://www.google.com'
+    },
+    {
+      photo: 'assets/images/banner-img.png',
+      url: 'http://www.yahoo.com'
+    }
+  ]
+
+  public bannerConfig: SwiperOptions = {
+    slidesPerView: 1,
+    autoplay: true
+  }
 
   public recommendedItemList = [
     {
