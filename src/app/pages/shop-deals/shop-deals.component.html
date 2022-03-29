@@ -1,0 +1,55 @@
+<div class="page-wrapper">
+    <section class="banners">
+        <article class="banner" *ngFor="let item of banners; let i = index" [hidden]="i > 2" [class.l]="item.size === 1" [class.h]="item.size === .5" [class.q]="item.size === .25" [class.th]="item.size === .75">
+            <img [src]="item.background" alt="">
+
+            <div class="info">
+                <div class="l">
+                    <h1>{{item.title}}</h1>
+                    <h2>{{item.percentage}}% OFF</h2>
+                </div>
+                <div class="r">
+                    <p>{{item.description}}</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="on-sale-item-list">
+
+        <h1 class="section-title">On Sale Items</h1>
+
+        <div class="item-list">
+            <a class="list-item" *ngFor="let item of onSaleItems">
+                <img [src]="item.photo" alt="">
+                    
+                <div class="bottom">
+                    <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
+                    </ngx-material-rating>
+                    
+                    <div class="name">
+                        <h1>{{item.name}}</h1>
+        
+                        <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="banners">
+        <article class="banner" *ngFor="let item of banners; let i = index" [hidden]="i < 3" [class.l]="item.size === 1" [class.h]="item.size === .5" [class.q]="item.size === .25" [class.th]="item.size === .75">
+            <img [src]="item.background" alt="">
+
+            <div class="info">
+                <div class="l">
+                    <h1>{{item.title}}</h1>
+                    <h2>{{item.percentage}}% OFF</h2>
+                </div>
+                <div class="r">
+                    <p>{{item.description}}</p>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

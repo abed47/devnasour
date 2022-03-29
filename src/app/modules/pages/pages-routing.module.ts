@@ -11,7 +11,8 @@ import { TermsOfUseComponent } from 'src/app/pages/terms-of-use/terms-of-use.com
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: 'login',
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'terms-of-use',
     component: TermsOfUseComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   }
 ];
 

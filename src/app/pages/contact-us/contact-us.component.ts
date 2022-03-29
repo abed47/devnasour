@@ -33,7 +33,6 @@ export class ContactUsComponent implements OnInit {
     let arr = CountryCodeList.all();
     arr.splice(arr.indexOf(arr.filter(item => item.countryCode === "IL")[0]), 1);
     this.countryList = arr;
-    console.log(this.countryList)
   }
 
 }

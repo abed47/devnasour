@@ -14,9 +14,10 @@ import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { ShopListingComponent } from '../../pages/shop-listing/shop-listing.component';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { NgxMaterialRatingModule } from 'ngx-material-rating';
+import { ShopDealsComponent } from '../../pages/shop-deals/shop-deals.component';
 
 @NgModule({
-  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent],
+  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent],
   imports: [
     CommonModule,
     ShopRoutingModule,

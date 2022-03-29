@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class ShopLayoutComponent implements OnInit, OnDestroy {
 
-  private subscriptions: Subscription[];
+  public subscriptions: any[];
   public activeIndex = 0;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
@@ -22,11 +22,17 @@ export class ShopLayoutComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  private loadSettings(){    
-    this.router.events.subscribe((res) => {
-      if(this.router.url === '/shop') this.activeIndex = 0;
-      if(this.router.url === '/shop/trending') this.activeIndex = 2;
-    });
+  private loadSettings(){  
+      this.handleCurrentRoute();
+      let ss = [];
+      ss.push(this.router.events.subscribe(e => this.handleCurrentRoute(e)));
+      this.subscriptions = [...ss];
+  }
+
+  private handleCurrentRoute = (r?: any) => {
+    if(this.router.url === '/shop') this.activeIndex = 0;
+    if(this.router.url === '/shop/trending') this.activeIndex = 2;
+    if(this.router.url === '/shop/deals') this.activeIndex = 3;
   }
 
 }
