@@ -135,6 +135,8 @@
             .list-item{
                 background-color: white;
                 box-shadow: 1px 2px 6px rgba(0, 0, 0, .18);
+                cursor: pointer;
+                user-select: none;
     
                 img{
                     width: 100%;
@@ -265,6 +267,25 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .shop-listing-home{
+
+        section.banner-wrapper{
+            .section-title{
+                margin-left: 0;
+            }
+        }
+
+        aside{
+            display: none;
+        }
+
+        .content{
+            width: 100%;
         }
     }
 }

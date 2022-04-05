@@ -1,0 +1,125 @@
+<div class="page-product-view">
+    <app-bread-crumbs></app-bread-crumbs>
+
+    <section class="product">
+        <article class="l">
+            <div class="gallery-container">
+                <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: white;" [items]="product.images"></gallery>
+            </div>
+
+            <div class="info">
+                <div class="description">
+                    <h2 class="title">Description</h2>
+                    <p class="content">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere ossimus, omnis amet voluptas ssumenda est, omnis dolor repellendus quis nostrum.
+
+                        Temporibus autem quibusdam et aut officiis debitis aut rerum dolorem necessitatibus saepe.</p>
+                </div>
+
+                <div class="information">
+                    <h2 class="title">Information</h2>
+
+                    <div class="block">
+                        <h3 class="title">Shipping</h3>
+                        <p class="content">We currently offer free shipping 
+                            worldwide on all orders over $100.</p>
+                    </div>
+                    <div class="block">
+                        <h3 class="title">Sizing</h3>
+                        <p class="content">We currently offer free shipping.</p>
+                    </div>
+                    <div class="block">
+                        <h3 class="title">Assistance</h3>
+                        <p class="content">Contact us on 999999 or 
+                            at info@devnasour.io</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="r">
+
+            <h1 class="title">{{product.name}}</h1>
+
+            <div class="rating-container">
+                <ngx-material-rating [value]="product.rating" disabled></ngx-material-rating>
+            </div>
+            
+            <div class="overview">
+                <p class="title">Overview</p>
+                <p class="content">{{product.overview}}</p>
+            </div>
+
+            <div class="pricing">
+                <span class="price" [class.strike]="product.discount > 0">${{product.price}}</span>
+                <span [hidden]="!product.discount" class="discounted-price">${{product.price - ((+product.price * +product.discount) / 100)}}</span>
+                <span [hidden]="!product.discount" class="discount">{{product.discount}}%</span>
+
+                <div class="r"><hr/></div>
+            </div>
+
+            <div class="actions">
+                <p class="title">Various versions</p>
+
+                <button mat-raised-button color="accent"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
+                <button mat-raised-button color="accent">UPLOAD</button>
+                <button mat-raised-button color="accent">CONTACT FOR DESIGN</button>
+                <div matRipple matRippleColor="accent" class="ripple-button">
+                    <p>Quantity</p>
+                    
+
+          
+                    <mat-select [(ngModel)]="selectedQuantity" class="select">
+                        <mat-option [value]="10">10</mat-option>
+                        <mat-option [value]="50">50</mat-option>
+                        <mat-option [value]="100">100</mat-option>
+                        <mat-option [value]="500">500</mat-option>
+                        <mat-option [value]="1000">1000</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="specifications">
+                <h1 class="title">Specifications</h1>
+                <ul>
+                    <li>
+                        <p>Size</p>
+                        <p>15x20x40cm</p>
+                    </li>
+                    <li>
+                        <p>Farmer</p>
+                        <p>carton</p>
+                    </li>
+                    <li>
+                        <p>Country</p>
+                        <p>Istanbul</p>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </section>
+
+    <section class="related-products">
+        <h1>Related Products</h1>
+
+        <div class="swiper-container">
+            <swiper [config]="relatedProductsSwiperConfig">
+                <div class="swiper-wrapper">
+                    <div *ngFor="let item of relatedProductsList" class="list-item swiper-slide" (click)="navigateTo(item.id)">
+                        <img [src]="item.photo" alt="">
+                        
+                        <div class="bottom">
+                            <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
+                            </ngx-material-rating>
+                            
+                            <div class="name">
+                                <h1>{{item.name}}</h1>
+                
+                                <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </swiper>
+        </div>
+    </section>
+</div>

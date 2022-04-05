@@ -7,6 +7,8 @@ import { Observable, Subject } from 'rxjs';
 export class LayoutUtilsService {
 
   private sidenav: Subject<any> = new Subject();
+  private breadCrumbSubject: Subject<{action: 'rename' | 'change-active', value?:string, key?:string}> = new Subject();
+
 
   constructor() { }
 
@@ -21,5 +23,17 @@ export class LayoutUtilsService {
 
   public getSidenavSub(){
     return this.sidenav;
+  }
+
+  public getBreadCrumbSubject() {
+    return this.breadCrumbSubject
+  }
+
+  public renamePath(n: string, key: string){
+    this.breadCrumbSubject.next({action: 'rename', value: n, key})
+  }
+
+  public changeActivePath(key: string){
+    this.breadCrumbSubject.next({action: 'change-active', key});
   }
 }

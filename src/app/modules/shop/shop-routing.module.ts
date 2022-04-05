@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopLayoutComponent } from 'src/app/layouts/shop-layout/shop-layout.component';
+import { ProductViewComponent } from 'src/app/pages/product-view/product-view.component';
 import { ShopDealsComponent } from 'src/app/pages/shop-deals/shop-deals.component';
 import { ShopHomeComponent } from 'src/app/pages/shop-home/shop-home.component';
 import { ShopListingComponent } from 'src/app/pages/shop-listing/shop-listing.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'deals',
         component: ShopDealsComponent
+      },
+      {
+        path: 'product/:id',
+        component: ProductViewComponent
       },
       {
         path: '',

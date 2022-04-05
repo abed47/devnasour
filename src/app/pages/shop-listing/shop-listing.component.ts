@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -34,7 +35,7 @@ export class ShopListingComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.loadSettings();
@@ -49,6 +50,10 @@ export class ShopListingComponent implements OnInit {
     }
 
     console.log(this.recommendedItemList)
+  }
+
+  public navigateTo(id: number | string){
+    this.router.navigate([`/shop/product/${id}`]);
   }
 
 }

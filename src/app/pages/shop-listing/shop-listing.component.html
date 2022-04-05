@@ -33,7 +33,7 @@
     </aside>
     <div class="content">
         <div class="recommended-list">
-            <div *ngFor="let item of recommendedItemList" class="list-item">
+            <div *ngFor="let item of recommendedItemList" class="list-item" (click)="navigateTo(item.id)">
                 <img [src]="item.photo" alt="">
                 
                 <div class="bottom">
@@ -54,7 +54,7 @@
             <h1 class="section-title">Trending "Products".</h1>
             
             <div class="product-list">
-                <div *ngFor="let item of recommendedItemList" class="list-item">
+                <div *ngFor="let item of recommendedItemList" class="list-item" (click)="navigateTo(item.id)">
                     <img [src]="item.photo" alt="">
                     
                     <div class="bottom">
