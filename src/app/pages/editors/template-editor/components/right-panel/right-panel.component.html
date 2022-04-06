@@ -46,7 +46,7 @@
         <div class="alignment-toggle">
             <h1>Alignment</h1>
 
-            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard" >
+            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard" (change)="onAlignChange($event)" >
                 <mat-button-toggle class="btn" value="left" aria-label="Text align left">
                   <mat-icon>align_horizontal_left</mat-icon>
                 </mat-button-toggle>
@@ -56,10 +56,10 @@
                 <mat-button-toggle class="btn" value="right" aria-label="Text align right">
                   <mat-icon>align_horizontal_right</mat-icon>
                 </mat-button-toggle>
-                <mat-button-toggle class="btn" value="justify" aria-label="Text align justify">
+                <mat-button-toggle class="btn" value="bottom" aria-label="Text align justify">
                   <mat-icon>align_vertical_bottom</mat-icon>
                 </mat-button-toggle>
-                <mat-button-toggle class="btn" value="justify" aria-label="Text align justify">
+                <mat-button-toggle class="btn" value="top" aria-label="Text align justify">
                   <mat-icon>align_vertical_top</mat-icon>
                 </mat-button-toggle>
               </mat-button-toggle-group>
@@ -105,7 +105,7 @@
             <h1>Color</h1>
             <div class="color-input">
                 <mat-form-field appearance="outline" color="accent">
-                    <input matInput [ngxMatColorPicker]="picker" [value]="color">
+                    <input (change)="handleColorChange($event)" matInput [ngxMatColorPicker]="picker" [value]="color">
                     <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
                     <ngx-mat-color-picker #picker [touchUi]="false" [color]="color"  defaultColor="#000080"></ngx-mat-color-picker>
                 </mat-form-field>

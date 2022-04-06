@@ -102,9 +102,12 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   private handleObjectUpdate(e){
-    // this.selectedObject.setCoords(true);
-    // this.selectedObject.dirty = true;
+
     if(!this.selectedObject) return;
+
+    if(e.object?.height) this.selectedObject.height = +e.object.height;
+    if(e.object?.width) this.selectedObject.width = +e.object.width;
+
     if(e.object.type === "width") this.selectedObject.width = +e.object.value;
     if(e.object.type === "height") this.selectedObject.height = +e.object.value;
     if(e.object.type === "top") this.selectedObject.top = +e.object.value;
@@ -116,11 +119,28 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     
     if(e.object.type === "align") {
       if(e.object.value === "left") this.selectedObject.left = 0;
-      if(e.object.value === "center"){}
-      if(e.object.value === "right"){}
-      if(e.object.value === "top"){}
-      if(e.object.value === "bottom"){}
+      if(e.object.value === "center") this.selectedObject.left = (this.fab.width / 2) - (this.selectedObject.width / 2)
+      if(e.object.value === "right") this.selectedObject.left = this.fab.width - this.selectedObject.width;
+      if(e.object.value === "top") this.selectedObject.top = 0;
+      if(e.object.value === "bottom") this.selectedObject.top = this.fab.height - this.selectedObject.height;
     }
+
+    if(e.object.type === "text-align"){
+      if(e.object.value === "right") this.selectedObject.styles.textAlign = "right";
+      if(e.object.value === "left") this.selectedObject.styles.textAlign = "left";
+      if(e.object.value === "justify") this.selectedObject.styles.textAlign = "justify";
+      if(e.object.value === "center") this.selectedObject.styles.textAlign = "center";
+    }
+
+
+    if(e.object?.height) console.log(e.object, 'hello')
+
+    
+
+
+    this.fab.renderAll();
+    if(e.object?.height) this.selectedObject.height = +e.object.height;
+    if(e.object?.width) this.selectedObject.width = +e.object.width;
     this.fab.renderAll();
     // this.fab.renderAndReset()
   }
