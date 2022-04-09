@@ -62,8 +62,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   private onCanvasClick(e: fabric.IEvent<MouseEvent> | any){
-    // console.log(e.isClick ===  false && e?.transform?.action === "drag")
-    // if(e.isClick ===  false && e?.transform?.action === "drag" && e.target) return;
+    console.log('lksdafjas;ldfkf', e);
     if(this.selectedObject !== null) return this.selectedObject = null;
 
     if(e.target !== null) {

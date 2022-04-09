@@ -11,6 +11,8 @@ import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 })
 export class RightPanelComponent implements OnInit, OnDestroy {
 
+  public selectedObjectType: "text" | "photo" | "shape" | null = null;
+
   public fontList = [
     'Dancing Script',
     'Lato',
@@ -70,8 +72,8 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   }
 
   public handleObjectSelection(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
-    console.log(e);
     if(e.action === "selection"){
+      console.log('selected object: ', e)
       this.objHeight = e.object.height;
       this.objWidth = e.object.width;
       this.ObjY = e.object.top;

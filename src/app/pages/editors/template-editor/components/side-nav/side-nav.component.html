@@ -2,6 +2,11 @@
 
     <div class="tool-container">
         
+        <button mat-button [class.active]="selectedTool === 'selection'" class="tool" (click)="changeTool('selection')">
+            <img src="assets/images/cursor.png" alt="icon"/>
+            <p>Select</p>
+        </button>
+
         <button mat-button [class.active]="selectedTool === 'templates'" class="tool" (click)="changeTool('templates')">
             <img src="assets/images/templates-icon.png" alt="icon"/>
             <p>Templates</p>

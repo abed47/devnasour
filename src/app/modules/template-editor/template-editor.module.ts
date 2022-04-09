@@ -16,6 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+import { ImageSelectionDialogComponent } from '../../pages/editors/template-editor/components/image-selection-dialog/image-selection-dialog.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } fro
     TemplateEditorLayoutComponent,
     RightPanelComponent,
     SideNavComponent,
-    TopNavComponent
+    TopNavComponent,
+    ImageSelectionDialogComponent
   ],
   imports: [
     CommonModule,

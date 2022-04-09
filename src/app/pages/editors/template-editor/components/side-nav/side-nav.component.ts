@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 })
 export class SideNavComponent implements OnInit {
 
-  public selectedTool: "templates" | "text" | "upload-photo" | "elements" | "background" | "upload" | "brush" = "text";
+  public selectedTool: "templates" | "text" | "upload-photo" | "elements" | "background" | "upload" | "brush" | "selection" = "selection";
+  public subscriptions: Subscription[] = [];
 
   constructor(private editorService: TwoDEditorService) { }
 
