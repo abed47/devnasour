@@ -104,11 +104,7 @@
         <div class="tool">
             <h1>Color</h1>
             <div class="color-input">
-                <mat-form-field appearance="outline" color="accent">
-                    <input (change)="handleColorChange($event)" matInput [ngxMatColorPicker]="picker" [value]="color">
-                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-                    <ngx-mat-color-picker #picker [touchUi]="false" [color]="color"  defaultColor="#000080"></ngx-mat-color-picker>
-                </mat-form-field>
+                <input [(colorPicker)]="color" [style.background]="color" cpPosition="top-left" (colorPickerChange)="handleColorChange($event)"/>
             </div>
         </div>
 

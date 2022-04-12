@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { ImageSelectionDialogComponent } from '../../pages/editors/template-editor/components/image-selection-dialog/image-selection-dialog.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { ImageSelectionDialogComponent } from '../../pages/editors/template-edit
     NgSelectModule,
     FormsModule,
     MatSliderModule,
-    NgxMatColorPickerModule
+    ColorPickerModule
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

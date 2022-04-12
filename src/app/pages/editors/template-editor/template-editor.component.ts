@@ -177,11 +177,14 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       if(e.object.value === "center") this.selectedObject.styles.textAlign = "center";
     }
 
+    if(e.object.type === "color"){
+      console.log("color options: ",e.object)
+      this.selectedObject.fill = e.object.value
+      this.selectedObject.dirty = true;
+    }
 
-    if(e.object?.height) console.log(e.object, 'hello')
 
-    
-
+    // if(e.object?.height) console.log(e.object, 'hello')
 
     this.fab.renderAll();
     if(e.object?.height) this.selectedObject.height = +e.object.height;

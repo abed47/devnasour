@@ -41,7 +41,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public selectedFont = 'Poppins';
   public fontSize = 15;
   public opacity = 100;
-  public color = new Color(0,0,80,1);
+  public color = '';
   public backgroundColor = '#000080';
   public touchUi = false;
   public selectedType = "";
@@ -67,10 +67,6 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.editorService.getSelectionSubject().subscribe((r: any) => this.handleObjectSelection(r)));
   }
 
-  public handleColorChange(e){
-    console.log(e);
-  }
-
   public handleObjectSelection(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
     console.log(e);
     if(e.action === "selection"){
@@ -82,6 +78,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       if(e?.object?.fontFamily) this.selectedFont = e.object.fontFamily;
       this.opacity = e.object.opacity * 100;
       this.selectedType = e.type;
+      this.color = e.object?.fill || '#000000'
       return;
     }
   }
@@ -131,6 +128,10 @@ export class RightPanelComponent implements OnInit, OnDestroy {
 
   public onAlignChange(e){
     this.editorService.updateObject("update", "update", {type: "align", value: e.value, width: this.objWidth, height: this.objHeight});
+  }
+
+  public handleColorChange(e){
+    this.editorService.updateObject("update", "update", { type: "color", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
   }
 
 }
