@@ -4,4 +4,4 @@ export enum StorageTypes {
     DB_STORAGE = 3
 }
 
-export type TowDTool = "select" | "templates" | "text" | "image-upload" | "elements" | "background" | "folders" | "brush";
+export type TowDTool = "selection" | "templates" | "text" | "image-upload" | "elements" | "background" | "folders" | "brush";

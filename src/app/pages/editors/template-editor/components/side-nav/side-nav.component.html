@@ -43,4 +43,11 @@
         </button>
 
     </div>
+
+    <div class="shapes-box" [class.active]="selectedTool === 'elements'">
+        <div class="shape" [class.active]="selectedShape === 'square'" (click)="onShapeSelected('square')"><img src="assets/images/square.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'circle'" (click)="onShapeSelected('circle')"><img src="assets/images/dry-clean.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'star'" (click)="onShapeSelected('star')"><img src="assets/images/star.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'triangle'" (click)="onShapeSelected('triangle')"><img src="assets/images/triangle.png" alt=""></div>
+    </div>
 </div>

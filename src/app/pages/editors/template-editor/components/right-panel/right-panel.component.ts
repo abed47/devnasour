@@ -72,8 +72,8 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   }
 
   public handleObjectSelection(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
+    console.log(e);
     if(e.action === "selection"){
-      console.log('selected object: ', e)
       this.objHeight = e.object.height;
       this.objWidth = e.object.width;
       this.ObjY = e.object.top;
@@ -81,6 +81,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       if(e.object?.fontSize) this.fontSize = e.object.fontSize;
       if(e?.object?.fontFamily) this.selectedFont = e.object.fontFamily;
       this.opacity = e.object.opacity * 100;
+      this.selectedType = e.type;
       return;
     }
   }

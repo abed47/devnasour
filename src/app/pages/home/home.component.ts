@@ -162,7 +162,6 @@ export class HomeComponent implements OnInit {
 
   public onSlideChange(e){
     this.activeBannerIndex = e.activeIndex;
-    console.log(this.swiperSlideShow)
   }
 
 }

@@ -14,7 +14,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
   private fab: fabric.Canvas;
   private subscriptions: Subscription[] = [];
-  private selectedTool: TowDTool = "select";
+  private selectedTool: TowDTool = "selection";
   public selectedObject: fabric.Object | fabric.IText | any = null;
   
 
@@ -47,7 +47,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     //add event subscriptions
     this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
       this.selectedTool = r;
-      console.log(this.selectedTool)
     }));
 
     this.subscriptions.push(this.editorService.getObjectSubject().subscribe((res) => {
@@ -62,8 +61,14 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   private onCanvasClick(e: fabric.IEvent<MouseEvent> | any){
-    console.log('lksdafjas;ldfkf', e);
-    if(this.selectedObject !== null) return this.selectedObject = null;
+
+    // console.log(e);
+    
+    if(this.selectedObject == null && this.selectedTool === "selection") {
+      this.editorService.changeTool('selection');
+      this.editorService.selectObject(null, null, null);
+      this.selectedObject = null;
+    }
 
     if(e.target !== null) {
       this.selectedObject = e.target;
@@ -80,6 +85,47 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
       this.fab.add(t);
     }
+
+    if(this.selectedTool === "elements"){
+      let s = this.editorService.getCurrentShape();
+
+      if(s === "circle"){
+        let c = new fabric.Circle({
+          fill: '#FF5E00', 
+          top: e.e.offsetY,
+          left: e.e.offsetX,
+          radius: 50
+        });
+
+        this.fab.add(c);
+      }
+
+      if(s === "square"){
+        let sq = new fabric.Rect({
+          width: 50,
+          height: 50,
+          fill: '#FF5E00', 
+          top: e.e.offsetY,
+          left: e.e.offsetX,
+        })
+
+        this.fab.add(sq);
+      }
+
+      if(s === "triangle"){
+        let st = new fabric.Triangle({
+          width: 50,
+          height: 50,
+          fill: '#FF5E00', 
+          top: e.e.offsetY,
+          left: e.e.offsetX,
+        })
+
+        this.fab.add(st);
+      }
+    }
+
+    this.editorService.getToolSubject().next("selection");
   }
 
   private initListeners(){
@@ -125,7 +171,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     }
 
     if(e.object.type === "text-align"){
-      if(e.object.value === "right") this.selectedObject.styles.textAlign = "right";
+      if(e.object.value === "right" && this.selectedObject?.styles?.textAlign) this.selectedObject.styles.textAlign = "right";
       if(e.object.value === "left") this.selectedObject.styles.textAlign = "left";
       if(e.object.value === "justify") this.selectedObject.styles.textAlign = "justify";
       if(e.object.value === "center") this.selectedObject.styles.textAlign = "center";

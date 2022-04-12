@@ -24,7 +24,6 @@ export class BreadCrumbsComponent implements OnInit, OnDestroy {
 
   private loadSubs(){
     this.subscriptions.push(this.layoutUtilsService.getBreadCrumbSubject().subscribe(r => {
-      console.log(r)
       if(r.action === "change-active"){}
       if(r.action === "rename"){
         this.paths.forEach(el => {
@@ -42,7 +41,6 @@ export class BreadCrumbsComponent implements OnInit, OnDestroy {
   }
 
   public navigateTo(item, index){
-    console.log(index)
     let u = '';
     for(let i = 0; i <= index; i++){
       u += '/' + this.paths[i].key

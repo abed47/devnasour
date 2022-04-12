@@ -8,8 +8,10 @@ import { TowDTool } from '../shared/types';
 export class TwoDEditorService {
 
   public selectedEl: any;
-  public toolSelected: TowDTool = "select";
+  public toolSelected: TowDTool = "selection";
   private toolSubject: Subject<TowDTool> = new Subject();
+  private selectedShapeSubject: Subject<any> = new Subject();
+  private selectedShape: string = "square";
   private selectionSubject: Subject<{
     action: string,
     type: "text" | "shape" | "image",
@@ -54,5 +56,18 @@ export class TwoDEditorService {
 
   public getSelectionSubject(){
     return this.selectionSubject;
+  }
+
+  public shapeChange(t){
+    this.selectedShape = t;
+    this.selectedShapeSubject.next(t);
+  }
+
+  public getShapeSubject () {
+    return this.selectedShapeSubject;
+  }
+
+  public getCurrentShape () {
+    return this.selectedShape;
   }
 }
