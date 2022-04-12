@@ -1,5 +1,5 @@
 <div class="right-panel">
-    <div [hidden]="selectedObjectType === 'text'" class="text-settings">
+    <div [hidden]="selectedObjectType !== 'text'" class="text-settings">
         <div class="title">
             <img src="assets/images/text-icon-primary.png" alt="text">
             <h1>Text setting</h1>
@@ -86,6 +86,76 @@
                     <p class="adornment">px</p>
                 </div>
             </div>
+        </div>
+
+        <div class="slider-with-input">
+            <h1>Opacity</h1>
+
+            <div class="slider-container">
+                <mat-slider color="accent" [(ngModel)]="opacity" (change)="onOpacityChange($event)"></mat-slider>
+
+                <div class="input">
+                    <input type="number" [(ngModel)]="opacity" (change)="onOpacityChange($event)">
+                    <p class="adornment">%</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool">
+            <h1>Color</h1>
+            <div class="color-input">
+                <input [(colorPicker)]="color" [style.background]="color" cpPosition="top-left" (colorPickerChange)="handleColorChange($event)"/>
+            </div>
+        </div>
+
+        <button mat-button color="warn" class="delete-btn"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
+    </div>
+
+    <div [hidden]="selectedObjectType !== 'shape'" class="text-settings">
+        <div class="title">
+            <img src="assets/images/square.png" alt="text">
+            <h1>Shape setting</h1>
+        </div>
+
+        <div class="dimensions-group">
+            <span class="g">
+                <input type="number" [value]="ObjX" (change)="onXChange($event)">
+                <p class="adornment">X</p>
+            </span>
+            <span class="g">
+                <input type="number" [value]="ObjY" (change)="onYChange($event)">
+                <p class="adornment">Y</p>
+            </span>
+            <span class="g">
+                <input type="number" [value]="objWidth" (change)="onWidthChange($event)">
+                <p class="adornment">W</p>
+            </span>
+            <span class="g">
+                <input type="number" [value]="objHeight" (change)="onHeightChange($event)">
+                <p class="adornment">H</p>
+            </span>
+        </div>
+
+        <div class="alignment-toggle">
+            <h1>Alignment</h1>
+
+            <mat-button-toggle-group class="btn-group" #group="matButtonToggleGroup" appearance="standard" (change)="onAlignChange($event)" >
+                <mat-button-toggle class="btn" value="left" aria-label="Text align left">
+                  <mat-icon>align_horizontal_left</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="center" aria-label="Text align center">
+                  <mat-icon>align_horizontal_center</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="right" aria-label="Text align right">
+                  <mat-icon>align_horizontal_right</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="bottom" aria-label="Text align justify">
+                  <mat-icon>align_vertical_bottom</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle class="btn" value="top" aria-label="Text align justify">
+                  <mat-icon>align_vertical_top</mat-icon>
+                </mat-button-toggle>
+              </mat-button-toggle-group>
         </div>
 
         <div class="slider-with-input">

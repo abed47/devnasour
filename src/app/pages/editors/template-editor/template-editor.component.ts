@@ -61,10 +61,8 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   private onCanvasClick(e: fabric.IEvent<MouseEvent> | any){
-
-    // console.log(e);
     
-    if(this.selectedObject == null && this.selectedTool === "selection") {
+    if(e.target == null && this.selectedTool === "selection") {
       this.editorService.changeTool('selection');
       this.editorService.selectObject(null, null, null);
       this.selectedObject = null;
@@ -178,10 +176,11 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     }
 
     if(e.object.type === "color"){
-      console.log("color options: ",e.object)
+      // console.log("color options: ",e.object)
       this.selectedObject.fill = e.object.value
       this.selectedObject.dirty = true;
     }
+    this.selectedObject.dirty = true;
 
 
     // if(e.object?.height) console.log(e.object, 'hello')

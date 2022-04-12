@@ -65,10 +65,21 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public loadSettings(){
     this.subscriptions.push(this.editorService.getObjectSubject().subscribe((r: any) => this.handleObjectEvent(r)));
     this.subscriptions.push(this.editorService.getSelectionSubject().subscribe((r: any) => this.handleObjectSelection(r)));
+    // this.subscriptions.push(this.)
   }
 
-  public handleObjectSelection(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
-    console.log(e);
+  public handleObjectSelection(e: {action: string, object: any, type: "text" | "photo" | "shape" | null}){
+    
+    if(e.type === null){
+      this.objHeight = 0;
+      this.objWidth = 0;
+      this.ObjX = 0;
+      this.ObjY = 0;
+      this.color = "#000000";
+      this.selectedObjectType = null;
+      return
+    }
+
     if(e.action === "selection"){
       this.objHeight = e.object.height;
       this.objWidth = e.object.width;
@@ -77,46 +88,48 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       if(e.object?.fontSize) this.fontSize = e.object.fontSize;
       if(e?.object?.fontFamily) this.selectedFont = e.object.fontFamily;
       this.opacity = e.object.opacity * 100;
-      this.selectedType = e.type;
+      this.selectedObjectType = this.handleFormatObjectType(e.type);
       this.color = e.object?.fill || '#000000'
       return;
     }
   }
-
-  public handleObjectEvent(e: {actions: string, object: any, type: 'text' | 'image'| 'shape'}){
-    // console.log(e);
+  
+  public handleObjectEvent(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
+    // if(e.action === "text")
+    if(e.action === "selection" && e.type === "text") this.selectedObjectType = "text";
+    if(e.action === "selection" && e.type === "shape") this.selectedObjectType = "shape"
   }
-
+  
   public onWidthChange(e){
     this.objWidth = e.target.value;
     this.editorService.updateObject("update", "update", {type: "width", value: e.target.value});
   }
-
+  
   public onHeightChange(e){
     this.objHeight = e.target.value;
     this.editorService.updateObject("update", "update", {type: "height", value: e.target.value});
   }
-
+  
   public onXChange(e){
     this.ObjX = e.target.value;
     this.editorService.updateObject("update", "update", {type: "left", value: e.target.value});
   }
-
+  
   public onYChange(e){
     this.ObjY = e.target.value;
     this.editorService.updateObject("update", "update", {type: "top", value: e.target.value});
   }
-
+  
   public onFontChange(e){
     this.selectedFont = e;
     this.editorService.updateObject("update", "update", {type: "font", value: e, width: this.objWidth, height: this.objHeight});
   }
-
+  
   public onFontSizeChange(e){
     this.fontSize = e?.target?.value || e?.value || 0;
     this.editorService.updateObject("update", "update", {type: "font-size", value: e?.target?.value || e?.value || 0, width: this.objWidth, height: this.objHeight})
   }
-
+  
   public onOpacityChange(e){
     this.opacity = e?.target?.value || e?.value || 0;
     this.editorService.updateObject("update", "update", {type: "opacity", value: e?.target?.value || e?.value || 0})
@@ -125,13 +138,19 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public onTextAlignChange(e){
     this.editorService.updateObject("update", "update", {type: "text-align", value: e.value, width: this.objWidth, height: this.objHeight});
   }
-
+  
   public onAlignChange(e){
     this.editorService.updateObject("update", "update", {type: "align", value: e.value, width: this.objWidth, height: this.objHeight});
   }
-
+  
   public handleColorChange(e){
     this.editorService.updateObject("update", "update", { type: "color", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
   }
-
+  
+    private handleFormatObjectType (e){
+      if(e === null) return null;
+      if(e === "text") return "text";
+      if(e === "rect" || e === "circle" || e === "triangle") return "shape"
+      return null
+    }
 }
