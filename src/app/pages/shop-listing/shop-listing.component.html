@@ -36,20 +36,15 @@
             <div *ngFor="let item of recommendedItemList" class="list-item" (click)="navigateTo(item.id)">
                 <img [src]="item.photo" alt="">
                 
-                <div class="bottom">
-                    <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
-                    </ngx-material-rating>
-                    
+                <div class="bottom">                    
                     <div class="name">
-                        <h1>{{item.name}}</h1>
-        
-                        <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                        <h1>{{item.name}}</h1>     
                     </div>
                 </div>
             </div>
         </div>
 
-        <section class="list-section">
+        <section hidden class="list-section">
 
             <h1 class="section-title">Trending "Products".</h1>
             

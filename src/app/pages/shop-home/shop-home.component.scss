@@ -28,8 +28,9 @@
                 opacity: .4;
 
                 img{
-                    width: 100%;
-                    // display: none;
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
                 }
 
                 h1{
@@ -48,6 +49,7 @@
                     width: 100%;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                    text-align: center;
                 }
 
                 &-active{

@@ -6,6 +6,8 @@ import { ResetPasswordComponent } from 'src/app/pages/auth/reset-password/reset-
 import { ContactUsComponent } from 'src/app/pages/contact-us/contact-us.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
+import { ProjectListingComponent } from 'src/app/pages/projects/project-listing/project-listing.component';
+import { ProjectViewComponent } from 'src/app/pages/projects/project-view/project-view.component';
 import { TermsOfUseComponent } from 'src/app/pages/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'projects',
+    component: ProjectListingComponent
+  },
+  {
+    path: 'project/:id',
+    component: ProjectViewComponent
   }
 ];
 

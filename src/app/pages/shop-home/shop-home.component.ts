@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -9,26 +10,7 @@ import { SwiperOptions } from 'swiper';
 })
 export class ShopHomeComponent implements OnInit {
 
-  public bannerItems = [
-    {
-      id: 1,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-      title: 'Test 1',
-      description: 'description wir here lsdfsa sadfjsajdf fsadfsd'
-    },
-    {
-      id: 2,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-      title: 'Test 1',
-      description: 'description wir here lsdfsa sadfjsajdf fsadfsd'
-    },
-    {
-      id: 3,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-      title: 'Test 1',
-      description: 'description wir here lsdfsa sadfjsajdf fsadfsd'
-    },
-  ]
+  public bannerItems = [];
 
   public bannerConfig: SwiperOptions = {
     slidesPerView: 3,
@@ -39,9 +21,30 @@ export class ShopHomeComponent implements OnInit {
     // autoplay: true
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private request: RequestService) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+
+  private loadData(){
+    //TODO: add preloader here
+    this.request.getMainCategories().then(res => {
+      if(res && res?.status){
+        console.log(res.data)
+        this.bannerItems = res.data.main_category.map(item => {
+          return {
+            id: item.web_category_id,
+            title: item.web_category_name,
+            photo: item.web_category_attachment_1,
+            description: item.web_category_description
+          }
+        })
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   public onItemClick(index){

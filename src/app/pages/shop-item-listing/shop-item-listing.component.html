@@ -1,0 +1,18 @@
+<div class="shop-item-listing-page">
+    <div class="item-list">
+        <div *ngFor="let item of itemList" class="list-item" (click)="navigateTo(item.id)">
+            <img [src]="item.photo" alt="">
+            
+            <div class="bottom">
+                <ngx-material-rating class="rating" [max]="5" [disabled]="true" color="accent" [value]="item?.rating || 0">
+                </ngx-material-rating>
+                
+                <div class="name">
+                    <h1>{{item.name}}</h1>
+    
+                    <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

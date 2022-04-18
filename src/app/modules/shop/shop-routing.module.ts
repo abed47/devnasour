@@ -4,6 +4,7 @@ import { ShopLayoutComponent } from 'src/app/layouts/shop-layout/shop-layout.com
 import { ProductViewComponent } from 'src/app/pages/product-view/product-view.component';
 import { ShopDealsComponent } from 'src/app/pages/shop-deals/shop-deals.component';
 import { ShopHomeComponent } from 'src/app/pages/shop-home/shop-home.component';
+import { ShopItemListingComponent } from 'src/app/pages/shop-item-listing/shop-item-listing.component';
 import { ShopListingComponent } from 'src/app/pages/shop-listing/shop-listing.component';
 import { ShopTrendingComponent } from 'src/app/pages/shop-trending/shop-trending.component';
 
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'c/:id',
         component: ShopListingComponent
+      },
+      {
+        path: 'p/:id',
+        component: ShopItemListingComponent
       },
       {
         path: 'deals',

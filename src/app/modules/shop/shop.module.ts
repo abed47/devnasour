@@ -18,9 +18,12 @@ import { ShopDealsComponent } from '../../pages/shop-deals/shop-deals.component'
 import { ProductViewComponent } from '../../pages/product-view/product-view.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {MatRippleModule} from '@angular/material/core';
+import { RequestService } from 'src/app/services/request.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ShopItemListingComponent } from '../../pages/shop-item-listing/shop-item-listing.component';
 
 @NgModule({
-  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent],
+  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent],
   imports: [
     CommonModule,
     ShopRoutingModule,
@@ -35,7 +38,11 @@ import {MatRippleModule} from '@angular/material/core';
     NgxMaterialRatingModule,
     SharedModule,
     MatRippleModule,
-    NgxUsefulSwiperModule
+    NgxUsefulSwiperModule,
+    HttpClientModule
+  ],
+  providers: [
+    RequestService
   ]
 })
 export class ShopModule { }

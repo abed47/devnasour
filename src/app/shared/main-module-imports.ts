@@ -14,6 +14,10 @@ import { HomeComponent } from '../pages/home/home.component';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { CountUpModule } from 'ngx-countup';
 import { RatingModule } from 'ng-starrating';
+import { MatIconModule } from '@angular/material/icon';
+import { GalleryModule } from 'ng-gallery';
+
+
 /**
  * @description imports and declarations for the main layout declarations
  */
@@ -30,7 +34,9 @@ export default {
         MatSidenavModule,
         NgxUsefulSwiperModule,
         CountUpModule,
-        RatingModule
+        RatingModule,
+        MatIconModule,
+        GalleryModule
     ],
     declarations: [
         FooterComponent,

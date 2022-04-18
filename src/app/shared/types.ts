@@ -5,3 +5,10 @@ export enum StorageTypes {
 }
 
 export type TowDTool = "selection" | "templates" | "text" | "image-upload" | "elements" | "background" | "folders" | "brush";
+
+export type responseType = {
+    data: any[] | any,
+    status: 0 | 1,
+    message: string,
+    type: string
+}

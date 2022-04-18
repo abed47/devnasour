@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: '',
-  googleFontsKey: 'AIzaSyAunrk3iesN60PvMdOy98XMusbI4eKXorQ'
+  apiUrl: 'devnasour/api/',
+  googleFontsKey: 'AIzaSyAunrk3iesN60PvMdOy98XMusbI4eKXorQ',
+  serverUrl: 'http://192.168.87.101/'
 };
 
 /*

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -35,25 +37,41 @@ export class ShopListingComponent implements OnInit {
     }
   ]
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private layoutUtils: LayoutUtilsService,
+    private request: RequestService
+    ) { }
 
   ngOnInit(): void {
     this.loadSettings();
   }
 
   private loadSettings(){
-    for(let i = 0; i < 14; i++){
-      this.recommendedItemList.push({
-        ...this.recommendedItemList[0],
-        id: i + 2
-      })
-    }
+    this.layoutUtils.showLoader();
+    let catId = this.route.snapshot.params.id
+    this.request.getSubCategories(catId).then(r => {
+      if(r.status === 1 && r.data?.length > 0){
+        this.recommendedItemList = r.data.map(item => {
+          return {
+            id: item.web_category_id,
+            name: item.web_category_name,
+            description: item.web_category_description,
+            photo: item.web_category_attachment_1
+          }
+        })
+      }
 
-    console.log(this.recommendedItemList)
+      if(r.status === 1 && !r?.data?.length){
+        //TODO: show error here later
+      }
+    })
+    this.layoutUtils.hidePreloader();
   }
 
   public navigateTo(id: number | string){
-    this.router.navigate([`/shop/product/${id}`]);
+    this.router.navigate([`/shop/p/${id}`]);
   }
 
 }

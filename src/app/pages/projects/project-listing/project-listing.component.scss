@@ -1,0 +1,87 @@
+@import 'src/styles/styles.scss';
+
+.project-list-page{
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+
+    header{
+        width: 100%;
+        @include init-flex(column, center, center);
+        margin-bottom: 25px;
+
+        .title{
+            color: $color-primary;
+            font-family: $font-bold;
+            font-size: clamp(1rem, 2.5vw, 2rem); 
+            margin: 0;
+        }
+
+        hr{
+            width: 100px;
+            border-color: $color-secondary;
+            border-top: none;
+            border-width: 2px;
+            margin: 15px 0;
+        }
+
+        .tagline{
+            font-family: $font-base;
+            color: $color-primary;
+            font-size: 12px;
+        }
+    }
+
+    main{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        row-gap: 20px;
+        column-gap: 20px;
+        justify-items: center;
+        align-content: center;
+        padding-bottom: 50px;
+
+        article{
+            background-color: #F9F9F9 !important;
+            box-shadow: 1px 2px 6px rgba(#000000, .2);
+            
+            img{
+                width: 100%;
+                max-height: 300px;
+                object-fit: cover;
+            }
+
+            .info{
+                box-sizing: border-box;
+                padding: 15px 20px;
+                background-color: #F9F9F9 !important;
+
+
+                .title{
+                    margin-bottom: 5px;
+                    font-size: 14px;
+                    color: $color-primary;
+                    font-family: $font-semibold;
+                }
+
+                .short-description{
+                    font-size: 12px;
+                    color: $text-color2;
+                }
+
+
+                a{
+                    @include init-flex(row, flex-start);
+                    color: $color-secondary;
+                    text-decoration: none;
+                    font-size: 12px;
+                    img{
+                        width: 1.2rem;
+                        margin-left: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
