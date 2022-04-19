@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SeoService } from './services/seo.service';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HelperService } from './services/helper.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HttpClientModule,
     MatProgressSpinnerModule
   ],
-  providers: [SeoService],
+  providers: [
+    SeoService,
+    HelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

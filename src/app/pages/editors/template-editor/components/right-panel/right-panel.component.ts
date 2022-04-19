@@ -11,7 +11,7 @@ import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 })
 export class RightPanelComponent implements OnInit, OnDestroy {
 
-  public selectedObjectType: "text" | "photo" | "shape" | null = null;
+  public selectedObjectType: "text" | "image" | "shape" | null = null;
 
   public fontList = [
     'Dancing Script',
@@ -68,7 +68,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     // this.subscriptions.push(this.)
   }
 
-  public handleObjectSelection(e: {action: string, object: any, type: "text" | "photo" | "shape" | null}){
+  public handleObjectSelection(e: {action: string, object: any, type: "text" | "image" | "shape" | null}){
     
     if(e.type === null){
       this.objHeight = 0;
@@ -97,7 +97,9 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public handleObjectEvent(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
     // if(e.action === "text")
     if(e.action === "selection" && e.type === "text") this.selectedObjectType = "text";
-    if(e.action === "selection" && e.type === "shape") this.selectedObjectType = "shape"
+    if(e.action === "selection" && e.type === "shape") this.selectedObjectType = "shape";
+    if(e.action === "selection" && e.type === "image") this.selectedObjectType = "image";
+    
   }
   
   public onWidthChange(e){
@@ -151,6 +153,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       if(e === null) return null;
       if(e === "text") return "text";
       if(e === "rect" || e === "circle" || e === "triangle") return "shape"
+      if(e === "image") return "image";
       return null
     }
 }

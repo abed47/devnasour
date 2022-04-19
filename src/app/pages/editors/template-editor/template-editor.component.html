@@ -6,5 +6,7 @@
       <canvas width="500px" height="500px" id="fabricSurface"></canvas>
     </div>
     <two-d-right-panel></two-d-right-panel>
+
+    <input type="file" #imageUploader class="hidden-file-input" (change)="handleImageSelected($event)">
   </div>
 </div>

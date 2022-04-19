@@ -1,10 +1,11 @@
-import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fabric } from 'fabric';
 import { Subscription } from 'rxjs';
 import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 import { TowDTool } from 'src/app/shared/types';
 import FontPicker from 'font-picker';
 import { environment } from 'src/environments/environment';
+import { HelperService } from 'src/app/services/helper.service';
 @Component({
   selector: 'app-template-editor',
   templateUrl: './template-editor.component.html',
@@ -16,9 +17,13 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   private subscriptions: Subscription[] = [];
   private selectedTool: TowDTool = "selection";
   public selectedObject: fabric.Object | fabric.IText | any = null;
+  @ViewChild('imageUploader') private imageUploaderRef;
   
 
-  constructor(private editorService: TwoDEditorService) { }
+  constructor(
+    private editorService: TwoDEditorService,
+    private helper: HelperService
+    ) { }
 
   ngOnInit(): void {
     this.loadSettings();
@@ -46,6 +51,11 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     //add event subscriptions
     this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
+      if(r === "upload-photo"){
+        this.imageUploaderRef.nativeElement.click();
+        this.editorService.changeTool('selection');
+        return;
+      }
       this.selectedTool = r;
     }));
 
@@ -70,6 +80,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     if(e.target !== null) {
       this.selectedObject = e.target;
+      console.log( e.target.type)
       this.editorService.selectObject(e.target.type === "i-text" ? "text" : e.target.type,'selection', e.target)
       return
     };
@@ -190,6 +201,20 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     if(e.object?.width) this.selectedObject.width = +e.object.width;
     this.fab.renderAll();
     // this.fab.renderAndReset()
+  }
+
+  public handleImageSelected(e) {
+    if(e?.target?.files?.[0]){
+      this.helper.imgToBase64(e.target.files[0]).then(res => {
+        let cImg = fabric.Image.fromURL(res, i => {
+          i.scaleToHeight(300);
+          i.scaleToWidth(300);
+          this.fab.add(i);
+          console.log(this.fab.toJSON())
+        });
+      })
+    }
+    this.editorService.getToolSubject().next("selection");
   }
 
 }
