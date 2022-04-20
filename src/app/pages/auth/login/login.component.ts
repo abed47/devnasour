@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private request: RequestService,
+    private layoutUtils: LayoutUtilsService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();

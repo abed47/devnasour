@@ -25,3 +25,40 @@ app-main-layout{
         display: flex;
     }
 }
+
+::ng-deep .snackbar{
+
+    color: white !important;
+
+    button{
+        color: white !important;
+    }
+
+    &-error{
+        background-color: #c9252d;
+        button{
+            color: white !important;
+        }
+    }
+
+    &-info{
+        background-color: #0d66d0;
+        button{
+            color: white !important;
+        }
+    }
+
+    &-warn{
+        background-color: #cb6f10;
+        button{
+            color: white !important;
+        }
+    }
+
+    &-success{
+        background-color: #12805c;
+        button{
+            color: white !important;
+        }
+    }
+}

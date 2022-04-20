@@ -16,6 +16,7 @@ import { CountUpModule } from 'ngx-countup';
 import { RatingModule } from 'ng-starrating';
 import { MatIconModule } from '@angular/material/icon';
 import { GalleryModule } from 'ng-gallery';
+import { SharedModule } from './shared.module';
 
 
 /**
@@ -36,7 +37,8 @@ export default {
         CountUpModule,
         RatingModule,
         MatIconModule,
-        GalleryModule
+        GalleryModule,
+        SharedModule
     ],
     declarations: [
         FooterComponent,

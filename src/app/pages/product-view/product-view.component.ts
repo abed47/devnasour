@@ -1,8 +1,9 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImageItem } from 'ng-gallery';
 import { Subject } from 'rxjs';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -13,24 +14,26 @@ import { SwiperOptions } from 'swiper';
 export class ProductViewComponent implements OnInit, AfterViewChecked {
 
   public pathNameSubject: Subject<any> = new Subject();
-  public selectedQuantity = 10;
+  public selectedQuantity = 0;
+  public selectedPrice = 0;
   public product = {
     images: [],
-    name: 'Test Product',
-    rating: 3,
-    overview: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
-    price: 100,
-    discount: null
+    name: '',
+    rating: 0,
+    overview: '',
+    price: 0,
+    discount: null,
+    description: '',
+    priceList: [],
+    shipping: '',
+    size: '',
+    farmer: '',
+    country: '',
+    sizing: ''
   };
 
   public relatedProductsList = [
-    {
-      id: 1,
-      photo: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg',
-      name: 'item name',
-      price: 145,
-      rating: 2
-    }
+
   ]
 
   public relatedProductsSwiperConfig: SwiperOptions = {
@@ -43,33 +46,78 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     // width: 500,
   }
 
-  constructor(private route: ActivatedRoute, private layoutUtilsService: LayoutUtilsService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private layoutUtilsService: LayoutUtilsService,
+    private router: Router,
+    private request: RequestService
+    ) { }
 
   ngOnInit(): void {
     this.loadData();
-    
-    for(let i = 0; i < 10; i++){
-      this.relatedProductsList.push({
-        ...this.relatedProductsList[0],
-        id: i + 2
-      })
-    }
   }
   
   ngAfterViewChecked(): void {
-    // console.log('hello')
-    
   }
   
   private loadData(){
     let productId = this.route.snapshot.params.id;
-    this.layoutUtilsService.renamePath('Product name', productId)
+    this.layoutUtilsService.renamePath('Product name', productId);
+    this.layoutUtilsService.showLoader();
+    this.relatedProductsList = [];
 
-    //loadImages
-    let imgs = ['https://cdn.dribbble.com/users/1622978/screenshots/14702491/media/988b5e44bb80bcb73383a8bebcd71028.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg'];
-    imgs.forEach(item => this.product.images.push(new ImageItem({src: item, thumb: item})))
+    this.request.getProductDetails(productId)
+    .then(r => {
+      
+      if(r && r?.status === 1){
+        console.log(r);
+        this.product.name = r.data.web_product_name;
+        this.product.images = r?.data?.attachments?.map(item => new ImageItem({src: item, thumb: item})) || [];
+        this.product.description = r.data.web_product_description;
+        this.product.overview = r.data.web_product_overview;
+        this.product.price = r.data.web_product_price;
+        this.product.discount = +r.data.web_product_discount;
+        //price opts
+        this.product.priceList = r.data.quantity_pricing;
+        this.selectedPrice = r.data.quantity_pricing[0].price;
+        this.selectedQuantity = r.data.quantity_pricing[0].quantity;
+
+        this.product.shipping = r.data.web_product_shipping;
+        this.product.sizing = r.data.web_product_sizing;
+        this.product.size = r.data.web_product_size;
+        this.product.farmer = r.data.web_product_farmer;
+        this.product.country = r.data.web_country_name;
+        this.product.rating = +r?.data?.web_product_rate + 1 || 0;
+        if(r?.data?.related_product) r.data.related_product.forEach(item => {
+          this.relatedProductsList.push({
+            name: item.web_product_name,
+            price: item.web_product_price,
+            rating: +item.web_product_rate || 0,
+            photo: item.attachments[0],
+            id: item.web_product_id
+          })
+        })
+      }
+
+      this.layoutUtilsService.hidePreloader();
+    })
+    .catch(e => {
+      console.log(e);
+      this.layoutUtilsService.hidePreloader();
+    })
+
+    
   }
 
-  
+  public handlePriceChange(e){
+    let newP = this.product.priceList.filter(item => item.quantity === e);
+    this.selectedPrice = newP[0].price;
+    this.selectedQuantity = newP[0].quantity;
+  }
 
+  public navigateTo(e){
+    this.router.navigate(['/shop/product/' + e]).then( e => {
+      this.loadData();
+    })
+  }
 }

@@ -7,6 +7,7 @@ import { GalleryModule } from 'ng-gallery';
 import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -19,14 +20,16 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatFormFieldModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   exports: [
     BreadCrumbsComponent,
     GalleryModule,
     MatSelectModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

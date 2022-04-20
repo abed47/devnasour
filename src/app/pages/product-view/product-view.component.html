@@ -4,15 +4,13 @@
     <section class="product">
         <article class="l">
             <div class="gallery-container">
-                <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: white;" [items]="product.images"></gallery>
+                <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: #FAFAFA;" [items]="product.images"></gallery>
             </div>
 
             <div class="info">
                 <div class="description">
                     <h2 class="title">Description</h2>
-                    <p class="content">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere ossimus, omnis amet voluptas ssumenda est, omnis dolor repellendus quis nostrum.
-
-                        Temporibus autem quibusdam et aut officiis debitis aut rerum dolorem necessitatibus saepe.</p>
+                    <p class="content">{{product.description}}</p>
                 </div>
 
                 <div class="information">
@@ -20,12 +18,11 @@
 
                     <div class="block">
                         <h3 class="title">Shipping</h3>
-                        <p class="content">We currently offer free shipping 
-                            worldwide on all orders over $100.</p>
+                        <p class="content">{{product.shipping}}</p>
                     </div>
                     <div class="block">
                         <h3 class="title">Sizing</h3>
-                        <p class="content">We currently offer free shipping.</p>
+                        <p class="content">{{product.sizing}}</p>
                     </div>
                     <div class="block">
                         <h3 class="title">Assistance</h3>
@@ -50,8 +47,8 @@
             </div>
 
             <div class="pricing">
-                <span class="price" [class.strike]="product.discount > 0">${{product.price}}</span>
-                <span [hidden]="!product.discount" class="discounted-price">${{product.price - ((+product.price * +product.discount) / 100)}}</span>
+                <span class="price" [class.strike]="product.discount > 0">${{selectedPrice}}</span>
+                <span [hidden]="!product.discount" class="discounted-price">${{selectedPrice - ((+selectedPrice * +product.discount) / 100)}}</span>
                 <span [hidden]="!product.discount" class="discount">{{product.discount}}%</span>
 
                 <div class="r"><hr/></div>
@@ -68,12 +65,8 @@
                     
 
           
-                    <mat-select [(ngModel)]="selectedQuantity" class="select">
-                        <mat-option [value]="10">10</mat-option>
-                        <mat-option [value]="50">50</mat-option>
-                        <mat-option [value]="100">100</mat-option>
-                        <mat-option [value]="500">500</mat-option>
-                        <mat-option [value]="1000">1000</mat-option>
+                    <mat-select [(ngModel)]="selectedQuantity" (valueChange)="handlePriceChange($event)" class="select">
+                        <mat-option *ngFor="let item of product.priceList" [value]="item.quantity">{{item.quantity}}</mat-option>
                     </mat-select>
                 </div>
             </div>
@@ -83,15 +76,15 @@
                 <ul>
                     <li>
                         <p>Size</p>
-                        <p>15x20x40cm</p>
+                        <p>{{product.size}}</p>
                     </li>
                     <li>
                         <p>Farmer</p>
-                        <p>carton</p>
+                        <p>{{product.farmer}}</p>
                     </li>
                     <li>
                         <p>Country</p>
-                        <p>Istanbul</p>
+                        <p>{{product.country}}</p>
                     </li>
                 </ul>
             </div>

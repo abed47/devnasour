@@ -356,3 +356,20 @@
     }
 
 }
+
+@media only screen and (max-width: 700px){
+    .page-product-view{
+        section.product{
+            flex-direction: column;
+            .r, .l{
+                width: 100%;
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            .r .specifications{
+                width: 100%;
+            }
+        }
+    }
+}

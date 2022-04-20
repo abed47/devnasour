@@ -8,6 +8,9 @@ import { SeoService } from './services/seo.service';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HelperService } from './services/helper.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { RequestService } from './services/request.service';
+import { LayoutUtilsService } from './services/layout-utils.service';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,14 @@ import { HelperService } from './services/helper.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
     SeoService,
-    HelperService
+    HelperService,
+    RequestService,
+    LayoutUtilsService
   ],
   bootstrap: [AppComponent]
 })
