@@ -51,6 +51,12 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     //add event subscriptions
     this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
+      if(r !== "brush") this.exitBrushMode();
+      if(r === "brush") {
+        this.enterBrushMode();
+        this.selectedTool = r;
+        return;
+      }
       if(r === "upload-photo"){
         this.imageUploaderRef.nativeElement.click();
         this.editorService.changeTool('selection');
@@ -71,6 +77,8 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   private onCanvasClick(e: fabric.IEvent<MouseEvent> | any){
+
+    if(this.fab.isDrawingMode) return;
     
     if(e.target == null && this.selectedTool === "selection") {
       this.editorService.changeTool('selection');
@@ -157,7 +165,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
   private handleObjectUpdate(e){
 
-    if(!this.selectedObject) return;
+    if(!this.selectedObject && !this.fab.isDrawingMode) return;
 
     if(e.object?.height) this.selectedObject.height = +e.object.height;
     if(e.object?.width) this.selectedObject.width = +e.object.width;
@@ -170,7 +178,9 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     if(e.object.type === "font-size") this.selectedObject.fontSize = +e.object.value;
     if(e.object.type === "opacity") this.selectedObject.opacity = +(e.object.value / 100);
     if(e.object.type === "text-align") this.selectedObject.textAlign = e.object.value;
-    
+    if(e.object.type === "brush-size") this.fab.freeDrawingBrush.width = e.object.value;
+    if(e.object.type === "brush-color") this.fab.freeDrawingBrush.color = e.object.value;
+
     if(e.object.type === "align") {
       if(e.object.value === "left") this.selectedObject.left = 0;
       if(e.object.value === "center") this.selectedObject.left = (this.fab.width / 2) - (this.selectedObject.width / 2)
@@ -191,7 +201,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       this.selectedObject.fill = e.object.value
       this.selectedObject.dirty = true;
     }
-    this.selectedObject.dirty = true;
+    if(this.selectedObject) this.selectedObject.dirty = true;
 
 
     // if(e.object?.height) console.log(e.object, 'hello')
@@ -206,7 +216,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   public handleImageSelected(e) {
     if(e?.target?.files?.[0]){
       this.helper.imgToBase64(e.target.files[0]).then(res => {
-        let cImg = fabric.Image.fromURL(res, i => {
+        fabric.Image.fromURL(res, i => {
           i.scaleToHeight(300);
           i.scaleToWidth(300);
           this.fab.add(i);
@@ -215,6 +225,14 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       })
     }
     this.editorService.getToolSubject().next("selection");
+  }
+
+  private enterBrushMode(){
+    this.fab.isDrawingMode = true;
+  }
+
+  private exitBrushMode(){
+    this.fab.isDrawingMode = false;
   }
 
 }

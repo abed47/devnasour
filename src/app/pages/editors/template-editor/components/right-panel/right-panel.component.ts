@@ -11,7 +11,7 @@ import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 })
 export class RightPanelComponent implements OnInit, OnDestroy {
 
-  public selectedObjectType: "text" | "image" | "shape" | null = null;
+  public selectedObjectType: "text" | "image" | "shape" | "brush" | null = null;
 
   public fontList = [
     'Dancing Script',
@@ -49,6 +49,8 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public objHeight = 0;
   public ObjX = 0;
   public ObjY = 0;
+  public brushColor = "#000000";
+  public brushWidth = 3;
 
   public colorFc: AbstractControl = new FormControl(null);
 
@@ -65,6 +67,9 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public loadSettings(){
     this.subscriptions.push(this.editorService.getObjectSubject().subscribe((r: any) => this.handleObjectEvent(r)));
     this.subscriptions.push(this.editorService.getSelectionSubject().subscribe((r: any) => this.handleObjectSelection(r)));
+    this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
+      if(r === "brush") this.selectedObjectType = "brush"
+    }))
     // this.subscriptions.push(this.)
   }
 
@@ -89,7 +94,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       if(e?.object?.fontFamily) this.selectedFont = e.object.fontFamily;
       this.opacity = e.object.opacity * 100;
       this.selectedObjectType = this.handleFormatObjectType(e.type);
-      this.color = e.object?.fill || '#000000'
+      this.color = e.object?.fill || '#000000';
       return;
     }
   }
@@ -147,6 +152,15 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   
   public handleColorChange(e){
     this.editorService.updateObject("update", "update", { type: "color", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
+  }
+
+  public onBrushWidthChange(e){
+    this.brushWidth = e?.target?.value || e?.value || 0;
+    this.editorService.updateObject("update", "update", {type: "brush-size", value: e?.target?.value || e?.value || 0})
+  }
+
+  public onBrushColorChange(e){
+    this.editorService.updateObject("update", "update", { type: "brush-color", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
   }
   
     private handleFormatObjectType (e){
