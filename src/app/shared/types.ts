@@ -4,7 +4,7 @@ export enum StorageTypes {
     DB_STORAGE = 3
 }
 
-export type TowDTool = "selection" | "templates" | "text" | "upload-photo" | "elements" | "background" | "folders" | "brush";
+export type TowDTool = "selection" | "templates" | "text" | "upload-photo" | "elements" | "background" | "upload" | "brush";
 
 export type responseType = {
     data: any[] | any,

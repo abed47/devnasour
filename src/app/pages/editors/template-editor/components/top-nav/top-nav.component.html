@@ -4,16 +4,22 @@
     <img src="assets/images/logo.png" alt="devnasour logo" class="logo" />
 
     <div class="title-editor">
-      <div class="display">
+      <div *ngIf="!titleEditingActive" class="display">
         <p>{{fileTitle}}.devnasour</p>
-        <button mat-icon-button class="btn"><img src="assets/images/edit-icon.png" /></button>
+        <button mat-icon-button class="btn" (click)="onEditClick()"><img src="assets/images/edit-icon.png" /></button>
+      </div>
+      <div *ngIf="titleEditingActive" class="editable">
+        <mat-form-field>
+          <input type="text" matInput [(ngModel)]="fileTitle">
+        </mat-form-field>
+        <button mat-icon-button class="btn" (click)="onSaveClick()"><img src="assets/images/save-primary.png" /></button>
       </div>
     </div>
   </div>
 
   <div class="r">
 
-    <button mat-raised-button color="primary">Download</button>
+    <button mat-raised-button color="primary" (click)="onDownloadClick()">Download</button>
 
     <div class="user-profile"><img src="assets/images/user-placeholder.png" alt="user-placeholder" /></div>
   </div>

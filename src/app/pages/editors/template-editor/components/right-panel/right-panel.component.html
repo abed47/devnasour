@@ -14,14 +14,14 @@
                 <input type="number" [value]="ObjY" (change)="onYChange($event)">
                 <p class="adornment">Y</p>
             </span>
-            <span class="g">
+            <!-- <span class="g">
                 <input type="number" [value]="objWidth" (change)="onWidthChange($event)">
                 <p class="adornment">W</p>
             </span>
             <span class="g">
                 <input type="number" [value]="objHeight" (change)="onHeightChange($event)">
                 <p class="adornment">H</p>
-            </span>
+            </span> -->
         </div>
 
         <div class="alignment-toggle">
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <button mat-button color="warn" class="delete-btn"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
+        <button mat-button color="warn" class="delete-btn" (click)="onDeleteClick()"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
     </div>
 
     <div [hidden]="selectedObjectType !== 'shape'" class="text-settings">
@@ -178,7 +178,7 @@
             </div>
         </div>
 
-        <button mat-button color="warn" class="delete-btn"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
+        <button mat-button color="warn" class="delete-btn" (click)="onDeleteClick()"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
     </div>
 
     <div [hidden]="selectedObjectType !== 'image'" class="text-settings">
@@ -241,7 +241,7 @@
             </div>
         </div>
 
-        <button mat-button color="warn" class="delete-btn"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
+        <button mat-button color="warn" class="delete-btn" (click)="onDeleteClick()"> <img src="assets/images/red-trash-icon.png" /> Delete Element</button>
     </div>
 
     <div [hidden]="selectedObjectType !== 'brush'" class="text-settings">

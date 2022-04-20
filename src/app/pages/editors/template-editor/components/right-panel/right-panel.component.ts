@@ -1,8 +1,10 @@
 import { Color } from '@angular-material-components/color-picker';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
+import { BgSelectDialogComponent } from '../bg-select-dialog/bg-select-dialog.component';
 
 @Component({
   selector: 'two-d-right-panel',
@@ -54,7 +56,10 @@ export class RightPanelComponent implements OnInit, OnDestroy {
 
   public colorFc: AbstractControl = new FormControl(null);
 
-  constructor(private editorService: TwoDEditorService) { }
+  constructor(
+    private editorService: TwoDEditorService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.loadSettings();
@@ -170,4 +175,10 @@ export class RightPanelComponent implements OnInit, OnDestroy {
       if(e === "image") return "image";
       return null
     }
+
+  public onDeleteClick(){
+    this.editorService.generalEvent({type: "action", name: "delete-object"})
+  }
+
+  
 }

@@ -6,6 +6,10 @@ import { TowDTool } from 'src/app/shared/types';
 import FontPicker from 'font-picker';
 import { environment } from 'src/environments/environment';
 import { HelperService } from 'src/app/services/helper.service';
+import { saveAs } from 'file-saver';
+import { MatDialog } from '@angular/material/dialog';
+import { BgSelectDialogComponent } from './components/bg-select-dialog/bg-select-dialog.component';
+
 @Component({
   selector: 'app-template-editor',
   templateUrl: './template-editor.component.html',
@@ -17,12 +21,16 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   private subscriptions: Subscription[] = [];
   private selectedTool: TowDTool = "selection";
   public selectedObject: fabric.Object | fabric.IText | any = null;
+  private canvasWidth = 500;
+  private canvasHeight = 500;
   @ViewChild('imageUploader') private imageUploaderRef;
+  @ViewChild('fileUploader') private fileUploader;
   
 
   constructor(
     private editorService: TwoDEditorService,
-    private helper: HelperService
+    private helper: HelperService,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -43,12 +51,13 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     this.fab = new fabric.Canvas('fabricSurface', {
       backgroundColor: '#EEEEEE',
-      width: 500,
-      height: 500
+      width: this.canvasHeight,
+      height: this.canvasWidth
     });
 
     this.fab.on('mouse:down', e => this.onCanvasClick(e));
 
+    // this.openBgDialog()
     //add event subscriptions
     this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
       if(r !== "brush") this.exitBrushMode();
@@ -57,8 +66,18 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
         this.selectedTool = r;
         return;
       }
+      if(r === "background"){
+        this.openBgDialog(this.fab);
+        this.editorService.changeTitle('selection');
+        return;
+      }
       if(r === "upload-photo"){
         this.imageUploaderRef.nativeElement.click();
+        this.editorService.changeTool('selection');
+        return;
+      }
+      if(r === "upload"){
+        this.fileUploader.nativeElement.click();
         this.editorService.changeTool('selection');
         return;
       }
@@ -67,7 +86,9 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     this.subscriptions.push(this.editorService.getObjectSubject().subscribe((res) => {
       this.handleObjectEvent(res)
-    }))
+    }));
+
+    this.subscriptions.push(this.editorService.getGeneralSubject().subscribe(r => this.handleGeneralEvents(r)));
 
     this.initListeners();
 
@@ -88,7 +109,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
     if(e.target !== null) {
       this.selectedObject = e.target;
-      console.log( e.target.type)
       this.editorService.selectObject(e.target.type === "i-text" ? "text" : e.target.type,'selection', e.target)
       return
     };
@@ -197,14 +217,12 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     }
 
     if(e.object.type === "color"){
-      // console.log("color options: ",e.object)
       this.selectedObject.fill = e.object.value
       this.selectedObject.dirty = true;
     }
     if(this.selectedObject) this.selectedObject.dirty = true;
 
 
-    // if(e.object?.height) console.log(e.object, 'hello')
 
     this.fab.renderAll();
     if(e.object?.height) this.selectedObject.height = +e.object.height;
@@ -220,7 +238,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
           i.scaleToHeight(300);
           i.scaleToWidth(300);
           this.fab.add(i);
-          console.log(this.fab.toJSON())
+          this.imageUploaderRef.nativeElement.value = ""
         });
       })
     }
@@ -235,4 +253,59 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     this.fab.isDrawingMode = false;
   }
 
+  private handleGeneralEvents(e:any){
+    if(e?.type === "action"){
+      if(e?.name === "download") this.onDownload();
+      if(e?.name === "delete-object") {
+        if(this.selectedObject){
+          this.fab.remove(this.selectedObject)
+        }
+      }
+    }
+  }
+
+  private onDownload(){
+    let fName = this.editorService.getTitle();
+    let dataJson = this.fab.toJSON();
+    let dataBlob = new Blob([JSON.stringify(dataJson)], { type: 'text/plain;charset=utf-8'})
+    saveAs(dataBlob, fName + '.devnasour')
+  }
+
+  public handleUploadFile(e: any){
+    if(e?.target?.files[0]){
+      let f = e.target.files[0];
+      this.helper.readTextFile(f).then((r: any) => {
+        this.fab.loadFromJSON(r, () => {});
+      })
+    }
+  }
+
+  private openBgDialog(fab){
+    
+    // return;
+    //@ts-ignore
+    let dialogRef = this.dialog.open<any, any>(BgSelectDialogComponent);
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res)
+      if(res !== undefined){
+        switch (res.type){
+          case 'image':
+            fabric.Image.fromURL(res.value, img => {
+              this.fab.setBackgroundImage(img, this.fab.renderAll.bind(this.fab), {
+                scaleX: this.canvasWidth / img.width,
+                scaleY: this.canvasHeight / img.height
+              })
+            });
+            break;
+          case 'color':
+            this.fab.setBackgroundColor(res.value, this.fab.renderAll.bind(this.fab))
+            break;
+          default:
+            this.fab.setBackgroundImage(null, this.fab.renderAll.bind(this.fab))
+            this.fab.setBackgroundColor(null, this.fab.renderAll.bind(this.fab))
+        }
+      }
+    })
+  }
 }

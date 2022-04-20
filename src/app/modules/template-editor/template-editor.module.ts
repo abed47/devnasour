@@ -18,6 +18,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { ImageSelectionDialogComponent } from '../../pages/editors/template-editor/components/image-selection-dialog/image-selection-dialog.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { BgSelectDialogComponent } from '../../pages/editors/template-editor/components/bg-select-dialog/bg-select-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     RightPanelComponent,
     SideNavComponent,
     TopNavComponent,
-    ImageSelectionDialogComponent
+    ImageSelectionDialogComponent,
+    BgSelectDialogComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     NgSelectModule,
     FormsModule,
     MatSliderModule,
-    ColorPickerModule
+    ColorPickerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

@@ -7,6 +7,10 @@ import { TowDTool } from '../shared/types';
 })
 export class TwoDEditorService {
 
+
+  private fileTitle = "untitled";
+  private generalSubject = new Subject();
+
   public selectedEl: any;
   public toolSelected: TowDTool = "selection";
   private toolSubject: Subject<TowDTool> = new Subject();
@@ -24,6 +28,22 @@ export class TwoDEditorService {
   }> = new Subject();
 
   constructor() { }
+
+  public getGeneralSubject(){
+    return this.generalSubject;
+  }
+
+  public generalEvent(e: any){
+    this.generalSubject.next(e);
+  }
+  
+  public getTitle(){
+    return this.fileTitle;
+  }
+
+  public changeTitle(t: string){
+    this.fileTitle = t;
+  }
 
   public getSelectedTool(){
     return this.toolSelected;

@@ -16,4 +16,13 @@ export class HelperService {
       reader.onerror = (err) => reject(err);
     })
   }
+
+  public readTextFile(file){
+    return new Promise<any>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    })
+  }
 }
