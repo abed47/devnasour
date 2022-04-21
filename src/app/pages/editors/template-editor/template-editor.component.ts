@@ -233,6 +233,29 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
   public handleImageSelected(e) {
     if(e?.target?.files?.[0]){
+      let isSvg = e?.target?.files?.[0]?.name?.match(/\.svg/ig)?.length > 0 ? true : false
+
+      if(isSvg){
+        let el = document.createElement('object');
+        el.type = "image/svg+xml";
+        el.data = URL.createObjectURL(e.target.files[0]);
+        el.width = '300px';
+        el.height = '300px';
+        let serializer = new XMLSerializer();
+        let str = serializer.serializeToString(el)
+        fabric.loadSVGFromURL(URL.createObjectURL(e.target.files[0]), (i) => {
+          let g = fabric.util.groupSVGElements(i, { width: 30, height: 30, fill: 'red', stroke: 'red' });
+            g.set({
+              left: 10,
+              top: 10
+            });
+            this.fab.add(g);
+            this.fab.renderAll();
+            this.imageUploaderRef.nativeElement.value = ""
+        })
+        return
+      }
+
       this.helper.imgToBase64(e.target.files[0]).then(res => {
         fabric.Image.fromURL(res, i => {
           i.scaleToHeight(300);
