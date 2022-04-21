@@ -55,7 +55,7 @@ export class RequestService {
       cb(null, e)
     })
   }
-  public login(body:{email: string, password: string}, cb: CallableFunction){
+  public login(body:any, cb: CallableFunction){
     this.http.post(this.serverUrl + 'login.php?action=login', body).subscribe(r => {
       cb(r, null)
     }, e => {

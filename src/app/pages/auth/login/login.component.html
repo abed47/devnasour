@@ -4,14 +4,14 @@
 
         <div class="l">
 
-            <form [formGroup]="loginForm">
+            <form [formGroup]="loginForm" (submit)="onLoginSubmit">
                 <h1>Welcome Back!</h1>
 
                 <hr class="mt-5" />
 
                 <mat-form-field appearance="outline" class="input">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" style="border-radius: 0px;">
+                    <input matInput type="email" formControlName="email" style="border-radius: 0px;">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="input">
@@ -20,7 +20,7 @@
                 </mat-form-field>
 
                 <div class="f-box input">
-                    <mat-checkbox color="accent" [checked]="true">
+                    <mat-checkbox color="accent" formControlName="stayLoggedIn">
                         keep me logged in
                     </mat-checkbox>
 
@@ -35,7 +35,7 @@
                 </button>
                 
 
-                <button mat-raised-button filled color="accent" class="btn facebook" (click)="onFbLogin()" >
+                <button mat-raised-button filled color="accent" class="btn facebook" type="submit">
                     <img src="assets/images/facebook-logo.png" alt="login with facebook" />
                 </button>
 

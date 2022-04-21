@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'devnasour/api/',
   googleFontsKey: 'AIzaSyAunrk3iesN60PvMdOy98XMusbI4eKXorQ',
-  serverUrl: 'http://192.168.87.101/'
+  serverUrl: 'http://192.168.1.106/'
 };
 
 /*
