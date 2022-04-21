@@ -108,6 +108,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     }
 
     if(e.target !== null) {
+      console.log(e.target)
       this.selectedObject = e.target;
       this.editorService.selectObject(e.target.type === "i-text" ? "text" : e.target.type,'selection', e.target)
       return
@@ -200,6 +201,13 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     if(e.object.type === "text-align") this.selectedObject.textAlign = e.object.value;
     if(e.object.type === "brush-size") this.fab.freeDrawingBrush.width = e.object.value;
     if(e.object.type === "brush-color") this.fab.freeDrawingBrush.color = e.object.value;
+    if(e.object.type === "path-fill") {
+      this.selectedObject.fill = e.object.value;
+      if(this.selectedObject?._objects?.length){
+        console.log('hello')
+        this.selectedObject._objects.forEach(el => el.fill = e.object.value)
+      }
+    }
 
     if(e.object.type === "align") {
       if(e.object.value === "left") this.selectedObject.left = 0;
@@ -239,16 +247,10 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
         let el = document.createElement('object');
         el.type = "image/svg+xml";
         el.data = URL.createObjectURL(e.target.files[0]);
-        el.width = '300px';
-        el.height = '300px';
-        let serializer = new XMLSerializer();
-        let str = serializer.serializeToString(el)
         fabric.loadSVGFromURL(URL.createObjectURL(e.target.files[0]), (i) => {
-          let g = fabric.util.groupSVGElements(i, { width: 30, height: 30, fill: 'red', stroke: 'red' });
-            g.set({
-              left: 10,
-              top: 10
-            });
+          let g = new fabric.Group(i);
+            g.scaleToHeight(300);
+            g.scaleToWidth(300)
             this.fab.add(g);
             this.fab.renderAll();
             this.imageUploaderRef.nativeElement.value = ""
@@ -310,7 +312,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     let dialogRef = this.dialog.open<any, any>(BgSelectDialogComponent);
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res)
       if(res !== undefined){
         switch (res.type){
           case 'image':

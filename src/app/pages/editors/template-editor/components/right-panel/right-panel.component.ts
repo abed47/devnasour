@@ -13,7 +13,7 @@ import { BgSelectDialogComponent } from '../bg-select-dialog/bg-select-dialog.co
 })
 export class RightPanelComponent implements OnInit, OnDestroy {
 
-  public selectedObjectType: "text" | "image" | "shape" | "brush" | null = null;
+  public selectedObjectType: "text" | "image" | "shape" | "brush" | "path" | "group" | null = null;
 
   public fontList = [
     'Dancing Script',
@@ -53,6 +53,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public ObjY = 0;
   public brushColor = "#000000";
   public brushWidth = 3;
+  public pathFill = "#000000";
 
   public colorFc: AbstractControl = new FormControl(null);
 
@@ -78,7 +79,7 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     // this.subscriptions.push(this.)
   }
 
-  public handleObjectSelection(e: {action: string, object: any, type: "text" | "image" | "shape" | null}){
+  public handleObjectSelection(e: {action: string, object: any, type: "text" | "image" | "shape" | "path" | null}){
     
     if(e.type === null){
       this.objHeight = 0;
@@ -104,11 +105,13 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     }
   }
   
-  public handleObjectEvent(e: {action: string, object: any, type: 'text' | 'image'| 'shape'}){
+  public handleObjectEvent(e: {action: string, object: any, type: 'text' | 'image'| 'shape' | "path" | "group"}){
     // if(e.action === "text")
     if(e.action === "selection" && e.type === "text") this.selectedObjectType = "text";
     if(e.action === "selection" && e.type === "shape") this.selectedObjectType = "shape";
     if(e.action === "selection" && e.type === "image") this.selectedObjectType = "image";
+    if(e.action === "selection" && e.type === "path") this.selectedObjectType = "path";
+    if(e.action === "selection" && e.type === "group") this.selectedObjectType = "group";
     
   }
   
@@ -167,12 +170,18 @@ export class RightPanelComponent implements OnInit, OnDestroy {
   public onBrushColorChange(e){
     this.editorService.updateObject("update", "update", { type: "brush-color", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
   }
+
+  public onPathFillChange(e){
+    this.editorService.updateObject("update", "update", { type: "path-fill", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
+  }
   
     private handleFormatObjectType (e){
       if(e === null) return null;
       if(e === "text") return "text";
       if(e === "rect" || e === "circle" || e === "triangle") return "shape"
       if(e === "image") return "image";
+      if(e === "path") return "path";
+      if(e === "group") return "group";
       return null
     }
 
