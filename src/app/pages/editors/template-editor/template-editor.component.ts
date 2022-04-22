@@ -9,6 +9,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { saveAs } from 'file-saver';
 import { MatDialog } from '@angular/material/dialog';
 import { BgSelectDialogComponent } from './components/bg-select-dialog/bg-select-dialog.component';
+import { jsPDF } from "jspdf";
 
 @Component({
   selector: 'app-template-editor',
@@ -281,6 +282,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   private handleGeneralEvents(e:any){
     if(e?.type === "action"){
       if(e?.name === "download") this.onDownload();
+      if(e?.name === "download-pdf") this.onDownloadPdf();
       if(e?.name === "delete-object") {
         if(this.selectedObject){
           this.fab.remove(this.selectedObject)
@@ -294,6 +296,15 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     let dataJson = this.fab.toJSON();
     let dataBlob = new Blob([JSON.stringify(dataJson)], { type: 'text/plain;charset=utf-8'})
     saveAs(dataBlob, fName + '.devnasour')
+  }
+
+  private onDownloadPdf(){
+    let fName = this.editorService.getTitle();
+    let dataStr = this.fab.toDataURL();
+    console.log(dataStr)
+    let f = new jsPDF({orientation: 'p', unit: 'px'}); 
+    f.addImage(dataStr, 'PNG', 0, 0, this.canvasWidth / 2 , this.canvasHeight / 2);
+    f.save(`${fName}.pdf`)
   }
 
   public handleUploadFile(e: any){

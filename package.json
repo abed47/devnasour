@@ -37,6 +37,7 @@
     "file-saver": "^2.0.5",
     "font-picker": "^3.5.1",
     "hammerjs": "^2.0.8",
+    "jspdf": "^2.5.1",
     "moment": "^2.29.1",
     "ng-countup": "^1.8.5",
     "ng-gallery": "^5.1.1",

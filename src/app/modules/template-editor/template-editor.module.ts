@@ -20,6 +20,7 @@ import { ImageSelectionDialogComponent } from '../../pages/editors/template-edit
 import { ColorPickerModule } from 'ngx-color-picker';
 import { BgSelectDialogComponent } from '../../pages/editors/template-editor/components/bg-select-dialog/bg-select-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     MatSliderModule,
     ColorPickerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

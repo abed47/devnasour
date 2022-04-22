@@ -37,4 +37,8 @@ export class TopNavComponent implements OnInit {
     this.editorService.generalEvent({type: 'action', name: 'download'})
   }
 
+  public onPdfClick(){
+    this.editorService.generalEvent({type: 'action', name: 'download-pdf'})
+  }
+
 }
