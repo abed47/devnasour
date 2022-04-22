@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { ImageItem } from 'ng-gallery';
+import { RequestService } from 'src/app/services/request.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-view',
   templateUrl: './project-view.component.html',
   styleUrls: ['./project-view.component.scss']
 })
-export class ProjectViewComponent implements OnInit {
+export class ProjectViewComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private layoutUtilsService: LayoutUtilsService) { }
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private route: ActivatedRoute, 
+    private layoutUtilsService: LayoutUtilsService,
+    private request: RequestService,
+    private router: Router
+  ) { }
 
   public project = {
     images: [],
@@ -48,27 +57,47 @@ export class ProjectViewComponent implements OnInit {
   public relatedProjects = [];
 
   ngOnInit(): void {
-
+    this.route.params.subscribe(r => {this.loadData()});
     this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
 
   private loadData(){
+    let pId = this.route.snapshot.params.id;
+
+    this.layoutUtilsService.showLoader();
+
+    this.request.getProject(pId, (res, err) => {
+      this.layoutUtilsService.hidePreloader();
+      if(res){
+        console.log(res);
+        if(res?.status === 1) {
+          this.project.name = res.data.web_project_name;
+          this.project.description = res.data.web_project_description;
+          this.project.images = res.data.attachments?.map(i => new ImageItem({src: i, thumb: i})) || []
+          this.relatedProjects = res.data.related_project?.map(i => {
+            return {
+              title: i.web_project_name,
+              description: i.web_project_description,
+              id: i.web_project_id,
+              photo: i.attachments[0]
+            }
+          }) || []
+        }
+      }
+
+      if(err){
+        this.layoutUtilsService.hidePreloader();
+        this.layoutUtilsService.showSnack("error", err?.message || res?.message);
+        this.router.navigate(['/'])
+      }
+    })
     let projectId = this.route.snapshot.params.id;
-    this.layoutUtilsService.renamePath('Product name', projectId)
-
-    //loadImages
-    let imgs = ['https://cdn.dribbble.com/users/1622978/screenshots/14702491/media/988b5e44bb80bcb73383a8bebcd71028.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg', 'https://goodmockups.com/wp-content/uploads/2021/03/Free-Foil-Embossing-Business-Card-Mockup-PSD-File.jpg'];
-    imgs.forEach(item => this.project.images.push(new ImageItem({src: item, thumb: item})))
-
-    for(let i = 0; i < 3; i++){
-      this.relatedProjects.push({
-        id: i + 1,
-        title: 'project ' + (i + 1),
-        description: 'lorem lasf fsalfjslf saflsfasfj sflsdakfsaf sflksf sflskf sflsfjslfwerw lfksdjafjaldjsfasfw erw rwelrw;l flsakf;ewljfks flkwerjkl sfs',
-        photo: 'https://i.ibb.co/v1TCQz8/ship.png'
-      })
-    }
+    this.layoutUtilsService.renamePath('Product name', projectId);    
   }
 
 }

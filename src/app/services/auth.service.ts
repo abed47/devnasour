@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { StorageTypes } from '../shared/types';
 import { StoreService } from './store.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  public AuthStatusSubject = new Subject();
 
   constructor(
     private store: StoreService
@@ -15,7 +18,7 @@ export class AuthService {
     let currentUser = this.store.getItem('currentUser', s);
     let token = this.store.getItem('token', s);
     let loggedIn = this.store.getItem('loggedIn', s);
-
+    this.AuthStatusSubject.next(true);
     return {currentUser, token, loggedIn}
   }
 

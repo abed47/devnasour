@@ -44,6 +44,23 @@
         }
     }
 
+    .logged-in-btn-group{
+        width: 150px;
+        @include init-flex();
+        button{
+            width: 25px;
+            height: 25px;
+            margin: 0 5px;
+            @include init-flex();
+
+            img{
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+            }
+        }
+    }
+
     .d-sm{
         display: none;
     }

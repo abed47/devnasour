@@ -11,10 +11,10 @@ export class StoreService {
   constructor() { }
 
   private isObject (v: string) {
-    let t1 = v.match(/\{.*\}/ig);
-    if(t1.length) return true;
-    let t2 = v.match(/\[.*\]/ig);
-    if(t2.length) return true;
+    let t1 = v?.match(/\{.*\}/ig);
+    if(t1?.length) return true;
+    let t2 = v?.match(/\[.*\]/ig);
+    if(t2?.length) return true;
     return false;
   }
 

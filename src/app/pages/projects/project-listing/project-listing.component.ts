@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-project-listing',
@@ -9,21 +11,40 @@ export class ProjectListingComponent implements OnInit {
 
   public itemList = [];
 
-  constructor() { }
+  constructor(
+    private request: RequestService,
+    private layoutUtils: LayoutUtilsService
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
   }
 
   private loadData(){
-    for(let i = 0; i < 20; i++){
-      this.itemList.push({
-        id: i + 1,
-        title: 'project ' + (i + 1),
-        description: 'lorem lasf fsalfjslf saflsfasfj sflsdakfsaf sflksf sflskf sflsfjslfwerw lfksdjafjaldjsfasfw erw rwelrw;l flsakf;ewljfks flkwerjkl sfs',
-        photo: 'https://i.ibb.co/v1TCQz8/ship.png'
-      })
-    }
+
+    this.layoutUtils.showLoader();
+
+    this.request.getProjects((res, err) => {
+      this.layoutUtils.hidePreloader();
+      if(res && res.status === 1){
+        console.log(res.data)
+        if(res.data?.length) this.itemList = res.data.map(item => {
+          return {
+            id: item.web_project_id,
+            description: item.web_project_description,
+            photo: item.attachments?.[0] || '',
+            title: item.web_project_name
+          }
+        })
+        return
+      }
+
+      if(res?.status === 0){
+        this.layoutUtils.showSnack(res.type, res.message);
+        return;
+      }
+      if(err){}
+    })
   }
 
 }

@@ -7,6 +7,15 @@
         <a [routerLink]="['/contact']" [routerLinkActive]="'active'">Contact Us</a>
         <a [routerLink]="['/about']" [routerLinkActive]="'active'">About</a>
     </nav>
-    <button class="btn secondary d-md" mat-button (click)="moveToLogin()">Account login</button>
+
+
+    <button [hidden]="loggedIn" class="btn secondary d-md" mat-button (click)="moveToLogin()">Account login</button>
+
+    <div [hidden]="!loggedIn" class="logged-in-btn-group d-md">
+        <button mat-icon-button><img src="assets/images/favourites-icon.png"/></button>
+        <button mat-icon-button><img src="assets/images/user-icon.png"/></button>
+        <button mat-icon-button><img src="assets/images/cart-icon.png"/></button>
+    </div>
+
     <button mat-icon-button class="d-sm" (click)="toggleSidenav()"><img src="assets/images/sidenav-icon.png" alt="" /></button>
 </header>

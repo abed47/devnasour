@@ -46,6 +46,20 @@ export class RequestService {
     });
   }
 
+  public getProjects(cb: CallableFunction){
+    this.http.get(this.serverUrl + 'get_data.php?e_type=pr').subscribe(res => cb(res), err => cb(null, err));
+  }
+
+  public getProject(id: string | number, cb: CallableFunction){
+    this.http.get(this.serverUrl + 'get_data.php?action=view_project&project_id=' + id).subscribe(res => cb(res), err => cb(null, err))
+  }
+
+  public getMetaData(keys: string[], cb: CallableFunction){
+    this.http.post(this.serverUrl + 'get_data.php', { action: 'get_metadata', keys}).subscribe(
+      res => cb(res, null),
+      err => cb(null, err)
+    )
+  }
 
   /*=============================================AUTH REQUESTS=================================================*/
   public register(body,cb: CallableFunction){
