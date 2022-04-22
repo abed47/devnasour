@@ -1,4 +1,8 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
+import { SeoService } from 'src/app/services/seo.service';
 import { SwiperOptions } from 'swiper';
 @Component({
   selector: 'app-home',
@@ -9,6 +13,8 @@ import { SwiperOptions } from 'swiper';
 export class HomeComponent implements OnInit {
 
   @ViewChild('swiperSlideShow') swiperSlideShow!: any;
+
+  public pageData: any = {};
 
   public swiperConfig: SwiperOptions = {
     slidesPerView: 1,
@@ -130,10 +136,30 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private request: RequestService,
+    private seoService: SeoService,
+    private layoutUtils: LayoutUtilsService
+  ) { }
 
   ngOnInit(): void {
     this.loadSettings();
+    this.loadData();
+  }
+
+  private loadData(){
+    this.layoutUtils.showLoader();
+    this.request.getMetaData(['home_desc_1', 'home_desc_2', 'home_desc_3', 'home_desc_4'], (res, err) => {
+      this.layoutUtils.hidePreloader();
+      if(res && res.status === 1){
+        this.pageData = res.data;
+      }
+
+      if(err){
+        this.layoutUtils.showSnack("error", err?.message)
+      }
+    })
   }
 
   private loadSettings(){

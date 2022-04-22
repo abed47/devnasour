@@ -45,29 +45,29 @@
                 </article>
 
                 <div class="group-1">
-                    <article>
-                        <img src="assets/images/scaling-icon.png" alt="Scale your business icon">
-                        <h1>Scale your business</h1>
+                    <article *ngIf="pageData?.home_desc_1">
+                        <img [src]="pageData?.home_desc_1?.web_metadata_image" alt="Scale your business icon">
+                        <h1>{{pageData?.home_desc_1?.web_metadata_title}}</h1>
                         <hr>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi quos officiis doloremque vero aspernatur</p>
+                        <p [innerHtml]="pageData?.home_desc_1?.web_metadata_description"></p>
                     </article>
-                    <article>
-                        <img src="assets/images/premium-material-icon.png" alt="Scale your business icon">
-                        <h1>Premium materials</h1>
+                    <article *ngIf="pageData?.home_desc_2">
+                        <img [src]="pageData?.home_desc_2?.web_metadata_image" alt="Scale your business icon">
+                        <h1>{{pageData?.home_desc_2?.web_metadata_title}}</h1>
                         <hr>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis architecto eaque nostrum asperiores</p>
+                        <p [innerHtml]="pageData?.home_desc_2?.web_metadata_description"></p>
                     </article>
-                    <article>
-                        <img src="assets/images/high-quality-icon.png" alt="Scale your business icon">
-                        <h1>High Quality</h1>
+                    <article *ngIf="pageData?.home_desc_3">
+                        <img [src]="pageData?.home_desc_3?.web_metadata_image" alt="Scale your business icon">
+                        <h1>{{pageData?.home_desc_3?.web_metadata_title}}</h1>
                         <hr>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod hic perspiciatis facilis nihil, dolorem ipsum nisi.</p>
+                        <p [innerHtml]="pageData?.home_desc_3?.web_metadata_description"></p>
                     </article>
-                    <article>
-                        <img src="assets/images/product-ready-icon.png" alt="Scale your business icon">
-                        <h1>Product Ready</h1>
+                    <article *ngIf="pageData?.home_desc_4">
+                        <img [src]="pageData?.home_desc_4?.web_metadata_image" alt="Scale your business icon">
+                        <h1>{{pageData?.home_desc_4?.web_metadata_title}}</h1>
                         <hr>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore</p>
+                        <p [innerHtml]="pageData?.home_desc_4?.web_metadata_description"></p>
                     </article>
                 </div>
             </div>
