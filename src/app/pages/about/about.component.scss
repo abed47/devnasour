@@ -67,10 +67,6 @@
             }
         }
 
-
-        .swiper-container{
-        }
-
         .swiper-slide{
             
                 img{
@@ -226,4 +222,86 @@
             }
         }
     }
+}
+
+@media only screen and (max-width: 700px){
+    .page-about{
+        padding-left: 0;
+
+        .title{
+            width: 100% !important;
+            padding: 0 50px;
+            box-sizing: border-box;
+            // @include init-flex(column, center, center);
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center;
+
+            hr{
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .hovering-packaging{
+            display: none;
+        }
+
+
+        .packaging-1{
+            .swiper-slide{
+                img{
+                    width: 40vw !important;
+                    height: 60vw !important;
+                }
+            }
+        }
+        
+        .our-story{
+            margin-bottom: 150px !important;
+            .floating{
+                // display: none;
+                // position: fixed !;
+                bottom: -100px;
+                top: unset !important;
+                height: auto !important;
+    
+                p{
+                    max-height: 200px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    // word-wrap: break-word;
+                }
+            }
+    
+            .display{
+                width: 100% !important;
+                height: 100vw !important;
+            }
+        }
+
+        .offices{
+            
+            .swiper-slide{
+                height: auto !important;
+                .floating{
+                    position: unset !important;
+                    box-shadow: none;
+                    background: none;
+                    width: 100%;
+
+                    h1{
+                        font-size: 28px;
+                        text-align: center;
+                    }
+
+                    p{
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
 }

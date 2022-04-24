@@ -18,7 +18,8 @@ export class AboutComponent implements OnInit {
         slidesPerView: 3.5
       },
       100:{
-        slidesPerView: 1
+        slidesPerView: 2.3,
+        spaceBetween: 5
       }
     }
   };
