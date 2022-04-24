@@ -1,0 +1,68 @@
+<main class="page-about">
+
+    <section class="packaging-1">
+        <div class="title">
+            <h1>Bringing packaging to life</h1>
+
+            <hr>
+
+            <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa quo nobis, beatae,</p>
+        </div>
+
+        <div class="hovering-packaging">
+            <h2>The best printing solution for you</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos quibusdam voluptatibus nemo numquam impedit odit libero, sit at officia ullam error et dolore voluptas reprehenderit dolorem? Dolorum vitae eligendi harum.</p>
+        </div>
+
+        <div class="swiper-container">
+            <swiper [config]="banner1Config">
+                <div class="swiper-wrapper">
+                    <a *ngFor="let item of packagingBannerItems" class="swiper-slide" (click)="onItemClick(item.id)">
+                        <img [src]="item.photo" alt="">
+                    </a>
+                </div>
+            </swiper>
+        </div>
+    </section>
+
+    <section class="our-story">
+        <div class="title">
+            <h2 class="intro">Where it all started, and ended!</h2>
+            <h1 class="title">Our Story</h1>
+            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione pariatur vitae non sunt, reiciendis minima possimus recusandae ipsam tempore, unde dolore inventore labore officia esse modi officiis provident ex facere!</p>
+        </div>
+
+        <div class="floating">
+            <h2>what we bring and 
+                how we started.</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut tenetur pariatur, animi alias a facere, tempore quia ipsa quos doloribus beatae nostrum, voluptate ipsum in praesentium explicabo. Eligendi, aliquid nesciunt.</p>
+        </div>
+
+        <img src="assets/images/rect.png" alt="" class="display">
+    </section>
+
+    <section class="offices">
+        <div class="title">
+            <h2 class="intro">Our presence locally and internationally</h2>
+            <h1 class="title">Our Offices</h1>
+            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione pariatur vitae non sunt, reiciendis minima possimus recusandae ipsam tempore, unde dolore inventore labore officia esse modi officiis provident ex facere!</p>
+        </div>
+
+        <div class="swiper-container">
+            <swiper [config]="locationBannerConfig">
+                <div class="swiper-wrapper">
+                    <a *ngFor="let item of locations" class="swiper-slide" (click)="onItemClick(item.id)">
+                        <div class="inner-wrapper">
+                            <img [src]="item.photo" alt="">
+
+                            <div class="floating">
+                                <h1>{{item.title}}</h1>
+                                <p>{{item.description}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </swiper>
+        </div>
+    </section>
+</main>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from 'src/app/pages/about/about.component';
 import { LoginComponent } from 'src/app/pages/auth/login/login.component';
 import { RegisterComponent } from 'src/app/pages/auth/register/register.component';
 import { ResetPasswordComponent } from 'src/app/pages/auth/reset-password/reset-password.component';
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'project/:id',
     component: ProjectViewComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   }
 ];
 
