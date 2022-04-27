@@ -54,11 +54,23 @@ export class RequestService {
     this.http.get(this.serverUrl + 'get_data.php?action=view_project&project_id=' + id).subscribe(res => cb(res), err => cb(null, err))
   }
 
-  public getMetaData(keys: string[], cb: CallableFunction){
+  public getMetaData(keys: string[], key: string | null, cb: CallableFunction){
+    if(key !== null && key !== undefined){
+      this.http.post(this.serverUrl + 'get_data.php', { action: 'get_metadata', key}).subscribe(
+        res => cb(res, null),
+        err => cb(null, err)
+      )
+      return
+    }
     this.http.post(this.serverUrl + 'get_data.php', { action: 'get_metadata', keys}).subscribe(
       res => cb(res, null),
       err => cb(null, err)
     )
+  }
+
+  public getMetaDataSub(keys: string[], key: string | null){
+    if(key !== null && key !== undefined) return this.http.post<responseType>(this.serverUrl + 'get_data.php', { action: 'get_metadata', key});
+    return this.http.post<responseType>(this.serverUrl + 'get_data.php', { action: 'get_metadata', keys});
   }
 
   /*=============================================AUTH REQUESTS=================================================*/

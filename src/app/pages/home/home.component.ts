@@ -48,48 +48,7 @@ export class HomeComponent implements OnInit {
   
   public midBannerItems = []
 
-  public bannerItems = [
-    {
-      photo: "https://i.ibb.co/cgyfBsz/NoPath.png",
-      title: "Best platform for product packaging",
-      subtitle: "",
-      details: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet",
-      linkUrl: "",
-      linkTitle: "learn about our success"
-    },
-    {
-      photo: "https://i.ibb.co/2SL3hCZ/fg.png",
-      title: "Platform Overview",
-      subtitle: "Advanced Printing Platform for you",
-      details: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet",
-      linkUrl: "",
-      linkTitle: ""
-    },
-    {
-      photo: "https://i.ibb.co/2SL3hCZ/fg.png",
-      title: "Platform Overview",
-      subtitle: "Advanced Printing Platform for you",
-      details: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet",
-      linkUrl: "",
-      linkTitle: ""
-    },
-    {
-      photo: "https://i.ibb.co/2SL3hCZ/fg.png",
-      title: "Platform Overview",
-      subtitle: "Advanced Printing Platform for you",
-      details: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet",
-      linkUrl: "",
-      linkTitle: ""
-    },
-    {
-      photo: "https://i.ibb.co/vkHKtGz/123.png",
-      title: "If you don't print, shop ready made.",
-      subtitle: "",
-      details: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet",
-      linkUrl: "",
-      linkTitle: "Learn About Our Success"
-    }
-  ]
+  public bannerItems = []
 
   public testimonialsList = [
     {
@@ -144,22 +103,40 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadSettings();
+    // this.loadSettings();
     this.loadData();
   }
 
-  private loadData(){
-    this.layoutUtils.showLoader();
-    this.request.getMetaData(['home_desc_1', 'home_desc_2', 'home_desc_3', 'home_desc_4'], (res, err) => {
-      this.layoutUtils.hidePreloader();
-      if(res && res.status === 1){
-        this.pageData = res.data;
+  private async loadData(){
+
+    try{
+      this.layoutUtils.showLoader();
+
+      let mainDataRes = await this.request.getMetaDataSub(['home_desc_1', 'home_desc_2', 'home_desc_3', 'home_desc_4'], null).toPromise();
+      let bannerRes = await this.request.getMetaDataSub(null, 'home_banner_').toPromise();
+      console.log(bannerRes)
+
+      if(mainDataRes?.status === 1) this.pageData = mainDataRes.data;
+      if(bannerRes?.status === 1 && Object.keys(bannerRes?.data)?.length > 0){
+        for(let item in bannerRes.data){
+          this.bannerItems.push({
+            photo: bannerRes.data[item]?.web_metadata_image || '',
+            title: bannerRes.data[item]?.web_metadata_title || '',
+            subtitle: bannerRes.data[item]?.web_metadata_value || '',
+            details: bannerRes.data[item]?.web_metadata_description || '',
+            linkUrl: bannerRes.data[item]?.web_metadata_link || '',
+            linkTitle: 'learn about our success'
+          })
+        }
+        this.loadSettings();
       }
 
-      if(err){
-        this.layoutUtils.showSnack("error", err?.message)
-      }
-    })
+      this.layoutUtils.hidePreloader();
+    }catch(err){
+      this.layoutUtils.hidePreloader();
+      this.layoutUtils.showSnack("error", err?.message || 'server error');
+    }
+    
   }
 
   private loadSettings(){
