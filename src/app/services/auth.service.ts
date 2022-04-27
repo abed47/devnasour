@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { StorageTypes } from '../shared/types';
 import { StoreService } from './store.service';
@@ -10,7 +11,8 @@ export class AuthService {
   public AuthStatusSubject = new Subject();
 
   constructor(
-    private store: StoreService
+    private store: StoreService,
+    private router: Router
   ) { }
 
   public getAuthStatus(){
@@ -18,7 +20,7 @@ export class AuthService {
     let currentUser = this.store.getItem('currentUser', s);
     let token = this.store.getItem('token', s);
     let loggedIn = this.store.getItem('loggedIn', s);
-    this.AuthStatusSubject.next(true);
+    if(loggedIn) this.AuthStatusSubject.next(true);
     return {currentUser, token, loggedIn}
   }
 
@@ -27,9 +29,16 @@ export class AuthService {
     this.store.setItem('loggedIn', true, s);
     this.store.setItem('currentUser', t.user, s);
     this.store.setItem('token', 'token', s);
+    this.AuthStatusSubject.next(true);
+    this.router.navigate(['/home']);
   }
   
   public setAuthStorage(t: StorageTypes){
     this.store.setItem('authStorage', t);
+  }
+
+  public logout(){
+    this.AuthStatusSubject.next(false);
+    this.store.drain();
   }
 }

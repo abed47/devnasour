@@ -1,15 +1,19 @@
 
 <mat-drawer-container class="example-container" [hasBackdrop]="true">
-    <mat-drawer #drawer mode="over" (closed)="onSidenavClose()" [opened]="true" position="right" [position]="'end'" class="drawer">
+    <mat-drawer #drawer mode="over" (closed)="onSidenavClose()" [opened]="sidenavOpen" position="right" [position]="'end'" class="drawer">
         <a [routerLink]="['/home']" [routerLinkActive]="'active'">Home</a>
         <a [routerLink]="['/projects']" [routerLinkActive]="'active'">Projects</a>
         <a [routerLink]="['/shop']" [routerLinkActive]="'active'">Shop</a>
         <a [routerLink]="['/contact']" [routerLinkActive]="'active'">Contact Us</a>
         <a [routerLink]="['/about']" [routerLinkActive]="'active'">About</a>
         
-        <div class="auth-actions">
+        <div *ngIf="!loggedIn" class="auth-actions">
             <a mat-raised-button color="primary" [routerLink]="['/login']">Login</a>
             <a mat-raised-button color="primary" [routerLink]="['/register']">register</a>
+        </div>
+
+        <div *ngIf="loggedIn" class="auth-actions">
+            <a mat-raised-button color="primary" (click)="onLogout()">Logout</a>
         </div>
     </mat-drawer>
     <mat-drawer-content>

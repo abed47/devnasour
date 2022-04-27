@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
         let stayLoggedIn = controls.stayLoggedIn.value;
         this.auth.setAuthStorage(stayLoggedIn ? StorageTypes.LOCAL_STORAGE : StorageTypes.SESSION_STORAGE);
         this.auth.handleLoginSuccess(res.data, stayLoggedIn);
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
+        return;
       }
       if(res && res.status === 0){
         this.layoutUtils.showSnack(res.type, res.message);

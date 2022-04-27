@@ -36,4 +36,10 @@ export class StoreService {
     if(this.isObject(v)) return JSON.parse(v);
     return v;
   }
+
+  public drain(){
+    localStorage.clear();
+    sessionStorage.clear();
+    // indexedDB.databases().then(r => console.log(r.crea))
+  }
 }
