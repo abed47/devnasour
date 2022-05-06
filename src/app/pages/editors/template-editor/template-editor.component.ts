@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { MatDialog } from '@angular/material/dialog';
 import { BgSelectDialogComponent } from './components/bg-select-dialog/bg-select-dialog.component';
 import { jsPDF } from "jspdf";
+import { degrees, PDFDocument, rgb, rotateInPlace } from 'pdf-lib';
 
 @Component({
   selector: 'app-template-editor',
@@ -100,6 +101,10 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
   private onCanvasClick(e: fabric.IEvent<MouseEvent> | any){
 
+    // this.fab._objects.forEach(o => o.render(this.fab.getContext()));
+    // this.fab.renderAndReset();
+    // this.fab.renderAll();
+
     if(this.fab.isDrawingMode) return;
     
     if(e.target == null && this.selectedTool === "selection") {
@@ -107,9 +112,9 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       this.editorService.selectObject(null, null, null);
       this.selectedObject = null;
     }
+    console.log(e.target)
 
     if(e.target !== null) {
-      console.log(e.target)
       this.selectedObject = e.target;
       this.editorService.selectObject(e.target.type === "i-text" ? "text" : e.target.type,'selection', e.target)
       return
@@ -260,9 +265,22 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       }
 
       this.helper.imgToBase64(e.target.files[0]).then(res => {
+
+        let i = new Image();
+        i.src = res;
+        i.onload = e => {
+          let im = new fabric.Image(i);
+          this.fab.add(im)
+        }
+        return 
         fabric.Image.fromURL(res, i => {
-          i.scaleToHeight(300);
-          i.scaleToWidth(300);
+
+          var elWidth = i.width || i.width;
+          var elHeight = i.height || i.height;
+          i.set({
+            scaleX:200/elWidth,
+            scaleY:200/elHeight
+          })
           this.fab.add(i);
           this.imageUploaderRef.nativeElement.value = ""
         });
@@ -298,7 +316,100 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     saveAs(dataBlob, fName + '.devnasour')
   }
 
-  private onDownloadPdf(){
+  private calcRotatedDimensions(angle, w, h){
+    var a = w * Math.cos(angle);
+    var b = h * Math.sin(angle);
+    var c = a + b; 
+
+    var p = w * Math.sin(angle);
+    var q = h * Math.cos(angle);
+    var r = p + q;
+
+    return {w: c, h: r}
+  }
+
+  private async onDownloadPdf(){
+    try{
+      let pdfDoc = await PDFDocument.create({});
+      let page = await pdfDoc.addPage([500, 500]);
+      // page.resetPosition()
+
+      let f: any = this.fab.toJSON();
+      
+      // let formatted = JSON.parse(f);
+
+      f.objects.forEach(async item => {
+
+        page.drawText('hello world', {
+          x: 15,
+          y: 5
+        })
+        if(item?.type === "image"){
+          console.log({
+            w: item.scaleX * item.width,
+            h: item.scaleY * item.height,
+            angle: item.angle,
+            left: item.left,
+            top: item.top,
+            wcos: (item.scaleX * item.width) * Math.cos(item.angle),
+            wsin: (item.scaleY * item.height) * Math.cos(item.angle),
+            item
+          })
+          // page.drawPage()
+          let img = await pdfDoc.embedPng(item.src);
+          if(item?.angle !== 0) {
+            let newD = this.calcRotatedDimensions(item.angle, item.width * item.scaleX,  item.height * item.scaleY);
+            console.log({
+              x: 500 - (newD.w + item.left) / 2,
+              y: 500 - (newD.h + item.top) / 2,
+            })
+            page.drawImage(img, {
+              width: item.width * item.scaleX,
+              height: item.height * item.scaleY,
+              x: item.left - ((item.width  * item.scaleX)/ 2),
+              y: 500 - ((item.height * item.scaleY) + item.top),
+              rotate: degrees(item.angle * -1)
+            })
+            return
+          }
+          page.drawImage(img, {
+            width: item.width * item.scaleX,
+            height: item.height * item.scaleY,
+            x: item.left,
+            y: 500 - ((item.height * item.scaleY) + item.top),
+            rotate: degrees(item.angle * -1)
+          })
+        }
+
+
+        if(item?.type === "i-text"){
+          page.drawText(item.text, {
+            x: item.left,
+            y: 500 - (item.height + item.top),
+            size: item.fontSize,
+            font: item.font,
+            // color: rgb()
+          })
+        }
+
+        if(item.type === "circle"){
+          console.log(item)
+          page.drawCircle({
+            x: item.left,
+            y: 500 - (item.top + item.width),
+            size: item.width / 2,
+          })
+        }
+      })
+
+      // return;
+      let pdf = await pdfDoc.save();
+      saveAs(new Blob([pdf]), 'try.pdf')
+      // pdfDoc.down
+    }catch(err){
+      console.log(err);
+    }
+    return;
     let fName = this.editorService.getTitle();
     let dataStr = this.fab.toDataURL();
     console.log(dataStr)
