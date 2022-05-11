@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CartComponent implements OnInit {
 
   private shippingPrice = 0;
-  public currentStage = 1;
+  public currentStage = 2;
   public cartItems = [
     {
       id: 1,
@@ -69,5 +69,9 @@ export class CartComponent implements OnInit {
     }
 
     return { total: 0, subtotal: 0, shipping: 0}
+  }
+
+  public moveToCheckout(){
+    this.currentStage += 1
   }
 }

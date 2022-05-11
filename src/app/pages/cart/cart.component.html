@@ -86,9 +86,118 @@
                     <p>{{getTotals().total}}</p>
                 </span>
     
-                <button mat-raised-button color="accent">CHECKOUT</button>
+                <button mat-raised-button color="accent" (click)="moveToCheckout()">CHECKOUT</button>
             </div>
             
+        </div>
+    </section>
+
+    <section class="checkout-section" [hidden]="currentStage !== 2">
+        <h1 class="title">Checkout</h1>
+
+        <div class="table">
+            <div class="billing-details">
+                <div class="header">
+                    <h5>Billing Details</h5>
+                </div>
+                
+                <form>
+
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>First Name</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Shipping address</mat-label>
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>City</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="select h-w">
+                        <mat-label>Country</mat-label>
+                        <mat-select>
+                            <mat-option>test</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="select h-w">
+                        <mat-label>Province</mat-label>
+                        <mat-select>
+                            <mat-option>test</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Post Code/ZIP</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Phone</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Email Address</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-checkbox>Save this information?</mat-checkbox>
+
+                    <div class="actions">
+                        <button mat-stroked-button color="accent" class="outlined">Back to shopping</button>
+                        <button mat-raised-button color="accent">Payment</button>
+                    </div>
+                </form>
+            </div>
+            <div class="order-list">
+                <div class="header">
+                    <h5>Your Order</h5>
+                </div>
+
+                <div class="item-list">
+                    <div *ngFor="let item of cartItems" class="item">
+                        <img [src]="item.photo" alt="">
+                        <div class="details">
+                            <p>{{item.name}}</p>
+                            <p>Color: {{item.color}}</p>
+                            <p>Size: {{item.size}}</p>
+                            <p class="price">TL {{item.price}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="pricings">
+                    <div class="item">
+                        <p>Subtotal</p>
+                        <p>TL {{getTotals().subtotal}}</p>
+                    </div>
+
+                    <div class="item">
+                        <p>Shipping</p>
+                        <p>TL {{getTotals().shipping}}</p>
+                    </div>
+
+                    <div class="total">
+                        <p>Total</p>
+                        <p>TL {{getTotals().total}}</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
