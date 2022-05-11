@@ -10,9 +10,20 @@ import MainLayoutImports from '../../shared/main-module-imports';
 import { ProjectListingComponent } from '../../pages/projects/project-listing/project-listing.component';
 import { ProjectViewComponent } from '../../pages/projects/project-view/project-view.component';
 import { AboutComponent } from '../../pages/about/about.component';
+import { CartComponent } from 'src/app/pages/cart/cart.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, TopNavComponent, MainLayoutComponent, ...MainLayoutImports.declarations, ProjectListingComponent, ProjectViewComponent, AboutComponent],
+  declarations: [
+    LoginComponent, 
+    RegisterComponent, 
+    TopNavComponent, 
+    MainLayoutComponent, 
+    ...MainLayoutImports.declarations, 
+    ProjectListingComponent, 
+    ProjectViewComponent, 
+    AboutComponent,
+    CartComponent,
+  ],
   imports: [
     CommonModule,
     PagesRoutingModule,

@@ -1,0 +1,95 @@
+<main class="cart-page">
+
+    <!-- <app-bread-crumbs></app-bread-crumbs> -->
+
+    <header>
+        <div class="stage" [class.active]="currentStage > 0">
+            <mat-icon class="icon">check_circle_outline</mat-icon>
+            <h3 class="title">Cart Items</h3>
+        </div>
+        <div class="stage" [class.active]="currentStage > 1">
+            <mat-icon class="icon">check_circle_outline</mat-icon>
+            <h3 class="title">Shipping And Checkout</h3>
+        </div>
+        <div class="stage" [class.active]="currentStage > 2">
+            <mat-icon class="icon">check_circle_outline</mat-icon>
+            <h3 class="title">Confirmation</h3>
+        </div>
+    </header>
+
+    <section class="cart-item-list" [hidden]="currentStage !== 1">
+        <h1 class="title">Cart</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cartItems">
+                    <td class="img">
+                        <img [src]="item.photo" alt="">
+                    </td>
+
+                    <td class="details">
+                        <p>{{item.name}}</p>
+                        <p>Color: {{item.color}}</p>
+                        <p>Size: {{item.size}}</p>
+                    </td>
+
+                    <td class="price"><h3>{{item.price}}TL</h3></td>
+
+                    <td class="quantity">{{item.quantity}}</td>
+                    <td class="total">{{item.total}}TL</td>
+                    <td class="actions"><button mat-icon-button><mat-icon>delete_outline</mat-icon></button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <span>Total: </span> <span>{{calcCartTotal()}}TL</span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="shipping-voucher">
+    
+            <div class="voucher">
+                <h2>Voucher</h2>
+                <p>Enter your coupon if you have one</p>
+                <mat-form-field appearance="outline" class="font-field">
+                    <mat-label>Voucher code</mat-label>
+                    <input type="text" matInput>
+                </mat-form-field>
+    
+                <button mat-raised-button color="accent">APPLY</button>
+            </div>
+    
+            <div class="totals">
+                <span>
+                    <p>Subtotal</p>
+                    <p>{{getTotals().subtotal}}</p>
+                </span>
+                <span>
+                    <p>Shipping</p>
+                    <p>{{getTotals().shipping}}</p>
+                </span>
+                <span class="total">
+                    <p>TOTAL</p>
+                    <p>{{getTotals().total}}</p>
+                </span>
+    
+                <button mat-raised-button color="accent">CHECKOUT</button>
+            </div>
+            
+        </div>
+    </section>
+
+</main>

@@ -4,6 +4,7 @@ import { AboutComponent } from 'src/app/pages/about/about.component';
 import { LoginComponent } from 'src/app/pages/auth/login/login.component';
 import { RegisterComponent } from 'src/app/pages/auth/register/register.component';
 import { ResetPasswordComponent } from 'src/app/pages/auth/reset-password/reset-password.component';
+import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { ContactUsComponent } from 'src/app/pages/contact-us/contact-us.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
   }
 ];
 

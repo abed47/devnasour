@@ -1,0 +1,220 @@
+@import 'src/styles/styles.scss';
+
+main.cart-page{
+    min-height: calc(100vh - 100px);
+    width: 100%;
+    padding: 0 20px;
+    padding-top: 30px;
+    box-sizing: border-box;
+    @include init-flex(column, flex-start);
+    font-family: $font-base;
+    background-color: white;
+    padding-bottom: 50px;
+
+    header{
+        width: 100%;
+        max-width: 1080px;
+        // background-color: red;
+        // height: 50px;
+        @include init-flex(row, flex-start);
+
+        .stage{
+            border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+            margin: 0 20px;
+            @include init-flex(row, flex-start);
+            width: 33%;
+            padding-bottom: 10px;
+            opacity: .6;
+
+            &:first-child{
+                margin-left: 0;
+            }
+
+            .icon{
+                font-size: 30px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .title{
+                margin: 0;
+                margin-left: 10px;
+                font-family: $font-base;
+                font-size: 16px;
+                color: #707070;
+            }
+
+            &.active{
+                border-bottom-color: black;
+                opacity: 1 !important;
+                .icon{
+                    color: $color-secondary;
+                }
+            }
+        }
+    }
+
+    section.cart-item-list{
+        width: 100%;
+        max-width: 1080px;
+
+
+        h1.title{
+            font-family: $font-bold;
+            margin: 30px 0;
+        }
+
+        table{
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-collapse: collapse;
+            border: 1px solid rgba(black, .3);
+
+            thead{
+                tr th{
+                    background-color: #F8F8F8;
+                    height: 60px;
+                    box-sizing: 1px 2px 6px rgba(black, 1);
+                    font-family: $font-semibold;
+                    text-transform: capitalize;
+                }
+            }
+
+            tbody{
+                tr{
+                    &:not(:last-child){
+                    border: 1px solid rgba(black, .3);
+                    }
+
+                    td{
+                        padding: 20px 0 !important;
+                    }
+
+                    .img{
+                        img{
+                            width: 100px;
+                            height: 100px;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .details{
+                        font-size: 12px;
+                        text-align: start;
+
+                    }
+
+                    .price{
+                        h3 {
+                            margin: 0;
+                            font-size: 14px;
+                            font-family: $font-medium;
+                        }
+                    }
+
+                    .total{
+                        font-family: $font-medium;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            tfoot tr td{
+                background-color: #F8F8F8;
+                height: 50px;
+                text-align: end;
+                width: 100%;
+                padding: 0 20px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-family: $font-medium;
+                color: black;
+
+                span{
+                    &:first-child{
+                        margin-right: 50px;
+                    }
+                }
+            }
+        }
+
+        .shipping-voucher{
+            width: 100%;
+            @include init-flex(row, space-between, flex-start);
+            margin-top: 30px;
+            border-top: 1px solid rgba($color: #000000, $alpha: .4);
+            box-sizing: border-box;
+
+            .voucher{
+                width: 45%;
+                height: 100%;
+                @include init-flex(column, flex-start, flex-start);
+
+                h2{
+                    color: black;
+                    font-size: 18px;
+                    font-family: $font-bold;
+                }
+
+                p{
+                    font-size: 14px;
+                    color: black;
+                    justify-content: center;
+                }
+
+
+                ::ng-deep .font-field{
+                    border-radius: 0 !important;
+                    width: 100%;
+                    .mat-form-field-outline-start, .mat-form-field-outline-end {
+                        border-radius: 0 !important;
+                    }
+                }
+
+                button{
+                    border-radius: 0 !important;
+                    font-family: $font-base !important;
+                    font-weight: normal;
+                }
+            }
+
+            .totals{
+                width: 45%;
+                width: 45%;
+                height: 100%;
+                @include init-flex(column, center, center);
+                background-color: #F8F8F8;
+                padding: 20px 30px;
+                box-sizing: border-box;
+
+                span{
+                    @include init-flex(row, space-between);
+                    width: 100%;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                    padding: 10px 0;
+
+                    p:first-child{
+                        font-size: 14px;
+                        font-family: $font-medium;
+                        margin: 0;
+                    }
+                    
+                    p:last-child{
+                        font-size: 14px;
+                        font-family: $font-base;
+                        margin: 0;
+                    }
+                }
+
+                button{
+                    border-radius: 0 !important;
+                    margin-top: 40px;
+                    width: 100%;
+                    max-width: 250px;
+                }
+            }
+        }
+    }
+}

@@ -51,11 +51,28 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
   private loadSettings(){
 
+    fabric.Object.NUM_FRACTION_DIGITS = 10;
+
     this.fab = new fabric.Canvas('fabricSurface', {
       backgroundColor: '#EEEEEE',
       width: this.canvasHeight,
-      height: this.canvasWidth
+      height: this.canvasWidth,
     });
+
+    // this.fab.font
+
+    
+    this.fab.on("object:scaling", e => {
+      console.log("scaling object: ", e)
+      e.target.dirty = true;
+      e.target.width = e.target.getScaledWidth();
+      e.target.height = e.target.getScaledHeight();
+      // e.target.eleme
+      e.target.set({
+        scaleX: 1,
+        scaleY: 1
+      })
+    })
 
     this.fab.on('mouse:down', e => this.onCanvasClick(e));
 
@@ -255,8 +272,8 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
         el.data = URL.createObjectURL(e.target.files[0]);
         fabric.loadSVGFromURL(URL.createObjectURL(e.target.files[0]), (i) => {
           let g = new fabric.Group(i);
-            g.scaleToHeight(300);
-            g.scaleToWidth(300)
+            g.scaleToHeight(300, true);
+            g.scaleToWidth(300, true)
             this.fab.add(g);
             this.fab.renderAll();
             this.imageUploaderRef.nativeElement.value = ""
@@ -266,21 +283,81 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
 
       this.helper.imgToBase64(e.target.files[0]).then(res => {
 
-        let i = new Image();
-        i.src = res;
-        i.onload = e => {
-          let im = new fabric.Image(i);
-          this.fab.add(im)
-        }
-        return 
-        fabric.Image.fromURL(res, i => {
+        // let i = new Image();
+        // i.src = res;
+        // i.onload = e => {
+        //   let im = new fabric.Image(i, {
+        //     originX: 'center',
+        //     originY: 'center',
+        //     left: 20,
+        //     top: 20,
+        //   });
+          
+        //   im.set({
+        //     scaleX: 200 / im.width,
+        //     scaleY: 200 / im.height,
+        //     left: 20 + (im.width / 2),
+        //     top: 20 + (im.height / 2)
+        //   })
+        //   this.fab.add(im)
+        // }
+        // return 
+        // let sv = document.createElement()
+        var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttributeNS('http://www.w3.org/2000/svg','xlink','http://www.w3.org/2000/xlink');
+        svg.setAttributeNS('http://www.w3.org/2000/svg','height','200');
+        svg.setAttributeNS('http://www.w3.org/2000/svg','width','200');
+        svg.setAttributeNS('http://www.w3.org/2000/svg','id','test2');
+        svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+        svg.setAttributeNS('http://www.w3.org/2000/svg','viewBox','0 0 200 200');
+        var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
+        svgimg.setAttributeNS(null,'height','200');
+        svgimg.setAttributeNS(null,'width','200');
+        svgimg.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href', res);
+        svgimg.setAttributeNS(null,'x','10');
+        svgimg.setAttributeNS(null,'y','10');
+        svgimg.setAttributeNS(null, 'visibility', 'visible');
+        svg.appendChild(svgimg)
+        
+        fabric.loadSVGFromString( `
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"     viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve" width="250px" height="250px">
+        <image 
+        width="250px" 
+        height="250px" 
+        x="0"
+        y="0"
+        xlink:href="${res}" 
+      />
+        </svg>
+        `, (i)=> {
+          console.log(i)
+          console.log(URL.createObjectURL(new Blob([svg.outerHTML], { type: "image/svg+xml"})))
+          let g = new fabric.Group(i, {
+            width: 250,
+            height: 250,
+          });
+            // g.scaleToHeight(300, true);
+            // g.scaleToWidth(300, true)
+            g.set({
+              scaleX: 1,
+              scaleY: 1,
+              width: 250,
+              height: 250
+            })
 
-          var elWidth = i.width || i.width;
-          var elHeight = i.height || i.height;
-          i.set({
-            scaleX:200/elWidth,
-            scaleY:200/elHeight
-          })
+            // g.transform(this.fab.cave)
+
+            // this.fab.transform
+
+            this.fab.add(g);
+            this.fab.renderAll();
+        })
+        return console.log(svg)
+        // $('svg').append(svgimg);
+        fabric.Image.fromURL(res, i => {
+          i.scaleToWidth(100)
           this.fab.add(i);
           this.imageUploaderRef.nativeElement.value = ""
         });
@@ -317,18 +394,51 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   private calcRotatedDimensions(angle, w, h){
-    var a = w * Math.cos(angle);
-    var b = h * Math.sin(angle);
-    var c = a + b; 
-
-    var p = w * Math.sin(angle);
-    var q = h * Math.cos(angle);
-    var r = p + q;
-
-    return {w: c, h: r}
+    let radialAngle = angle * (Math.PI/180);
+    if(angle < 90){
+      let newW = ((w * Math.sin(radialAngle)) + (h * Math.cos(radialAngle)));
+      let newH = ((w * Math.cos(radialAngle)) + (h * Math.sin(radialAngle)));
+      return {w: newW, h: newH}
+    }
+    let newW = ((w * Math.sin(angle)) + (h * Math.cos(angle)));
+    let newH = ((w * Math.cos(angle)) + (h * Math.sin(angle)));
+    return {w: newW, h: newH}
   }
 
   private async onDownloadPdf(){
+
+    this.fab.forEachObject(o => {
+      o.calcOwnMatrix();
+      o.calcTransformMatrix();
+      // o.noScaleCache();
+      // o.scale()?
+    })
+    
+    // this.fab.setDimensions({width: 500, height: 500})
+    let f = this.fab.toSVG({height: 500, width: 500, viewBox: { height: 500, width: 500, x: 0, y: 0}})
+    f = f.replace(/\<defs\>\n\<\/defs\>/ig, `
+    <defs>
+      <style type="text/css">@import url(http://fonts.googleapis.com/css?family=Pacifico);</style>
+    </defs>
+`)
+    // return;
+    // this.fab._objects.forEach(o => {
+    //   let reg = new RegExp(o.scaleX.toString(),'g');
+    //   let reg2 = new RegExp(o.scaleY.toString(), 'g');
+    //   f.replace(reg2, '1')
+    //   f.replace(reg, '1')
+    // })
+    // return;
+    var svgBlob = new Blob([f], {type:"image/svg+xml;charset=utf-8"});
+    var svgUrl = URL.createObjectURL(svgBlob);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = 'fsdklj';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    // saveAs([f], 'test.svg')
+    return;
     try{
       let pdfDoc = await PDFDocument.create({});
       let page = await pdfDoc.addPage([500, 500]);
@@ -367,7 +477,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
               width: item.width * item.scaleX,
               height: item.height * item.scaleY,
               x: item.left - ((item.width  * item.scaleX)/ 2),
-              y: 500 - ((item.height * item.scaleY) + item.top),
+              y: 500 - (newD.h + (item.top - ((item.height * item.scaleY) / 2))),
               rotate: degrees(item.angle * -1)
             })
             return
@@ -375,8 +485,8 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
           page.drawImage(img, {
             width: item.width * item.scaleX,
             height: item.height * item.scaleY,
-            x: item.left,
-            y: 500 - ((item.height * item.scaleY) + item.top),
+            x: item.left - ((item.width * item.scaleX) / 2),
+            y: 500 - ((item.height * item.scaleY) + (item.top - ((item.height * item.scaleY) / 2))),
             rotate: degrees(item.angle * -1)
           })
         }
@@ -409,13 +519,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     }catch(err){
       console.log(err);
     }
-    return;
-    let fName = this.editorService.getTitle();
-    let dataStr = this.fab.toDataURL();
-    console.log(dataStr)
-    let f = new jsPDF({orientation: 'p', unit: 'px'}); 
-    f.addImage(dataStr, 'PNG', 0, 0, this.canvasWidth / 2 , this.canvasHeight / 2);
-    f.save(`${fName}.pdf`)
   }
 
   public handleUploadFile(e: any){
