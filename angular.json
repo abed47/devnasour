@@ -134,6 +134,9 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/devnasour/server",
+            "externalDependencies": [
+              "fabric"
+            ],
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
           },
