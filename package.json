@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run devnasour:serve-ssr",
-    "serve:ssr": "node dist/devnasour/server/main.js",
+    "serve:ssr": "nodemon dist/devnasour/server/main.js",
     "build:ssr": "ng build --prod && ng run devnasour:server:production",
     "prerender": "ng run devnasour:prerender"
   },
