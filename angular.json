@@ -135,7 +135,9 @@
           "options": {
             "outputPath": "dist/devnasour/server",
             "externalDependencies": [
-              "fabric"
+              "fabric",
+              "swiper",
+              "ngx-useful-swiper"
             ],
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
