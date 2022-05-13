@@ -38,6 +38,7 @@
     "font-picker": "^3.5.1",
     "hammerjs": "^2.0.8",
     "jspdf": "^2.5.1",
+    "localstorage-polyfill": "^1.0.1",
     "moment": "^2.29.1",
     "ng-countup": "^1.8.5",
     "ng-gallery": "^5.1.1",
@@ -51,6 +52,7 @@
     "pdf-lib": "^1.17.1",
     "rxjs": "~6.6.0",
     "sass-google-fonts": "^1.0.1",
+    "sessionstorage-polyfill": "^1.0.1",
     "swiper": "^6.8.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
