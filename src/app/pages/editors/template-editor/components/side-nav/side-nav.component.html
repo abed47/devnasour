@@ -3,51 +3,51 @@
     <div class="tool-container">
         
         <button mat-button [class.active]="selectedTool === 'selection'" class="tool" (click)="changeTool('selection')">
-            <img src="assets/images/cursor.png" alt="icon"/>
+            <img src="../../../../../../assets/images/cursor.png" alt="icon"/>
             <p>Select</p>
         </button>
 
         <button mat-button [class.active]="selectedTool === 'templates'" class="tool" (click)="changeTool('templates')">
-            <img src="assets/images/templates-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/templates-icon.png" alt="icon"/>
             <p>Templates</p>
         </button>
         
         <button mat-button [class.active]="selectedTool === 'text'" class="tool" (click)="changeTool('text')">
-            <img src="assets/images/text-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/text-icon.png" alt="icon"/>
             <p>Text</p>
         </button>
         
         <button mat-button [class.active]="selectedTool === 'upload-photo'" class="tool" (click)="changeTool('upload-photo')">
-            <img src="assets/images/upload-photo-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/upload-photo-icon.png" alt="icon"/>
             <p>Upload Photo</p>
         </button>
         
         <button mat-button [class.active]="selectedTool === 'elements'" class="tool" (click)="changeTool('elements')">
-            <img src="assets/images/elements-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/elements-icon.png" alt="icon"/>
             <p>Elements</p>
         </button>
         
         <button mat-button [class.active]="selectedTool === 'background'" class="tool" (click)="changeTool('background')">
-            <img src="assets/images/background-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/background-icon.png" alt="icon"/>
             <p>Background</p>
         </button>
         
         <button mat-button [class.active]="selectedTool === 'upload'" class="tool" (click)="changeTool('upload')">
-            <img src="assets/images/folder-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/folder-icon.png" alt="icon"/>
             <p>Upload</p>
         </button>
         
         <button mat-button [class.active]="selectedTool === 'brush'" class="tool" (click)="changeTool('brush')">
-            <img src="assets/images/brush-icon.png" alt="icon"/>
+            <img src="../../../../../../assets/images/brush-icon.png" alt="icon"/>
             <p>Brush</p>
         </button>
 
     </div>
 
     <div class="shapes-box" [class.active]="selectedTool === 'elements'">
-        <div class="shape" [class.active]="selectedShape === 'square'" (click)="onShapeSelected('square')"><img src="assets/images/square.png" alt=""></div>
-        <div class="shape" [class.active]="selectedShape === 'circle'" (click)="onShapeSelected('circle')"><img src="assets/images/dry-clean.png" alt=""></div>
-        <div class="shape" [class.active]="selectedShape === 'star'" (click)="onShapeSelected('star')"><img src="assets/images/star.png" alt=""></div>
-        <div class="shape" [class.active]="selectedShape === 'triangle'" (click)="onShapeSelected('triangle')"><img src="assets/images/triangle.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'square'" (click)="onShapeSelected('square')"><img src="../../../../../../assets/images/square.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'circle'" (click)="onShapeSelected('circle')"><img src="../../../../../../assets/images/dry-clean.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'star'" (click)="onShapeSelected('star')"><img src="../../../../../../assets/images/star.png" alt=""></div>
+        <div class="shape" [class.active]="selectedShape === 'triangle'" (click)="onShapeSelected('triangle')"><img src="../../../../../../assets/images/triangle.png" alt=""></div>
     </div>
 </div>
