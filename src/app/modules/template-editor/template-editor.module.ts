@@ -21,7 +21,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { BgSelectDialogComponent } from '../../pages/editors/template-editor/components/bg-select-dialog/bg-select-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { NgxPdfkitModule } from '@felixdulfer/ngx-pdfkit';
 
 
 @NgModule({
@@ -48,7 +47,6 @@ import { NgxPdfkitModule } from '@felixdulfer/ngx-pdfkit';
     ColorPickerModule,
     MatDialogModule,
     MatMenuModule,
-    NgxPdfkitModule
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
