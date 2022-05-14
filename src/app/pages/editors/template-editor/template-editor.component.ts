@@ -62,17 +62,16 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     // this.fab.font
 
     
-    this.fab.on("object:scaling", e => {
-      console.log("scaling object: ", e)
-      e.target.dirty = true;
-      e.target.width = e.target.getScaledWidth();
-      e.target.height = e.target.getScaledHeight();
-      // e.target.eleme
-      e.target.set({
-        scaleX: 1,
-        scaleY: 1
-      })
-    })
+    // this.fab.on("object:scaling", e => {
+    //   // console.log("scaling object: ", e)
+    //   // e.target.dirty = true;
+    //   // e.target.width = e.target.getScaledWidth();
+    //   // e.target.height = e.target.getScaledHeight();
+    //   // e.target.set({
+    //   //   scaleX: 1,
+    //   //   scaleY: 1
+    //   // })
+    // })
 
     this.fab.on('mouse:down', e => this.onCanvasClick(e));
 
@@ -129,7 +128,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       this.editorService.selectObject(null, null, null);
       this.selectedObject = null;
     }
-    console.log(e.target)
 
     if(e.target !== null) {
       this.selectedObject = e.target;
@@ -227,7 +225,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     if(e.object.type === "path-fill") {
       this.selectedObject.fill = e.object.value;
       if(this.selectedObject?._objects?.length){
-        console.log('hello')
         this.selectedObject._objects.forEach(el => el.fill = e.object.value)
       }
     }
@@ -332,8 +329,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       />
         </svg>
         `, (i)=> {
-          console.log(i)
-          console.log(URL.createObjectURL(new Blob([svg.outerHTML], { type: "image/svg+xml"})))
           let g = new fabric.Group(i, {
             width: 250,
             height: 250,
@@ -354,7 +349,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
             this.fab.add(g);
             this.fab.renderAll();
         })
-        return console.log(svg)
         // $('svg').append(svgimg);
         fabric.Image.fromURL(res, i => {
           i.scaleToWidth(100)
@@ -455,24 +449,10 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
           y: 5
         })
         if(item?.type === "image"){
-          console.log({
-            w: item.scaleX * item.width,
-            h: item.scaleY * item.height,
-            angle: item.angle,
-            left: item.left,
-            top: item.top,
-            wcos: (item.scaleX * item.width) * Math.cos(item.angle),
-            wsin: (item.scaleY * item.height) * Math.cos(item.angle),
-            item
-          })
           // page.drawPage()
           let img = await pdfDoc.embedPng(item.src);
           if(item?.angle !== 0) {
             let newD = this.calcRotatedDimensions(item.angle, item.width * item.scaleX,  item.height * item.scaleY);
-            console.log({
-              x: 500 - (newD.w + item.left) / 2,
-              y: 500 - (newD.h + item.top) / 2,
-            })
             page.drawImage(img, {
               width: item.width * item.scaleX,
               height: item.height * item.scaleY,
@@ -503,7 +483,6 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
         }
 
         if(item.type === "circle"){
-          console.log(item)
           page.drawCircle({
             x: item.left,
             y: 500 - (item.top + item.width),
