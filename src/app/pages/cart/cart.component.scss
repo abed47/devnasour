@@ -405,6 +405,7 @@ main.cart-page{
             width: 100%;
             @include init-flex(row, flex-start, flex-start);
             
+            
             .billing-details{
                 width: 60%;
                 // border-right: 2px solid #F1F1F1;
@@ -413,12 +414,68 @@ main.cart-page{
                     @include headerStyles();
                 }
 
+                .address-display{
+                    box-sizing: border-box;
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    .actions{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
+                        align-items: center;
+
+                        button{
+                            color: blue;
+                            text-decoration: underline;
+                            font-family: $font-medium;
+                            text-transform: capitalize;
+                            font-size: 15px;
+                        }
+                    }
+
+                    .address{
+                        padding: 0;
+                        list-style: none;
+                        width: 100%;
+                        background-color: #F8F8F8;
+                        padding: 15px;
+                        box-sizing: border-box;
+                        
+                        li{
+                            width: 100%;
+                            @include init-flex(row, flex-start);
+                            border-bottom: 1px solid #b2b2b298;
+                            
+                            &:last-child{
+                                border-bottom: none;
+                            }
+
+                            p{
+                                margin: 10px 0;
+                                &:first-child{
+                                    color: #B2B2B2;
+                                    font-family: $font-base;
+                                    text-transform: capitalize;
+                                    font-size: 16px;
+                                    width: 20%;
+                                }
+                                &:last-child{
+                                    font-family: $font-base;
+                                    color: black;
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 form{
+                    box-sizing: border-box;
+                    padding-left: 25px;
+                    padding-right: 25px;
                     width: 100%;
                     @include init-flex(row, space-between);
                     flex-wrap: wrap;
-                    box-sizing: border-box;
-                    padding: 0 20px;
 
                     .f-w{
                         width: 100%;

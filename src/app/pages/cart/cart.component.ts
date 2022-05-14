@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -51,10 +52,18 @@ export class CartComponent implements OnInit {
       total: 600,
     },
   ]
+  
+  public billingForm: FormGroup;
+  public paymentForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
+    this.billingForm = this.fb.group({})
+
+    this.billingForm = this.fb.group({})
   }
 
   public calcCartTotal(){
@@ -73,5 +82,12 @@ export class CartComponent implements OnInit {
 
   public moveToCheckout(){
     this.currentStage += 1
+  }
+
+  public onNext(){
+    if(this.currentStage > 3) this.currentStage += 1;
+  }
+  public onBack(){
+    if(this.currentStage > 1) this.currentStage -= 1;
   }
 }
