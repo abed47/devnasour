@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CartComponent implements OnInit {
 
   private shippingPrice = 0;
-  public currentStage = 2;
+  public currentStage = 3;
   public cartItems = [
     {
       id: 1,

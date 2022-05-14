@@ -374,4 +374,163 @@ main.cart-page{
         }
         
     }
+
+    section.payment-section{
+        width: 100%;
+        max-width: 1080px;
+
+        @mixin headerStyles(){
+            background-color: #F1F1F1;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 15px;
+            margin-bottom: 20px;
+
+            h5{
+                font-family: $font-medium;
+                font-size: 15px;
+                margin-bottom: 0;
+                text-transform: capitalize;
+            }
+        }
+
+
+        h1.title{
+            font-family: $font-bold;
+            margin: 30px 0;
+            text-transform: capitalize;
+        }
+
+        .table{
+            width: 100%;
+            @include init-flex(row, flex-start, flex-start);
+            
+            .billing-details{
+                width: 60%;
+                // border-right: 2px solid #F1F1F1;
+
+                .header{
+                    @include headerStyles();
+                }
+
+                form{
+                    width: 100%;
+                    @include init-flex(row, space-between);
+                    flex-wrap: wrap;
+                    box-sizing: border-box;
+                    padding: 0 20px;
+
+                    .f-w{
+                        width: 100%;
+                    }
+
+                    .h-w{
+                        width: 45%;
+                    }
+
+                    ::ng-deep .input, ::ng-deep .select{
+                        .mat-form-field-outline-start, .mat-form-field-outline-end, mat-form-field-appearance-outline {
+                            border-radius: 0 0 0 0 !important;
+                        }
+                    }
+
+                    .actions{
+                        width: 100%;
+                        margin-top: 15px;
+
+                        .outlined{
+                            width: 40%;
+                            padding: 5px;
+                            border: 1.5px solid $color-secondary;
+                            border-radius: 0;
+                            text-transform: uppercase;
+                        }
+
+                        :not(.outlined){
+                            width: 40%;
+                            padding: 5px;
+                            border-radius: 0;
+                            margin-left: 10px;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+
+            .order-list{
+                min-height: 100%;
+                width: 40%;
+                border-left: 2px solid #F1F1F1;
+
+                .header{
+                    @include headerStyles();
+                }
+
+                .item-list{
+                    @include init-flex(column, flex-start, flex-start);
+                    .item{
+                        @include init-flex(row, flex-start);
+                        img{
+                            width: 50%;
+                        }
+
+                        .details{
+                            margin-left: 25px;
+                            p{
+                                color: black;
+                                font-family: $font-base;
+                                font-size: 13px;
+                                margin-bottom: 5px;
+                            }
+
+                            .price {
+                                color: $color-secondary;
+                                font-family: $font-medium;
+                                margin-top: 20px;
+                            }
+                        }
+                    }
+                }
+
+                hr{
+                    width: 70%;
+                    border-top: none;
+                    border-color: #F1F1F1;
+                    border-width: 2px;
+                    border-left: none;
+                }
+
+                .pricings{
+                    width: 100%;
+                    @include init-flex(column);
+
+                    .item{
+                        width: 50%;
+                        @include init-flex(row, space-between);
+
+                        p{
+                            &:first-child{
+                                color: black;
+                            }
+
+                            &:last-child{
+                                color: #707070;
+                            }
+                        }
+                    }
+
+                    .total{
+                        font-family: $font-semibold;
+                        width: 50%;
+                        @include init-flex(row, space-between);
+
+                        p:last-child{
+                            color: $color-secondary;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
 }
