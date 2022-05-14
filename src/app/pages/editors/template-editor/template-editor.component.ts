@@ -316,39 +316,39 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
         svgimg.setAttributeNS(null, 'visibility', 'visible');
         svg.appendChild(svgimg)
         
-        fabric.loadSVGFromString( `
-        <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-        <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"     viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve" width="250px" height="250px">
-        <image 
-        width="250px" 
-        height="250px" 
-        x="0"
-        y="0"
-        xlink:href="${res}" 
-      />
-        </svg>
-        `, (i)=> {
-          let g = new fabric.Group(i, {
-            width: 250,
-            height: 250,
-          });
-            // g.scaleToHeight(300, true);
-            // g.scaleToWidth(300, true)
-            g.set({
-              scaleX: 1,
-              scaleY: 1,
-              width: 250,
-              height: 250
-            })
+      //   fabric.loadSVGFromString( `
+      //   <?xml version="1.0" encoding="utf-8"?>
+      //   <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+      //   <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"     viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve" width="250px" height="250px">
+      //   <image 
+      //   width="250px" 
+      //   height="250px" 
+      //   x="0"
+      //   y="0"
+      //   xlink:href="${res}" 
+      // />
+      //   </svg>
+      //   `, (i)=> {
+      //     let g = new fabric.Group(i, {
+      //       width: 250,
+      //       height: 250,
+      //     });
+      //       // g.scaleToHeight(300, true);
+      //       // g.scaleToWidth(300, true)
+      //       g.set({
+      //         scaleX: 1,
+      //         scaleY: 1,
+      //         width: 250,
+      //         height: 250
+      //       })
 
-            // g.transform(this.fab.cave)
+      //       // g.transform(this.fab.cave)
 
-            // this.fab.transform
+      //       // this.fab.transform
 
-            this.fab.add(g);
-            this.fab.renderAll();
-        })
+      //       this.fab.add(g);
+      //       this.fab.renderAll();
+      //   })
         // $('svg').append(svgimg);
         fabric.Image.fromURL(res, i => {
           i.scaleToWidth(100)
