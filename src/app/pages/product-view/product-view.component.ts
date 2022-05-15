@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImageItem } from 'ng-gallery';
 import { Subject } from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
@@ -50,7 +51,8 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     private route: ActivatedRoute, 
     private layoutUtilsService: LayoutUtilsService,
     private router: Router,
-    private request: RequestService
+    private request: RequestService,
+    private cart: CartService,
     ) { }
 
   ngOnInit(): void {
@@ -70,7 +72,6 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     .then(r => {
       
       if(r && r?.status === 1){
-        console.log(r);
         this.product.name = r.data.web_product_name;
         this.product.images = r?.data?.attachments?.map(item => new ImageItem({src: item, thumb: item})) || [];
         this.product.description = r.data.web_product_description;
@@ -102,7 +103,6 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       this.layoutUtilsService.hidePreloader();
     })
     .catch(e => {
-      console.log(e);
       this.layoutUtilsService.hidePreloader();
     })
 
@@ -119,5 +119,9 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     this.router.navigate(['/shop/product/' + e]).then( e => {
       this.loadData();
     })
+  }
+
+  public addToCart(){
+    console.log(this.product);
   }
 }

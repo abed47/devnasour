@@ -21,11 +21,14 @@ import {MatRippleModule} from '@angular/material/core';
 import { RequestService } from 'src/app/services/request.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ShopItemListingComponent } from '../../pages/shop-item-listing/shop-item-listing.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ShopRoutingModule,
     MatTabsModule,
     MatFormFieldModule,

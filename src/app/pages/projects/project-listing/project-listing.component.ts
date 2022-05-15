@@ -27,7 +27,6 @@ export class ProjectListingComponent implements OnInit {
     this.request.getProjects((res, err) => {
       this.layoutUtils.hidePreloader();
       if(res && res.status === 1){
-        console.log(res.data)
         if(res.data?.length) this.itemList = res.data.map(item => {
           return {
             id: item.web_project_id,

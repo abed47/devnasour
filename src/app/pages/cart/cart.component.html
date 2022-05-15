@@ -86,7 +86,7 @@
                     <p>{{getTotals().total}}</p>
                 </span>
     
-                <button mat-raised-button color="accent" (click)="moveToCheckout()">CHECKOUT</button>
+                <button mat-raised-button color="accent" (click)="onNext()">CHECKOUT</button>
             </div>
             
         </div>
@@ -101,62 +101,60 @@
                     <h5>Billing Details</h5>
                 </div>
                 
-                <form>
+                <form [formGroup]="billingForm">
 
                     <mat-form-field appearance="outline" class="input h-w">
                         <mat-label>First Name</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" matInput formControlName="firstName" />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input h-w">
                         <mat-label>Last Name</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" matInput formControlName="lastName" />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
                         <mat-label>Shipping address</mat-label>
-                        <textarea matInput></textarea>
+                        <textarea matInput formControlName="address"></textarea>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
                         <mat-label>City</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" matInput formControlName="city" />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="select h-w">
                         <mat-label>Country</mat-label>
-                        <mat-select>
-                            <mat-option>test</mat-option>
+                        <mat-select formControlName="country">
+                            <mat-option *ngFor="let c of countryList" [value]="c.countryNameEn">{{c.countryNameEn}}</mat-option>
                         </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="select h-w">
                         <mat-label>Province</mat-label>
-                        <mat-select>
-                            <mat-option>test</mat-option>
-                        </mat-select>
+                        <input type="text" matInput formControlName="province">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
                         <mat-label>Post Code/ZIP</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" matInput formControlName="zip" />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
                         <mat-label>Phone</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" matInput formControlName="phone" />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
                         <mat-label>Email Address</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" matInput formControlName="email" />
                     </mat-form-field>
 
-                    <mat-checkbox>Save this information?</mat-checkbox>
+                    <mat-checkbox formControlName="saveAddress">Save this information?</mat-checkbox>
 
                     <div class="actions">
-                        <button mat-stroked-button color="accent" class="outlined">Back to shopping</button>
-                        <button mat-raised-button color="accent">Payment</button>
+                        <button mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to shopping</button>
+                        <button mat-raised-button color="accent" (click)="onNext()">Payment</button>
                     </div>
                 </form>
             </div>
@@ -211,7 +209,7 @@
                 </div>
 
                 <div class="address-display">
-                    <div class="actions"><button mat-flat-button>Change</button></div>
+                    <div class="actions" (click)="onBack()"><button mat-flat-button>Change</button></div>
                     <ul class="address">
                         <li>
                             <p>Contact</p> <p>address</p>
@@ -245,8 +243,8 @@
                     <mat-checkbox>Save this information?</mat-checkbox>
 
                     <div class="actions">
-                        <button mat-stroked-button color="accent" class="outlined">Back to shopping</button>
-                        <button mat-raised-button color="accent">Payment</button>
+                        <button mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to Shipping</button>
+                        <button mat-raised-button color="accent" (click)="confirmPayment()">Confirm</button>
                     </div>
                 </form>
             </div>

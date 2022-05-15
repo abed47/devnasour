@@ -32,7 +32,6 @@ export class ShopHomeComponent implements OnInit {
     //TODO: add preloader here
     this.request.getMainCategories().then(res => {
       if(res && res?.status){
-        console.log(res.data)
         this.bannerItems = res.data.main_category.map(item => {
           return {
             id: item.web_category_id,

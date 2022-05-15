@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import countryCodesList from 'country-codes-list';
 
 @Component({
   selector: 'app-cart',
@@ -8,8 +9,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
+  public countryList = [];
+  public voucherCode = "";
+  public voucherAccepted ="";
+  private voucherValue;
   private shippingPrice = 0;
-  public currentStage = 3;
+  public currentStage = 2;
   public cartItems = [
     {
       id: 1,
@@ -61,9 +66,28 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.billingForm = this.fb.group({})
+    this.buildSettings();
+  }
+  
+  private buildSettings(){
+    this.billingForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      province: ['', [Validators.required]],
+      zip: ['', []],
+      phone: ['', []],
+      email: ['', [Validators.required, Validators.email]],
+      saveAddress: [true, []]
+    })
 
-    this.billingForm = this.fb.group({})
+    this.paymentForm = this.fb.group({})
+
+    let arr = countryCodesList.all();
+    arr.splice(arr.indexOf(arr.filter(item => item.countryCode === "IL")[0]), 1);
+    this.countryList = arr;
   }
 
   public calcCartTotal(){
@@ -84,10 +108,20 @@ export class CartComponent implements OnInit {
     this.currentStage += 1
   }
 
+  public onApplyVoucher(){}
+
   public onNext(){
-    if(this.currentStage > 3) this.currentStage += 1;
+    if(this.currentStage === 2){
+      if (this.billingForm.invalid) return;
+    }
+    if(this.currentStage < 3) this.currentStage += 1;
   }
+
   public onBack(){
     if(this.currentStage > 1) this.currentStage -= 1;
+  }
+
+  public confirmPayment(){
+    
   }
 }

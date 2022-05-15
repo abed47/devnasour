@@ -15,7 +15,6 @@
 
                 <div class="information">
                     <h2 class="title">Information</h2>
-
                     <div class="block">
                         <h3 class="title">Shipping</h3>
                         <p class="content">{{product.shipping}}</p>
@@ -57,7 +56,7 @@
             <div class="actions">
                 <p class="title">Various versions</p>
 
-                <button mat-raised-button color="accent"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
+                <button mat-raised-button color="accent" (click)="addToCart()"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
                 <button mat-raised-button color="accent">UPLOAD</button>
                 <button mat-raised-button color="accent">CONTACT FOR DESIGN</button>
                 <div matRipple matRippleColor="accent" class="ripple-button">

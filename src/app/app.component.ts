@@ -28,7 +28,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private handleSnackbar(e){
-    console.log(e)
     this._snackbar.open(e.message, 'Dismiss', {
       panelClass: `snackbar-${e.type}`,
       duration: 4000

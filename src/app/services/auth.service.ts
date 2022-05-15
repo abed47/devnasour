@@ -17,6 +17,7 @@ export class AuthService {
 
   public getAuthStatus(){
     let s = this?.store?.getItem('authStorage', StorageTypes.LOCAL_STORAGE) || StorageTypes.SESSION_STORAGE;
+    if(+s) s = +s //parse int if s is not nan or null
     let currentUser = this.store.getItem('currentUser', s);
     let token = this.store.getItem('token', s);
     let loggedIn = this.store.getItem('loggedIn', s);
@@ -27,7 +28,7 @@ export class AuthService {
   public handleLoginSuccess(t, stayLoggedIn = false){
     let s = stayLoggedIn === true ? StorageTypes.LOCAL_STORAGE : StorageTypes.SESSION_STORAGE;
     this.store.setItem('loggedIn', true, s);
-    this.store.setItem('currentUser', t.user, s);
+    this.store.setItem('currentUser', t, s);
     this.store.setItem('token', 'token', s);
     this.AuthStatusSubject.next(true);
     this.router.navigate(['/home']);

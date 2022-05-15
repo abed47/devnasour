@@ -32,11 +32,9 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   private loadSettings(){
     this.subscriptions.push(this.layoutUtils.getSidenavSub().subscribe(r => this.sidenavOpen = r));
     this.subscriptions.push(this.auth.AuthStatusSubject.subscribe((r: any) => {
-      console.log('from subscription', r)
       this.loggedIn = r}));
 
     this.loggedIn = this.auth.getAuthStatus().loggedIn;
-    console.log(this.auth.getAuthStatus()?.loggedIn === true ? true : false, this.loggedIn)
   }
 
   public onSidenavClose(){

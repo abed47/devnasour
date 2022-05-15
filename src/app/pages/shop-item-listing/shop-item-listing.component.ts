@@ -29,7 +29,6 @@ export class ShopItemListingComponent implements OnInit {
 
     this.request.getCategoryProducts(catId)
     .then(r => {
-      console.log(r)
       if(r && r?.status === 1 && r.data?.length){
         this.itemList = r.data.map(item => {
           return {
