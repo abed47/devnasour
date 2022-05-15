@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import countryCodesList from 'country-codes-list';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,48 +15,8 @@ export class CartComponent implements OnInit {
   public voucherAccepted ="";
   private voucherValue;
   private shippingPrice = 0;
-  public currentStage = 2;
+  public currentStage = 1;
   public cartItems = [
-    {
-      id: 1,
-      name: 'test product',
-      photo: 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081',
-      color: 'red',
-      size: 'XL',
-      quantity: 20,
-      price: 30,
-      total: 600,
-    },
-    {
-      id: 1,
-      name: 'test product',
-      photo: 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081',
-      color: 'red',
-      size: 'XL',
-      quantity: 20,
-      price: 30,
-      total: 600,
-    },
-    {
-      id: 1,
-      name: 'test product',
-      photo: 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081',
-      color: 'red',
-      size: 'XL',
-      quantity: 20,
-      price: 30,
-      total: 600,
-    },
-    {
-      id: 1,
-      name: 'test product',
-      photo: 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081',
-      color: 'red',
-      size: 'XL',
-      quantity: 20,
-      price: 30,
-      total: 600,
-    },
   ]
   
   public billingForm: FormGroup;
@@ -63,6 +24,7 @@ export class CartComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private cart: CartService,
   ) { }
 
   ngOnInit(): void {
@@ -88,13 +50,28 @@ export class CartComponent implements OnInit {
     let arr = countryCodesList.all();
     arr.splice(arr.indexOf(arr.filter(item => item.countryCode === "IL")[0]), 1);
     this.countryList = arr;
+    
+    this.getCartItems();
+  }
+  
+  private getCartItems(){
+    let cItems = this.cart.getItems();
+    this.cartItems = cItems;
+  }
+
+  public removeCartItem(i){
+    let c = [...this.cartItems];
+    c.splice(i, 1);
+    this.cart.setItems(c);
+    this.getCartItems();
   }
 
   public calcCartTotal(){
     if(this.cartItems.length)
-      return this.cartItems.reduce((p, c) => p + +c.total, 0)
+      return this.cartItems.reduce((p, c) => p + +c.price, 0)
     return 0;
   }
+  
 
   public getTotals(){
     if(this.cartItems){

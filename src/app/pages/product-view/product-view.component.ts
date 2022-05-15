@@ -123,5 +123,12 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
 
   public addToCart(){
     console.log(this.product);
+    this.cart.addItem({
+      name: this.product.name,
+      description: this.product.description,
+      price: this.selectedPrice,
+      quantity: this.selectedQuantity, 
+      photo: this.product.images[0].data.src
+    })
   }
 }

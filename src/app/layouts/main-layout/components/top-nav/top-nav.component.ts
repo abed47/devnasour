@@ -32,7 +32,6 @@ export class TopNavComponent implements OnInit, OnDestroy{
   private loadSettings(){
     this.subscriptions.push(this.auth.AuthStatusSubject.subscribe((r: any) => {this.loggedIn = r}));
 
-    console.log(this.auth.getAuthStatus())
     this.loggedIn = this.auth.getAuthStatus()?.loggedIn || false
   }
 

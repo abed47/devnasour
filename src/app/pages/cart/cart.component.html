@@ -25,34 +25,34 @@
                 <tr>
                     <th>Image</th>
                     <th>Product</th>
-                    <th>Price</th>
+                    <!-- <th>Price</th> -->
                     <th>Qty</th>
                     <th>Total</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of cartItems">
+                <tr *ngFor="let item of cartItems;let i = index">
                     <td class="img">
                         <img [src]="item.photo" alt="">
                     </td>
 
                     <td class="details">
                         <p>{{item.name}}</p>
-                        <p>Color: {{item.color}}</p>
-                        <p>Size: {{item.size}}</p>
+                        <p>Description: {{item.description}}</p>
+                        <!-- <p>Size: {{item.size}}</p> -->
                     </td>
 
-                    <td class="price"><h3>{{item.price}}TL</h3></td>
+                    <!-- <td class="price"><h3>{{item.price}}TL</h3></td> -->
 
                     <td class="quantity">{{item.quantity}}</td>
-                    <td class="total">{{item.total}}TL</td>
-                    <td class="actions"><button mat-icon-button><mat-icon>delete_outline</mat-icon></button></td>
+                    <td class="total">{{item.price}}TL</td>
+                    <td class="actions"><button mat-icon-button (click)="removeCartItem(i)"><mat-icon>delete_outline</mat-icon></button></td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="5">
                         <span>Total: </span> <span>{{calcCartTotal()}}TL</span>
                     </td>
                 </tr>

@@ -10,9 +10,24 @@ export class CartService {
     private store: StoreService
   ) { }
 
-  public addItem(){}
+  public addItem(item){
+    let currentCart = this.store.getItem("cart", 1) || [];
+    currentCart.push(item);
+    this.store.setItem("cart", currentCart);
+    return true;
+  }
+
   public removeItem(){}
-  public clear(){}
-  public getItems(){}
-  public setItems(){}
+  
+  public clear(){
+    this.store.setItem("cart", [], 1);
+  }
+
+  public getItems(){
+    return this.store.getItem("cart", 1);
+  }
+
+  public setItems(c){
+    this.store.setItem("cart", c, 1)
+  }
 }
