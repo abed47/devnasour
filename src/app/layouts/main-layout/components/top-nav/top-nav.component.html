@@ -13,7 +13,7 @@
 
     <div [hidden]="!loggedIn" class="logged-in-btn-group d-md">
         <button mat-icon-button><img src="assets/images/favourites-icon.png"/></button>
-        <button mat-icon-button><img src="assets/images/user-icon.png"/></button>
+        <button mat-icon-button [routerLink]="['/user']"><img src="assets/images/user-icon.png"/></button>
         <button mat-icon-button [routerLink]="['/cart']"><img src="assets/images/cart-icon.png"/></button>
     </div>
 
