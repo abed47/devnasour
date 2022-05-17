@@ -11,6 +11,7 @@ import { HelperService } from './services/helper.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RequestService } from './services/request.service';
 import { LayoutUtilsService } from './services/layout-utils.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LayoutUtilsService } from './services/layout-utils.service';
     BrowserAnimationsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
   ],
   providers: [
     SeoService,

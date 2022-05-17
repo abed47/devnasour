@@ -1,1 +1,21 @@
-<router-outlet></router-outlet>
+<mat-drawer-container class="example-container">
+<mat-drawer mode="side" (closed)="onSidenavClose()" [opened]="sidenavOpen" position="left" [position]="'start'" class="drawer"> 
+    <!-- <div *ngIf="!loggedIn" class="auth-actions">
+        <a mat-raised-button color="primary" [routerLink]="['/login']">Login</a>
+        <a mat-raised-button color="primary" [routerLink]="['/register']">register</a>
+    </div> -->
+
+    <div class="auth-actions">
+        <a mat-raised-button color="primary">Logout</a>
+    </div>
+</mat-drawer>
+<mat-drawer-content>
+    
+    <user-top-nav></user-top-nav>
+    <div class="page-content-wrapper">
+        <router-outlet></router-outlet>
+        <!-- <main-footer></main-footer> -->
+    </div>
+
+</mat-drawer-content>
+</mat-drawer-container>
