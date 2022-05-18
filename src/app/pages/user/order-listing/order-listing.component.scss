@@ -1,0 +1,35 @@
+@import "src/styles/styles.scss";
+
+.orders-page{
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    .orders-page-container{
+        width: 100%;
+        max-width: 1080px;
+        box-sizing: border-box;
+        padding: 20px;
+
+        .header{
+            margin-bottom: 25px;
+        }
+
+        main{
+
+            .table-container{
+                background-color: white;
+                border-radius: 10px;
+                overflow: hidden;
+
+                .table{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

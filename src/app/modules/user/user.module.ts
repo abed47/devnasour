@@ -15,7 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent],
@@ -31,6 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatDialogModule,
     UserRoutingModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
 })
 export class UserModule { }
