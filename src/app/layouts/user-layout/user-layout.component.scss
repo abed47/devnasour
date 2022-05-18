@@ -2,18 +2,58 @@
 
 .page-content-wrapper{
     //100px for top nav, 280px for footer
-    height: calc(100% - 380px);
+    // height: calc(100% - 380px);
     width: 100%;
 }
 
 .drawer{
     width: 250px;
 
-    .auth-actions{
-        @include init-flex();
+    .sidenav-actions{
+        @include init-flex(column);
 
-        &>*{
-            margin: 0 5px;
+        .logo-container{
+            width: 100%;
+            height: 70px;
+            
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .link-list{
+            @include init-flex(column);
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            box-sizing: border-box;
+
+            &-item{
+                width: 80%;
+                color: $color-secondary;
+                margin: 10px 0;
+                a{
+                    padding: 5px 10px;
+                    box-sizing: border-box;
+                    width: 100%;
+                    box-sizing: border-box;
+                    @include init-flex(row, flex-start);
+                    color: #6E6E6E;
+
+                    &.active{
+                        color: $color-secondary;
+                        background-color: #ff5e0023;
+                    }
+                    
+                    .icon{
+                        font-size: 20px;
+                        margin-right: 15px;
+                    }
+                }
+
+            }
         }
     }
 
