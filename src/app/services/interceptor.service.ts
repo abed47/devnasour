@@ -14,7 +14,6 @@ export class InterceptorService implements HttpInterceptor {
   ) { }
   
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("request intercepted")
     this.layoutUtilsService.setIsLoading(true);
 
     return next.handle(req).pipe(
