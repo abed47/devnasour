@@ -6,8 +6,13 @@ import { OrderListingComponent } from 'src/app/pages/user/order-listing/order-li
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
   {
     path: 'orders',
