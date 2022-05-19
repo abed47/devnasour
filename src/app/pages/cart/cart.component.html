@@ -69,7 +69,7 @@
                     <input type="text" matInput>
                 </mat-form-field>
     
-                <button mat-raised-button color="accent">APPLY</button>
+                <button [disabled]="processing" mat-raised-button color="accent">APPLY</button>
             </div>
     
             <div class="totals">
@@ -86,7 +86,7 @@
                     <p>{{getTotals().total}}</p>
                 </span>
     
-                <button mat-raised-button color="accent" (click)="onNext()">CHECKOUT</button>
+                <button [disabled]="processing" mat-raised-button color="accent" (click)="onNext()">CHECKOUT</button>
             </div>
             
         </div>
@@ -99,6 +99,16 @@
             <div class="billing-details">
                 <div class="header">
                     <h5>Billing Details</h5>
+                </div>
+
+                <div class="address-select-field-container">
+                    <mat-form-field appearance="outline" class="select f-w">
+                        <mat-label>Address</mat-label>
+                        <mat-select [(ngModel)]="addressId">
+                            <mat-option [value]="-1">New Address</mat-option>
+                            <mat-option *ngFor="let c of addresses" [value]="c.countryNameEn">{{c.countryNameEn}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 
                 <form [formGroup]="billingForm">
@@ -153,8 +163,8 @@
                     <mat-checkbox formControlName="saveAddress">Save this information?</mat-checkbox>
 
                     <div class="actions">
-                        <button mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to shopping</button>
-                        <button mat-raised-button color="accent" (click)="onNext()">Payment</button>
+                        <button [disabled]="processing" mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to shopping</button>
+                        <button [disabled]="processing" mat-raised-button color="accent" (click)="onNext()">Payment</button>
                     </div>
                 </form>
             </div>
@@ -168,8 +178,8 @@
                         <img [src]="item.photo" alt="">
                         <div class="details">
                             <p>{{item.name}}</p>
-                            <p>Color: {{item.color}}</p>
-                            <p>Size: {{item.size}}</p>
+                            <!-- <p>Color: {{item.color}}</p> -->
+                            <!-- <p>Size: {{item.size}}</p> -->
                             <p class="price">TL {{item.price}}</p>
                         </div>
                     </div>
@@ -212,39 +222,45 @@
                     <div class="actions" (click)="onBack()"><button mat-flat-button>Change</button></div>
                     <ul class="address">
                         <li>
-                            <p>Contact</p> <p>address</p>
+                            <p>Contact:</p> <p>{{getBillingDetailsValue("email")}}</p>
                         </li>
                         <li>
-                            <p>Contact</p> <p>address</p>
+                            <p>Ship to:</p> <p>{{getBillingDetailsValue("address")}}</p>
                         </li>
                         <li>
-                            <p>Contact</p> <p>address</p>
+                            <p>Method:</p> <p>shipping method</p>
                         </li>
                     </ul>
                 </div>
                 
                 <form>
 
-                    <mat-form-field appearance="outline" class="input h-w">
-                        <mat-label>First Name</mat-label>
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Name On Card</mat-label>
                         <input type="text" matInput />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input h-w">
-                        <mat-label>Last Name</mat-label>
+                        <mat-label>Expiry Date</mat-label>
+                        <input type="date" matInput />
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>CVC</mat-label>
                         <input type="text" matInput />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
-                        <mat-label>City</mat-label>
+                        <mat-label>Card Number</mat-label>
                         <input type="text" matInput />
+                        <mat-icon matSuffix>credit_card</mat-icon>
                     </mat-form-field>
 
                     <mat-checkbox>Save this information?</mat-checkbox>
 
                     <div class="actions">
-                        <button mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to Shipping</button>
-                        <button mat-raised-button color="accent" (click)="confirmPayment()">Confirm</button>
+                        <button [disabled]="processing" mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to Shipping</button>
+                        <button [disabled]="processing" mat-raised-button color="accent" (click)="confirmPayment()">Confirm</button>
                     </div>
                 </form>
             </div>
@@ -258,8 +274,8 @@
                         <img [src]="item.photo" alt="">
                         <div class="details">
                             <p>{{item.name}}</p>
-                            <p>Color: {{item.color}}</p>
-                            <p>Size: {{item.size}}</p>
+                            <!-- <p>Color: {{item.color}}</p> -->
+                            <!-- <p>Size: {{item.size}}</p> -->
                             <p class="price">TL {{item.price}}</p>
                         </div>
                     </div>

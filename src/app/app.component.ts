@@ -33,4 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
       duration: 4000
     })
   }
+
+  public getIsLoading(){
+    return this.layoutUtilsService.getIsLoading();
+  }
 }

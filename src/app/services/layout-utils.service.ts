@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class LayoutUtilsService {
   private breadCrumbSubject: Subject<{action: 'rename' | 'change-active', value?:string, key?:string}> = new Subject();
   private loader: Subject<any> = new Subject();
   private snackbar: Subject<any> = new Subject();
+  private isLoading: BehaviorSubject<any> = new BehaviorSubject<boolean>(false);
 
 
   constructor() { }
@@ -64,5 +65,13 @@ export class LayoutUtilsService {
 
   public changeActivePath(key: string){
     this.breadCrumbSubject.next({action: 'change-active', key});
+  }
+
+  public setIsLoading(t: boolean){
+    this.isLoading.next(t);
+  }
+
+  public getIsLoading(){
+    return this.isLoading.asObservable();
   }
 }

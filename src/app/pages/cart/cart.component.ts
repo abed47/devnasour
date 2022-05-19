@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import countryCodesList from 'country-codes-list';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,8 +20,11 @@ export class CartComponent implements OnInit {
   private voucherValue;
   private shippingPrice = 0;
   public currentStage = 1;
+  public addressId = -1;
   public cartItems = [
   ]
+  public addresses = [];
+  public processing = false;
   
   public billingForm: FormGroup;
   public paymentForm: FormGroup;
@@ -25,6 +32,10 @@ export class CartComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cart: CartService,
+    private request: RequestService,
+    private auth: AuthService,
+    private layoutUtils: LayoutUtilsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +67,7 @@ export class CartComponent implements OnInit {
   
   private getCartItems(){
     let cItems = this.cart.getItems();
-    this.cartItems = cItems;
+    this.cartItems = cItems || [];
   }
 
   public removeCartItem(i){
@@ -88,6 +99,7 @@ export class CartComponent implements OnInit {
   public onApplyVoucher(){}
 
   public onNext(){
+    if(this.currentStage === 1 && this.cartItems?.length < 1) return; 
     if(this.currentStage === 2){
       if (this.billingForm.invalid) return;
     }
@@ -98,7 +110,54 @@ export class CartComponent implements OnInit {
     if(this.currentStage > 1) this.currentStage -= 1;
   }
 
+  /**
+   * @description - Format Array of cart products to create order from
+   */
+  private getProductsForOrder(){
+    return this.cart.getItems().map(i => {
+      return {
+        id: i.id,
+        quantity: i.quantity,
+        price: i.price,
+        discount: i.discount,
+      }
+    })
+  }
+
+  /**
+   * @description - Handle Success (empty cart, move to user dashboard)
+   */
+  public handleOrderCreated(){
+    //TODO: show success message instead of plain snackbar
+    this.layoutUtils.showSnack("success", "Order created");
+    this.cart.clear();
+    this.router.navigate(['/user/orders']);
+  }
+
   public confirmPayment(){
-    
+    let purchaseBody = {
+      action: "set_order",
+      web_user_id: this.auth.getAuthStatus().currentUser.web_user_id,
+      total: this.getTotals().total,
+      voucher_code: this.voucherCode,
+      address_id: this.addressId,
+      address_name: this.getBillingDetailsValue("address"),
+      product: this.getProductsForOrder()
+    };
+  
+    this.processing = true;
+    this.request.createOrder(purchaseBody, (res, err) => {
+      this.processing = false;
+      if(err || res?.status === 0){
+        this.layoutUtils.showSnack("error", err?.message || res.message || "Server Error");
+        return;
+      }
+
+      if(res.status === 1) this.handleOrderCreated();
+    })
+  }
+
+  public getBillingDetailsValue(v: string) {
+    return this.billingForm.controls[v].value || "";
   }
 }

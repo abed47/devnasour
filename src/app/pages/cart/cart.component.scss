@@ -256,6 +256,28 @@ main.cart-page{
                     @include headerStyles();
                 }
 
+                .address-select-field-container{
+                    width: 100%;
+                    @include init-flex(row, space-between);
+                    flex-wrap: wrap;
+                    box-sizing: border-box;
+                    padding: 0 20px;
+
+                    .f-w{
+                        width: 100%;
+                    }
+
+                    .h-w{
+                        width: 45%;
+                    }
+
+                    ::ng-deep .input, ::ng-deep .select{
+                        .mat-form-field-outline-start, .mat-form-field-outline-end, mat-form-field-appearance-outline {
+                            border-radius: 0 0 0 0 !important;
+                        }
+                    }
+                }
+
                 form{
                     width: 100%;
                     @include init-flex(row, space-between);
@@ -528,7 +550,10 @@ main.cart-page{
                     .item{
                         @include init-flex(row, flex-start);
                         img{
-                            width: 50%;
+                            width: 120px;
+                            height: 120px;
+                            object-fit: contain;
+                            margin: 20px;
                         }
 
                         .details{

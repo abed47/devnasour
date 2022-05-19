@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SeoService } from './services/seo.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HelperService } from './services/helper.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RequestService } from './services/request.service';
 import { LayoutUtilsService } from './services/layout-utils.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { InterceptorService } from './services/interceptor.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,18 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatMenuModule,
+    MatProgressBarModule,
   ],
   providers: [
     SeoService,
     HelperService,
     RequestService,
-    LayoutUtilsService
+    LayoutUtilsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
