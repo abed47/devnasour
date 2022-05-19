@@ -92,11 +92,7 @@ export class RequestService {
 
   /*=============================================USER REQUESTS=================================================*/
   public getOrders(body: { action: string, limit: number, offset: number, web_user_id: any}, cb: CallableFunction){
-    this.http.post(this.serverUrl + 'order.php', body).subscribe(r => {
-      cb(r, null)
-    }, e => {
-      cb(null, e)
-    })
+    this.http.post(this.serverUrl + 'order.php', body).subscribe(r => cb(r, null), e => cb(null, e));
   }
 
   public createOrder(body: any, cb: CallableFunction){

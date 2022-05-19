@@ -140,7 +140,7 @@ export class CartComponent implements OnInit {
       web_user_id: this.auth.getAuthStatus().currentUser.web_user_id,
       total: this.getTotals().total,
       voucher_code: this.voucherCode,
-      address_id: this.addressId,
+      address_id: this.addressId === -1 ? "" : this.addressId,
       address_name: this.getBillingDetailsValue("address"),
       product: this.getProductsForOrder()
     };
@@ -153,7 +153,7 @@ export class CartComponent implements OnInit {
         return;
       }
 
-      if(res.status === 1) this.handleOrderCreated();
+      // if(res.status === 1) this.handleOrderCreated();
     })
   }
 
