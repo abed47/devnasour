@@ -17,6 +17,23 @@
 
         .header{
             margin-bottom: 25px;
+            width: 100%;
+
+            .tabs{
+                button{
+                    border-radius: 0 !important;
+                    color: #6E6E6E;
+                    border-bottom: 2px solid #D4D4D4;
+                    background-color: none;
+                    background: none;
+                    transition: all 300ms ease-in-out;
+
+                    &.active{
+                        color: #1921FA;
+                        border-bottom-color: #1921FA;
+                    }
+                }
+            }
         }
 
         main{
@@ -25,6 +42,17 @@
                 background-color: white;
                 border-radius: 10px;
                 overflow: hidden;
+                position: relative;
+
+                .loading-options{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #6E6E6E;
+                    display: none;
+                }
 
                 .table{
                     width: 100%;

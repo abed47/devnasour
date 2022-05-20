@@ -2,10 +2,10 @@
     <div class="orders-page-container">
         <div class="header">
             <div class="tabs">
-                <button mat-flat-button>All Status</button>
-                <button mat-flat-button>On Delivery</button>
-                <button mat-flat-button>Delivered</button>
-                <button mat-flat-button>Canceled</button>
+                <button mat-flat-button [class.active]="statusFilter === 'all'" (click)="onFilterChange('all')">All Status</button>
+                <button mat-flat-button [class.active]="statusFilter === 'on-delivery'" (click)="onFilterChange('on-delivery')">On Delivery</button>
+                <button mat-flat-button [class.active]="statusFilter === 'delivered'" (click)="onFilterChange('delivered')">Delivered</button>
+                <button mat-flat-button [class.active]="statusFilter === 'canceled'" (click)="onFilterChange('canceled')">Canceled</button>
             </div>
             <div class="actions">
     
@@ -14,6 +14,9 @@
     
         <main>
             <div class="table-container">
+                <div class="loading-options">
+                  test
+                </div>
                 <table mat-table [dataSource]="dataSource" class="table">
     
                     <ng-container matColumnDef="id">
@@ -53,6 +56,10 @@
     
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="6" *ngIf="processing">loading...</td>
+                    </tr>
                   </table>
                 
                   <mat-paginator [pageSizeOptions]="[5, 10, 20]"

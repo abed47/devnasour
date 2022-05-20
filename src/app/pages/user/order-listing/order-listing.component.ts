@@ -19,6 +19,8 @@ export class OrderListingComponent implements OnInit {
   public itemsPerPage = 5;
   public currentPage = 0;
   public totalRows = 0;
+  public statusFilter = 'all';
+  public processing = false;
 
   constructor(
     private request: RequestService,
@@ -37,22 +39,23 @@ export class OrderListingComponent implements OnInit {
   }
 
   private loadData(){
+    this.dataSource.data = [];
+    this.processing = true;
     this.request.getOrders({
       limit: this.itemsPerPage,
       action: 'get_order',
       offset: this.currentPage,
-      web_user_id: 8
+      web_user_id: 8,
+      web_order_status_name: this.statusFilter
     }, (res, err) => {
-      console.log("response: ", res);
-      console.log("error: ", err);
-
+      this.processing = false;
       if(res && res.status === 1){
         this.data = res.data.map(i => {
           return {
             id: "#" + i.web_order_id,
             date: i.web_order_date,
             address: i.web_user_address_name,
-            status: i.web_oder_status_name,
+            status: i.web_order_status_name,
             total: i.web_order_total
           }
         })
@@ -65,19 +68,23 @@ export class OrderListingComponent implements OnInit {
   public getNextPage(e){
     this.currentPage = e.pageIndex;
     this.itemsPerPage = e.pageSize;
+    this.dataSource.data = [];
+    this.processing = true;
     this.request.getOrders({
       limit: e.pageSize,
       action: 'get_order',
       offset: e.pageIndex * e.pageSize,
-      web_user_id: 8
+      web_user_id: 8,
+      web_order_status_name: this.statusFilter,
     }, (res, err) => {
+      this.processing = true;
       if(res && res.status === 1){
         this.data = res.data.map(i => {
           return {
             id: "#" + i.web_order_id,
             date: i.web_order_date,
             address: i.web_user_address_name,
-            status: i.web_oder_status_name,
+            status: i.web_order_status_name,
             total: i.web_order_total
           }
         })
@@ -89,6 +96,14 @@ export class OrderListingComponent implements OnInit {
 
   public formatDate(d){
     return moment(d).format("DD/MM/YYYY")
+  }
+
+  public onFilterChange(s: string){
+    //'all', 'on-delivery', 'delivered', 'canceled'
+    this.statusFilter = s;
+    this.currentPage = 1;
+    this.itemsPerPage = 5;
+    this.loadData()
   }
 
 }
