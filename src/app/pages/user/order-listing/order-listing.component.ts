@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service';
 import { RequestService } from 'src/app/services/request.service';
 
 @Component({
@@ -21,9 +22,11 @@ export class OrderListingComponent implements OnInit {
   public totalRows = 0;
   public statusFilter = 'all';
   public processing = false;
+  private userId = null;
 
   constructor(
     private request: RequestService,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class OrderListingComponent implements OnInit {
   private loadSettings(){
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = this.data;
+    this.userId = this.auth.getAuthStatus().currentUser.web_user_id;
     this.loadData();
 
     // this.paginator.pageSizeOptions
@@ -45,7 +49,7 @@ export class OrderListingComponent implements OnInit {
       limit: this.itemsPerPage,
       action: 'get_order',
       offset: this.currentPage,
-      web_user_id: 8,
+      web_user_id: this.userId,
       web_order_status_name: this.statusFilter
     }, (res, err) => {
       console.log(res);
@@ -75,7 +79,7 @@ export class OrderListingComponent implements OnInit {
       limit: e.pageSize,
       action: 'get_order',
       offset: e.pageIndex * e.pageSize,
-      web_user_id: 8,
+      web_user_id: this.userId,
       web_order_status_name: this.statusFilter,
     }, (res, err) => {
       this.processing = true;
