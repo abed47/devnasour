@@ -6,7 +6,7 @@ import { UserLayoutComponent } from '../../layouts/user-layout/user-layout.compo
 import { DashboardComponent } from '../../pages/user/dashboard/dashboard.component';
 import { OrderListingComponent } from '../../pages/user/order-listing/order-listing.component';
 import { TopNavComponent } from '../../layouts/user-layout/components/top-nav/top-nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,12 +18,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddressListingComponent } from '../../pages/user/address-listing/address-listing.component';
+import { CreateAddressComponent } from '../../pages/user/create-address/create-address.component';
 
 @NgModule({
-  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent],
+  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -34,7 +36,9 @@ import { AddressListingComponent } from '../../pages/user/address-listing/addres
     MatDialogModule,
     UserRoutingModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
 })
 export class UserModule { }
