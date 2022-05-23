@@ -16,6 +16,13 @@ export class HomeComponent implements OnInit {
 
   public pageData: any = {};
 
+  public counters = {
+    activeUsers : 0,
+    positiveFeedback: 0,
+    prints: 0,
+    positiveRatings: 0
+  }
+
   public swiperConfig: SwiperOptions = {
     slidesPerView: 1,
     autoplay: {
@@ -129,6 +136,14 @@ export class HomeComponent implements OnInit {
           })
         }
         this.loadSettings();
+      }
+
+      let counterData = await this.request.getMetaDataSub(['prints_count', 'active_users_count', 'positive_feedback_count', 'positive_ratings_count'], null).toPromise();
+      if(counterData.status === 1){
+        this.counters.positiveFeedback = counterData.data.positive_feedback_count.web_metadata_value;
+        this.counters.prints = counterData.data.prints_count.web_metadata_value;
+        this.counters.activeUsers = counterData.data.active_users_count.web_metadata_value;
+        this.counters.positiveRatings = counterData.data.positive_ratings_count.web_metadata_value;
       }
 
       this.layoutUtils.hidePreloader();

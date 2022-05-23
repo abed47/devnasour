@@ -2,11 +2,11 @@
 
     <section class="packaging-1">
         <div class="title">
-            <h1>Bringing packaging to life</h1>
+            <h1>{{packagingData.title}}</h1>
 
             <hr>
 
-            <p class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa quo nobis, beatae,</p>
+            <p class="subtitle" [innerHtml]="packagingData.description"></p>
         </div>
 
         <div class="hovering-packaging">
@@ -17,8 +17,8 @@
         <div class="swiper-container">
             <swiper [config]="banner1Config">
                 <div class="swiper-wrapper">
-                    <a *ngFor="let item of packagingBannerItems" class="swiper-slide" (click)="onItemClick(item.id)">
-                        <img [src]="item.photo" alt="">
+                    <a *ngFor="let item of packagingData.images" class="swiper-slide" (click)="onItemClick(item.id)">
+                        <img [src]="item" alt="">
                     </a>
                 </div>
             </swiper>
@@ -27,9 +27,9 @@
 
     <section class="our-story">
         <div class="title">
-            <h2 class="intro">Where it all started, and ended!</h2>
-            <h1 class="title">Our Story</h1>
-            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione pariatur vitae non sunt, reiciendis minima possimus recusandae ipsam tempore, unde dolore inventore labore officia esse modi officiis provident ex facere!</p>
+            <h2 class="intro">{{ourStoryData.subtitle}}</h2>
+            <h1 class="title">{{ourStoryData.title}}</h1>
+            <p class="description" [innerHtml]="ourStoryData.description"></p>
         </div>
 
         <div class="floating">
@@ -38,7 +38,7 @@
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut tenetur pariatur, animi alias a facere, tempore quia ipsa quos doloribus beatae nostrum, voluptate ipsum in praesentium explicabo. Eligendi, aliquid nesciunt.</p>
         </div>
 
-        <img src="assets/images/rect.png" alt="" class="display">
+        <img [src]="ourStoryData.image" alt="" class="display">
     </section>
 
     <section class="offices">
@@ -51,13 +51,13 @@
         <div class="swiper-container">
             <swiper [config]="locationBannerConfig">
                 <div class="swiper-wrapper">
-                    <a *ngFor="let item of locations" class="swiper-slide" (click)="onItemClick(item.id)">
+                    <a *ngFor="let item of officesData" class="swiper-slide" (click)="onItemClick(item.id)">
                         <div class="inner-wrapper">
-                            <img [src]="item.photo" alt="">
+                            <img [src]="item.image" alt="">
 
                             <div class="floating">
                                 <h1>{{item.title}}</h1>
-                                <p>{{item.description}}</p>
+                                <p [innerHtml]="item.description"></p>
                             </div>
                         </div>
                     </a>

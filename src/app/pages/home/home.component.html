@@ -67,7 +67,7 @@
                         <img [src]="pageData?.home_desc_4?.web_metadata_image" alt="Scale your business icon">
                         <h1>{{pageData?.home_desc_4?.web_metadata_title}}</h1>
                         <hr>
-                        <p [innerHtml]="pageData?.home_desc_4?.web_metadata_description"></p>
+                        <div [innerHtml]="pageData?.home_desc_4?.web_metadata_description"></div>
                     </article>
                 </div>
             </div>
@@ -186,19 +186,19 @@
 
             <div class="counters">
                 <div class="counter">
-                    <h1>570</h1>
+                    <h1>{{counters.prints}}</h1>
                     <p>Prints</p>
                 </div>
                 <div class="counter">
-                    <h1>570</h1>
+                    <h1>{{counters.activeUsers}}</h1>
                     <p>Active Users</p>
                 </div>
                 <div class="counter">
-                    <h1>570</h1>
+                    <h1>{{counters.positiveFeedback}}</h1>
                     <p>Positive Feedback</p>
                 </div>
                 <div class="counter">
-                    <h1>570</h1>
+                    <h1>{{counters.positiveRatings}}</h1>
                     <p>+ rating</p>
                 </div>
             </div>
