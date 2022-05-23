@@ -5,6 +5,7 @@
     box-sizing: border-box;
     padding: 20px;
     background-color: white;
+    @include init-flex(column, flex-start, center);
 
     header{
         width: 100%;
@@ -34,13 +35,21 @@
     }
 
     main{
+        width: 100%;
+        max-width: 1080px;
+    }
+
+    .article-container{
+        margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         row-gap: 20px;
         column-gap: 20px;
         justify-items: center;
         align-content: center;
         padding-bottom: 50px;
+        width: 100%;
+        
 
         article{
             background-color: #F9F9F9 !important;

@@ -1,54 +1,56 @@
-<div class="project-view-page">
-    <!-- <app-bread-crumbs></app-bread-crumbs> -->
-
-    <section class="product">
-        <article class="l">
-            <div class="gallery-container">
-                <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: white;" [items]="project.images"></gallery>
-            </div>
-        </article>
-
-        <article class="r">
-
-            <h1 class="title">{{project.name}}</h1>
-
-            <hr>
-            
-            <div class="description">
-                <p class="title">Overview</p>
-                <p class="content">{{project.description}}</p>
-            </div>
-
-
-            <div class="models">
-                <p class="title">Selected model</p>
-
-                <ul>
-                    <li *ngFor="let item of project.models" [class.selected]="item.selected">
-                        <img [hidden]="!item.selected" src="assets/images/green-check.png" class="check-mark" />
-                        <h1>{{item.title}}</h1>
-                        <h2>{{item.subtitle}}</h2>
-                        <p>{{item.description}}</p>
-                    </li>
-                </ul>
-            </div>
-
-        </article>
-    </section>
-
-    <section class="related-projects">
-        <h1>Related Projects</h1>
-        <hr>
-
-        <div class="project-list">
-            <article *ngFor="let item of relatedProjects" class="project-item">
-                <img [src]="item.photo" />
-                <div class="info">
-                    <h2 class="title">{{item.title}}</h2>
-                    <p class="short-description">{{item.description}}</p>
-                    <a [routerLink]="['/project/'] + item.id" class="project-url">Learn more <img src="assets/images/secondary-right-arrow.png" /></a>
+<main>
+    <div class="project-view-page">
+        <!-- <app-bread-crumbs></app-bread-crumbs> -->
+    
+        <section class="product">
+            <article class="l">
+                <div class="gallery-container">
+                    <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: white;" [items]="project.images"></gallery>
                 </div>
             </article>
-        </div>
-    </section>
-</div>
+    
+            <article class="r">
+    
+                <h1 class="title">{{project.name}}</h1>
+    
+                <hr>
+                
+                <div class="description">
+                    <p class="title">Overview</p>
+                    <p class="content">{{project.description}}</p>
+                </div>
+    
+    
+                <div class="models">
+                    <p class="title">Selected model</p>
+    
+                    <ul>
+                        <li *ngFor="let item of project.models" [class.selected]="item.selected">
+                            <img [hidden]="!item.selected" src="assets/images/green-check.png" class="check-mark" />
+                            <h1>{{item.title}}</h1>
+                            <h2>{{item.subtitle}}</h2>
+                            <p>{{item.description}}</p>
+                        </li>
+                    </ul>
+                </div>
+    
+            </article>
+        </section>
+    
+        <section class="related-projects">
+            <h1>Related Projects</h1>
+            <hr>
+    
+            <div class="project-list">
+                <article *ngFor="let item of relatedProjects" class="project-item">
+                    <img [src]="item.photo" />
+                    <div class="info">
+                        <h2 class="title">{{item.title}}</h2>
+                        <p class="short-description">{{item.description}}</p>
+                        <a [routerLink]="['/project/'] + item.id" class="project-url">Learn more <img src="assets/images/secondary-right-arrow.png" /></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</main>

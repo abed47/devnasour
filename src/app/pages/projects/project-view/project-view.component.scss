@@ -1,6 +1,12 @@
 @import 'src/styles/styles.scss';
 
+main{
+    @include init-flex();
+    
+}
+
 .project-view-page{
+    max-width: 1080px;
     padding: 20px;
     @include init-flex(column, start, start);
     width: 100%;
@@ -169,6 +175,7 @@
                     width: 100%;
                     max-height: 300px;
                     object-fit: cover;
+                    height: 100%;
                 }
     
                 .info{

@@ -7,13 +7,15 @@
 
     <main>
         
-        <article *ngFor="let item of itemList" class="project-item">
-            <img [src]="item.photo" />
-            <div class="info">
-                <h2 class="title">{{item.title}}</h2>
-                <p class="short-description">{{item.description}}</p>
-                <a [routerLink]="['/project/'] + item.id" class="project-url">Learn more <img src="assets/images/secondary-right-arrow.png" /></a>
-            </div>
-        </article>
+        <div class="article-container">
+            <article *ngFor="let item of itemList" class="project-item">
+                <img [src]="item.photo" />
+                <div class="info">
+                    <h2 class="title">{{item.title}}</h2>
+                    <p class="short-description">{{item.description}}</p>
+                    <a [routerLink]="['/project/'] + item.id" class="project-url">Learn more <img src="assets/images/secondary-right-arrow.png" /></a>
+                </div>
+            </article>
+        </div>
     </main>
 </div>

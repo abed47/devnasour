@@ -16,9 +16,9 @@ export class ShopHomeComponent implements OnInit {
     slidesPerView: 3,
     centeredSlides: true,
     initialSlide: 1,
-    // loop: true,
-    spaceBetween: -40,
-    // autoplay: true
+    loop: true,
+    spaceBetween: 50,
+    autoplay: true
   }
 
   constructor(private router: Router, private request: RequestService) { }

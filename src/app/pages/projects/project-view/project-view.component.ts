@@ -74,7 +74,6 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
     this.request.getProject(pId, (res, err) => {
       this.layoutUtilsService.hidePreloader();
       if(res){
-        console.log(res);
         if(res?.status === 1) {
           this.project.name = res.data.web_project_name;
           this.project.description = res.data.web_project_description;
