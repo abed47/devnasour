@@ -1,6 +1,6 @@
 @import "src/styles/styles.scss";
 
-.orders-page{
+.addresses-page{
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;
@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: flex-start;
 
-    .orders-page-container{
+    .addresses-page-container{
         width: 100%;
         max-width: 1080px;
         box-sizing: border-box;
@@ -91,7 +91,7 @@
     }
 }
 
-.order-action-button{
+.address-action-button{
     color: #1921FA;
     font-size: 13px;
     font-family: $font-base;

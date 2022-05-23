@@ -17,9 +17,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AddressListingComponent } from '../../pages/user/address-listing/address-listing.component';
 
 @NgModule({
-  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent],
+  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent],
   imports: [
     CommonModule,
     FormsModule,

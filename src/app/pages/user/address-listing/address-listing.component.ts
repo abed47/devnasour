@@ -2,15 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service';
 import { RequestService } from 'src/app/services/request.service';
-
 @Component({
-  selector: 'app-order-listing',
-  templateUrl: './order-listing.component.html',
-  styleUrls: ['./order-listing.component.scss']
+  selector: 'app-address-listing',
+  templateUrl: './address-listing.component.html',
+  styleUrls: ['./address-listing.component.scss']
 })
-export class OrderListingComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'date', 'location', 'amount', 'status', 'actions'];
+export class AddressListingComponent implements OnInit {
+  displayedColumns: string[] = ['name', 'address', 'options'];
   private data = [];
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -21,9 +21,11 @@ export class OrderListingComponent implements OnInit {
   public totalRows = 0;
   public statusFilter = 'all';
   public processing = false;
+  private userId = null;
 
   constructor(
     private request: RequestService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class OrderListingComponent implements OnInit {
   private loadSettings(){
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = this.data;
+    this.userId = this.auth.getAuthStatus().currentUser.web_user_id;
     this.loadData();
 
     // this.paginator.pageSizeOptions
@@ -41,23 +44,20 @@ export class OrderListingComponent implements OnInit {
   private loadData(){
     this.dataSource.data = [];
     this.processing = true;
-    this.request.getOrders({
+    this.request.getAddresses({
       limit: this.itemsPerPage,
-      action: 'get_order',
+      action: 'get_user_address',
       offset: this.currentPage,
-      web_user_id: 8,
-      web_order_status_name: this.statusFilter
+      web_user_id: this.userId,
     }, (res, err) => {
       console.log(res);
       this.processing = false;
       if(res && res.status === 1){
         this.data = res.data.map(i => {
           return {
-            id: "#" + i.web_order_id,
-            date: i.web_order_date,
-            address: i.web_user_address_name,
-            status: i.web_order_status_name || "pending",
-            total: i.web_order_total
+            id: i.web_user_address_id,
+            name: i.web_user_address_title,
+            address: i.web_user_address_name
           }
         })
         this.totalRows = res.total_record;
@@ -71,22 +71,19 @@ export class OrderListingComponent implements OnInit {
     this.itemsPerPage = e.pageSize;
     this.dataSource.data = [];
     this.processing = true;
-    this.request.getOrders({
+    this.request.getAddresses({
       limit: e.pageSize,
-      action: 'get_order',
+      action: 'get_user_address',
       offset: e.pageIndex * e.pageSize,
-      web_user_id: 8,
-      web_order_status_name: this.statusFilter,
+      web_user_id: this.userId,
     }, (res, err) => {
       this.processing = true;
       if(res && res.status === 1){
         this.data = res.data.map(i => {
           return {
-            id: "#" + i.web_order_id,
-            date: i.web_order_date,
-            address: i.web_user_address_name,
-            status: i.web_order_status_name || "pending",
-            total: i.web_order_total
+            id: i.web_user_address_id,
+            name: i.web_user_address_title,
+            address: i.web_user_address_name
           }
         })
         this.dataSource.data = this.data;
@@ -121,5 +118,6 @@ export class OrderListingComponent implements OnInit {
         return 'Pending';
     }
   }
+
 
 }
