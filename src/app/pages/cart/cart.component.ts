@@ -141,7 +141,17 @@ export class CartComponent implements OnInit {
       total: this.getTotals().total,
       voucher_code: this.voucherCode,
       address_id: this.addressId === -1 ? "" : this.addressId,
-      address_name: this.getBillingDetailsValue("address"),
+      address: {
+        name: this.getBillingDetailsValue("address"),
+        country: this.getBillingDetailsValue("country"),
+        city: this.getBillingDetailsValue("city"),
+        zip: this.getBillingDetailsValue("zip"),
+        phone: this.getBillingDetailsValue("phone"),
+        email: this.getBillingDetailsValue("email"),
+        province: this.getBillingDetailsValue("province"),
+        first_name: this.getBillingDetailsValue("firstName"),
+        last_name: this.getBillingDetailsValue("lastName"),
+      },
       product: this.getProductsForOrder()
     };
   
