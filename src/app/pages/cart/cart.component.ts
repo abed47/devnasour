@@ -163,7 +163,7 @@ export class CartComponent implements OnInit {
         return;
       }
 
-      // if(res.status === 1) this.handleOrderCreated();
+      if(res.status === 1) this.handleOrderCreated();
     })
   }
 
