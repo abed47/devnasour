@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 
 @Component({
@@ -21,12 +22,14 @@ export class OrderListingComponent implements OnInit {
   public currentPage = 0;
   public totalRows = 0;
   public statusFilter = 'all';
+  public statusNameList = [];
   public processing = false;
   private userId = null;
 
   constructor(
     private request: RequestService,
-    private auth: AuthService
+    private auth: AuthService,
+    private layoutUtils: LayoutUtilsService,
   ) { }
 
   ngOnInit(): void {
@@ -42,32 +45,43 @@ export class OrderListingComponent implements OnInit {
     // this.paginator.pageSizeOptions
   }
 
-  private loadData(){
-    this.dataSource.data = [];
-    this.processing = true;
-    this.request.getOrders({
-      limit: this.itemsPerPage,
-      action: 'get_order',
-      offset: this.currentPage,
-      web_user_id: this.userId,
-      web_order_status_name: this.statusFilter
-    }, (res, err) => {
-      console.log(res);
-      this.processing = false;
-      if(res && res.status === 1){
-        this.data = res.data.map(i => {
-          return {
-            id: "#" + i.web_order_id,
-            date: i.web_order_date,
-            address: i.web_user_address_name,
-            status: i.web_order_status_name || "pending",
-            total: i.web_order_total
-          }
-        })
-        this.totalRows = res.total_record;
-        this.dataSource.data = this.data;
-      }
-    })
+  private async loadData(){
+    try{
+      let statusNames: any = await this.request.getOrderStatusEnum();
+      this.statusNameList = statusNames.data;
+      this.dataSource.data = [];
+      this.processing = true;
+      this.request.getOrders({
+        limit: this.itemsPerPage,
+        action: 'get_order',
+        offset: this.currentPage,
+        web_user_id: this.userId,
+        web_order_status_id: this.statusFilter === "all" ? null : this.getStatusIDByName(this.statusFilter),
+      }, (res, err) => {
+
+        if(err){
+          this.layoutUtils.showSnack("error", err?.message || "Error loading orders");
+          return;
+        }
+        console.log(res);
+        this.processing = false;
+        if(res && res.status === 1){
+          this.data = res.data.map(i => {
+            return {
+              id: "#" + i.web_order_id,
+              date: i.web_order_date,
+              address: i.web_user_address_name,
+              status: i.web_order_status_name || "pending",
+              total: i.web_order_total
+            }
+          })
+          this.totalRows = res.total_record;
+          this.dataSource.data = this.data;
+        }
+      })
+    }catch(err){
+      this.layoutUtils.showSnack("error", err?.message || "Could not load order status");
+    }
   }
 
   public getNextPage(e){
@@ -80,7 +94,7 @@ export class OrderListingComponent implements OnInit {
       action: 'get_order',
       offset: e.pageIndex * e.pageSize,
       web_user_id: this.userId,
-      web_order_status_name: this.statusFilter,
+      web_order_status_id: this.statusFilter === "all" ? null : this.getStatusIDByName(this.statusFilter),
     }, (res, err) => {
       this.processing = true;
       if(res && res.status === 1){
@@ -106,7 +120,7 @@ export class OrderListingComponent implements OnInit {
   public onFilterChange(s: string){
     //'all', 'on-delivery', 'delivered', 'canceled'
     this.statusFilter = s;
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.itemsPerPage = 5;
     this.loadData()
   }
@@ -124,6 +138,14 @@ export class OrderListingComponent implements OnInit {
       default:
         return 'Pending';
     }
+  }
+
+  private getStatusIDByName(name: string){
+    return this.statusNameList.filter(v => v.web_order_status_name === name)[0].web_order_status_id;
+  }
+
+  private getStatusNameByID(id){
+    return this.statusNameList.filter(v => v.web_order_status_id === id)[0].web_order_status_name;
   }
 
 }

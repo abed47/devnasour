@@ -3,7 +3,7 @@
         <div class="header">
             <div class="tabs">
                 <button mat-flat-button [class.active]="statusFilter === 'all'" (click)="onFilterChange('all')">All Status</button>
-                <button mat-flat-button [class.active]="statusFilter === 'on-delivery'" (click)="onFilterChange('on-delivery')">On Delivery</button>
+                <button mat-flat-button [class.active]="statusFilter === 'on_the_way'" (click)="onFilterChange('on_the_way')">On Delivery</button>
                 <button mat-flat-button [class.active]="statusFilter === 'delivered'" (click)="onFilterChange('delivered')">Delivered</button>
                 <button mat-flat-button [class.active]="statusFilter === 'canceled'" (click)="onFilterChange('canceled')">Canceled</button>
             </div>
