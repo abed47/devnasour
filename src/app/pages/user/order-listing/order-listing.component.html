@@ -8,7 +8,13 @@
                 <button mat-flat-button [class.active]="statusFilter === 'canceled'" (click)="onFilterChange('canceled')">Canceled</button>
             </div>
             <div class="actions">
-    
+              <mat-form-field appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" [(ngModel)]="textFilter" (keyup)="handleFilterKeyUp($event)">
+                <button *ngIf="textFilter" matSuffix mat-icon-button aria-label="Clear" (click)="handleClearFilter()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
             </div>
         </div>
     

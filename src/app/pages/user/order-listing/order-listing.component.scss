@@ -18,6 +18,7 @@
         .header{
             margin-bottom: 25px;
             width: 100%;
+            @include init-flex(row, space-between);
 
             .tabs{
                 button{

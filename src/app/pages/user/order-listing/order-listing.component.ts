@@ -25,6 +25,7 @@ export class OrderListingComponent implements OnInit {
   public statusNameList = [];
   public processing = false;
   private userId = null;
+  public textFilter = "";
 
   constructor(
     private request: RequestService,
@@ -148,4 +149,22 @@ export class OrderListingComponent implements OnInit {
     return this.statusNameList.filter(v => v.web_order_status_id === id)[0].web_order_status_name;
   }
 
+  private getSearchByDateFilter(){}
+
+  private getSearchByProductFilter(){}
+
+  public handleClearFilter(){
+    this.textFilter = '';
+    this.currentPage = 0;
+    this.itemsPerPage = 5;
+    this.loadData();
+  }
+
+  public handleFilterKeyUp(e){
+    if(e.key === "Enter"){
+      this.currentPage = 0;
+      this.itemsPerPage = 5;
+      this.loadData();
+    }
+  }
 }
