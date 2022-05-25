@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import countryCodesList from 'country-codes-list';
+import { AuthService } from 'src/app/services/auth.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-create-address',
@@ -10,12 +13,16 @@ import countryCodesList from 'country-codes-list';
 })
 export class CreateAddressComponent implements OnInit {
 
+  public processing: boolean = false;
   public billingForm: FormGroup;
   public countryList = [];
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private request: RequestService,
+    private auth: AuthService,
+    private layoutUtils: LayoutUtilsService,
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +48,36 @@ export class CreateAddressComponent implements OnInit {
     this.countryList = arr;
   }
 
-  public onSubmit(){}
+  public onSubmit(){
+    if(this.billingForm.valid){
+      this.processing = true;
+      let formValue = this.billingForm.value;
+      this.request.createAddress({
+        first_name: formValue.firstName,
+        last_name: formValue.lastName,
+        email: formValue.email,
+        phone: formValue.phone,
+        city: formValue.city,
+        address_name: formValue.address,
+        country: formValue.country,
+        zip: formValue.zip,
+        web_user_id: this.auth.getAuthStatus().currentUser.web_user_id,
+        action: 'add_user_address',
+        province: formValue.province,
+      }, (res, err) => {
+        this.processing = false;
+        if(err){
+          this.layoutUtils.showSnack("error", err?.message || "server error");
+          return;
+        }
+
+        if(res){
+          this.layoutUtils.showSnack("success", "Created successfully");
+          this.router.navigate(['/user/addresses'])
+        }
+      })
+    }
+  }
 
   public onCancel(){
     this.router.navigate(['/user/addresses'])

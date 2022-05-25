@@ -102,4 +102,12 @@ export class RequestService {
   public getAddresses(body: { action: string, limit: number, offset: number, web_user_id: any}, cb: CallableFunction){
     this.http.post(this.serverUrl + 'actions.php', body).subscribe(r => cb(r, null), e => cb(null, e));
   }
+
+  public createAddress(body: { action: string, web_user_id: string | number, city: string, address_name: string, zip: string | number, province: string, country: string, first_name: string, last_name: string, email: string, phone: string | number}, cb: CallableFunction){
+    this.http.post(this.serverUrl + 'actions.php', body).subscribe(r => cb(r, null), e => cb(null, e));
+  }
+
+  public getOrderStatusEnum(){
+    return this.http.post(this.serverUrl + 'order.php', { action: 'get_order_status' }).toPromise();
+  }
 }

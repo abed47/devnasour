@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import { RequestService } from 'src/app/services/request.service';
@@ -26,6 +27,7 @@ export class AddressListingComponent implements OnInit {
   constructor(
     private request: RequestService,
     private auth: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -119,5 +121,8 @@ export class AddressListingComponent implements OnInit {
     }
   }
 
+  public onNew(){
+    this.router.navigate(['/user/addresses/create'])
+  }
 
 }
