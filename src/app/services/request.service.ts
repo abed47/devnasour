@@ -91,7 +91,7 @@ export class RequestService {
   }
 
   /*=============================================USER REQUESTS=================================================*/
-  public getOrders(body: { action: string, limit: number, offset: number, web_user_id: any, web_order_status_id: string}, cb: CallableFunction){
+  public getOrders(body: { action: string, limit: number, offset: number, web_user_id: any, web_order_status_id: string, web_product_name: string, search_date: string}, cb: CallableFunction){
     this.http.post(this.serverUrl + 'order.php', body).subscribe(r => cb(r, null), e => cb(null, e));
   }
 

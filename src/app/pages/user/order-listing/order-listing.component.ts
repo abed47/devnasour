@@ -58,6 +58,8 @@ export class OrderListingComponent implements OnInit {
         offset: this.currentPage,
         web_user_id: this.userId,
         web_order_status_id: this.statusFilter === "all" ? null : this.getStatusIDByName(this.statusFilter),
+        web_product_name: this.getSearchByProductFilter(),
+        search_date: this.getSearchByDateFilter(),
       }, (res, err) => {
 
         if(err){
@@ -96,6 +98,8 @@ export class OrderListingComponent implements OnInit {
       offset: e.pageIndex * e.pageSize,
       web_user_id: this.userId,
       web_order_status_id: this.statusFilter === "all" ? null : this.getStatusIDByName(this.statusFilter),
+      web_product_name: this.getSearchByProductFilter(),
+      search_date: this.getSearchByDateFilter(),
     }, (res, err) => {
       this.processing = true;
       if(res && res.status === 1){
@@ -119,7 +123,6 @@ export class OrderListingComponent implements OnInit {
   }
 
   public onFilterChange(s: string){
-    //'all', 'on-delivery', 'delivered', 'canceled'
     this.statusFilter = s;
     this.currentPage = 0;
     this.itemsPerPage = 5;
@@ -149,9 +152,17 @@ export class OrderListingComponent implements OnInit {
     return this.statusNameList.filter(v => v.web_order_status_id === id)[0].web_order_status_name;
   }
 
-  private getSearchByDateFilter(){}
+  private getSearchByDateFilter(){
+    let date = moment(this.textFilter, 'DD/MM/YYYY');
+    if(date.isValid()) return date.format('YYYY-MM-DD');
+    return null;
+  }
 
-  private getSearchByProductFilter(){}
+  private getSearchByProductFilter(){
+    let date = moment(this.textFilter, 'DD/MM/YYYY');
+    if(!date.isValid() && this.textFilter) return this.textFilter;
+    return null;
+  }
 
   public handleClearFilter(){
     this.textFilter = '';
