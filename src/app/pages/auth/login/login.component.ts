@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,9 +13,11 @@ import { StorageTypes } from 'src/app/shared/types';
   encapsulation: ViewEncapsulation.None
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewChecked {
 
   loginForm: FormGroup;
+  @ViewChild('loginFormEl') private loginFormEl: ElementRef<HTMLFormElement>;
+  @ViewChild('innerWrapper') private innerWrapper: ElementRef<HTMLDivElement>;
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +26,11 @@ export class LoginComponent implements OnInit {
     private layoutUtils: LayoutUtilsService,
     private auth: AuthService
   ) { }
+
+  ngAfterViewChecked(): void {
+    this.innerWrapper.nativeElement.style.height = this.loginFormEl.nativeElement.clientHeight + 'px';
+    // throw new Error('Method not implemented.');
+  }
 
   ngOnInit(): void {
     this.initForm();

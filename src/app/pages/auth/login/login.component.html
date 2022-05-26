@@ -1,10 +1,10 @@
 <div class="page-login">
     
-    <div class="inner-wrapper">
+    <div class="inner-wrapper" #innerWrapper>
 
         <div class="l">
 
-            <form [formGroup]="loginForm" (submit)="onLoginSubmit">
+            <form [formGroup]="loginForm" (submit)="onLoginSubmit" #loginFormEl>
                 <h1>Welcome Back!</h1>
 
                 <hr class="mt-5" />
