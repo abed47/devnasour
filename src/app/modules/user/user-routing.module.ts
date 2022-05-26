@@ -5,6 +5,7 @@ import { AddressListingComponent } from 'src/app/pages/user/address-listing/addr
 import { CreateAddressComponent } from 'src/app/pages/user/create-address/create-address.component';
 import { DashboardComponent } from 'src/app/pages/user/dashboard/dashboard.component';
 import { OrderListingComponent } from 'src/app/pages/user/order-listing/order-listing.component';
+import { OrderViewComponent } from 'src/app/pages/user/order-view/order-view.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'addresses/create',
     component: CreateAddressComponent
+  },
+  {
+    path: 'orders/:id',
+    component: OrderViewComponent,
   }
 ];
 

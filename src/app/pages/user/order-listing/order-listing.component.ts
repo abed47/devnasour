@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
@@ -31,6 +32,7 @@ export class OrderListingComponent implements OnInit {
     private request: RequestService,
     private auth: AuthService,
     private layoutUtils: LayoutUtilsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -71,7 +73,7 @@ export class OrderListingComponent implements OnInit {
         if(res && res.status === 1){
           this.data = res.data.map(i => {
             return {
-              id: "#" + i.web_order_id,
+              id: i.web_order_id,
               date: i.web_order_date,
               address: i.web_user_address_name,
               status: i.web_order_status_name || "pending",
@@ -177,5 +179,9 @@ export class OrderListingComponent implements OnInit {
       this.itemsPerPage = 5;
       this.loadData();
     }
+  }
+
+  public onViewOrder(id){
+    this.router.navigate([`/user/orders/${id}`])
   }
 }

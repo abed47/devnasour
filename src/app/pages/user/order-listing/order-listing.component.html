@@ -27,7 +27,7 @@
     
                     <ng-container matColumnDef="id">
                       <th mat-header-cell *matHeaderCellDef> Order ID </th>
-                      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                      <td mat-cell *matCellDef="let element">#{{element.id}}</td>
                     </ng-container>
     
                     <ng-container matColumnDef="date">
@@ -56,7 +56,7 @@
                       <th mat-header-cell *matHeaderCellDef> Actions </th>
                       <td mat-cell *matCellDef="let element">
                         <button *ngIf="element.status === 'on_the_way'" mat-flat-button class="order-action-button">Track</button>
-                        <button mat-flat-button class="order-action-button">View Details</button>
+                        <button mat-flat-button class="order-action-button" (click)="onViewOrder(element.id)">View Details</button>
                         <button *ngIf="element.status !=='delivered' && element.status !== 'canceled'" mat-flat-button class="order-action-button canceled">Cancel</button>
                       </td>
                     </ng-container>

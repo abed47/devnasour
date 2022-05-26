@@ -19,9 +19,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddressListingComponent } from '../../pages/user/address-listing/address-listing.component';
 import { CreateAddressComponent } from '../../pages/user/create-address/create-address.component';
+import { OrderViewComponent } from '../../pages/user/order-view/order-view.component';
 
 @NgModule({
-  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent],
+  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent, OrderViewComponent],
   imports: [
     CommonModule,
     FormsModule,

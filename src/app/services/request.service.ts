@@ -99,6 +99,10 @@ export class RequestService {
     this.http.post(this.serverUrl + 'order.php', body).subscribe(r => cb(r, null), e => cb(null, e));
   }
 
+  public getOrderDetails(id: string | number, cb: CallableFunction){
+    this.http.post(this.serverUrl + 'order.php', { action: 'get_order', web_order_id: id, offset: 0, limit: 1}).subscribe(r => cb(r, null), e => cb(null, e));
+  }
+
   public getAddresses(body: { action: string, limit: number, offset: number, web_user_id: any}, cb: CallableFunction){
     this.http.post(this.serverUrl + 'actions.php', body).subscribe(r => cb(r, null), e => cb(null, e));
   }
