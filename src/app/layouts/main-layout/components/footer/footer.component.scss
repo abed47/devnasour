@@ -14,7 +14,7 @@
     
 
     .logo{
-        width: 170px;
+        width: 10%;
     }
 
     .lists{
@@ -54,7 +54,7 @@
                 p{
                     margin-top: 0;
                     margin-bottom: 15px;
-                    font-size: 16px;
+                    font-size: 12px;
                     font-family: $font-semibold;
                     color: $color-white;
                 }
@@ -67,6 +67,8 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+        width: 30%;
+        max-width: 500px;
 
         p{
             font-family: $font-bold;
@@ -79,7 +81,7 @@
             background-color: white;
             padding: 1px;
             border-radius: 25px;
-            width: 500px;
+            // width: 500px;
             display: flex;
             flex-direction: row;
             overflow: hidden;
@@ -87,26 +89,26 @@
             margin-top: 25px;
 
             input{
-                width: 300px;
+                // width: 80%;
                 outline: none;
                 border: none;
                 box-sizing: border-box;
                 padding: 5px 25px;
                 font-family: $font-semibold;
                 font-size: 16px;
-
+                width: 70%;
                 &::placeholder{
                     color: $text-color2;
                 }
             }
 
             .btn{
-                width: 200px;
+                width: 30%;
                 background-color: $color-secondary;
                 border-radius: 25px;
                 color: $color-white;
                 font-family: $font-semibold;
-                font-size: 16px;
+                font-size: 13px;
 
             }
         }
