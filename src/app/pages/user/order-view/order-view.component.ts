@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
@@ -35,11 +36,16 @@ export class OrderViewComponent implements OnInit {
       }
 
       if(res && res?.status === 1){
-        this.orderDetails = res.data;
-        this.products = res.data.products;
-        this.history = res.data.event_store;
+        this.orderDetails = res.data[0];
+        this.products = res.data[0].products;
+        this.history = res.data[0].event_store;
+        console.log(this.products);
       }
     })
+  }
+
+  public formatDate(d: string){
+    return moment(d, 'YYYY-MM-DD hh:mm:ss').format("DD/MM/YYYY")
   }
 
 }

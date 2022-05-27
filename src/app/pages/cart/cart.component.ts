@@ -120,6 +120,9 @@ export class CartComponent implements OnInit {
         quantity: i.quantity,
         price: i.price,
         discount: i.discount,
+        web_product_attachment_1: i.photo,
+        image: i.photo,
+        photo: i.photo,
       }
     })
   }
