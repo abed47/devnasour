@@ -39,7 +39,7 @@ export class OrderViewComponent implements OnInit {
         this.orderDetails = res.data[0];
         this.products = res.data[0].products;
         this.history = res.data[0].event_store;
-        console.log(this.products);
+        console.log(this.products[0])
       }
     })
   }
@@ -47,5 +47,14 @@ export class OrderViewComponent implements OnInit {
   public formatDate(d: string){
     return moment(d, 'YYYY-MM-DD hh:mm:ss').format("DD/MM/YYYY")
   }
+
+  // private fixProductImages(){
+  //   this.products.forEach((i, index) => {
+  //     this.request.getProductDetails(i.web_product_id).then(r => {
+  //       console.log(this.products[0].web_product_attachment_1)
+  //       this.products[0].web_product_attachment_1 = r.data.web_product_attachments[0]
+  //     })
+  //   })
+  // }
 
 }

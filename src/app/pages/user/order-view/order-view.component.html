@@ -26,16 +26,18 @@
                     <div class="list-item" *ngFor="let item of products">
 
                         <div class="l">
-                            <img [src]="item.web_product_attachment_1" alt="">
+                            <img src="assets/images/banner-img.png" alt="">
                         </div>
 
                         <div class="r">
-                            <h5>PRODUCT</h5>
-                            <p>{{item.web_product_name}}</p>
+                            <div class="top">
+                                <h5>PRODUCT</h5>
+                                <p>{{item.web_product_name}}</p>
+                            </div>
                             <div class="pricing-section">
                                 <span class="quantity">x2</span>
-                                <span class="price">TL {{item.web_product_price}}</span>
-                                <span class="total">TL {{item.web_product_price}}</span>
+                                <span class="price">TL {{item.web_order_product_price}}</span>
+                                <span class="total">TL {{item.web_order_product_price}}</span>
                             </div>
                         </div>
                     </div>
