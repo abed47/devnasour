@@ -35,8 +35,8 @@
                                 <p>{{item.web_product_name}}</p>
                             </div>
                             <div class="pricing-section">
-                                <span class="quantity">x2</span>
-                                <span class="price">TL {{item.web_order_product_price}}</span>
+                                <span class="quantity"></span>
+                                <span class="price">% {{item.web_order_product_discount}}</span>
                                 <span class="total">TL {{item.web_order_product_price}}</span>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div>
                         <p>Total</p>
-                        <p>TL 1500</p>
+                        <p>TL {{calcOrderTotal()}}</p>
                     </div>
                 </div>
             </div>

@@ -57,4 +57,10 @@ export class OrderViewComponent implements OnInit {
   //   })
   // }
 
+  public calcOrderTotal(){
+    return this.products.reduce((p, c, i) => {
+      return p + +c.web_order_product_price
+    }, 0)
+  }
+
 }

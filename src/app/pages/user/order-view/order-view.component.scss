@@ -91,6 +91,7 @@
                     .list-item{
                         width: 100%;
                         @include init-flex(row, flex-start, flex-start);
+                        margin: 15px 0;
 
                         .l{
                             width: 200px;
@@ -133,8 +134,20 @@
                             }
                         }
                     }
-                }
 
+                }
+                
+                .totals{
+                    width: 100%;
+                    border-top: 2px solid #EFEFEF;
+                    padding-top: 15px;
+                    @include init-flex(column, flex-start, flex-start);
+
+                    div{
+                        @include init-flex(row, space-between);
+                        width: 100%;
+                    }
+                }
             }
         }
     }
