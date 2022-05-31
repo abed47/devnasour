@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopLayoutComponent } from 'src/app/layouts/shop-layout/shop-layout.component';
 import { ProductViewComponent } from 'src/app/pages/product-view/product-view.component';
-import { ShopDealsComponent } from 'src/app/pages/shop-deals/shop-deals.component';
-import { ShopHomeComponent } from 'src/app/pages/shop-home/shop-home.component';
-import { ShopItemListingComponent } from 'src/app/pages/shop-item-listing/shop-item-listing.component';
-import { ShopListingComponent } from 'src/app/pages/shop-listing/shop-listing.component';
-import { ShopTrendingComponent } from 'src/app/pages/shop-trending/shop-trending.component';
+import { PricingComponent } from 'src/app/pages/shop/pricing/pricing.component';
+import { ShopDealsComponent } from 'src/app/pages/shop/shop-deals/shop-deals.component';
+import { ShopHomeComponent } from 'src/app/pages/shop/shop-home/shop-home.component';
+import { ShopItemListingComponent } from 'src/app/pages/shop/shop-item-listing/shop-item-listing.component';
+import { ShopListingComponent } from 'src/app/pages/shop/shop-listing/shop-listing.component';
+import { ShopTrendingComponent } from 'src/app/pages/shop/shop-trending/shop-trending.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'product/:id',
         component: ProductViewComponent
+      },
+      {
+        path: 'pricing',
+        component: PricingComponent,
       },
       {
         path: '',
