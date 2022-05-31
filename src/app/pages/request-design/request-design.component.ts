@@ -9,16 +9,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RequestDesignComponent implements OnInit {
 
   public designForm: FormGroup;
+  public logo: any;
+  public barcode: any;
 
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
     this.designForm = this.fb.group({
-      phone: ['+96176402090', []],
+      phone: ['', []],
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      company: ['', []]
+      company: ['', []],
+      designType: ['', []],
+      designContent: ['', []],
+      companyWebsite: [, []],
     })
   }
 
+
+  public onBarcodeChange(event){
+    console.log(event);
+  }
+
+  public onLogoChange(event){
+    console.log(event);
+  }
+
+  public onSubmit(){
+    let body = {}
+
+  }
 }

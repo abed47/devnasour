@@ -14,6 +14,7 @@ import { LayoutUtilsService } from './services/layout-utils.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { InterceptorService } from './services/interceptor.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatSnackBarModule,
     MatMenuModule,
     MatProgressBarModule,
+    NgxMatIntlTelInputModule
   ],
   providers: [
     SeoService,

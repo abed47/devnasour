@@ -18,7 +18,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { GalleryModule } from 'ng-gallery';
 import { SharedModule } from './shared.module';
 import { RequestDesignComponent } from '../pages/request-design/request-design.component';
-import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 
 /**
  * @description imports and declarations for the main layout declarations
@@ -40,7 +39,6 @@ export default {
         MatIconModule,
         GalleryModule,
         SharedModule,
-        NgxMatIntlTelInputModule
     ],
     declarations: [
         FooterComponent,

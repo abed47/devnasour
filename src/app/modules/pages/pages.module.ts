@@ -11,6 +11,7 @@ import { ProjectListingComponent } from '../../pages/projects/project-listing/pr
 import { ProjectViewComponent } from '../../pages/projects/project-view/project-view.component';
 import { AboutComponent } from '../../pages/about/about.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
     CommonModule,
     PagesRoutingModule,
     ...MainLayoutImports.imports,
+    NgxMatIntlTelInputModule
   ],
   bootstrap: [MainLayoutComponent]
 })

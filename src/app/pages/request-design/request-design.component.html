@@ -10,26 +10,65 @@
 
             <mat-form-field appearance="outline" class="h-w">
                 <mat-label>Your Name</mat-label>
-                <input type="text" matInput>
+                <input type="text" matInput formControlName="name">
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="h-w">
                 <mat-label>Contact Email</mat-label>
-                <input type="email" matInput>
+                <input type="email" matInput formControlName="email">
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="h-w">
                 <mat-label>Company Name</mat-label>
-                <input type="text" matInput>
+                <input type="text" matInput formControlName="company">
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Angular material international phone input</mat-label>
-                <ngx-mat-intl-tel-input formControlName="phone" name="phone"
-                  #phone>
-                </ngx-mat-intl-tel-input>
-                <mat-hint>eg : {{phone.selectedCountry.placeHolder}}</mat-hint>
-              </mat-form-field>
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Phone</mat-label>
+                <ngx-mat-intl-tel-input
+                [preferredCountries]="['tr']"
+                [enablePlaceholder]="true"
+                [enableSearch]="true"
+                name="phone"
+                formControlName="phone"></ngx-mat-intl-tel-input>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Design Type</mat-label>
+                <input type="text" matInput formControlName="designType">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Design Content</mat-label>
+                <textarea matInput formControlName="designContent"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Company Website</mat-label>
+                <input type="tel" matInput formControlName="companyWebsite">
+            </mat-form-field>
+            
+            <div class="h-w upload">
+                <label>Barcode</label>
+                
+                <span class="icon-container">
+                    <input type="file" (change)="onBarcodeChange($event)">
+                    <p>upload</p>
+                </span>
+            </div>
+            
+            <div class="h-w upload">
+                <label>Your Logo</label>
+                
+                <span class="icon-container">
+                    <input type="file" (change)="onLogoChange($event)">
+                    <p>upload</p>
+                </span>
+            </div>
         </form>
+
+        <small>By submitting this form you agree to our terms and conditions and our Privacy Policy which explains how we may collect, use and disclose your personal information including to third parties.</small>
+
+        <button mat-raised-button filled color="secondary" class="btn-secondary submit-btn">Contact sales</button>
     </section>
 </main>
