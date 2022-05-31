@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { GalleryModule } from 'ng-gallery';
 import { SharedModule } from './shared.module';
 import { RequestDesignComponent } from '../pages/request-design/request-design.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 /**
  * @description imports and declarations for the main layout declarations
@@ -39,6 +40,7 @@ export default {
         MatIconModule,
         GalleryModule,
         SharedModule,
+        MatRadioModule,
     ],
     declarations: [
         FooterComponent,

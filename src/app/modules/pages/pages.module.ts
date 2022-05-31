@@ -12,6 +12,7 @@ import { ProjectViewComponent } from '../../pages/projects/project-view/project-
 import { AboutComponent } from '../../pages/about/about.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { BecomeAPartnerComponent } from '../../pages/become-a-partner/become-a-partner.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
     ProjectViewComponent, 
     AboutComponent,
     CartComponent,
+    BecomeAPartnerComponent,
   ],
   imports: [
     CommonModule,

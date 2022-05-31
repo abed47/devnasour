@@ -1,0 +1,63 @@
+<main class="become-partner-page">
+    <header>
+        <h1>Become A Partner</h1>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod </p>
+    </header>
+
+    <section class="form-container">
+        <form [formGroup]="partnerForm">
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Your Name</mat-label>
+                <input type="text" matInput formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Contact Email</mat-label>
+                <input type="email" matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Company Name</mat-label>
+                <input type="text" matInput formControlName="company">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Phone</mat-label>
+                <ngx-mat-intl-tel-input
+                [preferredCountries]="['tr']"
+                [enablePlaceholder]="true"
+                [enableSearch]="true"
+                name="phone"
+                formControlName="phone"></ngx-mat-intl-tel-input>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Partnership Location</mat-label>
+                <input type="text" matInput formControlName="partnerShipLocation">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="h-w">
+                <mat-label>Design Content</mat-label>
+                <mat-select formControlName="franchiseType">
+                    <mat-option value="test">Option 1</mat-option>
+                    <mat-option value="test2">Option 2</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="radio">
+                <label>How did you hear about us?</label>
+                <mat-radio-group formControlName="howDidYouHearAboutUs" class="rad">
+                    <mat-radio-button value="1">Social Media</mat-radio-button>
+                    <mat-radio-button value="2" class="ml-5">Newspaper</mat-radio-button>
+                    <mat-radio-button value="2" class="ml-5">Other</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </form>
+
+        <small>By submitting this form you agree to our terms and conditions and our Privacy Policy which explains how we may collect, use and disclose your personal information including to third parties.</small>
+
+        <button mat-raised-button filled color="secondary" class="btn-secondary submit-btn" (click)="onSubmit()">Contact sales</button>
+    </section>
+</main>
