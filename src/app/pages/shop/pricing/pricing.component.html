@@ -21,12 +21,12 @@
                 </mat-form-field>
             </div>
             
-            <div class="f-w">
+            <div class="f-w mb-0">
                 <label>
                     Dimensions
                 </label>
                 
-                <div class="multiple-fields">
+                <div class="multiple-fields mb-0">
                     <mat-form-field class="form-field" appearance="outline" color="accent">
                         <mat-label>X</mat-label>
                         <input type="number" matInput>
@@ -66,6 +66,49 @@
                 </mat-form-field>
             </div>
 
+            <div class="f-w">
+                <label>
+                    LID
+                </label>
+                
+                <div class="multiple-fields">
+                    <button mat-stroked-button color="accent" class="option-btn" (click)="onLidOptionsChange(null)">None</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option1"  (click)="onLidOptionsChange(0)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 1</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option2" (click)="onLidOptionsChange(1)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 2</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option3" (click)="onLidOptionsChange(2)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 3</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option4" (click)="onLidOptionsChange(3)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 4</button>
+                </div>
+            </div>
+
+            <div class="f-w">
+                <label>
+                    LID
+                </label>
+                
+                <div class="multiple-fields">
+                    <button mat-stroked-button color="accent" class="option-btn" (click)="onLidOptionsChange(null)">None</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option1"  (click)="onLidOptionsChange(0)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 1</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option2" (click)="onLidOptionsChange(1)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 2</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option3" (click)="onLidOptionsChange(2)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 3</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option4" (click)="onLidOptionsChange(3)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 4</button>
+                </div>
+            </div>
         </div>
         <div class="r"></div>
     </div>

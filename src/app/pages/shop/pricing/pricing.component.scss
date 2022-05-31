@@ -54,15 +54,36 @@
                 }
 
                 .multiple-fields{
+                    margin-bottom: 25px;
                     width: 100%;
                     @include init-flex(row, space-between);
+                    flex-wrap: wrap;
+                    
                     .form-field{
                         width: 30%;
+                    }
+
+                    .option-btn{
+                        padding: 10px 35px;
+                        // border-color: $color-secondary;
+                        position: relative;
+                        .icon{
+                            display: none;
+                        }
+
+                        &.active{
+                            border-color: $color-primary;
+                            color: $color-primary;
+                            .icon{
+                                display: block;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                            }
+                        }
                     }
                 }
             }
         }
     }
-
-
 }
