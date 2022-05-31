@@ -17,6 +17,7 @@ import { RatingModule } from 'ng-starrating';
 import { MatIconModule } from '@angular/material/icon';
 import { GalleryModule } from 'ng-gallery';
 import { SharedModule } from './shared.module';
+import { RequestDesignComponent } from '../pages/request-design/request-design.component';
 
 
 /**
@@ -46,6 +47,7 @@ export default {
         ContactUsComponent,
         PrivacyPolicyComponent,
         TermsOfUseComponent,
-        HomeComponent
+        HomeComponent,
+        RequestDesignComponent,
     ]
 }

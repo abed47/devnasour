@@ -10,6 +10,7 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
 import { ProjectListingComponent } from 'src/app/pages/projects/project-listing/project-listing.component';
 import { ProjectViewComponent } from 'src/app/pages/projects/project-view/project-view.component';
+import { RequestDesignComponent } from 'src/app/pages/request-design/request-design.component';
 import { TermsOfUseComponent } from 'src/app/pages/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'request-a-design',
+    component: RequestDesignComponent,
   }
 ];
 

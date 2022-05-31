@@ -1,0 +1,61 @@
+@import "src/styles/styles.scss";
+.request-design-page{
+    width: 100%;
+    min-height: 100vh;
+    @include init-flex(column, flex-start);
+    padding-top: 50px;
+
+    header{
+        @include init-flex(column);
+
+        h1{
+            color: $color-primary;
+            font-size: 28px;
+            margin: 0;
+            font-family: $font-bold;
+        }
+
+        hr{
+            border-bottom: none;
+            border-top: 1px solid $color-secondary;
+            width: 30%;
+            margin: 25px 0;
+        }
+
+        p{
+            color: $color-primary;
+            font-size: 12px;
+            font-family: $font-base;
+        }
+    }
+
+
+    section.form-container{
+        box-shadow: 1px 2px 6px rgba(0, 0, 0, .28);
+        box-sizing: border-box;
+        width: 80%;
+        border-radius: 5px;
+        // filter: drop-shadow(0,10px, 25);
+        margin-top: 50px;
+        form{
+            box-sizing: border-box;
+            overflow: auto;
+            width: 100%;
+            padding: 10%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // padding: 50px 0;
+
+            .input{
+                width: 100%;
+                border-radius: 0px !important;
+
+                .mat-form-field-outline-start, .mat-form-field-outline-end {
+                    border-radius: 0 !important;
+                }
+            }
+        }
+    }
+}
