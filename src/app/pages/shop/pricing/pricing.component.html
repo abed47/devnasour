@@ -1,1 +1,48 @@
-<p>pricing works!</p>
+<main class="pricing-page">
+    
+    <div class="total-price">
+        <span class="title">Total Price</span>
+        <span class="price">T.L.{{totalPrice}}</span>
+    </div>
+
+
+    <div class="parameters-container">
+        <div class="l">
+            
+            <div class="f-w">
+                <label>
+                    Product Selection
+                </label>
+                
+                <mat-form-field class="form-field" appearance="outline" color="accent">
+                    <mat-select>
+                        <mat-option value="option">Cardboard Squared Box</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="f-w">
+                <label>
+                    Dimensions
+                </label>
+                
+                <div class="multiple-fields">
+                    <mat-form-field class="form-field" appearance="outline" color="accent">
+                        <mat-label>X</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearance="outline" color="accent">
+                        <mat-label>Y</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearance="outline" color="accent">
+                        <mat-label>Z</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+        <div class="r"></div>
+    </div>
+</main>
