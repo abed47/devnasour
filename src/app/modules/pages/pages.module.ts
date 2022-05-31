@@ -27,7 +27,7 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ...MainLayoutImports.imports
+    ...MainLayoutImports.imports,
   ],
   bootstrap: [MainLayoutComponent]
 })

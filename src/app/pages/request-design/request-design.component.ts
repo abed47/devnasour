@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-request-design',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestDesignComponent implements OnInit {
 
-  constructor() { }
+  public designForm: FormGroup;
+
+  constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.designForm = this.fb.group({
+      phone: ['+96176402090', []],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      company: ['', []]
+    })
   }
 
 }

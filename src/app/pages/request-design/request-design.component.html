@@ -6,7 +6,7 @@
     </header>
 
     <section class="form-container">
-        <form>
+        <form [formGroup]="designForm">
 
             <mat-form-field appearance="outline" class="h-w">
                 <mat-label>Your Name</mat-label>
@@ -22,6 +22,14 @@
                 <mat-label>Company Name</mat-label>
                 <input type="text" matInput>
             </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Angular material international phone input</mat-label>
+                <ngx-mat-intl-tel-input formControlName="phone" name="phone"
+                  #phone>
+                </ngx-mat-intl-tel-input>
+                <mat-hint>eg : {{phone.selectedCountry.placeHolder}}</mat-hint>
+              </mat-form-field>
         </form>
     </section>
 </main>
