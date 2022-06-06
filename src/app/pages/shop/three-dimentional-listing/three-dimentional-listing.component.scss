@@ -71,6 +71,10 @@
                     h3 {
                         margin: 0;
                         font-size: 15px;
+                        text-overflow: ellipsis;
+                        overflow: hidden; 
+                        width: 160px; 
+                        white-space: nowrap;
                     }
 
                     h2{

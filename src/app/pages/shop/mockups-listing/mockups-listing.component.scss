@@ -1,0 +1,88 @@
+@import "src/styles/styles.scss";
+
+.design-listing-page{
+    width: 100%;
+    min-height: 100vh;
+    @include init-flex(column, flex-start);
+    box-sizing: border-box;
+    padding: 50px;
+
+    .listing{
+        max-width: 1080px;
+        width: 100%;
+        @include init-flex(column, flex-start, flex-start);
+
+        header{
+            width: 100%;
+            margin-bottom: 25px;
+            h1{
+                color: $color-primary;
+                font-size: 24px;
+                font-family: $font-bold;
+                margin-bottom: 15px;
+            }
+
+            hr{
+                max-width: 200px;
+                border-top: none;
+                border-bottom: 2px solid $color-secondary;
+                margin: 0;
+            }
+        }
+
+        .list{
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            row-gap: 20px;
+            column-gap: 20px;
+            justify-items: start;
+            align-content: start;
+            padding-bottom: 50px;
+
+            &-item{
+                width: 100%;
+                box-shadow: 1px 2px 6px rgba(0, 0, 0, .2);
+                user-select: none;
+                cursor: pointer;
+                img{
+                    width: 100%;
+                    min-height: 200px;
+                    object-fit: cover;
+                }
+
+                .ratings-wrapper .rating{
+                    color: $color-secondary;
+                    padding-left: 5px;
+
+                    ::ng-deep .mat-icon-button{
+                        color: $color-secondary;
+                        width: 24px;
+                        mat-icon{
+                            font-size: 18px;
+                            width: 18px;
+                        }
+                    }
+                }
+
+                .summary{
+                    @include init-flex(column, flex-start, flex-start);
+                    margin-left: 10px;
+                    h3 {
+                        margin: 0;
+                        font-size: 15px;
+                        text-overflow: ellipsis;
+                        overflow: hidden; 
+                        width: 160px; 
+                        white-space: nowrap;
+                    }
+
+                    h2{
+                        font-size: 16px;
+                        font-family: $font-medium;
+                    }
+                }
+            }
+        }
+    }
+}
