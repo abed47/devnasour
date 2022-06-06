@@ -1,0 +1,25 @@
+<main>
+    <section class="listing">
+      <header>
+          <h1>Recommended Designs.</h1>
+          <hr>
+      </header>
+      
+      <div class="list" *ngFor="let item of productList">
+          <div class="list-item">
+              <img [src]="item.photo" alt="">
+          </div>
+
+          
+          <div class="ratings-wrapper">
+              <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="1">
+            </ngx-material-rating>
+        </div>
+
+        <div class="summary">
+            <h3>{{item.name}}</h3>
+            <h2>TL {{item.price}}</h2>
+        </div>
+      </div>
+    </section>
+</main>

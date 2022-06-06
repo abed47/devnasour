@@ -23,9 +23,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShopItemListingComponent } from '../../pages/shop/shop-item-listing/shop-item-listing.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PricingComponent } from '../../pages/shop/pricing/pricing.component';
+import { DesignsListingComponent } from '../../pages/shop/designs-listing/designs-listing.component';
+import { MockupsListingComponent } from '../../pages/shop/mockups-listing/mockups-listing.component';
+import { ThreeDimentionalListingComponent } from '../../pages/shop/three-dimentional-listing/three-dimentional-listing.component';
 
 @NgModule({
-  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent],
+  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent],
   imports: [
     CommonModule,
     FormsModule,
