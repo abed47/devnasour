@@ -123,3 +123,39 @@
         }
     }
 }
+
+@media only screen and (max-width: 700px) {
+    .page-contact-us {
+        background-color: white;
+        h1.page-title{
+            font-size: 24px;
+        }
+
+        .form-wrapper{
+            width: 100%;
+            grid-template-columns: 1fr;
+            border-radius: 0;
+            box-shadow: none;
+
+            .l {
+                border-radius: 0;
+                form {
+                    .submit-btn-c{
+                        text-align: center;
+                        margin-top: 15px;
+                    }
+                }
+            }
+
+            .r{
+                padding: 70px 20px;
+
+                .section{
+                    margin: 15px 0;
+                }
+            }
+            // display: none;
+        }
+    }
+
+}
