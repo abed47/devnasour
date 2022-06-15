@@ -25,10 +25,10 @@
                     <p class="title">Selected model</p>
     
                     <ul>
-                        <li *ngFor="let item of project.models" [class.selected]="item.selected">
-                            <img [hidden]="!item.selected" src="assets/images/green-check.png" class="check-mark" />
+                        <li *ngFor="let item of project.models" [class.selected]="item.is_default ==='1'">
+                            <img [hidden]="!item.is_default ==='1'" src="assets/images/green-check.png" class="check-mark" />
                             <h1>{{item.title}}</h1>
-                            <h2>{{item.subtitle}}</h2>
+                            <h2>{{item.type}}</h2>
                             <p>{{item.description}}</p>
                         </li>
                     </ul>

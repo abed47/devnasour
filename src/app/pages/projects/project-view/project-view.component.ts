@@ -78,12 +78,13 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
           this.project.name = res.data.web_project_name;
           this.project.description = res.data.web_project_description;
           this.project.images = res.data.attachments?.map(i => new ImageItem({src: i, thumb: i})) || []
+          this.project.models = res.data.project_models;
           this.relatedProjects = res.data.related_project?.map(i => {
             return {
               title: i.web_project_name,
               description: i.web_project_description,
               id: i.web_project_id,
-              photo: i.attachments[0]
+              photo: i.attachments[0],
             }
           }) || []
         }
