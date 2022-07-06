@@ -18,7 +18,8 @@ export class ShopHomeComponent implements OnInit {
     initialSlide: 1,
     loop: true,
     spaceBetween: 50,
-    autoplay: true
+    autoplay: true,
+    effect: "slide",
   }
 
   constructor(private router: Router, private request: RequestService) { }

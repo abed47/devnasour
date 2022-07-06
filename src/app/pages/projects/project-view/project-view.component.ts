@@ -15,7 +15,7 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private layoutUtilsService: LayoutUtilsService,
     private request: RequestService,
     private router: Router
@@ -23,41 +23,17 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
 
   public project = {
     images: [],
-    name: 'Test Product',
-    rating: 3,
-    description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
-    models: [
-      {
-        title: '5x5 Card box',
-        subtitle: '5x5x5 cm',
-        description: 'cardboard light',
-        selected: true
-      },
-      {
-        title: '5x5 Card box',
-        subtitle: '5x5x5 cm',
-        description: 'cardboard light',
-        selected: false
-      },
-      {
-        title: '5x5 Card box',
-        subtitle: '5x5x5 cm',
-        description: 'cardboard light',
-        selected: false
-      },
-      {
-        title: '5x5 Card box',
-        subtitle: '5x5x5 cm',
-        description: 'cardboard light',
-        selected: false
-      },
-    ]
+    name: '',
+    rating: 0,
+    description: '',
+    models: []
   };
 
   public relatedProjects = [];
 
   ngOnInit(): void {
-    this.route.params.subscribe(r => {this.loadData()});
+    this.relatedProjects = [];
+    this.route.params.subscribe(r => { this.loadData() });
     this.loadData();
   }
 
@@ -66,38 +42,43 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
   }
 
 
-  private loadData(){
+  private loadData() {
     let pId = this.route.snapshot.params.id;
 
     this.layoutUtilsService.showLoader();
 
     this.request.getProject(pId, (res, err) => {
       this.layoutUtilsService.hidePreloader();
-      if(res){
-        if(res?.status === 1) {
+      if (res) {
+        if (res?.status === 1) {
           this.project.name = res.data.web_project_name;
           this.project.description = res.data.web_project_description;
-          this.project.images = res.data.attachments?.map(i => new ImageItem({src: i, thumb: i})) || []
+          this.project.images = res.data.attachments?.map(i => new ImageItem({ src: i, thumb: i })) || []
           this.project.models = res.data.project_models;
-          this.relatedProjects = res.data.related_project?.map(i => {
-            return {
-              title: i.web_project_name,
-              description: i.web_project_description,
-              id: i.web_project_id,
-              photo: i.attachments[0],
+          this.relatedProjects = [];
+          res.data.related_project?.forEach((i, index) => {
+            if (index < 3) {
+              this.relatedProjects.push(
+                {
+                  title: i.web_project_name,
+                  description: i.web_project_description,
+                  id: i.web_project_id,
+                  photo: i.attachments[0],
+                }
+              )
             }
-          }) || []
+          })
         }
       }
 
-      if(err){
+      if (err) {
         this.layoutUtilsService.hidePreloader();
         this.layoutUtilsService.showSnack("error", err?.message || res?.message);
         this.router.navigate(['/'])
       }
     })
     let projectId = this.route.snapshot.params.id;
-    this.layoutUtilsService.renamePath('Product name', projectId);    
+    this.layoutUtilsService.renamePath('Product name', projectId);
   }
 
 }

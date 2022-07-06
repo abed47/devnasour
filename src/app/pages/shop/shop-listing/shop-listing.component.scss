@@ -123,16 +123,24 @@
         width: calc(100% - 220px);
 
         .recommended-list{
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            row-gap: 20px;
-            column-gap: 20px;
-            justify-items: start;
-            align-content: start;
-            padding-bottom: 50px;
+            // display: grid;
+            // grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            // row-gap: 20px;
+            // column-gap: 20px;
+            // justify-items: start;
+            // align-content: start;
+            // padding-bottom: 50px;
+            display: flex;
+            // flex-basis: calc(20%);
+            // margin: 5px;
+            box-sizing: border-box;
+            flex-wrap: wrap;
     
     
             .list-item{
+                margin: 15px;
+                box-sizing: border-box;
+                width: calc(19% - 15px);
                 background-color: white;
                 box-shadow: 1px 2px 6px rgba(0, 0, 0, .18);
                 cursor: pointer;

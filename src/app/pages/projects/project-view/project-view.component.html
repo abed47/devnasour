@@ -5,7 +5,14 @@
         <section class="product">
             <article class="l">
                 <div class="gallery-container">
-                    <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: white;" [items]="project.images"></gallery>
+                    <gallery 
+                    [thumbHeight]="100" 
+                    [title]="false" 
+                    [counter]="false" 
+                    style="background-color: white;" 
+                    [items]="project.images"
+                    imageSize="cover"
+                    ></gallery>
                 </div>
             </article>
     

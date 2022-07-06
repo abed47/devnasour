@@ -16,12 +16,16 @@ export class AboutComponent implements OnInit {
   public officesData = [];
 
   public banner1Config: SwiperOptions = {
-    slidesPerView: 3.5,
+    slidesPerView: 5.5,
     spaceBetween: 3,
 
     breakpoints:{
+      1050: {
+        slidesPerView: 3.8,
+        spaceBetween: 5,
+      },
       700:{
-        slidesPerView: 3.5
+        slidesPerView: 4
       },
       100:{
         slidesPerView: 2.3,
@@ -29,51 +33,16 @@ export class AboutComponent implements OnInit {
       }
     }
   };
-  public packagingBannerItems = [
-    {
-      photo: 'assets/images/rect.png'
-    },
-    {
-      photo: 'assets/images/rect.png'
-    },
- 
-    {
-      photo: 'assets/images/rect.png'
-    },
-    {
-      photo: 'assets/images/rect.png'
-    },
- 
-    {
-      photo: 'assets/images/rect.png'
-    },
-    {
-      photo: 'assets/images/rect.png'
-    },
- 
-    {
-      photo: 'assets/images/rect.png'
-    },
-    {
-      photo: 'assets/images/rect.png'
-    },
- 
-    {
-      photo: 'assets/images/rect.png'
-    },
-    {
-      photo: 'assets/images/rect.png'
-    },
- 
-  ]
+  public packagingBannerItems = [ ]
 
   public locationBannerConfig: SwiperOptions = {
     loop: true,
+    spaceBetween: 150,
     breakpoints: {
-      700:{
-        slidesPerView: 1.3,
-        spaceBetween: 30
-      },
+      // 700:{
+      //   width: 300,
+      //   spaceBetween: 150
+      // },
       100:{
         slidesPerView: 1
       }
