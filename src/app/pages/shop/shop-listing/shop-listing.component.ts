@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-shop-listing',
   templateUrl: './shop-listing.component.html',
   styleUrls: ['./shop-listing.component.scss']
 })
-export class ShopListingComponent implements OnInit {
+export class ShopListingComponent implements OnInit, AfterViewInit {
+
+  showSideMenu = false;
+  currentVisible = 0;
+  public categoryList = [];
 
   public bannerItems = [
     {
@@ -44,16 +49,25 @@ export class ShopListingComponent implements OnInit {
     private request: RequestService
     ) { }
 
+
+  ngAfterViewInit(): void {
+    
+    window.onresize = e => {
+      $('.list-item img').height($('.list-item img').width())
+    }
+  }
+
   ngOnInit(): void {
     this.loadSettings();
   }
 
-  private loadSettings(){
-    this.layoutUtils.showLoader();
-    let catId = this.route.snapshot.params.id
-    this.request.getSubCategories(catId).then(r => {
-      if(r.status === 1 && r.data?.length > 0){
-        this.recommendedItemList = r.data.map(item => {
+  private async loadSettings(){
+    try {
+      this.layoutUtils.showLoader();
+      let catId = this.route.snapshot.params.id;
+      let catRes = await this.request.getSubCategories(catId);
+      if(catRes.status === 1 && catRes.data?.length > 0){
+        this.recommendedItemList = catRes.data.map(item => {
           return {
             id: item.web_category_id,
             name: item.web_category_name,
@@ -63,15 +77,58 @@ export class ShopListingComponent implements OnInit {
         })
       }
 
-      if(r.status === 1 && !r?.data?.length){
-        //TODO: show error here later
+      if(catRes.status === 1 && !catRes?.data?.length){
+        this.layoutUtils.showSnack("error", catRes?.message || "server error");
+        this.router.navigate(["/shop"]);
       }
-    })
-    this.layoutUtils.hidePreloader();
+
+      const categoryListRes: any = await this.request.getCategoryWithChildren().toPromise();
+      if(Object.keys(categoryListRes?.data)){
+        this.categoryList = Object.keys(categoryListRes.data).map(i => categoryListRes.data[i])
+      }
+      
+      $('.list-item img').height($('.list-item img').width())
+
+      console.log(catRes);
+      
+      this.layoutUtils.hidePreloader();
+
+      
+    } catch (err) {
+      this.layoutUtils.showSnack("error", err?.message || "server error");
+      this.router.navigate(["/shop"]);
+    }
+    // this.layoutUtils.showLoader();
+    // let catId = this.route.snapshot.params.id
+    // this.request.getSubCategories(catId).then(r => {
+    //   if(r.status === 1 && r.data?.length > 0){
+    //     this.recommendedItemList = r.data.map(item => {
+    //       return {
+    //         id: item.web_category_id,
+    //         name: item.web_category_name,
+    //         description: item.web_category_description,
+    //         photo: item.web_category_attachment_1
+    //       }
+    //     })
+    //   }
+
+    //   if(r.status === 1 && !r?.data?.length){
+    //     //TODO: show error here later
+    //   }
+    // })
+    // this.layoutUtils.hidePreloader();
   }
 
   public navigateTo(id: number | string){
     this.router.navigate([`/shop/p/${id}`]);
   }
 
+  public showIfApplicable(e) {
+    $('.sub-category-item').hide();
+    $(`.${e.target.classList[0]}`).children('.sub-category-item').show()
+  }
+
+  public hideIfApplicable() {
+    $('.sub-category-item').hide();
+  }
 }

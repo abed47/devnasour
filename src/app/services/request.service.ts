@@ -114,4 +114,8 @@ export class RequestService {
   public getOrderStatusEnum(){
     return this.http.post(this.serverUrl + 'order.php', { action: 'get_order_status' }).toPromise();
   }
+
+  public getCategoryWithChildren(){
+    return this.http.post(this.serverUrl + 'get_data.php', { action: "get_category_with_children"})
+  }
 }

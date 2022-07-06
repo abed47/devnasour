@@ -16,19 +16,26 @@
             <h1>All Categories</h1>
         </div>
 
-        <ul>
+        <ul class="aside-category-list" (mouseleave)="hideIfApplicable()">
+            <li *ngFor="let category of categoryList" [class]="'category-list-item-' + category.web_category_id" (mouseenter)="showIfApplicable($event)">  
+                <p [title]="category.web_category_name"> <span class="circle"></span>{{category.web_category_name}}</p>  
+                <mat-icon class="icon">arrow_right</mat-icon>
+
+                <div class="sub-category-item">
+                    hello
+                </div>
+            </li>
+            <!-- <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
             <li>  <p> <span class="circle"></span>Paper work <span class="new">new</span> </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
             <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
             <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
             <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
             <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work <span class="new">new</span> </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
-            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
+            <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li> -->
         </ul>
     </aside>
     <div class="content">
