@@ -85,12 +85,18 @@ export class ShopListingComponent implements OnInit, AfterViewInit {
       const categoryListRes: any = await this.request.getCategoryWithChildren().toPromise();
       if(Object.keys(categoryListRes?.data)){
         this.categoryList = Object.keys(categoryListRes.data).map(i => categoryListRes.data[i])
+        this.categoryList.forEach((category, index) => {
+          if (category?.children && Object.keys(category?.children)?.length){
+            this.categoryList[index].children = 
+            Object.keys(this.categoryList[index].children).map(i => this.categoryList[index].children[i])
+          }
+        })
       }
       
       $('.list-item img').height($('.list-item img').width())
 
-      console.log(catRes);
-      
+      console.log(categoryListRes);
+      $('.sub-category-item').hide();
       this.layoutUtils.hidePreloader();
 
       
@@ -125,7 +131,7 @@ export class ShopListingComponent implements OnInit, AfterViewInit {
 
   public showIfApplicable(e) {
     $('.sub-category-item').hide();
-    $(`.${e.target.classList[0]}`).children('.sub-category-item').show()
+    $(`.${e.target.classList[0]}`).children('.sub-category-item').css("display", "flex")
   }
 
   public hideIfApplicable() {

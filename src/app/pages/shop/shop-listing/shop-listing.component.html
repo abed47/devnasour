@@ -21,8 +21,8 @@
                 <p [title]="category.web_category_name"> <span class="circle"></span>{{category.web_category_name}}</p>  
                 <mat-icon class="icon">arrow_right</mat-icon>
 
-                <div class="sub-category-item">
-                    hello
+                <div *ngIf="category?.children?.length" class="sub-category-item">
+                    <span *ngFor="let subcategory of category.children" class="sub-category-list-item" (click)="navigateTo(subcategory.web_category_id)">{{subcategory?.web_category_name}}</span>
                 </div>
             </li>
             <!-- <li>  <p> <span class="circle"></span>Paper work  </p>  <mat-icon class="icon">arrow_right</mat-icon></li>
