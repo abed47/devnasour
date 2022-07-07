@@ -1,117 +1,156 @@
 <div class="page-product-view">
+  <div class="page-container">
     <app-bread-crumbs></app-bread-crumbs>
 
     <section class="product">
-        <article class="l">
-            <div class="gallery-container">
-                <gallery [thumbHeight]="100" [title]="false" [counter]="false" style="background-color: #FAFAFA;" [items]="product.images"></gallery>
+      <article class="l">
+        <div class="gallery-container">
+          <gallery
+            [thumbHeight]="100"
+            [title]="false"
+            [counter]="false"
+            style="background-color: #fafafa"
+            [items]="product.images"
+          ></gallery>
+        </div>
+
+        <div class="info">
+          <div class="description">
+            <h2 class="title">Description</h2>
+            <p class="content">{{ product.description }}</p>
+          </div>
+
+          <div class="information">
+            <h2 class="title">Information</h2>
+            <div class="block">
+              <h3 class="title">Shipping</h3>
+              <p class="content">{{ product.shipping }}</p>
             </div>
-
-            <div class="info">
-                <div class="description">
-                    <h2 class="title">Description</h2>
-                    <p class="content">{{product.description}}</p>
-                </div>
-
-                <div class="information">
-                    <h2 class="title">Information</h2>
-                    <div class="block">
-                        <h3 class="title">Shipping</h3>
-                        <p class="content">{{product.shipping}}</p>
-                    </div>
-                    <div class="block">
-                        <h3 class="title">Sizing</h3>
-                        <p class="content">{{product.sizing}}</p>
-                    </div>
-                    <div class="block">
-                        <h3 class="title">Assistance</h3>
-                        <p class="content">Contact us on 999999 or 
-                            at info@devnasour.io</p>
-                    </div>
-                </div>
+            <div class="block">
+              <h3 class="title">Sizing</h3>
+              <p class="content">{{ product.sizing }}</p>
             </div>
-        </article>
-
-        <article class="r">
-
-            <h1 class="title">{{product.name}}</h1>
-
-            <div class="rating-container">
-                <ngx-material-rating [value]="product.rating" disabled></ngx-material-rating>
+            <div class="block">
+              <h3 class="title">Assistance</h3>
+              <p class="content">
+                Contact us on 999999 or at info@devnasour.io
+              </p>
             </div>
-            
-            <div class="overview">
-                <p class="title">Overview</p>
-                <p class="content">{{product.overview}}</p>
-            </div>
+          </div>
+        </div>
+      </article>
 
-            <div class="pricing">
-                <span class="price" [class.strike]="product.discount > 0">${{selectedPrice}}</span>
-                <span [hidden]="!product.discount" class="discounted-price">${{selectedPrice - ((+selectedPrice * +product.discount) / 100)}}</span>
-                <span [hidden]="!product.discount" class="discount">{{product.discount}}%</span>
+      <article class="r">
+        <h1 class="title">{{ product.name }}</h1>
 
-                <div class="r"><hr/></div>
-            </div>
+        <div class="rating-container">
+          <ngx-material-rating
+            [value]="product.rating"
+            disabled
+          ></ngx-material-rating>
+        </div>
 
-            <div class="actions">
-                <p class="title">Various versions</p>
+        <div class="overview">
+          <p class="title">Overview</p>
+          <p class="content">{{ product.overview }}</p>
+        </div>
 
-                <button mat-raised-button color="accent" (click)="addToCart()"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
-                <button mat-raised-button color="accent">UPLOAD</button>
-                <button mat-raised-button color="accent">CONTACT FOR DESIGN</button>
-                <div matRipple matRippleColor="accent" class="ripple-button">
-                    <p>Quantity</p>
-                    
+        <div class="pricing">
+          <span class="price" [class.strike]="product.discount > 0"
+            >${{ selectedPrice }}</span
+          >
+          <span [hidden]="!product.discount" class="discounted-price"
+            >${{
+              selectedPrice - (+selectedPrice * +product.discount) / 100
+            }}</span
+          >
+          <span [hidden]="!product.discount" class="discount"
+            >{{ product.discount }}%</span
+          >
 
-          
-                    <mat-select [(ngModel)]="selectedQuantity" (valueChange)="handlePriceChange($event)" class="select">
-                        <mat-option *ngFor="let item of product.priceList" [value]="item.quantity">{{item.quantity}}</mat-option>
-                    </mat-select>
-                </div>
-            </div>
+          <div class="r"><hr /></div>
+        </div>
 
-            <div class="specifications">
-                <h1 class="title">Specifications</h1>
-                <ul>
-                    <li>
-                        <p>Size</p>
-                        <p>{{product.size}}</p>
-                    </li>
-                    <li>
-                        <p>Farmer</p>
-                        <p>{{product.farmer}}</p>
-                    </li>
-                    <li>
-                        <p>Country</p>
-                        <p>{{product.country}}</p>
-                    </li>
-                </ul>
-            </div>
-        </article>
+        <div class="actions">
+          <p class="title">Various versions</p>
+
+          <button mat-raised-button color="accent" (click)="addToCart()">
+            <mat-icon>add_shopping_cart</mat-icon> Add to cart
+          </button>
+          <button mat-raised-button color="accent">UPLOAD</button>
+          <button mat-raised-button color="accent">CONTACT FOR DESIGN</button>
+          <div matRipple matRippleColor="accent" class="ripple-button">
+            <p>Quantity</p>
+
+            <mat-select
+              [(ngModel)]="selectedQuantity"
+              (valueChange)="handlePriceChange($event)"
+              class="select"
+            >
+              <mat-option
+                *ngFor="let item of product.priceList"
+                [value]="item.quantity"
+                >{{ item.quantity }}</mat-option
+              >
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="specifications">
+          <h1 class="title">Specifications</h1>
+          <ul>
+            <li>
+              <p>Size</p>
+              <p>{{ product.size }}</p>
+            </li>
+            <li>
+              <p>Farmer</p>
+              <p>{{ product.farmer }}</p>
+            </li>
+            <li>
+              <p>Country</p>
+              <p>{{ product.country }}</p>
+            </li>
+          </ul>
+        </div>
+      </article>
     </section>
 
     <section class="related-products">
-        <h1>Related Products</h1>
+      <h1>Related Products</h1>
 
-        <div class="swiper-container">
-            <swiper [config]="relatedProductsSwiperConfig">
-                <div class="swiper-wrapper">
-                    <div *ngFor="let item of relatedProductsList" class="list-item swiper-slide" (click)="navigateTo(item.id)">
-                        <img [src]="item.photo" alt="">
-                        
-                        <div class="bottom">
-                            <ngx-material-rating class="rating" [max]="5" [disabled]="false" color="accent" value="2.5">
-                            </ngx-material-rating>
-                            
-                            <div class="name">
-                                <h1>{{item.name}}</h1>
-                
-                                <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
-                            </div>
-                        </div>
-                    </div>
+      <div class="swiper-container">
+        <swiper [config]="relatedProductsSwiperConfig">
+          <div class="swiper-wrapper">
+            <div
+              *ngFor="let item of relatedProductsList"
+              class="list-item swiper-slide"
+              (click)="navigateTo(item.id)"
+            >
+              <img [src]="item.photo" alt="" />
+
+              <div class="bottom">
+                <ngx-material-rating
+                  class="rating"
+                  [max]="5"
+                  [disabled]="false"
+                  color="accent"
+                  value="2.5"
+                >
+                </ngx-material-rating>
+
+                <div class="name">
+                  <h1>{{ item.name }}</h1>
+
+                  <button mat-icon-button>
+                    <mat-icon>favorite_outline</mat-icon>
+                  </button>
                 </div>
-            </swiper>
-        </div>
+              </div>
+            </div>
+          </div>
+        </swiper>
+      </div>
     </section>
+  </div>
 </div>
