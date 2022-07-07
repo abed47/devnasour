@@ -1,20 +1,22 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 import * as $ from 'jquery';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shop-listing',
   templateUrl: './shop-listing.component.html',
   styleUrls: ['./shop-listing.component.scss']
 })
-export class ShopListingComponent implements OnInit, AfterViewInit {
+export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showSideMenu = false;
   currentVisible = 0;
   public categoryList = [];
+  private subscriptions: Subscription[] = [];
 
   public bannerItems = [
     {
@@ -49,6 +51,11 @@ export class ShopListingComponent implements OnInit, AfterViewInit {
     private request: RequestService
     ) { }
 
+  
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe())
+  }
+
 
   ngAfterViewInit(): void {
     
@@ -61,7 +68,15 @@ export class ShopListingComponent implements OnInit, AfterViewInit {
     this.loadSettings();
   }
 
-  private async loadSettings(){
+  private loadSettings(){
+    // this.subscriptions.push(this.router.events.subscribe())
+    this.subscriptions.push(this.router.events.subscribe(e => {
+      if (e instanceof NavigationStart) this.loadData();
+    }))
+    this.loadData();
+  }
+
+  private async loadData(){
     try {
       this.layoutUtils.showLoader();
       let catId = this.route.snapshot.params.id;

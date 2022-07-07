@@ -18,8 +18,7 @@
             </button>
 
             <mat-menu #categoriesMenu>
-                <button mat-menu-item>Category 1</button>
-                <button mat-menu-item>Category 2</button>
+                <button mat-menu-item *ngFor="let category of categoryList" (click)="navigateTo(category.web_category_id)">{{category.web_category_name}}</button>
             </mat-menu>
         </div>
 
