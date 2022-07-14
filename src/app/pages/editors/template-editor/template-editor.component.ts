@@ -372,6 +372,7 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
     if(e?.type === "action"){
       if(e?.name === "download") this.onDownload();
       if(e?.name === "download-pdf") this.onDownloadPdf();
+      if(e?.name === "save-design") this.saveDesignToAccount();
       if(e?.name === "delete-object") {
         if(this.selectedObject){
           this.fab.remove(this.selectedObject)
@@ -535,5 +536,22 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
         }
       }
     })
+  }
+
+  private async saveDesignToAccount(){
+    try {
+      const r = new FileReader();
+      let myBlob = new Blob([JSON.stringify(this.fab.toJSON())], { type: "text/plain" })
+      const designBlob = await this.helper.imgToBase64(myBlob);
+      console.log(designBlob);
+      const thumb = this.fab.toDataURL();
+      console.log(thumb);
+    } catch (err) {
+      console.log(err?.message);
+    }
+    // r.onload = (e) => {
+    //   console.log(r.result)
+    // }
+    // r.readAsDataURL(myBlob)
   }
 }

@@ -41,4 +41,8 @@ export class TopNavComponent implements OnInit {
     this.editorService.generalEvent({type: 'action', name: 'download-pdf'})
   }
 
+  public onSaveDesign(){
+    this.editorService.generalEvent({type: 'action', name: 'save-design'})
+  }
+
 }
