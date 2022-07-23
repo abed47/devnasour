@@ -39,10 +39,10 @@ export class AboutComponent implements OnInit {
     loop: true,
     spaceBetween: 150,
     breakpoints: {
-      // 700:{
-      //   width: 300,
-      //   spaceBetween: 150
-      // },
+      700:{
+        width: 300,
+        spaceBetween: 150
+      },
       100:{
         slidesPerView: 1
       }

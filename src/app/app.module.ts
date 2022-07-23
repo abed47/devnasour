@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { InterceptorService } from './services/interceptor.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
     MatSnackBarModule,
     MatMenuModule,
     MatProgressBarModule,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    CarouselModule,
   ],
   providers: [
     SeoService,

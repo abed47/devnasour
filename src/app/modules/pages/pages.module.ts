@@ -13,6 +13,7 @@ import { AboutComponent } from '../../pages/about/about.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { BecomeAPartnerComponent } from '../../pages/become-a-partner/become-a-partner.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BecomeAPartnerComponent } from '../../pages/become-a-partner/become-a-p
     CommonModule,
     PagesRoutingModule,
     ...MainLayoutImports.imports,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    MatPaginatorModule
   ],
   bootstrap: [MainLayoutComponent]
 })

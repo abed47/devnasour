@@ -104,6 +104,14 @@ main.cart-page{
                         font-size: 12px;
                         text-align: start;
 
+                        .description{
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 50;
+                            display: none;
+                            // word-break: keep-all;
+                            white-space: nowrap;
+                        }
                     }
 
                     .price{

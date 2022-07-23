@@ -130,6 +130,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       photo: this.product.images[0].data.src,
       discount: this.product.discount,
       id: this.route.snapshot.params.id,
-    })
+    });
+    this.layoutUtilsService.showSnack("success", "Product Added")
   }
 }

@@ -46,7 +46,7 @@ import { ThreeDimentionalListingComponent } from '../../pages/shop/three-dimenti
     SharedModule,
     MatRippleModule,
     NgxUsefulSwiperModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     RequestService

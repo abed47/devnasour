@@ -46,11 +46,8 @@ export class RequestService {
     });
   }
 
-  public getProjects(cb: CallableFunction){
-    this.http.post(this.serverUrl + 'get_data.php?e_type=pr&limit=1&offset=2', {
-      offset: 0,
-      limit: 1
-    }).subscribe(res => cb(res), err => cb(null, err));
+  public getProjects(offset: number, limit: number, cb: CallableFunction){
+    this.http.post(this.serverUrl + `get_data.php?e_type=pr&limit=${limit}&offset=${offset}`, {}).subscribe(res => cb(res), err => cb(null, err));
   }
 
   public getProject(id: string | number, cb: CallableFunction){

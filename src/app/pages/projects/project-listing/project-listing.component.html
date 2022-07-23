@@ -18,4 +18,14 @@
             </article>
         </div>
     </main>
+
+    <div class="pagination-container">
+        <mat-paginator 
+        [length]="totalRows"
+        [pageSize]="9"
+        hidePageSize
+        (page)="onPageEvent($event)"
+        aria-label="Select page">
+        </mat-paginator>
+    </div>
 </div>
