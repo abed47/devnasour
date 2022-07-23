@@ -624,3 +624,62 @@ main.cart-page{
         
     }
 }
+
+@media only screen and (max-width: 700px) {
+    main.cart-page{
+        header{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .stage{
+                width: 100%;
+                margin: 20px 5px;
+            }
+        }
+
+        section.cart-item-list{
+            .shipping-voucher{
+                flex-direction: column;
+                width: 100%;
+
+                .voucher {
+                    width: 100%;
+                    margin: 20px 0;
+                }
+
+                .totals{
+                    width: 100%;
+                }
+            }
+        }
+
+        section.checkout-section{
+            .table{
+                flex-direction: column-reverse;
+
+                .billing-details{
+                    width: 100%;
+                    border: none;
+                }
+                .order-list{
+                    width: 100%;
+                }
+            }
+        }
+
+        section.payment-section{
+            .table{
+                flex-direction: column;
+
+                .billing-details{
+                    width: 100%;
+                }
+
+                .order-list{
+                    display: none;
+                }
+            }
+        }
+    }
+}
