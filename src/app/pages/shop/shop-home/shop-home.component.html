@@ -1,6 +1,6 @@
 <main class="shop-home">
-    <div class="swiper-container">
-        <swiper [config]="bannerConfig">
+    <!-- <div class="swiper-container"> -->
+    <!-- <swiper [config]="bannerConfig">
             <div class="swiper-wrapper">
                 <div *ngFor="let item of bannerItems" class="swiper-slide" (click)="onItemClick(item.id)">
                     <img [src]="item.photo" alt="">
@@ -8,6 +8,52 @@
                     <p>{{item.description}}</p>
                 </div>
             </div>
-        </swiper>
+        </swiper> -->
+
+    <!-- </div> -->
+
+    <div class="carousel-container">
+        <!-- <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let item of bannerItems" class="slide">
+                <img [src]="item.photo">
+                <h1>{{item.title}}</h1>
+                <p>{{item.description}}</p>
+            </div>
+        </ngx-slick-carousel> -->
+
+        <ngx-flicking class="carousel large" [options]="{ 
+            circular: true, 
+            duration: 500, 
+            align: 'center',
+            panelsPerView: 3,
+            autoResize: true,
+            input: ['touch', 'mouse']
+        }" [plugins]="sliderPlugins">
+            <div flicking-panel class="panel" *ngFor="let panel of bannerItems">
+                <div class="panel-image">
+                    <img [src]="panel.photo" />
+                </div>
+                <h1>{{panel.title}}</h1>
+                <p>{{panel.description}}</p>
+            </div>
+        </ngx-flicking>
+
+        <ngx-flicking class="carousel small" [options]="{ 
+            circular: true, 
+            duration: 500, 
+            align: 'center',
+            panelsPerView: 1,
+            autoResize: true,
+            resizeOnContentsReady: true,
+            input: ['touch', 'mouse']
+        }" [plugins]="mobileSliderPlugins">
+            <div flicking-panel class="panel" *ngFor="let panel of bannerItems">
+                <div class="panel-image">
+                    <img [src]="panel.photo" />
+                </div>
+                <h1>{{panel.title}}</h1>
+                <p>{{panel.description}}</p>
+            </div>
+        </ngx-flicking>
     </div>
 </main>

@@ -26,7 +26,7 @@ import { PricingComponent } from '../../pages/shop/pricing/pricing.component';
 import { DesignsListingComponent } from '../../pages/shop/designs-listing/designs-listing.component';
 import { MockupsListingComponent } from '../../pages/shop/mockups-listing/mockups-listing.component';
 import { ThreeDimentionalListingComponent } from '../../pages/shop/three-dimentional-listing/three-dimentional-listing.component';
-
+import { NgxFlickingModule } from "@egjs/ngx-flicking";
 @NgModule({
   declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent],
   imports: [
@@ -47,6 +47,7 @@ import { ThreeDimentionalListingComponent } from '../../pages/shop/three-dimenti
     MatRippleModule,
     NgxUsefulSwiperModule,
     HttpClientModule,
+    NgxFlickingModule
   ],
   providers: [
     RequestService

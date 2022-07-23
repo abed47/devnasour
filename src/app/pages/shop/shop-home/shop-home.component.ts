@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
-
+import { Perspective, AutoPlay } from "@egjs/flicking-plugins";
+import { Plugin } from '@egjs/ngx-flicking';
+import { FlickingOptions } from "@egjs/ngx-flicking"
 @Component({
   selector: 'app-shop-home',
   templateUrl: './shop-home.component.html',
@@ -11,7 +13,6 @@ import { SwiperOptions } from 'swiper';
 export class ShopHomeComponent implements OnInit {
 
   public bannerItems = [];
-
   public bannerConfig: SwiperOptions = {
     slidesPerView: 3,
     centeredSlides: true,
@@ -22,10 +23,26 @@ export class ShopHomeComponent implements OnInit {
     effect: "slide",
   }
 
+  public sliderPlugins: Plugin[] = [
+    new Perspective({rotate: 0.05, scale: 2}),
+    new AutoPlay({direction: "NEXT", duration: 800}),
+  ];
+
+  public mobileSliderPlugins: Plugin[] = [
+    new Perspective({rotate: 0.05, scale: 2}),
+    new AutoPlay({direction: "NEXT", duration: 800}),
+  ];
+  // public sliderConfig: FlickingOptions = {
+  //   circular: true,
+  //   align: "center",
+  //   circularFallback: 
+  // }
+
   constructor(private router: Router, private request: RequestService) { }
 
   ngOnInit(): void {
     this.loadData();
+    
   }
 
 
@@ -50,4 +67,6 @@ export class ShopHomeComponent implements OnInit {
   public onItemClick(index){
     this.router.navigate(['/shop/c/' + index]);
   }
+
+
 }

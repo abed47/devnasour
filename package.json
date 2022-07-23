@@ -27,6 +27,8 @@
     "@angular/platform-browser-dynamic": "~11.1.0",
     "@angular/platform-server": "~11.1.0",
     "@angular/router": "~11.1.0",
+    "@egjs/flicking-plugins": "^4.4.0",
+    "@egjs/ngx-flicking": "^4.9.1",
     "@ng-select/ng-select": "^6.1.0",
     "@nguniversal/express-engine": "^11.1.2",
     "@types/fabric": "^4.5.7",
@@ -60,7 +62,6 @@
     "sass-google-fonts": "^1.0.1",
     "sessionstorage-polyfill": "^1.0.1",
     "swiper": "^6.8.1",
-    "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
