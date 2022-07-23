@@ -75,6 +75,7 @@ export class CartComponent implements OnInit {
     c.splice(i, 1);
     this.cart.setItems(c);
     this.getCartItems();
+    this.layoutUtils.checkCartItemChange();
   }
 
   public calcCartTotal(){

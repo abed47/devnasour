@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { InterceptorService } from './services/interceptor.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
     MatMenuModule,
     MatProgressBarModule,
     NgxMatIntlTelInputModule,
+    MatBadgeModule
   ],
   providers: [
     SeoService,

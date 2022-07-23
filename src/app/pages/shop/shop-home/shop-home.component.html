@@ -27,9 +27,9 @@
             align: 'center',
             panelsPerView: 3,
             autoResize: true,
-            input: ['touch', 'mouse']
+            inputType: ['touch', 'mouse']
         }" [plugins]="sliderPlugins">
-            <div flicking-panel class="panel" *ngFor="let panel of bannerItems">
+            <div flicking-panel class="panel" *ngFor="let panel of bannerItems" (click)="onItemClick(panel.id)">
                 <div class="panel-image">
                     <img [src]="panel.photo" />
                 </div>
@@ -45,9 +45,9 @@
             panelsPerView: 1,
             autoResize: true,
             resizeOnContentsReady: true,
-            input: ['touch', 'mouse']
+            inputType: ['touch', 'mouse']
         }" [plugins]="mobileSliderPlugins">
-            <div flicking-panel class="panel" *ngFor="let panel of bannerItems">
+            <div flicking-panel class="panel" *ngFor="let panel of bannerItems" (click)="onItemClick(panel.id)">
                 <div class="panel-image">
                     <img [src]="panel.photo" />
                 </div>

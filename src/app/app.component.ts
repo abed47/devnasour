@@ -20,7 +20,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(this.layoutUtilsService.getPreloaderSubject().subscribe(r => this.loaderActive = r));
-    this.subscriptions.push(this.layoutUtilsService.getSnackbarSubject().subscribe(r => this.handleSnackbar(r)))
+    this.subscriptions.push(this.layoutUtilsService.getSnackbarSubject().subscribe(r => this.handleSnackbar(r)));
+    this.layoutUtilsService.checkCartItemChange();
   }
 
   ngOnDestroy(): void {

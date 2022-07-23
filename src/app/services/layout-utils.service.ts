@@ -15,6 +15,7 @@ export class LayoutUtilsService {
   private loader: Subject<any> = new Subject();
   private snackbar: Subject<any> = new Subject();
   private isLoading: BehaviorSubject<any> = new BehaviorSubject<boolean>(false);
+  private cartItemCount: Subject<any> = new Subject();
 
 
   constructor() { }
@@ -37,6 +38,7 @@ export class LayoutUtilsService {
 
   public hidePreloader(){
     this.loader.next(false);
+    this.checkCartItemChange();
   }
 
   public getPreloaderSubject(){
@@ -73,5 +75,13 @@ export class LayoutUtilsService {
 
   public getIsLoading(){
     return this.isLoading.asObservable();
+  }
+
+  public getCartChangeObservable(){
+    return this.cartItemCount.asObservable();
+  }
+
+  public checkCartItemChange() {
+    return this.cartItemCount.next();
   }
 }

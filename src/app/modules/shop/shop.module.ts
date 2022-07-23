@@ -27,6 +27,7 @@ import { DesignsListingComponent } from '../../pages/shop/designs-listing/design
 import { MockupsListingComponent } from '../../pages/shop/mockups-listing/mockups-listing.component';
 import { ThreeDimentionalListingComponent } from '../../pages/shop/three-dimentional-listing/three-dimentional-listing.component';
 import { NgxFlickingModule } from "@egjs/ngx-flicking";
+import { MatBadgeModule } from '@angular/material/badge';
 @NgModule({
   declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent],
   imports: [
@@ -47,7 +48,8 @@ import { NgxFlickingModule } from "@egjs/ngx-flicking";
     MatRippleModule,
     NgxUsefulSwiperModule,
     HttpClientModule,
-    NgxFlickingModule
+    NgxFlickingModule,
+    MatBadgeModule
   ],
   providers: [
     RequestService
