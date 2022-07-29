@@ -174,10 +174,10 @@ main.cart-page{
 
 
                 ::ng-deep .font-field{
-                    border-radius: 0 !important;
+                    // border-radius: 0 !important;
                     width: 100%;
                     .mat-form-field-outline-start, .mat-form-field-outline-end {
-                        border-radius: 0 !important;
+                        // border-radius: 0 !important;
                     }
                 }
 
@@ -281,7 +281,7 @@ main.cart-page{
 
                     ::ng-deep .input, ::ng-deep .select{
                         .mat-form-field-outline-start, .mat-form-field-outline-end, mat-form-field-appearance-outline {
-                            border-radius: 0 0 0 0 !important;
+                            // border-radius: 0 0 0 0 !important;
                         }
                     }
                 }
@@ -303,7 +303,7 @@ main.cart-page{
 
                     ::ng-deep .input, ::ng-deep .select{
                         .mat-form-field-outline-start, .mat-form-field-outline-end, mat-form-field-appearance-outline {
-                            border-radius: 0 0 0 0 !important;
+                            // border-radius: 0 0 0 0 !important;
                         }
                     }
 
