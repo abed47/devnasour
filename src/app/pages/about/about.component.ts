@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
-
+import { AutoPlay } from '@egjs/flicking-plugins';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -59,6 +59,10 @@ export class AboutComponent implements OnInit {
       description: 'lorem ipsum helo wlk slkf sfdlsfs fslflsf lsfsljfklsf fslfksdf sflksdfsfj sfjklk',
       photo: 'assets/images/rect.png'
     }
+  ]
+
+  public officesPlugins = [
+    new AutoPlay({ duration: 1500, direction: "NEXT", stopOnHover: false })
   ]
 
   constructor(

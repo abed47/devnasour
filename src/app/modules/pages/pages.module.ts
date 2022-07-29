@@ -15,6 +15,7 @@ import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { BecomeAPartnerComponent } from '../../pages/become-a-partner/become-a-partner.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatBadgeModule } from '@angular/material/badge';
+import { NgxFlickingModule } from '@egjs/ngx-flicking';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     ...MainLayoutImports.imports,
     NgxMatIntlTelInputModule,
     MatPaginatorModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxFlickingModule
   ],
   bootstrap: [MainLayoutComponent]
 })

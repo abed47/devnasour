@@ -11,7 +11,9 @@
 
         <div class="hovering-packaging">
             <h2>The best printing solution for you</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos quibusdam voluptatibus nemo numquam impedit odit libero, sit at officia ullam error et dolore voluptas reprehenderit dolorem? Dolorum vitae eligendi harum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos quibusdam voluptatibus nemo numquam
+                impedit odit libero, sit at officia ullam error et dolore voluptas reprehenderit dolorem? Dolorum vitae
+                eligendi harum.</p>
         </div>
 
         <div class="swiper-container">
@@ -33,9 +35,11 @@
         </div>
 
         <div class="floating">
-            <h2>what we bring and 
+            <h2>what we bring and
                 how we started.</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut tenetur pariatur, animi alias a facere, tempore quia ipsa quos doloribus beatae nostrum, voluptate ipsum in praesentium explicabo. Eligendi, aliquid nesciunt.</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut tenetur pariatur, animi alias a facere,
+                tempore quia ipsa quos doloribus beatae nostrum, voluptate ipsum in praesentium explicabo. Eligendi,
+                aliquid nesciunt.</p>
         </div>
 
         <img [src]="ourStoryData.image" alt="" class="display">
@@ -45,24 +49,58 @@
         <div class="title">
             <h2 class="intro">Our presence locally and internationally</h2>
             <h1 class="title">Our Offices</h1>
-            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione pariatur vitae non sunt, reiciendis minima possimus recusandae ipsam tempore, unde dolore inventore labore officia esse modi officiis provident ex facere!</p>
+            <p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione pariatur vitae non
+                sunt, reiciendis minima possimus recusandae ipsam tempore, unde dolore inventore labore officia esse
+                modi officiis provident ex facere!</p>
         </div>
 
-        <div class="swiper-container">
-            <swiper [config]="locationBannerConfig">
-                <div class="swiper-wrapper">
-                    <a *ngFor="let item of officesData" class="swiper-slide" (click)="onItemClick(item.id)">
-                        <div class="inner-wrapper">
-                            <img [src]="item.image" alt="">
+        <ngx-flicking class="carousel small" [options]="{ 
+            circular: true, 
+            align: 'prev',
+            panelsPerView: 1,
+            autoResize: true,
+            resizeOnContentsReady: true,
+            inputType: ['touch', 'mouse'],
+            margin: 50,
+            adaptive: true,
+            bound: true
+        }" [plugins]="officesPlugins">
+            <a flicking-panel class="panel" *ngFor="let item of officesData" class="swiper-slide"
+                (click)="onItemClick(item.id)">
+                <div class="inner-wrapper">
+                    <img [src]="item.image" alt="">
 
-                            <div class="floating">
-                                <h1>{{item.title}}</h1>
-                                <p [innerHtml]="item.description"></p>
-                            </div>
-                        </div>
-                    </a>
+                    <div class="floating">
+                        <h1>{{item.title}}</h1>
+                        <p [innerHtml]="item.description"></p>
+                    </div>
                 </div>
-            </swiper>
-        </div>
+            </a>
+        </ngx-flicking>
+
+        <ngx-flicking class="carousel big" [options]="{ 
+            circular: true, 
+            duration: 500, 
+            align: 'prev',
+            panelsPerView: 3,
+            autoResize: true,
+            resizeOnContentsReady: true,
+            inputType: ['touch', 'mouse'],
+            margin: 50,
+            adaptive: true,
+            bound: true
+        }" [plugins]="officesPlugins">
+            <a flicking-panel class="panel" *ngFor="let item of officesData" class="swiper-slide"
+                (click)="onItemClick(item.id)">
+                <div class="inner-wrapper">
+                    <img [src]="item.image" alt="">
+
+                    <div class="floating">
+                        <h1>{{item.title}}</h1>
+                        <p [innerHtml]="item.description"></p>
+                    </div>
+                </div>
+            </a>
+        </ngx-flicking>
     </section>
 </main>

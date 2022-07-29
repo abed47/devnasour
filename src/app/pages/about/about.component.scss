@@ -143,9 +143,19 @@
     }
 
     .offices{
-        width: 100%;
-        margin-bottom: 50px;
+        // width: 100%;
+        // margin-bottom: 50px;
         // padding-bottom: 100px;
+
+        .carousel{
+            &.small{
+                display: none;
+            }
+
+            &.big{
+                display: block;
+            }
+        }
 
         .title{
             width: 50%;
@@ -179,7 +189,8 @@
             // overflow-y: visible;
             // width: 20px;
             // width: 30% !important;
-            padding-bottom: 50px;
+            // padding-bottom: 150px;
+            margin: 0 50px;
 
             .inner-wrapper{
                 position: relative;
@@ -224,6 +235,22 @@
                 height: 100%;
                 object-fit: cover;
                 height: 400px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .page-about{
+        .offices{
+            .carousel{
+                &.small{
+                    display: none !important;
+                }
+    
+                &.big{
+                    display: block;
+                }
             }
         }
     }
@@ -287,6 +314,16 @@
         }
 
         .offices{
+
+            .carousel{
+                &.small{
+                    display: block !important;
+                }
+
+                &.big{
+                    display: none !important;
+                }
+            }
             
             .swiper-slide{
                 height: auto !important;

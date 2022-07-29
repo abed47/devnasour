@@ -25,12 +25,12 @@ export class ShopHomeComponent implements OnInit {
 
   public sliderPlugins: Plugin[] = [
     new Perspective({rotate: 0.05, scale: 2}),
-    new AutoPlay({direction: "NEXT", duration: 800}),
+    new AutoPlay({direction: "NEXT", duration: 1500}),
   ];
 
   public mobileSliderPlugins: Plugin[] = [
     new Perspective({rotate: 0.05, scale: 2}),
-    new AutoPlay({direction: "NEXT", duration: 800}),
+    new AutoPlay({direction: "NEXT", duration: 1500}),
   ];
   // public sliderConfig: FlickingOptions = {
   //   circular: true,
