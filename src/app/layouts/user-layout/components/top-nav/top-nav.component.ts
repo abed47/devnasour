@@ -45,4 +45,8 @@ export class TopNavComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
+  public onGoHome(){
+    this.router.navigate(['/home'])
+  }
+
 }
