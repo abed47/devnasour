@@ -118,4 +118,12 @@ export class RequestService {
   public getCategoryWithChildren(){
     return this.http.post(this.serverUrl + 'get_data.php', { action: "get_category_with_children"})
   }
+
+  /*=============================================USER REQUESTS=================================================*/
+  public saveDesign(body: any) {
+    return this.http.post(`${this.serverUrl}design.php`, body).toPromise();
+  }
+  public searchDesign(body: any) {
+    return this.http.post(`${this.serverUrl}design.php`, body).toPromise();
+  }
 }

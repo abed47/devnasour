@@ -20,9 +20,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddressListingComponent } from '../../pages/user/address-listing/address-listing.component';
 import { CreateAddressComponent } from '../../pages/user/create-address/create-address.component';
 import { OrderViewComponent } from '../../pages/user/order-view/order-view.component';
+import { DownloadsComponent } from '../../pages/user/downloads/downloads.component';
 
 @NgModule({
-  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent, OrderViewComponent],
+  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent, OrderViewComponent, DownloadsComponent],
   imports: [
     CommonModule,
     FormsModule,

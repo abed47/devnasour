@@ -11,6 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { BgSelectDialogComponent } from './components/bg-select-dialog/bg-select-dialog.component';
 import { jsPDF } from "jspdf";
 import { degrees, PDFDocument, rgb, rotateInPlace } from 'pdf-lib';
+import { AuthService } from 'src/app/services/auth.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-template-editor',
@@ -32,7 +35,10 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
   constructor(
     private editorService: TwoDEditorService,
     private helper: HelperService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth: AuthService,
+    private layoutUtils: LayoutUtilsService,
+    private request: RequestService,
     ) { }
 
   ngOnInit(): void {
@@ -543,9 +549,24 @@ export class TemplateEditorComponent implements OnInit, OnDestroy, AfterViewChec
       const r = new FileReader();
       let myBlob = new Blob([JSON.stringify(this.fab.toJSON())], { type: "text/plain" })
       const designBlob = await this.helper.imgToBase64(myBlob);
-      console.log(designBlob);
       const thumb = this.fab.toDataURL();
-      console.log(thumb);
+
+      const body = {
+        action: "create_design",
+        web_design_type: 1,
+        web_design_name: this.editorService.getTitle(),
+        web_design_cat_id: null,
+        base64_file: designBlob,
+        base64_image: thumb,
+        web_user_id: 1,
+      }
+
+      const res: any = await this.request.saveDesign(body);
+      if (res?.status) {
+        this.layoutUtils.showSnack("success", "Design Crated!");
+        return;
+      }
+      this.layoutUtils.showSnack("error", "Error!");
     } catch (err) {
       console.log(err?.message);
     }

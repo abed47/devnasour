@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { TwoDEditorService } from 'src/app/services/two-d-editor.service';
 
 @Component({
@@ -10,9 +11,12 @@ export class TopNavComponent implements OnInit {
 
   public fileTitle: string = "untitled";
   public titleEditingActive: boolean = false;
+  private currentUser = null;
+  public loggedIn = false;
   
   constructor(
-    private editorService: TwoDEditorService
+    private editorService: TwoDEditorService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -21,6 +25,12 @@ export class TopNavComponent implements OnInit {
 
   private loadSettings(){
     this.fileTitle = this.editorService.getTitle();
+    const currentUser = this.auth?.getAuthStatus()?.currentUser;
+
+    if(currentUser) {
+      this.currentUser = currentUser;
+      this.loggedIn = true;
+    }
   }
 
   public onEditClick(){

@@ -4,6 +4,7 @@ import { UserLayoutComponent } from 'src/app/layouts/user-layout/user-layout.com
 import { AddressListingComponent } from 'src/app/pages/user/address-listing/address-listing.component';
 import { CreateAddressComponent } from 'src/app/pages/user/create-address/create-address.component';
 import { DashboardComponent } from 'src/app/pages/user/dashboard/dashboard.component';
+import { DownloadsComponent } from 'src/app/pages/user/downloads/downloads.component';
 import { OrderListingComponent } from 'src/app/pages/user/order-listing/order-listing.component';
 import { OrderViewComponent } from 'src/app/pages/user/order-view/order-view.component';
 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'orders/:id',
     component: OrderViewComponent,
+  },
+  {
+    path: 'downloads',
+    component: DownloadsComponent
   }
 ];
 
