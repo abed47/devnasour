@@ -21,6 +21,7 @@ import { AddressListingComponent } from '../../pages/user/address-listing/addres
 import { CreateAddressComponent } from '../../pages/user/create-address/create-address.component';
 import { OrderViewComponent } from '../../pages/user/order-view/order-view.component';
 import { DownloadsComponent } from '../../pages/user/downloads/downloads.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent, OrderViewComponent, DownloadsComponent],
@@ -41,6 +42,7 @@ import { DownloadsComponent } from '../../pages/user/downloads/downloads.compone
     MatPaginatorModule,
     MatInputModule,
     MatFormFieldModule,
+    ChartsModule,
   ],
 })
 export class UserModule { }
