@@ -48,5 +48,5 @@ export class FavoritesComponent implements OnInit {
     this.layoutUtils.checkCartItemChange();
   }
 
-  public onApplyVoucher(){}
+  
 }
