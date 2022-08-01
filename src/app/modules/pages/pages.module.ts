@@ -16,6 +16,7 @@ import { BecomeAPartnerComponent } from '../../pages/become-a-partner/become-a-p
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NgxFlickingModule } from '@egjs/ngx-flicking';
+import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgxFlickingModule } from '@egjs/ngx-flicking';
     AboutComponent,
     CartComponent,
     BecomeAPartnerComponent,
+    FavoritesComponent
   ],
   imports: [
     CommonModule,

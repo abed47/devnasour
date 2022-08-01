@@ -1,1 +1,48 @@
-<p>favorites works!</p>
+<main class="favorite-page">
+
+    <!-- <app-bread-crumbs></app-bread-crumbs> -->
+
+    <section class="cart-item-list">
+        <h1 class="title">Cart</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <!-- <th>Price</th> -->
+                    <!-- <th>Qty</th> -->
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of favoriteItems;let i = index">
+                    <td class="img">
+                        <img [src]="item.web_product_attachment_1" alt="">
+                    </td>
+
+                    <td class="details">
+                        <p>{{item.web_product_name}}</p>
+                        <p class="description">Description: {{item.web_product_description}}</p>
+                        <!-- <p>Size: {{item.size}}</p> -->
+                    </td>
+
+                    <!-- <td class="price"><h3>{{item.price}}TL</h3></td> -->
+
+                    <!-- <td class="quantity">{{item.quantity}}</td> -->
+                    <td class="total">{{item.web_product_price}}TL</td>
+                    <td class="actions"><button mat-icon-button (click)="removeCartItem(i)"><mat-icon>delete_outline</mat-icon></button></td>
+                </tr>
+            </tbody>
+            <!-- <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <span>Total: </span> <span>{{calcCartTotal()}}TL</span>
+                    </td>
+                </tr>
+            </tfoot> -->
+        </table>
+    </section>
+
+</main>

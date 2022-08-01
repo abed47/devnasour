@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import countryCodesList from 'country-codes-list';
+import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
+import { FavoritesService } from 'src/app/services/favorites.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
@@ -7,9 +14,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor() { }
+  public favoriteItems = [
+  ]
+  public addresses = [];
+  public processing = false;
+  
+  public billingForm: FormGroup;
+  public paymentForm: FormGroup;
+
+  constructor(
+    private layoutUtils: LayoutUtilsService,
+    private favoritesService: FavoritesService,
+  ) { }
 
   ngOnInit(): void {
+    this.buildSettings();
+  }
+  
+  private buildSettings(){
+    this.getFavoriteItems();
+  }
+  
+  private getFavoriteItems(){
+    let cItems = this.favoritesService.getItems();
+    this.favoriteItems = cItems || [];
   }
 
+  public removeFavoriteItem(i){
+    let c = [...this.favoriteItems];
+    c.splice(i, 1);
+    this.favoritesService.setItems(c);
+    this.getFavoriteItems();
+    this.layoutUtils.checkCartItemChange();
+  }
+
+  public onApplyVoucher(){}
 }
