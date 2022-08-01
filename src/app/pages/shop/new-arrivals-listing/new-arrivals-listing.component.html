@@ -6,7 +6,7 @@
       </header>
       
       <div class="list">
-          <div class="list-item" *ngFor="let item of productList" (click)="onProductClick(item.web_product_id)">
+          <div class="list-item" *ngFor="let item of productList" (click)="onProductClick(item.web_product_id, $event, item)">
             <img [src]="item.web_product_attachment_1" alt="">
               
             <div class="ratings-wrapper">
@@ -15,7 +15,11 @@
             </div>
     
             <div class="summary">
-                <h3>{{item.web_product_name}}</h3>
+                <div class="title">
+                    <h3>{{item.web_product_name}}</h3>
+                    <button [hidden]="isItemInFavorites(item)" mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                    <button [hidden]="!isItemInFavorites(item)" mat-icon-button><mat-icon>favorite</mat-icon></button>
+                </div>
                 <h2>TL {{item.web_product_price}}</h2>
             </div>
           </div>

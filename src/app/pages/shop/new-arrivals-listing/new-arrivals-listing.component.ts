@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FavoritesService } from 'src/app/services/favorites.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 
@@ -19,7 +20,8 @@ export class NewArrivalsListingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private layoutUtils: LayoutUtilsService,
-    private request: RequestService
+    private request: RequestService,
+    private favoriteService: FavoritesService,
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,6 @@ export class NewArrivalsListingComponent implements OnInit {
       
       this.totalRows = res.total_record;
       this.productList = res.data;
-      console.log(res);
     } catch (err) {
       this.layoutUtils.hidePreloader();
       this.layoutUtils.showSnack("error", err?.message || 'Server error');
@@ -60,7 +61,11 @@ export class NewArrivalsListingComponent implements OnInit {
     }
   }
 
-  public onProductClick(id) {
+  public onProductClick(id, event, product?) {
+    if (event.target.nodeName === "MAT-ICON" || event.target.nodeName === "BUTTON") {
+      this.handleFavorite(product);
+      return;
+    }
     this.router.navigate([`/shop/product/${id}`]);
     if(window){
       window.scrollTo({
@@ -69,5 +74,21 @@ export class NewArrivalsListingComponent implements OnInit {
         behavior: "smooth",
       });
     }
+  }
+
+  public handleFavorite(p: any) {
+    if (this.favoriteService.isItemLinked(p)){
+      this.favoriteService.removeItem(p);
+      this.layoutUtils.showSnack("success", "Removed from favorites");
+      this.layoutUtils.checkCartItemChange();
+      return;
+    }
+    this.favoriteService.addItem(p);
+    this.layoutUtils.showSnack("success", "Added to favorites");
+    this.layoutUtils.checkCartItemChange();
+  }
+
+  public isItemInFavorites(p: any) {
+    return this.favoriteService.isItemLinked(p)
   }
 }

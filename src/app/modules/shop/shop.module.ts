@@ -30,6 +30,7 @@ import { NgxFlickingModule } from "@egjs/ngx-flicking";
 import { MatBadgeModule } from '@angular/material/badge';
 import { NewArrivalsListingComponent } from '../../pages/shop/new-arrivals-listing/new-arrivals-listing.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FavoritesService } from 'src/app/services/favorites.service';
 @NgModule({
   declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent, NewArrivalsListingComponent],
   imports: [
@@ -55,7 +56,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
   ],
   providers: [
-    RequestService
+    RequestService,
+    FavoritesService
   ]
 })
 export class ShopModule { }

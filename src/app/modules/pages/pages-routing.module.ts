@@ -7,6 +7,7 @@ import { ResetPasswordComponent } from 'src/app/pages/auth/reset-password/reset-
 import { BecomeAPartnerComponent } from 'src/app/pages/become-a-partner/become-a-partner.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { ContactUsComponent } from 'src/app/pages/contact-us/contact-us.component';
+import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
 import { ProjectListingComponent } from 'src/app/pages/projects/project-listing/project-listing.component';
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'become-a-partner',
     component: BecomeAPartnerComponent,
+  },
+  {
+    path: 'favorites',
+    component: FavoritesComponent,
   }
 ];
 
