@@ -4,6 +4,7 @@ import { ShopLayoutComponent } from 'src/app/layouts/shop-layout/shop-layout.com
 import { ProductViewComponent } from 'src/app/pages/product-view/product-view.component';
 import { DesignsListingComponent } from 'src/app/pages/shop/designs-listing/designs-listing.component';
 import { MockupsListingComponent } from 'src/app/pages/shop/mockups-listing/mockups-listing.component';
+import { NewArrivalsListingComponent } from 'src/app/pages/shop/new-arrivals-listing/new-arrivals-listing.component';
 import { PricingComponent } from 'src/app/pages/shop/pricing/pricing.component';
 import { ShopDealsComponent } from 'src/app/pages/shop/shop-deals/shop-deals.component';
 import { ShopHomeComponent } from 'src/app/pages/shop/shop-home/shop-home.component';
@@ -55,6 +56,10 @@ const routes: Routes = [
       },{
         path: 'designs',
         component: DesignsListingComponent
+      },
+      {
+        path: 'new-arrivals',
+        component: NewArrivalsListingComponent,
       },
       {
         path: '',

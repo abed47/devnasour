@@ -24,7 +24,7 @@
 
         <nav mat-tab-nav-bar color="accent" class="tabs">
             <a mat-tab-link class="tab" [class.active]="activeIndex === 0 ? true : false" [active]="activeIndex === 0" routerLink="/shop">Home</a>
-            <a mat-tab-link class="tab" [class.active]="activeIndex === 1 ? true : false" [active]="activeIndex === 1">New Arrivals</a>
+            <a mat-tab-link class="tab" [class.active]="activeIndex === 1 ? true : false" [active]="activeIndex === 1" routerLink="/shop/new-arrivals">New Arrivals</a>
             <a mat-tab-link class="tab" [class.active]="activeIndex === 2 ? true : false" [active]="activeIndex === 2" routerLink="/shop/trending">Trending</a>
             <a mat-tab-link class="tab" [class.active]="activeIndex === 3 ? true : false" [active]="activeIndex === 3" routerLink="/shop/deals">Deals For You</a>
           </nav>

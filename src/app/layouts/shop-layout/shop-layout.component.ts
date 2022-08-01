@@ -31,6 +31,7 @@ export class ShopLayoutComponent implements OnInit, OnDestroy {
 
   private handleCurrentRoute = (r?: any) => {
     if(this.router.url === '/shop') this.activeIndex = 0;
+    if(this.router.url === '/shop/new-arrivals') this.activeIndex = 1;
     if(this.router.url === '/shop/trending') this.activeIndex = 2;
     if(this.router.url === '/shop/deals') this.activeIndex = 3;
   }

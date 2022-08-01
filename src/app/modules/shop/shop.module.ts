@@ -28,8 +28,10 @@ import { MockupsListingComponent } from '../../pages/shop/mockups-listing/mockup
 import { ThreeDimentionalListingComponent } from '../../pages/shop/three-dimentional-listing/three-dimentional-listing.component';
 import { NgxFlickingModule } from "@egjs/ngx-flicking";
 import { MatBadgeModule } from '@angular/material/badge';
+import { NewArrivalsListingComponent } from '../../pages/shop/new-arrivals-listing/new-arrivals-listing.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
-  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent],
+  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent, NewArrivalsListingComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -49,7 +51,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     NgxUsefulSwiperModule,
     HttpClientModule,
     NgxFlickingModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatPaginatorModule,
   ],
   providers: [
     RequestService

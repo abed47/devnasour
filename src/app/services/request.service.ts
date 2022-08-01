@@ -14,6 +14,10 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   private getToken(){}
+  /*=============================================SHOP REQUESTS=================================================*/
+  public getNewArrivals(body:any){
+    return this.http.post(`${this.serverUrl}get_data.php`, body).toPromise();
+  }
 
   public getMainCategories(){
     return new Promise<responseType>((resolve, reject) => {
@@ -119,7 +123,7 @@ export class RequestService {
     return this.http.post(this.serverUrl + 'get_data.php', { action: "get_category_with_children"})
   }
 
-  /*=============================================USER REQUESTS=================================================*/
+  /*=============================================DESIGN REQUESTS=================================================*/
   public saveDesign(body: any) {
     return this.http.post(`${this.serverUrl}design.php`, body).toPromise();
   }
