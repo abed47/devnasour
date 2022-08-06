@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChartData, ChartType } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 

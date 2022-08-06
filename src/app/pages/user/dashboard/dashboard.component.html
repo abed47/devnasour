@@ -1,33 +1,82 @@
 <div class="user-dashboard">
-    <div class="w-25">
-        <div class="amount-card">
-            <div class="l">
-                <p>Total Orders</p>
-                <h1>4982</h1>
+    <section>
+        <div class="w-25">
+            <div class="amount-card">
+                <div class="l">
+                    <p>Total Orders</p>
+                    <h1>4982</h1>
+                </div>
+                <div class="r">
+                    <mat-icon>assignment</mat-icon>
+                </div>
             </div>
-            <div class="r">
-                <mat-icon>assignment</mat-icon>
+            <div class="amount-card">
+                <div class="l">
+                    <p>Designs Done</p>
+                    <h1>4982</h1>
+                </div>
+                <div class="r">
+                    <mat-icon>class</mat-icon>
+                </div>
+            </div>
+            <div class="amount-card">
+                <div class="l">
+                    <p>Total Orders</p>
+                    <h1>4982</h1>
+                </div>
+                <div class="r">
+                    <mat-icon>exit_to_app</mat-icon>
+                </div>
             </div>
         </div>
-        <div class="amount-card">
-            <div class="l">
-                <p>Designs Done</p>
-                <h1>4982</h1>
-            </div>
-            <div class="r">
-                <mat-icon>class</mat-icon>
+        <div class="w-50">
+            <div class="order-summary-container">
+                <div class="top">
+                    <h1>Order Summary</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Filters</mat-label>
+                        <mat-select [(ngModel)]="selectedFilter">
+                          <mat-option *ngFor="let item of filterTypes" [value]="selectedFilter">{{
+                            item === 1 ? "Weekly" :
+                            item === 2 ? "Monthly" :
+                            "Yearly"   
+                        }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    
+                    <p class="description">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                    </p>
+
+                    <div class="charts-container">
+                        <div class="chart1">
+                          <canvas baseChart style="display: block;"
+                          id="chart1"
+                          [chartType]="chart1Type"
+                          [data]="chart1Data"
+                          [labels]="chart1Labels"
+                          [colors]="chart1Colors"
+                          [options]="chart1Options"
+                          >
+                          </canvas>
+                        </div>
+
+                        <div class="left-bars">
+                          <div *ngFor="let item of getBars(); let i = index" class="bar">
+                              
+                            <div class="bar-line" [style]="{background: 'linear-gradient(to right,' + chart1Colors[0].backgroundColor[i] + ' ' + getBarPercentage(item, getBars()) + ', #F2F2F2 0%)'}"></div>
+
+                            <div class="legend">
+                                <div class="box" [style]="{backgroundColor: chart1Colors[0].backgroundColor[i]}"></div>
+                                <p>{{item.label}}</p>
+                            </div>
+
+                          </div>
+                        </div>
+                    </div>
             </div>
         </div>
-        <div class="amount-card">
-            <div class="l">
-                <p>Total Orders</p>
-                <h1>4982</h1>
-            </div>
-            <div class="r">
-                <mat-icon>exit_to_app</mat-icon>
-            </div>
-        </div>
-    </div>
-    <div class="w-50">a</div>
-    <div class="w-25">a</div>
+        <div class="w-25">a</div>
+    </section>
 </div>

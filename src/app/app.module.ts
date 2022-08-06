@@ -16,6 +16,7 @@ import { InterceptorService } from './services/interceptor.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatMenuModule,
     MatProgressBarModule,
     NgxMatIntlTelInputModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ChartsModule,
   ],
   providers: [
     SeoService,
