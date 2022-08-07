@@ -35,8 +35,8 @@
                 flex-direction: column;
                 
                 .panel-image{
-                    width: 370px;
-                    height: 370px;
+                    width: 400px;
+                    height: 400px;
 
                     img{
                         width: 100%;
@@ -63,7 +63,7 @@
             align-items: center;
 
             .swiper-slide{
-                width: 350px !important;
+                width: 500px !important;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -71,8 +71,8 @@
                 opacity: .4;
 
                 img{
-                    width: 350px;
-                    height: 350px;
+                    width: 500px;
+                    height: 500px;
                     object-fit: cover;
                 }
 
