@@ -80,4 +80,35 @@ export class DashboardComponent implements OnInit {
     // return 55
     return ((amount / total) * 100).toFixed(2);
   }
+
+  // public drawMap(){
+  //   const map = new DottedMap({
+  //     height: 500,
+  //     width: 200,
+  //     // countries: ['FRA']
+  //     // region: { lat: { min, max }, lng: { min, max } },
+  //     grid: 'vertical',
+  //     avoidOuterPins: false,
+  //   });
+    
+  //   // map.addPin({
+  //   //   lat,
+  //   //   lng,
+  //   //   svgOptions: { color, radius },
+  //   //   data,
+  //   // });
+    
+  //   // If you want to get the raw array of points
+  //   map.getPoints();
+  //   // [{ x, y, data, svgOptions }]
+    
+  //   // Or use this method to get a string which is a SVG
+  //   const svg = map.getSVG({
+  //     shape: 'circle',
+  //     backgroundColor: '#FF00FF',
+  //     color: '#FFFF00',
+  //     radius: 0.5,
+  //   });
+  //   console.log(svg)
+  // }
 }

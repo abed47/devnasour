@@ -77,6 +77,28 @@
                     </div>
             </div>
         </div>
-        <div class="w-25">a</div>
+        <div class="w-25">
+            <div class="activity">
+                <div class="top">
+                    <h1>Recent Activity</h1>
+                </div>
+                <div class="middle">
+                    <button mat-raised-button color="accent">+ New Order</button>
+                    <ul class="activity-list">
+                        <li *ngFor="let item of [1,2,3]" class="activity-list-item">
+                            <img src="assets/images/rect.png" alt="">
+
+                            <div class="detail">
+                                <h3>James Sukardi</h3>
+                                <p>Alexandria St. London Park</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom">
+                    <button mat-flat-button>View More</button>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
