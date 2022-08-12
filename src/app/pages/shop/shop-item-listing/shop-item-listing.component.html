@@ -2,7 +2,7 @@
     <section class="listing">
       <div class="list">
           <div class="list-item" *ngFor="let item of productList" (click)="onProductClick(item.web_product_id, $event, item)">
-            <img [src]="item.web_product_attachment_1" alt="">
+            <img [src]="item.attachments[0]" alt="">
               
             <div class="ratings-wrapper">
                   <ngx-material-rating class="rating" [max]="5" [disabled]="true" color="accent" [value]="item.web_product_rate">
