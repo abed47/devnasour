@@ -19,6 +19,10 @@ export class RequestService {
     return this.http.post(`${this.serverUrl}get_data.php`, body).toPromise();
   }
 
+  public getTrendingProducts(body: any) {
+    return this.http.post(`${this.serverUrl}actions.php`, body).toPromise();
+  }
+
   public getMainCategories(){
     return new Promise<responseType>((resolve, reject) => {
       this.http.get<responseType>(this.serverUrl + 'get_data.php').subscribe(r => {
