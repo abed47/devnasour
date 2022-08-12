@@ -1,19 +1,37 @@
 @import 'src/styles/styles.scss';
 
-.shop-item-listing-page-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
+.main-product-listing-page{
+    width: 100%;
+    min-height: 100vh;
+    @include init-flex(column, flex-start);
+    box-sizing: border-box;
+    padding: 50px;
 
-    .shop-item-listing-page {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        padding: 20px;
+    .listing{
         max-width: 1080px;
+        width: 100%;
+        @include init-flex(column, flex-start, flex-start);
 
-        .item-list {
+        header{
+            width: 100%;
+            margin-bottom: 25px;
+            h1{
+                color: $color-primary;
+                font-size: 24px;
+                font-family: $font-bold;
+                margin-bottom: 15px;
+            }
+
+            hr{
+                max-width: 150px;
+                border-top: none;
+                border-bottom: 2px solid $color-secondary;
+                margin: 0;
+            }
+        }
+
+        .list{
+            width: 100%;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             row-gap: 20px;
@@ -21,61 +39,57 @@
             justify-items: start;
             align-content: start;
             padding-bottom: 50px;
-            padding-top: 50px;
 
-
-            .list-item {
-                background-color: white;
-                box-shadow: 1px 2px 6px rgba(0, 0, 0, .18);
-                cursor: pointer;
-                user-select: none;
+            &-item{
                 width: 100%;
-
-                img {
+                box-shadow: 1px 2px 6px rgba(0, 0, 0, .2);
+                user-select: none;
+                cursor: pointer;
+                img{
                     width: 100%;
-                    // height: 30px;
-                    height: 60%;
+                    min-height: 200px;
                     object-fit: cover;
-                    min-height: 180px;
                 }
 
-                .bottom {
-                    margin-bottom: 5px;
+                .ratings-wrapper .rating{
+                    color: $color-secondary;
+                    padding-left: 5px;
 
-                    .rating {
-                        width: 100%;
-
-                        &>* {
-                            font-size: 5px !important;
-                            display: flex;
-                            // flex-direction: column;
-                        }
-
-                        ::ng-deep .mat-icon-button {
-                            color: $color-secondary;
-                            width: 30px;
-                            height: 30px;
-                            text-align: center;
-                        }
-
-                        ::ng-deep .mat-icon {
-                            font-size: 15px;
+                    ::ng-deep .mat-icon-button{
+                        color: $color-secondary;
+                        width: 24px;
+                        mat-icon{
+                            font-size: 18px;
+                            width: 18px;
                         }
                     }
+                }
 
-                    .name {
+                .summary{
+                    @include init-flex(column, flex-start, flex-start);
+                    margin-left: 10px;
+                    
+                    .title{
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
-                        padding: 10px;
-
-                        h1 {
+                        width: 100%;
+                        color: $color-secondary;
+                        
+                        h3 {
                             margin: 0;
-                            font-size: 14px;
-                            font-family: $font-bold;
-                            text-transform: capitalize;
+                            font-size: 15px;
+                            text-overflow: ellipsis;
+                            overflow: hidden; 
+                            width: 160px; 
+                            white-space: nowrap;
                         }
+                    }
+
+                    h2{
+                        font-size: 16px;
+                        font-family: $font-medium;
                     }
                 }
             }
