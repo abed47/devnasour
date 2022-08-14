@@ -161,8 +161,8 @@
             grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
             row-gap: 20px;
             column-gap: 20px;
-            justify-items: start;
-            align-content: start;
+            justify-items: flex-start;
+            align-content: flex-start;
             padding-bottom: 50px;
             // display: flex;
             // flex-basis: calc(20%);
@@ -261,8 +261,8 @@
                 grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
                 row-gap: 20px;
                 column-gap: 20px;
-                justify-items: start;
-                align-content: start;
+                justify-items: flex-start;
+                align-content: flex-start;
                 padding-bottom: 50px;
         
         
