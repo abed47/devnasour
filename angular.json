@@ -139,7 +139,8 @@
             "externalDependencies": [
               "fabric",
               "swiper",
-              "ngx-useful-swiper"
+              "ngx-useful-swiper",
+              "chart.js"
             ],
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
