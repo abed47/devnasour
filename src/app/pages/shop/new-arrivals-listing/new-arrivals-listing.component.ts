@@ -34,7 +34,7 @@ export class NewArrivalsListingComponent implements OnInit {
     try {
       const body = {
         action: "new_product_arrival",
-        offset: this.currentPage * this.itemsPerPage,
+        offset: this.getProductOffset(),
         limit: this.itemsPerPage,
       }
       const res: any = await this.request.getNewArrivals(body);
@@ -47,6 +47,11 @@ export class NewArrivalsListingComponent implements OnInit {
       this.layoutUtils.showSnack("error", err?.message || 'Server error');
       this.router.navigate(["/home"]);
     }
+  }
+
+  private getProductOffset(){
+    if(this.currentPage === 1) return 0;
+    return this.currentPage * this.itemsPerPage;
   }
 
   public onPageEvent(e: any){

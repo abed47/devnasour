@@ -1,20 +1,33 @@
-<div class="shop-item-listing-page-wrapper">
-    <div class="shop-item-listing-page">
-        <div class="item-list">
-            <div *ngFor="let item of itemList" class="list-item" (click)="navigateTo(item.id)">
-                <img [src]="item.photo" alt="">
-                
-                <div class="bottom">
-                    <ngx-material-rating class="rating" [max]="5" [disabled]="true" color="accent" [value]="item?.rating || 0">
-                    </ngx-material-rating>
-                    
-                    <div class="name">
-                        <h1>{{item.name}}</h1>
-        
-                        <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
-                    </div>
-                </div>
+<main class="main-product-listing-page">
+    <section class="listing">
+      <div class="list">
+          <div class="list-item" *ngFor="let item of productList" (click)="onProductClick(item.web_product_id, $event, item)">
+            <img [src]="item.attachments[0]" alt="">
+              
+            <div class="ratings-wrapper">
+                  <ngx-material-rating class="rating" [max]="5" [disabled]="true" color="accent" [value]="item.web_product_rate">
+                </ngx-material-rating>
             </div>
-        </div>
+    
+            <div class="summary">
+                <div class="title">
+                    <h3>{{item.web_product_name}}</h3>
+                    <button [hidden]="isItemInFavorites(item)" mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                    <button [hidden]="!isItemInFavorites(item)" mat-icon-button><mat-icon>favorite</mat-icon></button>
+                </div>
+                <h2>TL {{item.web_product_price}}</h2>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <div class="pagination-container">
+        <mat-paginator 
+        [length]="totalRows"
+        [pageSize]="itemsPerPage"
+        hidePageSize
+        (page)="onPageEvent($event)"
+        aria-label="Select page">
+        </mat-paginator>
     </div>
-</div>
+</main>

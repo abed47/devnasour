@@ -537,8 +537,8 @@
                 // @include init-flex(row, flex-start, flex-start);
                 display: grid;
                 grid-template-columns: 5% 95%;
-                justify-items: start;
-                align-content: start;
+                justify-items: flex-start;
+                align-content: flex-start;
 
                 &:last-child{
                     .n .vr{
