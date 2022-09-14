@@ -91,6 +91,18 @@
               >
             </mat-select>
           </div>
+
+          <div class="color-list" [class.active]="product.color?.length">
+            <div
+              class="color-list-item"
+              *ngFor="let item of product.color"
+              [class.selected]="item.web_product_color_id == selectedColor"
+              (click)="onColorChange(item)"
+            >
+
+              <div [ngStyle]="{backgroundColor: item.web_product_color_hex}"></div>
+            </div>
+          </div>
         </div>
 
         <div class="specifications">
