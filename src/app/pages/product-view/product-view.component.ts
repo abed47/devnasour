@@ -122,6 +122,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
   }
 
   public addToCart(): void{
+    if (!this.colorSelectionValid()) { return; }
     this.cart.addItem({
       name: this.product.name,
       description: this.product.description,
@@ -130,6 +131,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       photo: this.product.images[0].data.src,
       discount: this.product.discount,
       id: this.route.snapshot.params.id,
+      color: this.selectedColor,
     });
     this.layoutUtilsService.showSnack('success', 'Product Added');
     this.layoutUtilsService.checkCartItemChange();
@@ -137,5 +139,13 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
 
   public onColorChange(c): void {
     this.selectedColor = c.web_product_color_id;
+  }
+
+  public colorSelectionValid(): boolean {
+    if (this.product.color?.length && !this.selectedColor) {
+      this.layoutUtilsService.showSnack('error', 'Please select color!');
+      return false;
+    }
+    return true;
   }
 }

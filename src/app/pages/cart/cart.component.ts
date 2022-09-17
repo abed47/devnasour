@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
   ]
   public addresses = [];
   public processing = false;
-  
+
   public billingForm: FormGroup;
   public paymentForm: FormGroup;
 
@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.buildSettings();
   }
-  
+
   private buildSettings(){
     this.billingForm = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -61,10 +61,10 @@ export class CartComponent implements OnInit {
     let arr = countryCodesList.all();
     arr.splice(arr.indexOf(arr.filter(item => item.countryCode === "IL")[0]), 1);
     this.countryList = arr;
-    
+
     this.getCartItems();
   }
-  
+
   private getCartItems(){
     let cItems = this.cart.getItems();
     this.cartItems = cItems || [];
@@ -83,7 +83,7 @@ export class CartComponent implements OnInit {
       return this.cartItems.reduce((p, c) => p + +c.price, 0)
     return 0;
   }
-  
+
 
   public getTotals(){
     if(this.cartItems){
@@ -100,7 +100,7 @@ export class CartComponent implements OnInit {
   public onApplyVoucher(){}
 
   public onNext(){
-    if(this.currentStage === 1 && this.cartItems?.length < 1) return; 
+    if(this.currentStage === 1 && this.cartItems?.length < 1) return;
     if(this.currentStage === 2){
       if (this.billingForm.invalid) return;
     }
@@ -124,6 +124,7 @@ export class CartComponent implements OnInit {
         web_product_attachment_1: i.photo,
         image: i.photo,
         photo: i.photo,
+        web_product_color_id: i.color,
       }
     })
   }
@@ -158,7 +159,7 @@ export class CartComponent implements OnInit {
       },
       product: this.getProductsForOrder()
     };
-  
+
     this.processing = true;
     this.request.createOrder(purchaseBody, (res, err) => {
       this.processing = false;

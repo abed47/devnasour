@@ -31,6 +31,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { NewArrivalsListingComponent } from '../../pages/shop/new-arrivals-listing/new-arrivals-listing.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent, NewArrivalsListingComponent],
   imports: [
@@ -54,6 +55,7 @@ import { FavoritesService } from 'src/app/services/favorites.service';
     NgxFlickingModule,
     MatBadgeModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     RequestService,

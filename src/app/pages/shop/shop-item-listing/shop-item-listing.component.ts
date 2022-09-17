@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
@@ -15,6 +15,7 @@ export class ShopItemListingComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 15;
   totalRows = 0;
+  pageTitle = '';
 
   constructor(
     private router: Router,
@@ -22,16 +23,18 @@ export class ShopItemListingComponent implements OnInit {
     private layoutUtils: LayoutUtilsService,
     private request: RequestService,
     private favoriteService: FavoritesService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
+    this.getPageTitle();
   }
 
-  private loadData(){
+  private async loadData(){
     this.layoutUtils.showLoader();
     let catId = this.route.snapshot.params.id;
 
+    let catRes = await this.request.getSubCategories(catId);
     this.request.getCategoryProducts(catId)
     .then(r => {
       if(r && r?.status === 1 && r.data?.length){
@@ -95,4 +98,12 @@ export class ShopItemListingComponent implements OnInit {
     return this.favoriteService.isItemLinked(p)
   }
 
+  getPageTitle() {
+    this.route.queryParams.subscribe(r => {
+      if (r?.category) {
+        this.pageTitle = r.category.replace(/\*\*\*\*/ig, " ")
+      }
+    }).unsubscribe()
+  }
+  
 }

@@ -7,6 +7,30 @@
     box-sizing: border-box;
     padding: 50px;
 
+    .banner-wrapper{
+        width: 100%;
+        margin-bottom: 20px;
+        @include init-flex(row, flex-start, flex-start);
+        .section-title{
+            // margin-left: 210px;
+            position: relative;
+            width: auto;
+            color: $color-primary;
+            font-size: 22px;
+            font-family: $font-bold;
+
+            &::after{
+                content: "";
+                border-bottom: 1px solid $color-secondary;
+                height: 1px;
+                width: 20%;
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                max-width: 100px;
+            }
+        }
+    }
     .listing{
         max-width: 1080px;
         width: 100%;

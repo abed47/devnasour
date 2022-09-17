@@ -1,4 +1,7 @@
 <main class="main-product-listing-page">
+    <section class="banner-wrapper">
+        <h1 class="section-title">{{pageTitle}}</h1>
+    </section>
     <section class="listing">
       <div class="list">
           <div class="list-item" *ngFor="let item of productList" (click)="onProductClick(item.web_product_id, $event, item)">

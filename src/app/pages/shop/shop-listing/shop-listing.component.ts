@@ -140,8 +140,11 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.layoutUtils.hidePreloader();
   }
 
-  public navigateTo(id: number | string){
-    this.router.navigate([`/shop/p/${id}`]);
+  public navigateTo(id: number | string, cat){
+    console.log("hello 2 ", id, cat)
+    this.router.navigate([`/shop/p/${id}`], {queryParams: {
+      category: cat?.replace(/ /ig,"****")
+    }});
   }
 
   public showIfApplicable(e) {
