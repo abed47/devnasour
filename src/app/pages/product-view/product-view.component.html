@@ -76,21 +76,7 @@
           </button>
           <button mat-raised-button color="accent">UPLOAD</button>
           <button mat-raised-button color="accent">CONTACT FOR DESIGN</button>
-          <div matRipple matRippleColor="accent" class="ripple-button">
-            <p>Quantity</p>
-
-            <mat-select
-              [(ngModel)]="selectedQuantity"
-              (valueChange)="handlePriceChange($event)"
-              class="select"
-            >
-              <mat-option
-                *ngFor="let item of product.priceList"
-                [value]="item.quantity"
-                >{{ item.quantity }}</mat-option
-              >
-            </mat-select>
-          </div>
+          
 
           <div class="color-list" [class.active]="product.color?.length">
             <div
@@ -110,7 +96,18 @@
           <ul>
             <li>
               <p>Quantity</p>
-              <p>{{ product.farmer }}</p>
+    
+                <mat-select
+                  [(ngModel)]="selectedQuantity"
+                  (valueChange)="handlePriceChange($event)"
+                  class="select"
+                >
+                  <mat-option
+                    *ngFor="let item of product.priceList"
+                    [value]="item.quantity"
+                    >{{ item.quantity }}</mat-option
+                  >
+                </mat-select>
             </li>
             <li>
               <p>Size</p>
