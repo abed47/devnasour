@@ -123,7 +123,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
 
   public addToCart(): void{
     if (!this.colorSelectionValid()) { return; }
-    this.cart.addItem({
+    const res = this.cart.addItem({
       name: this.product.name,
       description: this.product.description,
       price: this.selectedPrice,
@@ -133,8 +133,10 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       id: this.route.snapshot.params.id,
       color: this.selectedColor,
     });
-    this.layoutUtilsService.showSnack('success', 'Product Added');
-    this.layoutUtilsService.checkCartItemChange();
+    if (res) {
+      this.layoutUtilsService.showSnack('success', 'Product Added');
+      this.layoutUtilsService.checkCartItemChange();
+    }
   }
 
   public onColorChange(c): void {

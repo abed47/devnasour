@@ -90,9 +90,11 @@ export class ShopTrendingComponent implements OnInit {
       this.layoutUtils.checkCartItemChange();
       return;
     }
-    this.favoriteService.addItem(p);
-    this.layoutUtils.showSnack("success", "Added to favorites");
-    this.layoutUtils.checkCartItemChange();
+    const res = this.favoriteService.addItem(p);
+    if (res) {
+      this.layoutUtils.showSnack("success", "Added to favorites");
+      this.layoutUtils.checkCartItemChange();
+    }
   }
 
   public isItemInFavorites(p: any) {
