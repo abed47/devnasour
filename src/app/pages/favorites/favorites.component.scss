@@ -84,6 +84,7 @@ main.favorite-page{
 
             tbody{
                 tr{
+                    cursor: pointer;
                     &:not(:last-child){
                     border: 1px solid rgba(black, .3);
                     }

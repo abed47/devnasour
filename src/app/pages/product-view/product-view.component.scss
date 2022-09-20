@@ -425,3 +425,10 @@
         }
     }
 }
+
+#galery324{
+    ::ng-deep .g-thumbs-container {
+        // display: none !important;
+        left: -40% !important;
+    }
+}

@@ -12,6 +12,8 @@
             imageSize="cover"
             style="background-color: #fafafa"
             [items]="product.images"
+            thumbMode="free"
+            id="galery324"
           ></gallery>
         </div>
 
@@ -129,7 +131,7 @@
         <div
               *ngFor="let item of relatedProductsList"
               class="list-item swiper-slide"
-              (click)="navigateTo(item.id)"
+              (click)="navigateTo(item.id, item.name)"
             >
               <img [src]="item.photo" alt="" />
 

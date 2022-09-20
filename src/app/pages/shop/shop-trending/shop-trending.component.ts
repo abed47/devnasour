@@ -80,7 +80,7 @@ export class ShopTrendingComponent implements OnInit {
       this.handleFavorite(product);
       return;
     }
-    this.router.navigate([`/shop/product/${id}`]);
+    this.router.navigate([`/shop/product/${id}/${product.web_product_name}`]);
     if(window){
       window.scrollTo({
         top: 0,

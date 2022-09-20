@@ -39,7 +39,7 @@ const routes: Routes = [
         component: ShopDealsComponent
       },
       {
-        path: 'product/:id',
+        path: 'product/:id/:name',
         component: ProductViewComponent
       },
       {

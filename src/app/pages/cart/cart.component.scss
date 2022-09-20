@@ -343,6 +343,7 @@ main.cart-page{
                         @include init-flex(row, flex-start);
                         img{
                             width: 50%;
+                            max-width: 150px;
                         }
 
                         .details{

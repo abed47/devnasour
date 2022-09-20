@@ -49,8 +49,8 @@ export class FavoritesComponent implements OnInit {
     this.layoutUtils.checkCartItemChange();
   }
 
-  public navigateTo(id: number) {
-    this.router.navigate([`/shop/product/${id}`]);
+  public navigateTo(id: number, name: string) {
+    this.router.navigate([`/shop/product/${id}/${name}`]);
     if(window){
       window.scrollTo({
         top: 0,

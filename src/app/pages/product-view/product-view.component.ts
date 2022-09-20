@@ -115,8 +115,8 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     this.selectedQuantity = newP[0].quantity;
   }
 
-  public navigateTo(e): void{
-    this.router.navigate(['/shop/product/' + e]).then( (res: any) => {
+  public navigateTo(e, name): void{
+    this.router.navigate([`/shop/product/${e}/${name}`]).then( (res: any) => {
       this.loadData();
     });
     if(window){
