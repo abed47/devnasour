@@ -48,6 +48,13 @@ export class TopNavComponent implements OnInit, OnDestroy{
 
   public moveToLogin () {
     this.router.navigate(['/login']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
   public toggleSidenav(){

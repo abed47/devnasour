@@ -137,6 +137,13 @@ export class CartComponent implements OnInit {
     this.layoutUtils.showSnack("success", "Order created");
     this.cart.clear();
     this.router.navigate(['/user/orders']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
   public confirmPayment(){

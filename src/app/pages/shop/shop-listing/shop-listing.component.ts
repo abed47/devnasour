@@ -95,6 +95,13 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
       if(catRes.status === 1 && !catRes?.data?.length){
         this.layoutUtils.showSnack("error", catRes?.message || "server error");
         this.router.navigate(["/shop"]);
+        if(window){
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+        }
       }
 
       const categoryListRes: any = await this.request.getCategoryWithChildren().toPromise();
@@ -118,6 +125,13 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
     } catch (err) {
       this.layoutUtils.showSnack("error", err?.message || "server error");
       this.router.navigate(["/shop"]);
+      if(window){
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
     }
     // this.layoutUtils.showLoader();
     // let catId = this.route.snapshot.params.id
@@ -145,6 +159,13 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate([`/shop/p/${id}`], {queryParams: {
       category: cat?.replace(/ /ig,"****")
     }});
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
   public showIfApplicable(e) {

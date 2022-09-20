@@ -46,6 +46,13 @@ export class NewArrivalsListingComponent implements OnInit {
       this.layoutUtils.hidePreloader();
       this.layoutUtils.showSnack("error", err?.message || 'Server error');
       this.router.navigate(["/home"]);
+      if(window){
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
     }
   }
 

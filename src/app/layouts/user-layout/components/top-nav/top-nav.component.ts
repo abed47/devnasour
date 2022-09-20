@@ -43,10 +43,24 @@ export class TopNavComponent implements OnInit, OnDestroy {
   public onLogout(){
     this.auth.logout();
     this.router.navigate(['/login']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
   public onGoHome(){
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
 }

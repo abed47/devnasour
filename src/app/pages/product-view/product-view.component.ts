@@ -119,6 +119,13 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     this.router.navigate(['/shop/product/' + e]).then( (res: any) => {
       this.loadData();
     });
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
   public addToCart(): void{

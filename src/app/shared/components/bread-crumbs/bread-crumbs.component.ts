@@ -46,6 +46,13 @@ export class BreadCrumbsComponent implements OnInit, OnDestroy {
       u += '/' + this.paths[i].key
     }
     this.router.navigate([u]);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
 }

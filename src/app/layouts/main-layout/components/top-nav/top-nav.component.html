@@ -11,7 +11,7 @@
 
     <button [hidden]="loggedIn" class="btn secondary d-md" mat-button (click)="moveToLogin()">Account login</button>
 
-    <div class="logged-in-btn-group d-md">
+    <div [hidden]="!loggedIn" class="logged-in-btn-group d-md">
         <button [hidden]="favoriteItemCount > 0" mat-icon-button><img src="assets/images/favourites-icon.png"/></button>
         <button
         [hidden]="!favoriteItemCount"

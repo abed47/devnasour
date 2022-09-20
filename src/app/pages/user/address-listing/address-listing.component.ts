@@ -122,7 +122,14 @@ export class AddressListingComponent implements OnInit {
   }
 
   public onNew(){
-    this.router.navigate(['/user/addresses/create'])
+    this.router.navigate(['/user/addresses/create']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
 }

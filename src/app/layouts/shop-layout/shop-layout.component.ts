@@ -69,6 +69,13 @@ export class ShopLayoutComponent implements OnInit, OnDestroy {
     } catch (err) {
       this.layoutUtils.showSnack("error", err?.message || "server error");
       this.router.navigate(["/shop"]);
+      if(window){
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
     }
     // this.layoutUtils.showLoader();
     // let catId = this.route.snapshot.params.id
@@ -93,5 +100,12 @@ export class ShopLayoutComponent implements OnInit, OnDestroy {
 
   public navigateTo(id: number | string){
     this.router.navigate([`/shop/c/${id}`]);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 }

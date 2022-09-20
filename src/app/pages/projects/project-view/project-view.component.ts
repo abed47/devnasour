@@ -74,7 +74,14 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
       if (err) {
         this.layoutUtilsService.hidePreloader();
         this.layoutUtilsService.showSnack("error", err?.message || res?.message);
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
+        if(window){
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+        }
       }
     })
     let projectId = this.route.snapshot.params.id;

@@ -45,6 +45,13 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     this.auth.logout();
     this.loggedIn = false;
     this.router.navigate(['/']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
 }

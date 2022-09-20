@@ -33,13 +33,19 @@ export class OrderViewComponent implements OnInit {
       if(err || res?.status === 0){
         this.layoutUtils.showSnack("error", err?.message || res?.message || "error loading order");
         this.router.navigate(['/user/orders']);
+        if(window){
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+        }
       }
 
       if(res && res?.status === 1){
         this.orderDetails = res.data[0];
         this.products = res.data[0].products;
         this.history = res.data[0].event_store;
-        console.log(this.products[0])
       }
     })
   }

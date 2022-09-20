@@ -16,7 +16,14 @@ export class FavoritesService {
 
   public addItem(item){
     if (!this.authService.getAuthStatus()?.loggedIn){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
+      if(window){
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
       return false;
    }
     if(this.isItemLinked(item)) return;

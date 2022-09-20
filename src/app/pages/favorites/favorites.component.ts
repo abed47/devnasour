@@ -25,6 +25,7 @@ export class FavoritesComponent implements OnInit {
   constructor(
     private layoutUtils: LayoutUtilsService,
     private favoritesService: FavoritesService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -48,5 +49,14 @@ export class FavoritesComponent implements OnInit {
     this.layoutUtils.checkCartItemChange();
   }
 
-  
+  public navigateTo(id: number) {
+    this.router.navigate([`/shop/product/${id}`]);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }
 }

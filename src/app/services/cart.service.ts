@@ -16,7 +16,14 @@ export class CartService {
 
   public addItem(item){
     if (!this.authService.getAuthStatus()?.loggedIn){
-       this.router.navigate(['/login'])
+       this.router.navigate(['/login']);
+       if(window){
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
        return false;
     }
     let currentCart = this.store.getItem("cart", 1) || [];

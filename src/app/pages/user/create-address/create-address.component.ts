@@ -73,13 +73,27 @@ export class CreateAddressComponent implements OnInit {
 
         if(res){
           this.layoutUtils.showSnack("success", "Created successfully");
-          this.router.navigate(['/user/addresses'])
+          this.router.navigate(['/user/addresses']);
+          if(window){
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
+          }
         }
       })
     }
   }
 
   public onCancel(){
-    this.router.navigate(['/user/addresses'])
+    this.router.navigate(['/user/addresses']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 }

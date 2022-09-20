@@ -32,6 +32,13 @@ export class AuthService {
     this.store.setItem('token', 'token', s);
     this.AuthStatusSubject.next(true);
     this.router.navigate(['/home']);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
   
   public setAuthStorage(t: StorageTypes){
