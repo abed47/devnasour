@@ -116,7 +116,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
   }
 
   public navigateTo(e, name): void{
-    this.router.navigate([`/shop/product/${e}/${name}`]).then( (res: any) => {
+    this.router.navigate([`/shop/product/${e}/${name.replace(/\ /ig, "-")}`]).then( (res: any) => {
       this.loadData();
     });
     if(window){

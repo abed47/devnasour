@@ -78,7 +78,7 @@ export class NewArrivalsListingComponent implements OnInit {
       this.handleFavorite(product);
       return;
     }
-    this.router.navigate([`/shop/product/${id}/${product?.web_product_name}`]);
+    this.router.navigate([`/shop/product/${id}/${product?.web_product_name.replace(/\ /ig, "-")}`]);
     if(window){
       window.scrollTo({
         top: 0,

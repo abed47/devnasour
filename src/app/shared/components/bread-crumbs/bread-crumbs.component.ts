@@ -35,7 +35,8 @@ export class BreadCrumbsComponent implements OnInit, OnDestroy {
 
   private initCrumbs(){
     let segments = window.location.pathname.split('/');
-    segments.forEach((s, i) => s !== '' && s ? this.paths.push({key: s, name: s.toUpperCase(), active: i === segments.length - 1}) : null);
+    console.log(segments.forEach(i => console.log("type ", isNaN(+i), i)))
+    segments.forEach((s, i) => s !== '' && s && isNaN(+s) ? this.paths.push({key: s, name: s.toUpperCase(), active: i === segments.length - 1}) : null);
     this.loadSubs();
 
   }

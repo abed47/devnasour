@@ -50,7 +50,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   public navigateTo(id: number, name: string) {
-    this.router.navigate([`/shop/product/${id}/${name}`]);
+    this.router.navigate([`/shop/product/${id}/${name.replace(/\ /ig, "-")}`]);
     if(window){
       window.scrollTo({
         top: 0,
