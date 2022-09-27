@@ -150,7 +150,7 @@
                         <input type="text" matInput formControlName="zip" />
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="f-w">
+                    <!-- <mat-form-field appearance="outline" class="f-w">
                         <mat-label>Phone</mat-label>
                         <ngx-mat-intl-tel-input
                         [preferredCountries]="['tr']"
@@ -158,7 +158,22 @@
                         [enableSearch]="true"
                         name="phone"
                         formControlName="phone"></ngx-mat-intl-tel-input>
-                    </mat-form-field>
+                    </mat-form-field> -->
+
+                    <mat-form-field appearance="outline" class="f-w" floatLabel="always">
+                        <mat-label>phone</mat-label>
+                        <input
+                        type="tel"
+                        name="phone"
+                        formControlName="phone"
+                        matInput ng2TelInput
+                        [ng2TelInputOptions]="{initialCountry: selectedPhoneCountry, separateDialCode:false}"
+                        (hasError)="hasError($event)"
+                        (ng2TelOutput)="getNumber($event)"
+                        (intlTelInputObject)="telInputObject($event)"
+                        (countryChange)="onCountryChange($event)"
+                        >
+                      </mat-form-field>
 
                     <mat-form-field appearance="outline" class="input f-w">
                         <mat-label>Email Address</mat-label>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import countryCodesList from 'country-codes-list';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
+import { phone } from "phone";
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,7 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class CartComponent implements OnInit {
 
+  public selectedPhoneCountry = "tr";
   public countryList = [];
   public voucherCode = "";
   public voucherAccepted ="";
@@ -51,7 +53,7 @@ export class CartComponent implements OnInit {
       country: ['', [Validators.required]],
       province: ['', [Validators.required]],
       zip: ['', []],
-      phone: ['', []],
+      phone: ['', [Validators.required, Validators.pattern(/[0-9]/ig)]],
       email: ['', [Validators.required, Validators.email]],
       saveAddress: [true, []]
     })
@@ -181,5 +183,30 @@ export class CartComponent implements OnInit {
 
   public getBillingDetailsValue(v: string) {
     return this.billingForm.controls[v].value || "";
+  }
+
+  public getNumber(e) {
+    console.log("get number: ", e);
+    return undefined
+  }
+
+  public hasError(e) {
+    console.log("error: ",e);
+    console.log(this.billingForm.controls.phone.value);
+    const { isValid } = phone(this.billingForm.controls.phone.value, { country: this.selectedPhoneCountry })
+    if (!isValid) {
+      this.billingForm.controls.phone.setErrors(["phone number not valid"])
+    }
+    // this.
+    
+  }
+
+  public telInputObject(e) {
+    console.log("value: ", e)
+  }
+
+  public onCountryChange (e) {
+    console.log("country: ", e);
+    this.selectedPhoneCountry = e.iso2;
   }
 }

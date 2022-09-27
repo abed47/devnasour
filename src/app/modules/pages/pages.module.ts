@@ -17,6 +17,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NgxFlickingModule } from '@egjs/ngx-flicking';
 import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component'
     NgxMatIntlTelInputModule,
     MatPaginatorModule,
     MatBadgeModule,
-    NgxFlickingModule
+    NgxFlickingModule,
+    MatFormFieldModule,
+    Ng2TelInputModule,
   ],
   bootstrap: [MainLayoutComponent]
 })
