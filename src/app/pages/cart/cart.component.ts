@@ -126,7 +126,7 @@ export class CartComponent implements OnInit {
         web_product_attachment_1: i.photo,
         image: i.photo,
         photo: i.photo,
-        web_product_color_id: i.color,
+        web_product_color_id: i?.color || 0,
       }
     })
   }
