@@ -4,6 +4,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
+import { phone } from "phone";
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { RequestService } from 'src/app/services/request.service';
 })
 export class RegisterComponent implements OnInit {
 
+  public selectedPhoneCountry = "tr";
   public registerForm: FormGroup;
   public userType: 1 | 2 = 1;
   public receiveEmailUpdates: boolean = false;
@@ -101,4 +103,23 @@ export class RegisterComponent implements OnInit {
     this.receiveEmailUpdates = !this.receiveEmailUpdates
   }
 
+  public telInputObject(e) {
+    console.log("value: ", e)
+  }
+
+  public onCountryChange (e) {
+    console.log("country: ", e);
+    this.selectedPhoneCountry = e.iso2;
+  }
+
+  public hasError(e) {
+    console.log("error: ",e);
+    console.log(this.registerForm.controls.phone.value);
+    const { isValid } = phone(this.registerForm.controls.phone.value, { country: this.selectedPhoneCountry })
+    if (!isValid) {
+      this.registerForm.controls.phone.setErrors(["phone number not valid"])
+    }
+    // this.
+    
+  }
 }
