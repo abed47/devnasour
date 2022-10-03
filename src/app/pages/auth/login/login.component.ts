@@ -72,4 +72,39 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
   public onGoogleLogin(){}
 
+  public onMessage: (this: Window, ev: MessageEvent<any>) => any | undefined;
+  targett: Window | undefined;
+
+  public openSocial(type: string) {
+    const googleLink = "https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=834815781970-044in4uj74phpfi7cmm9ep78jtar4eg5.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fwww.chillyvilly.com%2Fapi%2Fgoogle_login%2Flogin_google.php&state&scope=email%20profile&approval_prompt=auto";
+    const appleLink = "";
+    const facebookLink = "";
+    let url: string;
+    if (type === 'google') url = googleLink;
+    if (type === 'apple') url = appleLink;
+    if (type === 'facebook') url = facebookLink;
+
+    const target = window.open(url, '', 'width=400px, height=500px');
+    if(!target) return;
+
+    window.removeEventListener('message', this.onMessage);
+    this.targett?.close;
+
+    this.onMessage = (e: MessageEvent) => {
+      let d = e.data;
+      let socialLoginResp = JSON.parse(d['token']);
+      target.close();
+      if(socialLoginResp?.type === "success") {
+        console.log(socialLoginResp);
+        this.layoutUtils.showSnack("success", "Welcome back");
+        
+      }else if (socialLoginResp?.type === "error"){
+        this.layoutUtils.showSnack("error", socialLoginResp?.message);
+      }
+      window.removeEventListener("message", this.onMessage);
+    }
+    window.addEventListener("message", this.onMessage);
+    this.targett = target;
+  }
+
 }
