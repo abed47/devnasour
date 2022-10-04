@@ -16,6 +16,8 @@ import { StorageTypes } from 'src/app/shared/types';
 export class LoginComponent implements OnInit, AfterViewChecked {
 
   loginForm: FormGroup;
+  private googleLink = "";
+  private facebookLink = "";
   @ViewChild('loginFormEl') private loginFormEl: ElementRef<HTMLFormElement>;
   @ViewChild('innerWrapper') private innerWrapper: ElementRef<HTMLDivElement>;
 
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.initForm();
+    this.loadData();
   }
 
   private initForm (){
@@ -43,6 +46,17 @@ export class LoginComponent implements OnInit, AfterViewChecked {
       stayLoggedIn: [false, []]
     });
     // this.loginForm.valueChanges.subscribe()
+  }
+
+  private async loadData () {
+    try {
+      const res: any = await this.request.getSocialAuth();
+      if (res?.facebook) this.facebookLink = res.facebook;
+      if (res?.google) this.googleLink = res.google;
+      console.log(res);
+    } catch (err) {
+      console.log("error while loading social auth", err?.message, err);
+    }
   }
 
   public onLoginSubmit(){
@@ -76,13 +90,10 @@ export class LoginComponent implements OnInit, AfterViewChecked {
   targett: Window | undefined;
 
   public openSocial(type: string) {
-    const googleLink = "https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=834815781970-044in4uj74phpfi7cmm9ep78jtar4eg5.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fwww.chillyvilly.com%2Fapi%2Fgoogle_login%2Flogin_google.php&state&scope=email%20profile&approval_prompt=auto";
-    const appleLink = "";
-    const facebookLink = "";
     let url: string;
-    if (type === 'google') url = googleLink;
-    if (type === 'apple') url = appleLink;
-    if (type === 'facebook') url = facebookLink;
+    if (type === 'google') url = this.googleLink;
+    // if (type === 'apple') url = appleLink;
+    if (type === 'facebook') url = this.facebookLink;
 
     const target = window.open(url, '', 'width=400px, height=500px');
     if(!target) return;

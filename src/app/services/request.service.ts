@@ -15,6 +15,9 @@ export class RequestService {
 
   private getToken(){}
   /*=============================================SHOP REQUESTS=================================================*/
+  public getSocialAuth() {
+    return this.http.post(`${this.serverUrl}actions.php`, {action: 'get_login_auth'}).toPromise();
+  }
   public getNewArrivals(body:any){
     return this.http.post(`${this.serverUrl}get_data.php`, body).toPromise();
   }
