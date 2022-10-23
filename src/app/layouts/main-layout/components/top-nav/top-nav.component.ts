@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
-import { WindowRef } from 'src/app/window-ref.service';
 
 @Component({
   selector: 'main-top-nav',
@@ -27,8 +26,6 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
     private auth: AuthService,
     private cartService: CartService,
     private favoriteService: FavoritesService,
-    @Inject(PLATFORM_ID) private platformId: any,
-    private windowRef: WindowRef
   ) { }
 
   ngAfterViewChecked(): void {
@@ -37,7 +34,8 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
   ngOnInit(): void {
     this.loadSettings();
     // this.auth.getAuthStatus
-    if(isPlatformBrowser(this.platformId)) {
+    if(window !== undefined) {
+      //@ts-ignore
       window.addEventListener("click", (e) => this.handleOutsideClick(e))
     }
   }
@@ -46,7 +44,8 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
-    if(isPlatformBrowser(this.platformId)) {
+    if(window !== undefined) {
+      //@ts-ignore
       window.removeEventListener("click", (e) => this.handleOutsideClick(e));
     }
   }
