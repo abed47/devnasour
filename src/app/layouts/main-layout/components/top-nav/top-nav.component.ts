@@ -33,14 +33,14 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
   ngOnInit(): void {
     this.loadSettings();
     // this.auth.getAuthStatus
-    window.addEventListener("click", (e) => this.handleOutsideClick(e))
+    if (window?.addEventListener) window.addEventListener("click", (e) => this.handleOutsideClick(e))
   }
 
   
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
-    window.removeEventListener("click", (e) => this.handleOutsideClick(e));
+    if (window?.removeEventListener) window.removeEventListener("click", (e) => this.handleOutsideClick(e));
   }
 
   private loadSettings(){
