@@ -16,7 +16,25 @@
             <h1>All Categories</h1>
         </div>
 
-        <ul class="aside-category-list" (mouseleave)="hideIfApplicable()">
+        <mat-tree style="background-color: none;" [dataSource]="dataSource" [treeControl]="treeControl">
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
+              <div style="cursor: pointer;" (click)="navigateTo(node.id, node.name)">{{node.name}}</div>
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <div style="cursor: pointer;" (click)="navigateTo(node.id, node.name, true)">{{node.name}}</div>
+            </mat-tree-node>
+          </mat-tree>
+        <!-- <ul class="aside-category-list" (mouseleave)="hideIfApplicable()">
             <li *ngFor="let category of categoryList" [class]="'category-list-item-' + category.web_category_id" (mouseenter)="showIfApplicable($event)">  
                 <p [title]="category.web_category_name"> <span class="circle"></span>{{category.web_category_name}}</p>  
                 <mat-icon class="icon">arrow_right</mat-icon>
@@ -25,7 +43,7 @@
                     <span *ngFor="let subcategory of category.children" class="sub-category-list-item" (click)="navigateTo(subcategory.web_category_id, subcategory?.web_category_name)">{{subcategory?.web_category_name}}</span>
                 </div>
             </li>
-        </ul>
+        </ul> -->
     </aside>
     <div class="content">
         <div class="recommended-list">

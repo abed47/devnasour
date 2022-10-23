@@ -33,6 +33,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { MockupViewComponent } from 'src/app/pages/mockup-view/product-view.component';
+import {MatTree, MatTreeModule} from '@angular/material/tree';
+
 @NgModule({
   declarations: [MockupViewComponent,ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent, NewArrivalsListingComponent],
   imports: [
@@ -56,7 +58,8 @@ import { MockupViewComponent } from 'src/app/pages/mockup-view/product-view.comp
     NgxFlickingModule,
     MatBadgeModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTreeModule
   ],
   providers: [
     RequestService,

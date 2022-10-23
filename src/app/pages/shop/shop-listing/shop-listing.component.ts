@@ -5,6 +5,8 @@ import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 @Component({
   selector: 'app-shop-listing',
@@ -17,6 +19,31 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
   currentVisible = 0;
   public categoryList = [];
   private subscriptions: Subscription[] = [];
+
+
+  hasChild = (_: number, node: any) => node.expandable;
+
+  private _transformer = (node: any, level: number) => {
+    console.log("this is the node >>>>>> ", node)
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.web_category_name,
+      id: node.web_category_id,
+      level: level,
+    };
+  };
+
+  treeFlattener = new MatTreeFlattener(
+    this._transformer,
+    node => node.level,
+    node => node.expandable,
+    node => node.children,
+  );
+
+  treeControl = new FlatTreeControl<any>(
+    node => node.level,
+    node => node.expandable,
+  );
 
   public bannerItems = [
     {
@@ -43,6 +70,8 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
       rating: 2
     }
   ]
+
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);;
 
   constructor(
     private router: Router, 
@@ -112,7 +141,9 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
             this.categoryList[index].children = 
             Object.keys(this.categoryList[index].children).map(i => this.categoryList[index].children[i])
           }
-        })
+        });
+        // this.dataSource = 
+        this.dataSource.data = this.categoryList;
       }
       
       $('.list-item img').height($('.list-item img').width())
@@ -154,11 +185,17 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.layoutUtils.hidePreloader();
   }
 
-  public navigateTo(id: number | string, cat){
+  public navigateTo(id: number | string, cat, isParent?){
     console.log("hello 2 ", id, cat)
-    this.router.navigate([`/shop/p/${id}`], {queryParams: {
-      category: cat?.replace(/ /ig,"****")
-    }});
+    if (isParent) {
+      this.router.navigate([`/shop/c/${id}`], {queryParams: {
+        category: cat?.replace(/ /ig,"****")
+      }});
+    } else {
+      this.router.navigate([`/shop/p/${id}`], {queryParams: {
+        category: cat?.replace(/ /ig,"****")
+      }});
+    }
     if(window){
       window.scrollTo({
         top: 0,
