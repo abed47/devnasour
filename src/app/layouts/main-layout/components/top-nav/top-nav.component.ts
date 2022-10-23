@@ -1,10 +1,12 @@
-import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewChecked, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { WindowRef } from 'src/app/window-ref.service';
 
 @Component({
   selector: 'main-top-nav',
@@ -25,6 +27,8 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
     private auth: AuthService,
     private cartService: CartService,
     private favoriteService: FavoritesService,
+    @Inject(PLATFORM_ID) private platformId: any,
+    private windowRef: WindowRef
   ) { }
 
   ngAfterViewChecked(): void {
@@ -33,14 +37,18 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
   ngOnInit(): void {
     this.loadSettings();
     // this.auth.getAuthStatus
-    if (window?.addEventListener) window.addEventListener("click", (e) => this.handleOutsideClick(e))
+    if(isPlatformBrowser(this.platformId)) {
+      window.addEventListener("click", (e) => this.handleOutsideClick(e))
+    }
   }
 
   
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
-    if (window?.removeEventListener) window.removeEventListener("click", (e) => this.handleOutsideClick(e));
+    if(isPlatformBrowser(this.platformId)) {
+      window.removeEventListener("click", (e) => this.handleOutsideClick(e));
+    }
   }
 
   private loadSettings(){
