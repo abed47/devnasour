@@ -1,0 +1,159 @@
+@import "src/styles/styles.scss";
+
+.addresses-page{
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    .addresses-page-container{
+        width: 100%;
+        max-width: 1080px;
+        box-sizing: border-box;
+        padding: 20px;
+
+        .header{
+            margin-bottom: 25px;
+            width: 100%;
+
+            .tabs{
+                button{
+                    border-radius: 0 !important;
+                    color: #6E6E6E;
+                    border-bottom: 2px solid #D4D4D4;
+                    background-color: none;
+                    background: none;
+                    transition: all 300ms ease-in-out;
+
+                    &.active{
+                        color: #1921FA;
+                        border-bottom-color: #1921FA;
+                    }
+                }
+            }
+        }
+
+        main{
+
+            .form-container{
+                // background-color: white;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+
+                form{
+                    box-sizing: border-box;
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    width: 100%;
+                    @include init-flex(row, space-between);
+                    flex-wrap: wrap;
+
+                    .f-w{
+                        width: 100%;
+                    }
+
+                    .h-w{
+                        width: 45%;
+                    }
+
+                    ::ng-deep .input, ::ng-deep .select{
+                        .mat-form-field-outline-start, .mat-form-field-outline-end, mat-form-field-appearance-outline {
+                            border-radius: 0 0 0 0 !important;
+                        }
+                    }
+
+                    .actions{
+                        width: 100%;
+                        margin-top: 15px;
+
+                        .outlined{
+                            width: 40%;
+                            padding: 5px;
+                            border: 1.5px solid $color-secondary;
+                            border-radius: 0;
+                            text-transform: uppercase;
+                        }
+
+                        :not(.outlined){
+                            width: 40%;
+                            padding: 5px;
+                            border-radius: 0;
+                            margin-left: 10px;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+
+                .form-actions{
+                    width: 100%;
+                    box-sizing: border-box;
+                    // padding-left: 25px;
+                    // padding-right: 25px;
+                    padding: 20px;
+                    width: 100%;
+                    @include init-flex(row, flex-end);
+                    flex-wrap: wrap;
+
+                    button{
+                        margin: 0 5px;
+                        padding: 0px 20px;
+                        border-radius: 25px;
+
+                        &.submit{
+                            color: white;
+                            background-color: $color-primary;
+                        }
+
+                        &.cancel{
+                            border: 1px solid $color-danger;
+                            color: $color-danger;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.status-pill{
+    padding: 5px;
+    border-radius: 20px;
+
+    &.pending{
+        color: $color-warn;
+        border: 1px solid $color-warn;
+        width: auto;
+    }
+
+    &.delivered{
+        color: $color-success;
+        border: 1px solid $color-success;
+        width: auto;
+    }
+
+    &.on_the_way{
+        color: $color-primary;
+        border: 1px solid $color-primary;
+        width: auto;
+    }
+
+    &.canceled{
+        color: $color-danger;
+        border: 1px solid $color-danger;
+        width: auto;
+    }
+}
+
+.address-action-button{
+    color: #1921FA;
+    font-size: 13px;
+    font-family: $font-base;
+    
+    &.canceled{
+        color: #6E6E6E;
+    }
+}

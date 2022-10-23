@@ -30,6 +30,7 @@ export class CartComponent implements OnInit {
 
   public billingForm: FormGroup;
   public paymentForm: FormGroup;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -65,6 +66,34 @@ export class CartComponent implements OnInit {
     this.countryList = arr;
 
     this.getCartItems();
+
+    this.request.getAddresses({
+      limit: 20,
+      action: 'get_user_address',
+      offset: 0,
+      web_user_id: this.auth.getAuthStatus().currentUser.web_user_id,
+    }, (res, err) => {
+      if(res && res.status === 1){
+        this.addresses = res.data.map(i => {
+          console.log(i)
+          return {
+            city: i.web_user_address_city,
+            country: i.web_user_address_country,
+            email: i.web_user_address_email,
+            firstName: i.web_user_address_first_name,
+            addressId: i.web_user_address_id,
+            lastName: i.web_user_address_last_name,
+            addressName: i.web_user_address_name,
+            phone: i.web_user_address_phone,
+            province: i.web_user_address_province,
+            zip: i.web_user_address_zip,
+            id: i.web_user_address_id,
+            name: i.web_user_address_title,
+            address: i.web_user_address_name
+          }
+        })
+      }
+    })
   }
 
   private getCartItems(){
@@ -208,5 +237,29 @@ export class CartComponent implements OnInit {
   public onCountryChange (e) {
     console.log("country: ", e);
     this.selectedPhoneCountry = e.iso2;
+  }
+
+  public handleAddressChange(e) {
+    console.log(e, this.addresses);
+    const controls = this.billingForm.controls;
+    controls.saveAddress.setValue(true);
+    if (e > 0) {
+      controls.saveAddress.setValue(false);
+      let address = this.addresses.filter(i => i.addressId == e)?.[0];
+      
+      if (address) {
+        controls.firstName.setValue(address.firstName)
+        controls.lastName.setValue(address.lastName)
+        controls.address.setValue(address.addressName)
+        controls.city.setValue(address.city)
+        controls.country.setValue(address.country)
+        controls.province.setValue(address.province)
+        controls.zip.setValue(address.zip)
+        controls.phone.setValue(address.phone)
+        controls.email.setValue(address.email)
+      }
+      return;
+    }
+    this.billingForm.reset();
   }
 }

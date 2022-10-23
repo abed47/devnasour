@@ -102,11 +102,11 @@
                 </div>
 
                 <div class="address-select-field-container">
-                    <mat-form-field appearance="outline" class="select f-w">
+                    <mat-form-field appearance="outline" class="select f-w" >
                         <mat-label>Address</mat-label>
-                        <mat-select [(ngModel)]="addressId">
+                        <mat-select [(ngModel)]="addressId" (valueChange)="handleAddressChange($event)">
                             <mat-option [value]="-1">New Address</mat-option>
-                            <mat-option *ngFor="let c of addresses" [value]="c.countryNameEn">{{c.countryNameEn}}</mat-option>
+                            <mat-option *ngFor="let c of addresses" [value]="c.addressId">{{c.addressName}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>

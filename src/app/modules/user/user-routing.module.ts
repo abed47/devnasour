@@ -7,6 +7,7 @@ import { DashboardComponent } from 'src/app/pages/user/dashboard/dashboard.compo
 import { DownloadsComponent } from 'src/app/pages/user/downloads/downloads.component';
 import { OrderListingComponent } from 'src/app/pages/user/order-listing/order-listing.component';
 import { OrderViewComponent } from 'src/app/pages/user/order-view/order-view.component';
+import { ViewAddressComponent } from 'src/app/pages/user/view-address/view-address.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'addresses/create',
     component: CreateAddressComponent
+  },
+  {
+    path: 'addresses/view/:id',
+    component: ViewAddressComponent,
   },
   {
     path: 'orders/:id',

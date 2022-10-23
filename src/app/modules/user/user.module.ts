@@ -22,9 +22,10 @@ import { CreateAddressComponent } from '../../pages/user/create-address/create-a
 import { OrderViewComponent } from '../../pages/user/order-view/order-view.component';
 import { DownloadsComponent } from '../../pages/user/downloads/downloads.component';
 import { ChartsModule } from 'ng2-charts';
+import { ViewAddressComponent } from '../../pages/user/view-address/view-address.component';
 
 @NgModule({
-  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent, OrderViewComponent, DownloadsComponent],
+  declarations: [UserLayoutComponent, DashboardComponent, OrderListingComponent, TopNavComponent, AddressListingComponent, CreateAddressComponent, OrderViewComponent, DownloadsComponent, ViewAddressComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -132,4 +132,9 @@ export class AddressListingComponent implements OnInit {
     }
   }
 
+  public viewAddress(e)  {
+    console.log(e);
+    this.router.navigate(['/user/addresses/view/' + e.id])
+  }
+
 }
