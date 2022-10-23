@@ -1,24 +1,29 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImageItem } from 'ng-gallery';
 import { Subject } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
-import { FavoritesService } from 'src/app/services/favorites.service';
 import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
+import Snap from 'snapsvg-cjs';
+
+
+// var s = Snap("#snappy");
+
 
 @Component({
-  selector: 'app-product-view',
+  selector: 'app-mockup-view',
   templateUrl: './product-view.component.html',
   styleUrls: ['./product-view.component.scss']
 })
-export class ProductViewComponent implements OnInit, AfterViewChecked {
+export class MockupViewComponent implements OnInit, AfterViewChecked {
 
   public pathNameSubject: Subject<any> = new Subject();
   public selectedColor: number = null;
   public selectedQuantity = 0;
   public selectedPrice = 0;
+  public imgPreview = null;
   public product = {
     images: [],
     name: '',
@@ -46,6 +51,8 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     // initialSlide: 3
     // width: 500,
   };
+  private s;
+  @ViewChild("snapped") public imageViewRef: ElementRef<SVGElement>
 
   constructor(
     private route: ActivatedRoute,
@@ -53,9 +60,10 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private request: RequestService,
     private cart: CartService,
-    private favoriteService: FavoritesService,
-    private layoutUtils: LayoutUtilsService
-    ) { }
+    ) {
+
+      this.s = Snap('#snappy');
+     }
 
   ngOnInit(): void {
     this.loadData();
@@ -64,7 +72,24 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
   }
 
-  private loadData(): void{
+  private onSVGLoaded(data, e,st) {
+    // console.log("lsdkfjsldfj", data.select("#Layer_1"))
+    console.log(data);
+    var b = this.s.append( data );
+    var bbox = b.getBBox();
+    var vbox = bbox.x + " " + bbox.y + " " + bbox.width + " " + bbox.height;                                           
+    this.s.attr({ viewBox: vbox });
+  }
+
+  private async loadData(){
+    this.s = Snap('#snappy');
+    let mat = this.s.rect(0, 0, 300, 300).attr({
+        fill:"#ffff00"
+    });    
+
+    const data = await this.request.downloadFile("https://svgur.com/i/nbA.svg");
+    console.log(data);
+
     const productId = this.route.snapshot.params.id;
     this.layoutUtilsService.renamePath('Product name', productId);
     this.layoutUtilsService.showLoader();
@@ -73,8 +98,10 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     this.request.getProductDetails(productId)
     .then(r => {
 
+      Snap.load("http://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg", this.onSVGLoaded);
+
+
       if (r && r?.status === 1){
-        console.log(r);
         this.product.name = r.data.web_product_name;
         this.product.images = r?.data?.attachments?.map(item => new ImageItem({src: item, thumb: item})) || [];
         this.product.description = r.data.web_product_description;
@@ -91,8 +118,16 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
         this.product.farmer = r.data.web_product_farmer;
         this.product.country = r.data.web_country_name;
         this.product.rating = +r?.data?.web_product_rate + 1 || 0;
-        if (r?.data?.related_product) { r.data.related_product.forEach(item => {
-          this.relatedProductsList.push(item);
+        if (r?.data?.related_product) { 
+          
+          r.data.related_product.forEach(item => {
+          this.relatedProductsList.push({
+            name: item.web_product_name,
+            price: item.web_product_price,
+            rating: +item.web_product_rate || 0,
+            photo: item.attachments[0],
+            id: item.web_product_id
+          });
         });
         }
       }
@@ -153,40 +188,5 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       return false;
     }
     return true;
-  }
-
-  public onProductClick(id, event, product?) {
-    if (event.target.nodeName === "MAT-ICON" || event.target.nodeName === "BUTTON") {
-      this.handleFavorite(product);
-      return;
-    }
-    this.router.navigate([`/shop/product/${id}/${product.web_product_name.replace(/\ /ig, "-")}`]).then(() => {
-      if(window){
-        window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: "smooth",
-        });
-      }
-      this.loadData()
-    });
-  }
-
-  public isItemInFavorites(p: any) {
-    return this.favoriteService.isItemLinked(p)
-  }
-
-  public handleFavorite(p: any) {
-    if (this.favoriteService.isItemLinked(p)){
-      this.favoriteService.removeItem(p);
-      this.layoutUtils.showSnack("success", "Removed from favorites");
-      this.layoutUtils.checkCartItemChange();
-      return;
-    }
-    const res = this.favoriteService.addItem(p);
-    if (res) {
-      this.layoutUtils.showSnack("success", "Added to favorites");
-      this.layoutUtils.checkCartItemChange();
-    }
   }
 }

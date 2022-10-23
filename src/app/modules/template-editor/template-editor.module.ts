@@ -21,6 +21,12 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { BgSelectDialogComponent } from '../../pages/editors/template-editor/components/bg-select-dialog/bg-select-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MockupBgSelectDialogComponent } from 'src/app/pages/editors/mockup-template-editor/components/bg-select-dialog/mockup-bg-select-dialog.component';
+import { MockupEditorComponent } from 'src/app/pages/editors/mockup-template-editor/mockup-editor.component';
+import { MockupRightPanelComponent } from 'src/app/pages/editors/mockup-template-editor/components/right-panel/mockup-right-panel.component';
+import { MockupSideNavComponent } from 'src/app/pages/editors/mockup-template-editor/components/side-nav/mockup-side-nav.component';
+import { MockupTopNavComponent } from 'src/app/pages/editors/mockup-template-editor/components/top-nav/mockup-top-nav.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -31,7 +37,12 @@ import { MatMenuModule } from '@angular/material/menu';
     SideNavComponent,
     TopNavComponent,
     ImageSelectionDialogComponent,
-    BgSelectDialogComponent
+    BgSelectDialogComponent,
+    MockupBgSelectDialogComponent,
+    MockupEditorComponent,
+    MockupRightPanelComponent,
+    MockupSideNavComponent,
+    MockupTopNavComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +58,7 @@ import { MatMenuModule } from '@angular/material/menu';
     ColorPickerModule,
     MatDialogModule,
     MatMenuModule,
+    MatCheckboxModule,
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

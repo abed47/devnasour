@@ -1,0 +1,32 @@
+<div class="top-nav" style="width: 100%">
+
+  <div class="l">
+    <img src="assets/images/logo.png" alt="devnasour logo" class="logo" />
+
+    <div class="title-editor">
+      <div *ngIf="!titleEditingActive" class="display">
+        <p>{{fileTitle}}.devnasour</p>
+        <button mat-icon-button class="btn" (click)="onEditClick()"><img src="assets/images/edit-icon.png" /></button>
+      </div>
+      <div *ngIf="titleEditingActive" class="editable">
+        <mat-form-field>
+          <input type="text" matInput [(ngModel)]="fileTitle">
+        </mat-form-field>
+        <button mat-icon-button class="btn" (click)="onSaveClick()"><img src="assets/images/save-primary.png" /></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="r">
+
+    <button mat-raised-button color="primary" mat-button [matMenuTriggerFor]="menu">Download</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onDownloadClick()">Devnasour file</button>
+      <button mat-menu-item (click)="onPdfClick()">SVG file</button>
+      <button mat-menu-item (click)="onSaveDesign()">Save Design</button>
+    </mat-menu>
+
+    <div class="user-profile"><img src="assets/images/user-placeholder.png" alt="user-placeholder" /></div>
+  </div>
+
+</div>

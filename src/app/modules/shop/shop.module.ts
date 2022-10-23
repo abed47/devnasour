@@ -32,8 +32,9 @@ import { NewArrivalsListingComponent } from '../../pages/shop/new-arrivals-listi
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { MockupViewComponent } from 'src/app/pages/mockup-view/product-view.component';
 @NgModule({
-  declarations: [ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent, NewArrivalsListingComponent],
+  declarations: [MockupViewComponent,ShopHomeComponent, ShopLayoutComponent, ShopTrendingComponent, ShopListingComponent, ShopDealsComponent, ProductViewComponent, ShopItemListingComponent, PricingComponent, DesignsListingComponent, MockupsListingComponent, ThreeDimentionalListingComponent, NewArrivalsListingComponent],
   imports: [
     CommonModule,
     FormsModule,

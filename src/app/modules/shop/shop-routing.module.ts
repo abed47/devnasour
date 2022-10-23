@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopLayoutComponent } from 'src/app/layouts/shop-layout/shop-layout.component';
+import { MockupViewComponent } from 'src/app/pages/mockup-view/product-view.component';
 import { ProductViewComponent } from 'src/app/pages/product-view/product-view.component';
 import { DesignsListingComponent } from 'src/app/pages/shop/designs-listing/designs-listing.component';
 import { MockupsListingComponent } from 'src/app/pages/shop/mockups-listing/mockups-listing.component';
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'product/:id/:name',
         component: ProductViewComponent
+      },
+      {
+        path: 'mockup/:id/:name',
+        component: MockupViewComponent
       },
       {
         path: 'pricing',

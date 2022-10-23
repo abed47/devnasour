@@ -137,4 +137,8 @@ export class RequestService {
   public searchDesign(body: any) {
     return this.http.post(`${this.serverUrl}design.php`, body).toPromise();
   }
+
+  public downloadFile (url, body?: any) {
+    return this.http.get(url, { headers: { "Content-Type": "image/svg+xml" }}).toPromise();
+  }
 }

@@ -39,7 +39,8 @@
               "./node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
             "scripts": [
-              "./node_modules/intl-tel-input/build/js/intlTelInput.min.js"
+              "./node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+              "./node_modules/snapsvg/dist/snap.svg.js"
             ]
           },
           "configurations": {
@@ -107,7 +108,8 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/intl-tel-input/build/js/intlTelInput.min.js"
+              "./node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+              "../node_modules/snapsvg/dist/snap.svg.js"
             ]
           }
         },

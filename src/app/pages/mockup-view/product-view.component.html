@@ -5,16 +5,7 @@
     <section class="product">
       <article class="l">
         <div class="gallery-container">
-          <gallery
-            [thumbHeight]="100"
-            [title]="false"
-            [counter]="false"
-            imageSize="cover"
-            style="background-color: #fafafa"
-            [items]="product.images"
-            thumbMode="free"
-            id="galery324"
-          ></gallery>
+          <svg #snapped id='snappy' class='img-responsive' viewBox="0 0 1200 700"></svg>         
         </div>
 
         <div class="info">
@@ -128,23 +119,32 @@
       <h1>Related Products</h1>
 
       <div class="products">
-        <div class="list-item swiper-slide" *ngFor="let item of relatedProductsList" (click)="onProductClick(item.web_product_id, $event, item)">
-          <img [src]="item.attachments[0]" alt="">
-            
-          <div class="ratings-wrapper">
-                <ngx-material-rating class="rating" [max]="5" [disabled]="true" color="accent" [value]="item.web_product_rate">
-              </ngx-material-rating>
-          </div>
-  
-          <div class="summary">
-              <div class="title">
-                  <h3>{{item.web_product_name}}</h3>
-                  <button [hidden]="isItemInFavorites(item)" mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
-                  <button [hidden]="!isItemInFavorites(item)" mat-icon-button><mat-icon>favorite</mat-icon></button>
+        <div
+              *ngFor="let item of relatedProductsList"
+              class="list-item swiper-slide"
+              (click)="navigateTo(item.id, item.name)"
+            >
+              <img [src]="item.photo" alt="" />
+
+              <div class="bottom">
+                <ngx-material-rating
+                  class="rating"
+                  [max]="5"
+                  [disabled]="false"
+                  color="accent"
+                  value="2.5"
+                >
+                </ngx-material-rating>
+
+                <div class="name">
+                  <h1>{{ item.name }}</h1>
+
+                  <button mat-icon-button>
+                    <mat-icon>favorite_outline</mat-icon>
+                  </button>
+                </div>
               </div>
-              <h2>TL {{item.web_product_price}}</h2>
-          </div>
-        </div>
+            </div>
       </div>
     </section>
   </div>

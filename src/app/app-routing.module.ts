@@ -10,7 +10,7 @@ const routes: Routes = [
     component: TemplateEditorLayoutComponent,
     children: [
       {
-        path: '2d',
+        path: '',
         loadChildren: () => import('./modules/template-editor/template-editor.module').then(m => m.TemplateEditorModule)
       }
     ]
@@ -43,7 +43,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
+    initialNavigation: 'enabled',
+    onSameUrlNavigation: 'reload',
+    
 })],
   exports: [RouterModule]
 })
