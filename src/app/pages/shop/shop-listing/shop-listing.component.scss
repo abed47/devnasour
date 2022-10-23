@@ -6,7 +6,7 @@
     box-sizing: border-box;
     min-height: 100vh;
     padding: 20px;
-    @include init-flex(row, start, start);
+    @include init-flex(row, flex-start, flex-start);
     flex-wrap: wrap;
 
     section.banner-wrapper{
@@ -50,14 +50,14 @@
     aside{
         width: 190px;
         height: 100%;
-        @include init-flex(column, start, start);
+        @include init-flex(column, flex-start, flex-start);
         border: 1px solid black;
         margin-right: 20px;
         border-radius: 5px;
         // overflow: hidden;
         
         .list-header{
-            @include init-flex(row, start);
+            @include init-flex(row, flex-start);
             background-color: #F8F8F8;
             padding: 10px;
             .icon{

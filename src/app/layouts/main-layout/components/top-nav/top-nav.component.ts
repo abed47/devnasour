@@ -34,7 +34,7 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
   ngOnInit(): void {
     this.loadSettings();
     // this.auth.getAuthStatus
-    if(window !== undefined) {
+    if(window && window?.addEventListener) {
       //@ts-ignore
       window.addEventListener("click", (e) => this.handleOutsideClick(e))
     }
@@ -44,7 +44,7 @@ export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
-    if(window !== undefined) {
+    if(window && window?.removeEventListener) {
       //@ts-ignore
       window.removeEventListener("click", (e) => this.handleOutsideClick(e));
     }
