@@ -6,7 +6,54 @@
         <a [routerLink]="['/shop']" [routerLinkActive]="'active'">Shop</a>
         <a [routerLink]="['/contact']" [routerLinkActive]="'active'">Contact Us</a>
         <a [routerLink]="['/about']" [routerLinkActive]="'active'">About</a>
+        <a mat-icon-button (click)="menuToggle()" id="menuToggler">Design</a>
     </nav>
+
+    <div id="megaMenu" class="mega-menu" [class.active]="megaMenuOpen">
+        <div   class="main">
+            <a [routerLink]="['/template-editor/2d']" class="item">
+                <div class="left">
+                    <img src="assets/images/mega-menu-main.png" alt="">
+                </div>
+                <div class="right">
+                    <div class="title">2D</div>
+                    <p>Try our 2d editor</p>
+                </div>
+            </a>
+            <a [routerLink]="['/shop/3d']" class="item">
+                <div class="left">
+                    <img src="assets/images/mega-menu-main.png" alt="">
+                </div>
+                <div class="right">
+                    <div class="title">3D</div>
+                    <p>Try our 3d editor</p>
+                </div>
+            </a>
+            <a [routerLink]="['/shop/3d']" class="item">
+                <div class="left">
+                    <img src="assets/images/mega-menu-main.png" alt="">
+                </div>
+                <div class="right">
+                    <div class="title">3D Products</div>
+                    <p>Try our 3D designed Items</p>
+                </div>
+            </a>
+            <a [routerLink]="['/shop/mockups']" class="item">
+                <div class="left">
+                    <img src="assets/images/mega-menu-main.png" alt="">
+                </div>
+                <div class="right">
+                    <div class="title">Mockups</div>
+                    <p>Checkout our 2D selection </p>
+                </div>
+            </a>
+        </div>
+        <div class="side">
+            <img src="assets/images/mega-menu-side.png" alt="">
+            <img src="assets/images/mega-menu-side.png" alt="">
+            <img src="assets/images/mega-menu-side.png" alt="">
+        </div>
+    </div>
 
 
     <button [hidden]="loggedIn" class="btn secondary d-md" mat-button (click)="moveToLogin()">Account login</button>

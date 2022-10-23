@@ -19,6 +19,7 @@ import { NgxFlickingModule } from '@egjs/ngx-flicking';
 import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     AboutComponent,
     CartComponent,
     BecomeAPartnerComponent,
-    FavoritesComponent
+    FavoritesComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +45,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     NgxFlickingModule,
     MatFormFieldModule,
     Ng2TelInputModule,
+    MatMenuModule
   ],
   bootstrap: [MainLayoutComponent]
 })

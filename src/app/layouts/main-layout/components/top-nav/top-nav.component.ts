@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,12 +11,13 @@ import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss']
 })
-export class TopNavComponent implements OnInit, OnDestroy{
+export class TopNavComponent implements OnInit, OnDestroy, AfterViewChecked{
 
   private subscriptions: Subscription[] = [];
   public loggedIn = false;
   public cartItemCount = 0;
   public favoriteItemCount = 0;
+  public megaMenuOpen = false
 
   constructor(
     private router: Router, 
@@ -26,13 +27,20 @@ export class TopNavComponent implements OnInit, OnDestroy{
     private favoriteService: FavoritesService,
   ) { }
 
+  ngAfterViewChecked(): void {
+  }
+
   ngOnInit(): void {
     this.loadSettings();
     // this.auth.getAuthStatus
+    window.addEventListener("click", (e) => this.handleOutsideClick(e))
   }
+
+  
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
+    window.removeEventListener("click", (e) => this.handleOutsideClick(e));
   }
 
   private loadSettings(){
@@ -75,5 +83,14 @@ export class TopNavComponent implements OnInit, OnDestroy{
       return this.favoriteItemCount = items.length;
     }
     this.favoriteItemCount = 0;
+  }
+
+  public menuToggle() {
+    this.megaMenuOpen = !this.megaMenuOpen
+  }
+
+  public handleOutsideClick (e) {
+    if (e.target.offsetParent.id == "menuToggler") return;
+    this.megaMenuOpen = false;
   }
 }
