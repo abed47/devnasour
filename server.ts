@@ -3,6 +3,8 @@ import 'localstorage-polyfill';
 import 'sessionstorage-polyfill';
 global['localStorage'] = localStorage;
 global['sessionStorage'] = sessionStorage;
+global['window'] = window;
+global['document'] = window.document;
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
