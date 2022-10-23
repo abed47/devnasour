@@ -1,4 +1,4 @@
-<header class="main-layout-header">
+<header class="main-layout-header" (click)="handleOutsideClick($event)">
     <img class="logo" src="../../../../../assets/images/logo.png" alt="devnasour logo" [routerLink]="['/']">
     <nav class="links d-md">
         <a [routerLink]="['/home']" [routerLinkActive]="'active'">Home</a>

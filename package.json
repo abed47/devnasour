@@ -36,6 +36,7 @@
     "@types/jquery": "^3.5.14",
     "chart.js": "^2.9.3",
     "country-codes-list": "^1.6.8",
+    "domino": "^2.1.6",
     "dotted-map": "^2.2.3",
     "express": "^4.15.2",
     "fabric": "^5.2.1",
