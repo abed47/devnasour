@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-shop-deals',
@@ -7,62 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopDealsComponent implements OnInit {
 
-  public banners = [
-    {
-      background: 'https://powaysigncompany.com/wp-content/uploads/2015/10/promotional-products-1024x648.jpg',
-      title: 'Best Deals For you',
-      percentage: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-      url: '',
-      size: 1,
-      order: 1
-    },
-    {
-      background: 'https://powaysigncompany.com/wp-content/uploads/2015/10/promotional-products-1024x648.jpg',
-      title: 'Best Deals For you',
-      percentage: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-      url: '',
-      size: .5,
-      order: 2
-    },
-    {
-      background: 'https://powaysigncompany.com/wp-content/uploads/2015/10/promotional-products-1024x648.jpg',
-      title: 'Best Deals For you',
-      percentage: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-      url: '',
-      size: .5,
-      order: 3
-    },
-    {
-      background: 'https://powaysigncompany.com/wp-content/uploads/2015/10/promotional-products-1024x648.jpg',
-      title: 'Best Deals For you',
-      percentage: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-      url: '',
-      size: 1,
-      order: 4
-    },
-    {
-      background: 'https://powaysigncompany.com/wp-content/uploads/2015/10/promotional-products-1024x648.jpg',
-      title: 'Best Deals For you',
-      percentage: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-      url: '',
-      size: .75,
-      order: 5
-    },
-    {
-      background: 'https://powaysigncompany.com/wp-content/uploads/2015/10/promotional-products-1024x648.jpg',
-      title: 'Best Deals For you',
-      percentage: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-      url: '',
-      size: .25,
-      order: 6
-    },
-  ]
+  public banners = []
 
   public onSaleItems = [
     {
@@ -74,12 +21,55 @@ export class ShopDealsComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(
+    private request: RequestService,
+    private layoutUtils: LayoutUtilsService
+  ) { }
 
   ngOnInit(): void {
 
     for(let i = 1; i < 5; i++){
       this.onSaleItems.push({...this.onSaleItems[0], id: i + 1})
+    }
+
+    this.loadData();
+  }
+
+  async loadData() {
+    try {
+      console.log("loading data...");
+      const dealsRes: any = await this.request.getDeals();
+      console.log("dealsRespons: ", dealsRes);
+      console.log("loaded data....");
+      
+      if (dealsRes?.data) {
+        dealsRes.data.forEach(item => {
+          this.banners.push({
+            background: item.web_deal_image,
+            title: item.web_deal_title,
+            percentage: 10,
+            description: item.web_deal_description,
+            url: item.web_deal_link,
+            size: this.getSize(item.web_deal_size_value),
+            order: 6
+          })
+        })
+      }
+    } catch (err) {
+      this.layoutUtils.showSnack("error", err?.message)
+    }
+  }
+
+  private getSize (s: string) {
+    switch (s) {
+      case 'L':
+        return 1;
+      case 'H':
+        return .5
+      case 'Q':
+        return .25
+      default:
+        return .75
     }
   }
 

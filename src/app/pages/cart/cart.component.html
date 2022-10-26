@@ -66,10 +66,10 @@
                 <p>Enter your coupon if you have one</p>
                 <mat-form-field appearance="outline" class="font-field">
                     <mat-label>Voucher code</mat-label>
-                    <input type="text" matInput>
+                    <input type="text" matInput [disabled]="promoId > 0">
                 </mat-form-field>
     
-                <button [disabled]="processing" mat-raised-button color="accent">APPLY</button>
+                <button [disabled]="processing || promoId > 0" mat-raised-button color="accent">APPLY</button>
             </div>
     
             <div class="totals">
@@ -81,6 +81,12 @@
                     <p>Shipping</p>
                     <p>{{getTotals().shipping}}</p>
                 </span>
+
+                <span [hidden]="promoId < 1">
+                    <p>Discount</p>
+                    <p>TL {{(getTotals().total / 100 ) * promoPercentage}}</p>
+                </span>
+                
                 <span class="total">
                     <p>TOTAL</p>
                     <p>{{getTotals().total}}</p>
@@ -216,6 +222,11 @@
                     <div class="item">
                         <p>Shipping</p>
                         <p>TL {{getTotals().shipping}}</p>
+                    </div>
+
+                    <div class="item" [hidden]="promoId < 1">
+                        <p>Total</p>
+                        <p>TL {{(getTotals().total / 100 ) * promoPercentage}}</p>
                     </div>
 
                     <div class="total">

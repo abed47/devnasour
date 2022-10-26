@@ -16,6 +16,7 @@ export class ViewAddressComponent implements OnInit {
   public processing: boolean = false;
   public billingForm: FormGroup;
   public countryList = [];
+  public addressId: number | string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -79,6 +80,7 @@ export class ViewAddressComponent implements OnInit {
         })
 
         let currentAddress = addrs.filter(i => i.addressId == this.route.snapshot.params.id)?.[0];
+        this.addressId = this.route.snapshot.params.id;
         this.billingForm.setValue({
           firstName: currentAddress.firstName,
           lastName: currentAddress.lastName,
@@ -100,7 +102,7 @@ export class ViewAddressComponent implements OnInit {
     if(this.billingForm.valid){
       this.processing = true;
       let formValue = this.billingForm.value;
-      this.request.createAddress({
+      this.request.editAddress({
         first_name: formValue.firstName,
         last_name: formValue.lastName,
         email: formValue.email,
@@ -110,8 +112,9 @@ export class ViewAddressComponent implements OnInit {
         country: formValue.country,
         zip: formValue.zip,
         web_user_id: this.auth.getAuthStatus().currentUser.web_user_id,
-        action: 'add_user_address',
+        action: 'edit_user_address',
         province: formValue.province,
+        address_id: this.addressId,
       }, (res, err) => {
         this.processing = false;
         if(err){
@@ -120,7 +123,7 @@ export class ViewAddressComponent implements OnInit {
         }
 
         if(res){
-          this.layoutUtils.showSnack("success", "Created successfully");
+          this.layoutUtils.showSnack("success", "Edited successfully");
           this.router.navigate(['/user/addresses']);
           if(window){
             window.scrollTo({

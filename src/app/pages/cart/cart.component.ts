@@ -15,6 +15,9 @@ import { phone } from "phone";
 })
 export class CartComponent implements OnInit {
 
+  public promoId = null;
+  public promoPercentage = 0;
+
   public selectedPhoneCountry = "tr";
   public countryList = [];
   public voucherCode = "";
@@ -75,7 +78,6 @@ export class CartComponent implements OnInit {
     }, (res, err) => {
       if(res && res.status === 1){
         this.addresses = res.data.map(i => {
-          console.log(i)
           return {
             city: i.web_user_address_city,
             country: i.web_user_address_country,
@@ -89,7 +91,8 @@ export class CartComponent implements OnInit {
             zip: i.web_user_address_zip,
             id: i.web_user_address_id,
             name: i.web_user_address_title,
-            address: i.web_user_address_name
+            address: i.web_user_address_name,
+            voucher_code: this.promoId,
           }
         })
       }
@@ -118,7 +121,17 @@ export class CartComponent implements OnInit {
 
   public getTotals(){
     if(this.cartItems){
-      return {total: this.calcCartTotal() + this.shippingPrice, shipping: this.shippingPrice, subtotal: this.calcCartTotal()}
+      let total = this.calcCartTotal() + this.shippingPrice;
+      let shipping = this.shippingPrice;
+      let subtotal = this.calcCartTotal();
+      let discountAmount = ((total / 100) * this.promoPercentage) || 0;
+      total -= discountAmount
+      return {
+        total, 
+        shipping, 
+        subtotal,
+        discountAmount
+      }
     }
 
     return { total: 0, subtotal: 0, shipping: 0}
