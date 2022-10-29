@@ -73,10 +73,13 @@
         <div class="actions">
           <p class="title">Various versions</p>
 
-          <button mat-raised-button color="accent" (click)="addToCart()">
+          <button mat-raised-button color="accent" (click)="addToCart()" [disabled]="!file">
             <mat-icon>add_shopping_cart</mat-icon> Add to cart
           </button>
-          <button mat-raised-button color="accent">UPLOAD</button>
+          <button mat-raised-button color="accent" style="position: relative;">
+            <input accept="image/*, application/pdf" type="file" style="width: 100%; height: 100%; opacity: 0; position: absolute; z-index: 500; left: 0; top: 0;" (change)="onFileSelectChange($event)" />
+            UPLOAD
+          </button>
           <button mat-raised-button color="accent" [routerLink]="['/request-a-design']">CONTACT FOR DESIGN</button>
           
 

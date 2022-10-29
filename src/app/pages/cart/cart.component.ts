@@ -275,4 +275,14 @@ export class CartComponent implements OnInit {
     }
     this.billingForm.reset();
   }
+
+  public handleItemQuantityChange(item, e, i) {
+    let p = item.quantities.filter(pr => pr.quantity == e.value);
+    let oldCart = this.cart.getItems();
+    oldCart[i].quantity = p[0].quantity;
+    oldCart[i].price = p[0].price;
+    this.cart.clear();
+    this.cart.setItems(oldCart);
+    this.cartItems = oldCart;
+  }
 }

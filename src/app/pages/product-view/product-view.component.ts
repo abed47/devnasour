@@ -15,6 +15,7 @@ import { SwiperOptions } from 'swiper';
 })
 export class ProductViewComponent implements OnInit, AfterViewChecked {
 
+  public file: any | null = null;
   public pathNameSubject: Subject<any> = new Subject();
   public selectedColor: number = null;
   public selectedQuantity = 0;
@@ -125,8 +126,9 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public addToCart(): void{
-    if (!this.colorSelectionValid()) { return; }
+  public async addToCart(): Promise<void>{
+    if (!this.colorSelectionValid() || !this.file) { return; }
+    const fileUrl = await this.getBase64(this.file);
     const res = this.cart.addItem({
       name: this.product.name,
       description: this.product.description,
@@ -136,6 +138,8 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       discount: this.product.discount,
       id: this.route.snapshot.params.id,
       color: this.selectedColor,
+      file: fileUrl,
+      quantities: this.product.priceList
     });
     if (res) {
       this.layoutUtilsService.showSnack('success', 'Product Added');
@@ -172,6 +176,14 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  public onFileSelectChange(e) {
+    if (e?.target?.files?.[0]){
+      this.file = e.target.files[0];
+      return;
+    }
+    this.file = null;
+  }
+
   public isItemInFavorites(p: any) {
     return this.favoriteService.isItemLinked(p)
   }
@@ -189,4 +201,18 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       this.layoutUtils.checkCartItemChange();
     }
   }
+
+
+  private getBase64(f) {
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(f);
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = function (error) {
+        reject(error);
+      };
+    })
+ }
 }

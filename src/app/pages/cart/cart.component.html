@@ -45,7 +45,13 @@
 
                     <!-- <td class="price"><h3>{{item.price}}TL</h3></td> -->
 
-                    <td class="quantity">{{item.quantity}}</td>
+                    <td class="quantity">
+                        <mat-form-field>
+                            <mat-select [value]="item.quantity" (selectionChange)="handleItemQuantityChange(item, $event, i)">
+                                <mat-option *ngFor="let p of item.quantities" [value]="p.quantity">{{p.quantity}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
                     <td class="total">{{item.price}}TL</td>
                     <td class="actions"><button mat-icon-button (click)="removeCartItem(i)"><mat-icon>delete_outline</mat-icon></button></td>
                 </tr>
