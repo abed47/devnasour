@@ -18,7 +18,7 @@
 
         <mat-tree style="background-color: none;" [dataSource]="dataSource" [treeControl]="treeControl">
             <!-- This is the tree node template for leaf nodes -->
-            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="5">
               <!-- use a disabled button to provide padding for tree leaf -->
               <button mat-icon-button disabled></button>
               <div style="cursor: pointer;" (click)="navigateTo(node.id, node.name)">{{node.name}}</div>

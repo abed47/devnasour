@@ -26,7 +26,7 @@
                     <div class="list-item" *ngFor="let item of products">
 
                         <div class="l">
-                            <img src="assets/images/banner-img.png" alt="">
+                            <img [src]="item?.web_product_attachment_1" alt="">
                         </div>
 
                         <div class="r">

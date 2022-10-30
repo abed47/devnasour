@@ -285,4 +285,27 @@ export class CartComponent implements OnInit {
     this.cart.setItems(oldCart);
     this.cartItems = oldCart;
   }
+
+  //3QACPM8P0
+
+  public async handleGetCoupon() {
+    try {
+      this.processing = true;
+      const res: any = await this.request.getCoupon(this.voucherCode);
+      
+      if (res?.status === 0) {
+        this.layoutUtils.showSnack("error", res?.message);
+      }
+
+      if (res?.status === 1) {
+        this.layoutUtils.showSnack("success", "Promo code added");
+      }
+      this.processing = false;
+    } catch (err) {
+      this.layoutUtils.showSnack("error", err?.message || "Cannot add")
+      this.processing = false;
+      this.voucherCode = "";
+      this.promoId = null;
+    }
+  }
 }

@@ -151,4 +151,11 @@ export class RequestService {
       action: 'get_deals',
     }).toPromise();
   }
+
+  public getCoupon(code: string) {
+    return this.http.post(`${this.serverUrl}actions.php`, {
+      action: 'get_coupon',
+      code
+    }).toPromise()
+  }
 }

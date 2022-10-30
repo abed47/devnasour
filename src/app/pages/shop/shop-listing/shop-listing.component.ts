@@ -24,7 +24,6 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
   hasChild = (_: number, node: any) => node.expandable;
 
   private _transformer = (node: any, level: number) => {
-    console.log("this is the node >>>>>> ", node)
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.web_category_name,
@@ -91,6 +90,7 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
     window.onresize = e => {
       $('.list-item img').height($('.list-item img').width())
     }
+
   }
 
   ngOnInit(): void {
@@ -148,10 +148,10 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
       
       $('.list-item img').height($('.list-item img').width())
 
-      console.log(categoryListRes);
       $('.sub-category-item').hide();
       this.layoutUtils.hidePreloader();
 
+      this?.treeControl?.expand(this?.treeControl?.dataNodes?.[0])
       
     } catch (err) {
       this.layoutUtils.showSnack("error", err?.message || "server error");
@@ -186,7 +186,6 @@ export class ShopListingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public navigateTo(id: number | string, cat, isParent?){
-    console.log("hello 2 ", id, cat)
     if (isParent) {
       this.router.navigate([`/shop/c/${id}`], {queryParams: {
         category: cat?.replace(/ /ig,"****")

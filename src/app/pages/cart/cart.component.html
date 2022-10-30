@@ -72,10 +72,10 @@
                 <p>Enter your coupon if you have one</p>
                 <mat-form-field appearance="outline" class="font-field">
                     <mat-label>Voucher code</mat-label>
-                    <input type="text" matInput [disabled]="promoId > 0">
+                    <input type="text" matInput [disabled]="promoId > 0" [(ngModel)]="voucherCode">
                 </mat-form-field>
     
-                <button [disabled]="processing || promoId > 0" mat-raised-button color="accent">APPLY</button>
+                <button [disabled]="processing || promoId > 0" mat-raised-button color="accent" (click)="handleGetCoupon()">APPLY</button>
             </div>
     
             <div class="totals">
