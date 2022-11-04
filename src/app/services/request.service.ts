@@ -158,4 +158,14 @@ export class RequestService {
       code
     }).toPromise()
   }
+
+  public getDashboard (webUserId) {
+    return this
+    .http
+    .post(`${this.serverUrl}actions.php`, {
+      action: "user_dashboard",
+      web_user_id: webUserId
+    })
+    .toPromise();
+  }
 }

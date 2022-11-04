@@ -298,6 +298,9 @@ export class CartComponent implements OnInit {
       }
 
       if (res?.status === 1) {
+        let data = res.data;
+        this.promoId = data.web_coupon_id;
+        this.promoPercentage = +data.web_coupon_discount;
         this.layoutUtils.showSnack("success", "Promo code added");
       }
       this.processing = false;

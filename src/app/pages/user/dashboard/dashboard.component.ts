@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartColor, ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Color } from 'ng2-charts';
+import { AuthService } from 'src/app/services/auth.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,19 +47,32 @@ export class DashboardComponent implements OnInit {
     ]
   }
 
-  constructor() { }
+  constructor(
+    private request: RequestService,
+    private auth: AuthService,
+    private layoutUtils: LayoutUtilsService
+  ) { }
 
   ngOnInit(): void {
     this.buildSettings();
   }
 
-  private buildSettings() {
-    const data = this.data;
+  private async buildSettings() {
+    // const data = this.data;
 
-    data.stats.forEach(item => {
-      this.chart1Data.push(item.value);
-      this.chart1Labels.push(item.label);
-    })
+    // data.stats.forEach(item => {
+    //   this.chart1Data.push(item.value);
+    //   this.chart1Labels.push(item.label);
+    // })
+
+    try {
+      const user = this.auth.getAuthStatus();
+      console.log(user);
+      const r = await this.request.getDashboard(user.currentUser.web_user_id);
+      console.log("res >>>>>>>>>>>>>>>>>> : ", r);
+    } catch (err) {
+      this.layoutUtils.showSnack("error", err?.message);
+    }
   }
 
   public getBars(){
@@ -71,7 +87,7 @@ export class DashboardComponent implements OnInit {
         return +c.value + +p;
       }) || 0;  
     }
-    console.log(item, list)
+    // console.log(item, list)
     return `${this.getPercentage(total, item.value)}%`;
     // return '55%' 
   }
