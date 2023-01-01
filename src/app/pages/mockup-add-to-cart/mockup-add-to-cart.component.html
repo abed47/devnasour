@@ -1,0 +1,75 @@
+<main class="page">
+
+    <div class="mockup-page-container">
+        <div class="left" #canvasHolder>
+            <canvas #mainCan id="mainCan" width="400" height="400"></canvas>
+            <div #imageHolder id="imgHolder">
+                <img *ngFor="let s of sides" [src]="mockup[s]" [class.active]="selectedSide === s" (click)="onFabChange(s)">
+            </div>
+        </div>
+        <div class="right">
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab label="Text">
+                    <div class="textab">
+                        <div [hidden]="quotas[selectedSide]?.text === true" class="add-text">
+                            <mat-form-field class="input">
+                                <mat-label>Add Text</mat-label>
+                                <textarea matInput [(ngModel)]="currentText"  type="text"></textarea>
+                            </mat-form-field>
+                            <button mat-stroked-button color="primary" (click)="onAddText()">Add Text</button>
+                        </div>
+                        <div [hidden]="quotas[selectedSide]?.text === false" class="add-text">
+                            <mat-form-field class="input">
+                                <mat-label>Add Text</mat-label>
+                                <textarea matInput [(ngModel)]="currentText" (keyup)="onTextChange($event)" type="text"></textarea>
+                            </mat-form-field>
+
+                            <!-- <mat-select>
+                                <mat-option>dlskfjsdlfj</mat-option>
+                            </mat-select> -->
+
+                            <!-- <mat-form-field>
+                                <mat-label>Font</mat-label>
+                                <select></select>
+                            </mat-form-field> -->
+                            <div class="tools">
+
+                                <div class="tool">
+                                    <h1>Color</h1>
+                                    <div class="color-input">
+                                        <input [(colorPicker)]="color" [style.background]="color" [cpOutputFormat]="'rgba'"  (colorPickerChange)="handleColorChange($event)"/>
+                                    </div>
+                                </div>
+
+                                <div class="font-settings">
+                                    <h1>Font</h1>
+                        
+                                    <ng-select [(ngModel)]="font" (change)="onFontChange($event)">
+                                        <ng-option *ngFor="let item of fontList" [value]="item" class="itedm">
+                                            <p [ngStyle]="{fontFamily: item, margin: 0}">{{item}}</p>
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Image">
+                    <div [hidden]="quotas[selectedSide]?.image === true" class="image-choose">
+                        <button mat-stroked-button color="secondary" (click)="selectImage()">Choose image</button>
+                        <input type="file" accept="image/*" #imageUpload (change)="onImageChange($event)">
+                    </div>
+
+                    <div [hidden]="quotas[selectedSide]?.image === false" class="image-chosen">
+                        <button mat-stroked-button color="secondary" (click)="bringImageToBack()">Move to back</button>
+                        <button mat-stroked-button color="secondary" (click)="bringImageToFront()">Move to front</button>
+                        <button mat-stroked-button color="secondary" (click)="rotateImage()">Rotate</button>
+                        <button mat-stroked-button color="secondary" (click)="changeImage()">Change</button>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Specifications">Content 3</mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+</main>

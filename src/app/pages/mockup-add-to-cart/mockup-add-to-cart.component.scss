@@ -1,0 +1,135 @@
+@import "src/styles/styles.scss";
+@import "node_modules/sass-google-fonts/src/GoogleFonts.scss";
+
+@include google-font( 'Dancing Script' );
+@include google-font( 'Lato' );
+@include google-font( 'Acme' );
+@include google-font( 'Roboto' );
+@include google-font( 'Montserrat' );
+@include google-font( 'Oswald' );
+@include google-font( 'Amiri' );
+@include google-font( 'Ubuntu' );
+@include google-font( 'Raleway' );
+@include google-font( 'Playfair Display' );
+@include google-font( 'Lora' );
+@include google-font( 'Inconsolata' );
+@include google-font( 'Lobster' );
+@include google-font( 'Smokum' );
+@include google-font( 'Syne Mono' );
+@include google-font( 'Pacifico' );
+@include google-font( 'Shadows Into Light' );
+@include google-font( 'Permanent Marker' );
+@include google-font( 'Caveat' );
+@include google-font( 'Poppins' );
+
+main.page{
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .mockup-page-container{
+        // width: 50%;
+        // max-width: 400px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .left{
+            width: 100%;
+            min-width: 400px;
+            width: 400px;
+            // max-width: 50%;
+
+            #imgHolder {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                img{
+                    width: 50px;
+                    
+                    &.active{
+                        border: 1px solid $color-primary;
+                    }
+                }
+            }
+        }
+
+        .right {
+            box-sizing: border-box;
+            padding: 0 15px;
+            min-height: 400px;
+            width: 100%;
+            // width: 400px;
+
+
+            .tools{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start;
+                width: 100%;
+
+                &>*{
+                    width: 50%;
+                }
+            }
+
+            .tool{
+                min-height: 500px;
+            }
+
+            .textab{
+                .add-text{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                    .input{
+                        width: 100%;
+                        margin: 15px 0 5px 0;
+                    }
+                }
+            }
+
+            .image-choose{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px 5px;
+                height: 50px;
+
+                input {
+                    opacity: 0;
+                }
+            }
+
+            .image-chosen{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px 5px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+
+                button{
+                    width: 45% !important;
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.color-picker{
+    z-index: 5000;
+}

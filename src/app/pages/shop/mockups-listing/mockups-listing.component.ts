@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mockups-listing',
@@ -9,7 +10,9 @@ export class MockupsListingComponent implements OnInit {
 
   productList = [];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -24,6 +27,19 @@ export class MockupsListingComponent implements OnInit {
         photo: "assets/images/box-image.png",
         id: 1
       })
+    }
+  }
+
+
+  public onMoveToPage(item: any){
+    console.log(item);
+    this.router.navigate([`/shop/mockup/${item.id}/${item.name}`]);
+    if(window){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
     }
   }
 

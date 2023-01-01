@@ -15,6 +15,7 @@ export class OrderViewComponent implements OnInit {
   public history = [];
   public products = [];
   public orderDetails = null;
+  public orderTotal = 0;
   constructor(
     private auth: AuthService,
     private layoutUtils: LayoutUtilsService,
@@ -46,6 +47,7 @@ export class OrderViewComponent implements OnInit {
         this.orderDetails = res.data[0];
         this.products = res.data[0].products;
         this.history = res.data[0].event_store;
+        this.orderTotal = +res.data[0].web_order_total;
       }
     })
   }

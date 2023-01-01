@@ -99,6 +99,21 @@
         <div class="specifications">
           <h1 class="title">Specifications</h1>
           <ul>
+            <li [hidden]="!product?.sizes?.length">
+              <p>Sizes</p>
+    
+                <mat-select
+                  [(ngModel)]="selectedSize"
+                  (valueChange)="handleSizeChange($event)"
+                  class="select"
+                >
+                  <mat-option
+                    *ngFor="let item of product.sizes"
+                    [value]="item.web_product_size_id"
+                    >{{ item.web_product_size_value }}</mat-option
+                  >
+                </mat-select>
+            </li>
             <li>
               <p>Quantity</p>
     

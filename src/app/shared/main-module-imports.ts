@@ -19,6 +19,15 @@ import { GalleryModule } from 'ng-gallery';
 import { SharedModule } from './shared.module';
 import { RequestDesignComponent } from '../pages/request-design/request-design.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatBadgeModule } from '@angular/material/badge';
+import { NgxFlickingModule } from '@egjs/ngx-flicking';
+import { Ng2TelInputModule } from 'ng2-tel-input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 /**
  * @description imports and declarations for the main layout declarations
@@ -41,6 +50,16 @@ export default {
         GalleryModule,
         SharedModule,
         MatRadioModule,
+        NgxMatIntlTelInputModule,
+        MatPaginatorModule,
+        MatBadgeModule,
+        NgxFlickingModule,
+        MatFormFieldModule,
+        Ng2TelInputModule,
+        MatMenuModule,
+        MatTabsModule,
+        ColorPickerModule,
+        NgSelectModule,
     ],
     declarations: [
         FooterComponent,

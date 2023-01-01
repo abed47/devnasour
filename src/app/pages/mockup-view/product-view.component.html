@@ -67,7 +67,6 @@
           <button mat-raised-button color="accent" (click)="addToCart()">
             <mat-icon>add_shopping_cart</mat-icon> Add to cart
           </button>
-          <button mat-raised-button color="accent">UPLOAD</button>
           <button mat-raised-button color="accent" [routerLink]="['/request-a-design']">CONTACT FOR DESIGN</button>
           
 
@@ -87,7 +86,7 @@
         <div class="specifications">
           <h1 class="title">Specifications</h1>
           <ul>
-            <li>
+            <!-- <li>
               <p>Quantity</p>
     
                 <mat-select
@@ -101,7 +100,7 @@
                     >{{ item.quantity }}</mat-option
                   >
                 </mat-select>
-            </li>
+            </li> -->
             <li>
               <p>Size</p>
               <p>{{ product.size }}</p>

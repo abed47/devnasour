@@ -19,6 +19,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
   public pathNameSubject: Subject<any> = new Subject();
   public selectedColor: number = null;
   public selectedQuantity = 0;
+  public selectedSize = null;
   public selectedPrice = 0;
   public product = {
     images: [],
@@ -35,6 +36,7 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     country: '',
     sizing: '',
     color: [],
+    sizes: []
   };
 
   public relatedProductsList = [];
@@ -92,6 +94,10 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
         this.product.farmer = r.data.web_product_farmer;
         this.product.country = r.data.web_country_name;
         this.product.rating = +r?.data?.web_product_rate + 1 || 0;
+        this.product.sizes = r?.data?.product_size || [];
+        if (r?.data?.product_size?.length) {
+          this.selectedSize = r?.data?.product_size[0].web_product_size_id;
+        }
         if (r?.data?.related_product) { r.data.related_product.forEach(item => {
           this.relatedProductsList.push(item);
         });
@@ -111,6 +117,10 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
     const newP = this.product.priceList.filter(item => item.quantity === e);
     this.selectedPrice = newP[0].price;
     this.selectedQuantity = newP[0].quantity;
+  }
+
+  public handleSizeChange(e): void{
+    this.selectedQuantity = e;
   }
 
   public navigateTo(e, name): void{
@@ -139,7 +149,8 @@ export class ProductViewComponent implements OnInit, AfterViewChecked {
       id: this.route.snapshot.params.id,
       color: this.selectedColor,
       file: fileUrl,
-      quantities: this.product.priceList
+      quantities: this.product.priceList,
+      size: this.selectedSize
     });
     if (res) {
       this.layoutUtilsService.showSnack('success', 'Product Added');

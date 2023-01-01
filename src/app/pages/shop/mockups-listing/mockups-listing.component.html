@@ -6,7 +6,7 @@
       </header>
       
       <div class="list">
-          <div class="list-item" *ngFor="let item of productList">
+          <div class="list-item" *ngFor="let item of productList" (click)="onMoveToPage(item)">
             <img [src]="item.photo" alt="">
               
             <div class="ratings-wrapper">

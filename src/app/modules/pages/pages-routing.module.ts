@@ -9,6 +9,7 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { ContactUsComponent } from 'src/app/pages/contact-us/contact-us.component';
 import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
+import { MockupAddToCartComponent } from 'src/app/pages/mockup-add-to-cart/mockup-add-to-cart.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
 import { ProjectListingComponent } from 'src/app/pages/projects/project-listing/project-listing.component';
 import { ProjectViewComponent } from 'src/app/pages/projects/project-view/project-view.component';
@@ -76,6 +77,10 @@ const routes: Routes = [
   {
     path: 'favorites',
     component: FavoritesComponent,
+  },
+  {
+    path: 'mockup-add-to-cart/:id/:colorId',
+    component: MockupAddToCartComponent
   }
 ];
 

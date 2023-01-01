@@ -162,6 +162,8 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
 
   public addToCart(): void{
     if (!this.colorSelectionValid()) { return; }
+    this.router.navigate([`/mockup-add-to-cart/${this.route.snapshot.params.id}/${this.selectedColor}`]);
+    return;
     const res = this.cart.addItem({
       name: this.product.name,
       description: this.product.description,

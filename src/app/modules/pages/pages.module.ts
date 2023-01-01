@@ -20,6 +20,11 @@ import { FavoritesComponent } from 'src/app/pages/favorites/favorites.component'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import {MatMenuModule} from '@angular/material/menu';
+import { MockupAddToCartComponent } from '../../pages/mockup-add-to-cart/mockup-add-to-cart.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -34,18 +39,15 @@ import {MatMenuModule} from '@angular/material/menu';
     CartComponent,
     BecomeAPartnerComponent,
     FavoritesComponent,
+    MockupAddToCartComponent,
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ...MainLayoutImports.imports,
-    NgxMatIntlTelInputModule,
-    MatPaginatorModule,
-    MatBadgeModule,
-    NgxFlickingModule,
-    MatFormFieldModule,
-    Ng2TelInputModule,
-    MatMenuModule
+    ...MainLayoutImports.imports
+  ],
+  providers: [
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ],
   bootstrap: [MainLayoutComponent]
 })

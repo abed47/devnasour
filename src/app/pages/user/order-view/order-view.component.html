@@ -46,15 +46,15 @@
                 <div class="totals">
                     <div>
                         <p>Subtotal</p>
-                        <p>TL 1500</p>
+                        <p>TL {{calcOrderTotal()}}</p>
                     </div>
-                    <div>
-                        <p>PPN(10%)</p>
-                        <p>TL 1500</p>
+                    <div [hidden]="calcOrderTotal() == orderTotal">
+                        <p>Discount</p>
+                        <p>TL {{calcOrderTotal() - orderTotal}}</p>
                     </div>
                     <div>
                         <p>Total</p>
-                        <p>TL {{calcOrderTotal()}}</p>
+                        <p>TL {{orderTotal}}</p>
                     </div>
                 </div>
             </div>
