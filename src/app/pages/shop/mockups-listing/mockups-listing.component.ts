@@ -11,6 +11,7 @@ import { RequestService } from 'src/app/services/request.service';
 export class MockupsListingComponent implements OnInit {
 
   public pageNumber = 0;
+  public totalRecords = 0;
 
   productList = [];
 
@@ -41,6 +42,7 @@ export class MockupsListingComponent implements OnInit {
         offset: this.pageNumber * 15,
         limit: 15,
       })
+      this.productList = [];
       if (res?.data?.length) {
         res.data.forEach(element => {
           this.productList.push({
@@ -54,7 +56,9 @@ export class MockupsListingComponent implements OnInit {
         });
       }
 
+      this.totalRecords = res.total_record;
       this.layoutUtils.hidePreloader();
+      console.log(res);
     } catch (err) {
       this.layoutUtils.hidePreloader();
       this.layoutUtils.showSnack("error", err?.message || "error loading mockups");
@@ -72,6 +76,12 @@ export class MockupsListingComponent implements OnInit {
         behavior: "smooth",
       });
     }
+  }
+
+  public onPageEvent(e){
+    console.log(e);
+    this.pageNumber = e.pageIndex;
+    this.loadData();
   }
 
 }

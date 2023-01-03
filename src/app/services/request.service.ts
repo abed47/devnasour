@@ -138,7 +138,7 @@ export class RequestService {
   // [18:52, 03/01/2023] marwan taha: {"action":"get_mockup_detail","color_id","mockup_id"}
   // [18:52, 03/01/2023] marwan taha: {"action":"get_mockup","mockup_id":2}
   // [18:52, 03/01/2023] marwan taha: {"action":"get_mockup","offset":0,"limit":1}
-  public getMockups(body: { offset: number, limit: number, action?: string }) {
+  public getMockups(body: { offset?: number, limit?: number, action?: string,  mockup_id?: number}) {
     return this.http.post(`${this.serverUrl}actions.php`, {...body, action: "get_mockup"}).toPromise();
   }
 

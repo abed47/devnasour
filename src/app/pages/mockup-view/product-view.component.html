@@ -74,11 +74,11 @@
             <div
               class="color-list-item"
               *ngFor="let item of product.color"
-              [class.selected]="item.web_product_color_id == selectedColor"
+              [class.selected]="item.color_id == selectedColor"
               (click)="onColorChange(item)"
             >
 
-              <div [ngStyle]="{backgroundColor: item.web_product_color_hex}"></div>
+              <div [ngStyle]="{backgroundColor: item.color_hex}"></div>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
 import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 import Snap from 'snapsvg-cjs';
+import { FavoritesService } from 'src/app/services/favorites.service';
 
 
 // var s = Snap("#snappy");
@@ -18,12 +19,12 @@ import Snap from 'snapsvg-cjs';
   styleUrls: ['./product-view.component.scss']
 })
 export class MockupViewComponent implements OnInit, AfterViewChecked {
-
+  public file: any | null = null;
   public pathNameSubject: Subject<any> = new Subject();
   public selectedColor: number = null;
   public selectedQuantity = 0;
+  public selectedSize = null;
   public selectedPrice = 0;
-  public imgPreview = null;
   public product = {
     images: [],
     name: '',
@@ -39,6 +40,7 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     country: '',
     sizing: '',
     color: [],
+    sizes: []
   };
 
   public relatedProductsList = [];
@@ -51,8 +53,6 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     // initialSlide: 3
     // width: 500,
   };
-  private s;
-  @ViewChild("snapped") public imageViewRef: ElementRef<SVGElement>
 
   constructor(
     private route: ActivatedRoute,
@@ -60,10 +60,9 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private request: RequestService,
     private cart: CartService,
-    ) {
-
-      this.s = Snap('#snappy');
-     }
+    private favoriteService: FavoritesService,
+    private layoutUtils: LayoutUtilsService
+    ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -72,62 +71,42 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
   }
 
-  private onSVGLoaded(data, e,st) {
-    // console.log("lsdkfjsldfj", data.select("#Layer_1"))
-    console.log(data);
-    var b = this.s.append( data );
-    var bbox = b.getBBox();
-    var vbox = bbox.x + " " + bbox.y + " " + bbox.width + " " + bbox.height;                                           
-    this.s.attr({ viewBox: vbox });
-  }
-
-  private async loadData(){
-    this.s = Snap('#snappy');
-    let mat = this.s.rect(0, 0, 300, 300).attr({
-        fill:"#ffff00"
-    });    
-
-    const data = await this.request.downloadFile("https://svgur.com/i/nbA.svg");
-    console.log(data);
-
+  private loadData(): void{
+    console.log(this.route.snapshot.params)
     const productId = this.route.snapshot.params.id;
-    this.layoutUtilsService.renamePath('Product name', productId);
+    this.layoutUtilsService.renamePath('Mockup name', productId);
     this.layoutUtilsService.showLoader();
     this.relatedProductsList = [];
 
-    this.request.getProductDetails(productId)
-    .then(r => {
-
-      Snap.load("http://upload.wikimedia.org/wikipedia/commons/b/b0/NewTux.svg", this.onSVGLoaded);
-
+    this.request.getMockups({ mockup_id: productId })
+    .then((r: any) => {
 
       if (r && r?.status === 1){
-        this.product.name = r.data.web_product_name;
-        this.product.images = r?.data?.attachments?.map(item => new ImageItem({src: item, thumb: item})) || [];
-        this.product.description = r.data.web_product_description;
-        this.product.overview = r.data.web_product_overview;
-        this.product.price = r.data.web_product_price;
-        this.product.discount = +r.data.web_product_discount;
-        this.product.priceList = r.data.quantity_pricing;
-        this.selectedPrice = r.data.quantity_pricing[0].price;
-        this.selectedQuantity = r.data.quantity_pricing[0].quantity;
-        this.product.color = r.data.product_color;
-        this.product.shipping = r.data.web_product_shipping;
-        this.product.sizing = r.data.web_product_sizing;
-        this.product.size = r.data.web_product_size;
-        this.product.farmer = r.data.web_product_farmer;
-        this.product.country = r.data.web_country_name;
-        this.product.rating = +r?.data?.web_product_rate + 1 || 0;
-        if (r?.data?.related_product) { 
-          
-          r.data.related_product.forEach(item => {
-          this.relatedProductsList.push({
-            name: item.web_product_name,
-            price: item.web_product_price,
-            rating: +item.web_product_rate || 0,
-            photo: item.attachments[0],
-            id: item.web_product_id
-          });
+        console.log(r);
+        this.product.color = r?.data?.[0]?.colors;
+        this.product.name = r?.data?.[0]?.web_mockup_title;
+        this.product.images = r.data[0]?.attachments?.map(item => new ImageItem({src: item, thumb: item})) || [];
+        this.product.description = r?.data?.[0]?.web_mockup_description;
+        this.product.overview = r?.data?.[0]?.web_mockup_overview;
+        this.product.price = r?.data?.[0]?.web_mockup_price;
+        this.product.discount = +r?.data?.[0]?.web_mockup_discount;
+        this.product.priceList = r?.data?.[0]?.quantity_pricing;
+        this.selectedPrice = r?.data?.[0]?.quantity_pricing[0].price;
+        this.selectedQuantity = r?.data?.[0]?.quantity_pricing[0].quantity;
+        this.product.shipping = r?.data?.[0]?.web_mockup_shipping;
+        this.product.sizing = r?.data?.[0]?.web_mockup_sizing;
+        this.product.size = r?.data?.[0]?.web_mockup_size;
+        this.product.farmer = r?.data?.[0]?.web_mockup_farmer;
+        this.product.country = r?.data?.[0]?.web_country_name;
+        this.product.rating = +r.data[0]?.web_mockup_rate + 1 || 0;
+        this.product.sizes = r.data[0]?.product_size || [];
+
+        console.log(this.product, "sdfdsfsfdsfds");
+        if (r.data[0]?.product_size?.length) {
+          this.selectedSize = r.data[0]?.product_size[0].web_mockup_size_id;
+        }
+        if (r.data[0]?.related_product) { r.data.related_product.forEach(item => {
+          this.relatedProductsList.push(item);
         });
         }
       }
@@ -147,6 +126,10 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     this.selectedQuantity = newP[0].quantity;
   }
 
+  public handleSizeChange(e): void{
+    this.selectedQuantity = e;
+  }
+
   public navigateTo(e, name): void{
     this.router.navigate([`/shop/product/${e}/${name.replace(/\ /ig, "-")}`]).then( (res: any) => {
       this.loadData();
@@ -163,25 +146,10 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
   public addToCart(): void{
     if (!this.colorSelectionValid()) { return; }
     this.router.navigate([`/mockup-add-to-cart/${this.route.snapshot.params.id}/${this.selectedColor}`]);
-    return;
-    const res = this.cart.addItem({
-      name: this.product.name,
-      description: this.product.description,
-      price: this.selectedPrice,
-      quantity: this.selectedQuantity,
-      photo: this.product.images[0].data.src,
-      discount: this.product.discount,
-      id: this.route.snapshot.params.id,
-      color: this.selectedColor,
-    });
-    if (res) {
-      this.layoutUtilsService.showSnack('success', 'Product Added');
-      this.layoutUtilsService.checkCartItemChange();
-    }
   }
 
   public onColorChange(c): void {
-    this.selectedColor = c.web_product_color_id;
+    this.selectedColor = c.color_id;
   }
 
   public colorSelectionValid(): boolean {
@@ -191,4 +159,61 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     }
     return true;
   }
+
+  public onProductClick(id, event, product?) {
+    if (event.target.nodeName === "MAT-ICON" || event.target.nodeName === "BUTTON") {
+      this.handleFavorite(product);
+      return;
+    }
+    this.router.navigate([`/shop/product/${id}/${product.web_mockup_title.replace(/\ /ig, "-")}`]).then(() => {
+      if(window){
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+      this.loadData()
+    });
+  }
+
+  public onFileSelectChange(e) {
+    if (e?.target?.files?.[0]){
+      this.file = e.target.files[0];
+      return;
+    }
+    this.file = null;
+  }
+
+  public isItemInFavorites(p: any) {
+    return this.favoriteService.isItemLinked(p)
+  }
+
+  public handleFavorite(p: any) {
+    if (this.favoriteService.isItemLinked(p)){
+      this.favoriteService.removeItem(p);
+      this.layoutUtils.showSnack("success", "Removed from favorites");
+      this.layoutUtils.checkCartItemChange();
+      return;
+    }
+    const res = this.favoriteService.addItem(p);
+    if (res) {
+      this.layoutUtils.showSnack("success", "Added to favorites");
+      this.layoutUtils.checkCartItemChange();
+    }
+  }
+
+
+  private getBase64(f) {
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(f);
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = function (error) {
+        reject(error);
+      };
+    })
+ }
 }

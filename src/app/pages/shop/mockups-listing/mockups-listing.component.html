@@ -21,4 +21,14 @@
           </div>
       </div>
     </section>
+
+    <div class="pagination-container">
+      <mat-paginator 
+      [length]="totalRecords"
+      [pageSize]="15"
+      hidePageSize
+      (page)="onPageEvent($event)"
+      aria-label="Select page">
+      </mat-paginator>
+  </div>
 </main>
