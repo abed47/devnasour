@@ -319,7 +319,6 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
             extension: 'png',
             base64: url.split(",")[1]
           });
-          console.log(res, this.product, currentKey, currentSize)
           files.push(res.link);
           if (j === Object.keys(this.fabs).length - 1){
             this.cartService.addItem({
@@ -336,6 +335,16 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
               type: 'MOCKUP',
               files,
             })
+            if (i === Object.keys(this.sizedSelected).length - 1){
+              this.router.navigate(["/cart"]);
+              if(window){
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }
+            }
           }
         });
       }
