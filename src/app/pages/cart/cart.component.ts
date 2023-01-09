@@ -170,8 +170,8 @@ export class CartComponent implements OnInit {
         image: i.photo,
         photo: i.photo,
         web_product_color_id: i?.color || 0,
-        type: i?.type || "PRODUCT",
-        files: i.files
+        order_type: i?.type || "PRODUCT",
+        media_urls: i.files
       }
     })
   }
