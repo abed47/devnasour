@@ -14,6 +14,13 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   private getToken(){}
+
+  public uploadImage(body: {extension: string, base64: string}) {
+    return this.http.post(`${this.serverUrl}actions.php`, {
+      action: 'upload_url',
+      ...body
+    }).toPromise();
+  }
   /*=============================================SHOP REQUESTS=================================================*/
   public getSocialAuth() {
     return this.http.post(`${this.serverUrl}actions.php`, {action: 'get_login_auth'}).toPromise();

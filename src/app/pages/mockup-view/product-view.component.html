@@ -5,7 +5,16 @@
     <section class="product">
       <article class="l">
         <div class="gallery-container">
-          <svg #snapped id='snappy' class='img-responsive' viewBox="0 0 1200 700"></svg>         
+          <gallery
+            [thumbHeight]="100"
+            [title]="false"
+            [counter]="false"
+            imageSize="cover"
+            style="background-color: #fafafa"
+            [items]="product.images"
+            thumbMode="free"
+            id="galery324"
+          ></gallery>        
         </div>
 
         <div class="info">

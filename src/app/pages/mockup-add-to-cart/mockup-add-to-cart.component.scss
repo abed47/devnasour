@@ -28,6 +28,27 @@ main.page{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+
+    .page-header{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .inner-width{
+            width: 910px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h3{
+                font-size: 18px;
+                color: $color-secondary;
+                font-weight: 600;
+            }
+        }
+    }
 
     .mockup-page-container{
         // width: 50%;

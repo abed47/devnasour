@@ -1,5 +1,12 @@
 <main class="page">
 
+    <div class="page-header">
+        <div class="inner-width">
+            <h3>Mockup edit</h3>
+
+            <button mat-raised-button color="primary" (click)="confirmOrder($event)">Confirm</button>
+        </div>
+    </div>
     <div class="mockup-page-container">
         <div class="left" #canvasHolder>
             <canvas #mainCan id="mainCan" width="400" height="400"></canvas>
@@ -57,17 +64,26 @@
                 <mat-tab label="Image">
                     <div [hidden]="quotas[selectedSide]?.image === true" class="image-choose">
                         <button mat-stroked-button color="secondary" (click)="selectImage()">Choose image</button>
-                        <input type="file" accept="image/*" #imageUpload (change)="onImageChange($event)">
+                        <input placeholder="choose image" type="file" accept="image/*" #imageUpload (change)="onImageChange($event)">
                     </div>
 
                     <div [hidden]="quotas[selectedSide]?.image === false" class="image-chosen">
                         <button mat-stroked-button color="secondary" (click)="bringImageToBack()">Move to back</button>
                         <button mat-stroked-button color="secondary" (click)="bringImageToFront()">Move to front</button>
                         <button mat-stroked-button color="secondary" (click)="rotateImage()">Rotate</button>
-                        <button mat-stroked-button color="secondary" (click)="changeImage()">Change</button>
+                        <button mat-stroked-button color="secondary" (click)="onChangeImage($event)">Change</button>
                     </div>
                 </mat-tab>
-                <mat-tab label="Specifications">Content 3</mat-tab>
+                <mat-tab label="Specifications">
+                    <div class="containe" style="display: flex; width: 100%; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div class="slect" *ngFor="let size of product.sizes" style="box-sizing: border-box; padding: 5px; width: auto; max-width: 100px;">
+                            <!-- <label>{{size.size_title}}</label> -->
+                            <mat-form-field style="width: 100%;">
+                                <input matInput type="text" [(ngModel)]="sizedSelected[size.size_title]" [placeholder]="size.size_title" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-tab>
             </mat-tab-group>
         </div>
     </div>

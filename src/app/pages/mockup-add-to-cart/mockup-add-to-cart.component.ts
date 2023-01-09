@@ -1,6 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { fabric } from 'fabric';
+import { CartService } from 'src/app/services/cart.service';
+import { LayoutUtilsService } from 'src/app/services/layout-utils.service';
+import { RequestService } from 'src/app/services/request.service';
 @Component({
   selector: 'app-mockup-add-to-cart',
   templateUrl: './mockup-add-to-cart.component.html',
@@ -8,19 +12,10 @@ import { fabric } from 'fabric';
 })
 export class MockupAddToCartComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
-  mockup = {
-    side0: "https://dsadmin.octasolutions.co/upload/web_product/2022-06/web_product_attachment_1_17.jpg",
-    side1: "https://dsadmin.octasolutions.co/upload/web_product/2022-06/web_product_attachment_1_12.jpg",
-    side3: "https://secure-cdn.uprinting.com/personalize/functions_image/bgimage_wrapper.php?placement_id=27565&product_id=49349&color=593D88&colorname=Court%20Purple&designer_type=clipart&width=300&height=300&pt=1597156665&exp=691200&new_designer=1",
-  
-    sizes: [
-      { sizeId: 1, sizeTitle: "Xl" },
-      { sizeId: 2, sizeTitle: "X" },
-      { sizeId: 3, sizeTitle: "M" },
-      { sizeId: 4, sizeTitle: "S" },
-      { sizeId: 5, sizeTitle: "XS" }
-    ]
-  };
+  mockup: any = {};
+
+  product: any = {};
+  sizedSelected: any = {};
 
   fabs = {};
   selectedFab: fabric.Canvas = null;
@@ -60,7 +55,13 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
   @ViewChild("mainCan") mainCanvas: ElementRef<HTMLCanvasElement>;
   @ViewChild("imageUpload") imageUploadEl: ElementRef<HTMLInputElement>;
 
-  constructor() {
+  constructor(
+    private request: RequestService,
+    private layoutUtils: LayoutUtilsService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private cartService: CartService,
+  ) {
    }
   ngAfterViewChecked(): void {
     // this.buildSettings()
@@ -71,18 +72,46 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
   }
 
   ngAfterViewInit(): void {
-    this.buildSettings();
+    this.loadData();
   }
 
+  private async loadData() {
+
+    try {
+      const productId = await this.route.snapshot.params.id;
+      const colorId = await this.route.snapshot.params.colorId;
+      this.layoutUtils.showLoader();
+      const data: any = await this.request.getMockups({
+        mockup_id: productId,
+      });
+
+      if (data?.data?.length) {
+        let res = data.data[0];
+        const selectedColor = res?.colors?.filter((c) => {
+          return c.color_id == colorId;
+        });
+
+        this.mockup = selectedColor[0]
+        this.product = res;
+      }
+      this.layoutUtils.hidePreloader();
+      this.buildSettings();
+    } catch (err) {
+      this.layoutUtils.hidePreloader();
+      this.layoutUtils.showSnack("error", err?.message);
+    }
+  }
   private buildSettings() {
     fabric.Object.NUM_FRACTION_DIGITS = 10;
 
     const sides = Object.keys(this.mockup).map((i) => {
-      console.log(i, i.includes("side"));
+      console.log(i);
       if (i.includes("side")) {
         return i;
       }
-    }).filter(i => i != null && i != undefined);
+    }).filter(i => {
+      return i != null && i != undefined && this.mockup[i]
+    });
 
     const basicFab = new fabric.Canvas("mainCan", {
       backgroundColor: '#EEEEFF',
@@ -93,6 +122,12 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     this.selectedFab = basicFab;
 
     this.sides = sides;
+    
+    // this.sides = sides.map(s => s);
+    this.sides.forEach(s => {
+      this.mockup[s] = "data:image/jpeg;base64," + this.mockup[s];
+    });
+    console.log(this.sides, this.mockup);
 
     sides.forEach((s, i) => {
 
@@ -142,7 +177,6 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
       })
     });
     this.selectedSide = fabName;
-    
   }
 
   public onAddText () {
@@ -168,6 +202,14 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
 
   public onImageChange(e) {
     let f = e.target.files[0];
+
+    const img2 = this.getCurrentImageObject();
+    if (img2) {
+      this.selectedFab.remove(img2);
+      // this.selectedFab.dirt
+      this.selectedFab.renderAll();
+    }
+
     if (f && window){
       let url = window.URL.createObjectURL(f);
       fabric.Image.fromURL(url, (img) => {
@@ -178,6 +220,10 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
         this.quotas[this.selectedSide].image = true;
       });
     }
+  }
+
+  public onChangeImage(e) {
+    this.imageUploadEl.nativeElement.click();
   }
 
   public bringImageToFront() {
@@ -210,7 +256,6 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
   public changeImage() {}
 
   public onTextChange (e) {
-    console.log(e.target.value, this.currentText, this.currentText);
     let txtObj = this.getCurrentTextObject();
     if (txtObj) {
       // console.dir(txtObj);
@@ -249,5 +294,43 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     let objs = this.selectedFab.getObjects().filter(t => t.type === "image");
     if (!objs?.length) return null;
     return objs[0];
+  }
+
+  public confirmOrder(e) {
+    this.fabs[this.selectedSide] = this.selectedFab.toJSON();
+    if (!Object.keys(this.sizedSelected).length) {
+      this.layoutUtils.showSnack("warn", "Please select a size first")
+      return;
+    }
+
+    const cartItems: any = [];
+
+    for (let i = 0; i < Object.keys(this.sizedSelected).length; i++) {
+      for (let j = 0; j < Object.keys(this.fabs).length; j++) {
+        const currentKey = this.fabs[Object.keys(this.fabs)[j]];
+        console.log(currentKey);
+        let raw = this.selectedFab;
+        raw.clear();
+        raw.loadFromJSON(currentKey, () => {
+          raw.renderAll();
+        console.log(raw.toDataURL())
+        });
+        // raw.toDataURL();
+        
+      }
+    }
+    // this.cartService.addItem({
+    //   name: this.product.name,
+    //   description: this.product.description,
+    //   price: this.selectedPrice,
+    //   quantity: this.selectedQuantity,
+    //   photo: this.product.images[0].data.src,
+    //   discount: this.product.discount,
+    //   id: this.route.snapshot.params.id,
+    //   color: this.selectedColor,
+    //   file: fileUrl,
+    //   quantities: this.product.priceList,
+    //   size: this.selectedSize
+    // });
   }
 }

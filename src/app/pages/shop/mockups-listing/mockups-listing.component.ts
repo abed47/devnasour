@@ -47,7 +47,7 @@ export class MockupsListingComponent implements OnInit {
         res.data.forEach(element => {
           this.productList.push({
             name: element.web_mockup_title,
-            photo: element?.web_mockup_attachment,
+            photo: element?.attachments?.[0],
             rating: element?.web_mockup_rating || 0,
             price: element?.web_mockup_price || 0,
             id: element.web_mockup_id

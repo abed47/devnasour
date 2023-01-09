@@ -85,7 +85,10 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
         console.log(r);
         this.product.color = r?.data?.[0]?.colors;
         this.product.name = r?.data?.[0]?.web_mockup_title;
-        this.product.images = r.data[0]?.attachments?.map(item => new ImageItem({src: item, thumb: item})) || [];
+        this.product.images = r.data[0]?.attachments?.map(item => {
+          console.log(item);
+          return new ImageItem({src: item, thumb: item})
+        }) || [];
         this.product.description = r?.data?.[0]?.web_mockup_description;
         this.product.overview = r?.data?.[0]?.web_mockup_overview;
         this.product.price = r?.data?.[0]?.web_mockup_price;
@@ -99,7 +102,9 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
         this.product.farmer = r?.data?.[0]?.web_mockup_farmer;
         this.product.country = r?.data?.[0]?.web_country_name;
         this.product.rating = +r.data[0]?.web_mockup_rate + 1 || 0;
-        this.product.sizes = r.data[0]?.product_size || [];
+        this.product.sizes = r.data[0]?.web_mockup_sizing || [];
+
+        
 
         console.log(this.product, "sdfdsfsfdsfds");
         if (r.data[0]?.product_size?.length) {
