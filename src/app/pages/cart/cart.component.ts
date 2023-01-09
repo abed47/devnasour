@@ -113,8 +113,9 @@ export class CartComponent implements OnInit {
   }
 
   public calcCartTotal(){
-    if(this.cartItems.length)
+    if(this.cartItems.length){
       return this.cartItems.reduce((p, c) => p + +c.price, 0)
+    }
     return 0;
   }
 
@@ -169,6 +170,8 @@ export class CartComponent implements OnInit {
         image: i.photo,
         photo: i.photo,
         web_product_color_id: i?.color || 0,
+        type: i?.type || "PRODUCT",
+        files: i.files
       }
     })
   }

@@ -105,7 +105,6 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     fabric.Object.NUM_FRACTION_DIGITS = 10;
 
     const sides = Object.keys(this.mockup).map((i) => {
-      console.log(i);
       if (i.includes("side")) {
         return i;
       }
@@ -127,7 +126,6 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     this.sides.forEach(s => {
       this.mockup[s] = "data:image/jpeg;base64," + this.mockup[s];
     });
-    console.log(this.sides, this.mockup);
 
     sides.forEach((s, i) => {
 
@@ -296,29 +294,54 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     return objs[0];
   }
 
-  public confirmOrder(e) {
+  public async confirmOrder(e) {
     this.fabs[this.selectedSide] = this.selectedFab.toJSON();
     if (!Object.keys(this.sizedSelected).length) {
       this.layoutUtils.showSnack("warn", "Please select a size first")
       return;
     }
 
-    const cartItems: any = [];
+    const cartItems: any[] = [];
 
+    //convert
     for (let i = 0; i < Object.keys(this.sizedSelected).length; i++) {
+      const currentSize = Object.keys(this.sizedSelected)[i];
       for (let j = 0; j < Object.keys(this.fabs).length; j++) {
         const currentKey = this.fabs[Object.keys(this.fabs)[j]];
-        console.log(currentKey);
+        const files = [];
         let raw = this.selectedFab;
         raw.clear();
-        raw.loadFromJSON(currentKey, () => {
+        raw.loadFromJSON(currentKey, async () => {
           raw.renderAll();
-        console.log(raw.toDataURL())
+          const url = raw.toDataURL();
+          //push to server
+          const res: any = await this.request.uploadImage({
+            extension: 'png',
+            base64: url.split(",")[1]
+          });
+          console.log(res, this.product, currentKey, currentSize)
+          files.push(res.link);
+          if (j === Object.keys(this.fabs).length - 1){
+            this.cartService.addItem({
+              name: this.product.web_mockup_title,
+              description: this.product.web_mockup_description,
+              price: this.product.web_mockup_price * this.sizedSelected[currentSize],
+              quantity: this.sizedSelected[currentSize],
+              photo: res.link,
+              discount: this.product.web_mockup_discount,
+              id: this.route.snapshot.params.id,
+              color: this.route.snapshot.params.colorId,
+              file: res.link,
+              size: currentSize,
+              type: 'MOCKUP',
+              files,
+            })
+          }
         });
-        // raw.toDataURL();
-        
       }
     }
+    //upload
+
     // this.cartService.addItem({
     //   name: this.product.name,
     //   description: this.product.description,
@@ -332,5 +355,21 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     //   quantities: this.product.priceList,
     //   size: this.selectedSize
     // });
+  }
+  
+  private detectMimeType(b64) {
+    var signatures = {
+      JVBERi0: "application/pdf",
+      R0lGODdh: "image/gif",
+      R0lGODlh: "image/gif",
+      iVBORw0KGgo: "image/png",
+      "/9j/": "image/jpg"
+    };
+
+    for (var s in signatures) {
+      if (b64.indexOf(s) === 0) {
+        return signatures[s];
+      }
+    }
   }
 }
