@@ -25,6 +25,8 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
   public selectedQuantity = 0;
   public selectedSize = null;
   public selectedPrice = 0;
+  public printTypes = [];
+  public selectedPrintType = null;
   public product = {
     images: [],
     name: '',
@@ -71,18 +73,21 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
   }
 
-  private loadData(): void{
-    console.log(this.route.snapshot.params)
+  private async loadData(): Promise<void>{
     const productId = this.route.snapshot.params.id;
     this.layoutUtilsService.renamePath('Mockup name', productId);
     this.layoutUtilsService.showLoader();
     this.relatedProductsList = [];
 
+    //get print types
+    const pTypesRes = await this.request.getPrintType();
+    console.log("print types: ", pTypesRes)
+
     this.request.getMockups({ mockup_id: productId })
     .then((r: any) => {
 
       if (r && r?.status === 1){
-        console.log(r);
+        
         this.product.color = r?.data?.[0]?.colors;
         this.product.name = r?.data?.[0]?.web_mockup_title;
         this.product.images = r.data[0]?.attachments?.map(item => {

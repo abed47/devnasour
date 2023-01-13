@@ -149,6 +149,12 @@ export class RequestService {
     return this.http.post(`${this.serverUrl}actions.php`, {...body, action: "get_mockup"}).toPromise();
   }
 
+  public getPrintType() {
+    return this.http.post(`${this.serverUrl}actions.php`,{
+      action: 'get_decoration'
+    }).toPromise();
+  }
+
   /*=============================================DESIGN REQUESTS=================================================*/
   public saveDesign(body: any) {
     return this.http.post(`${this.serverUrl}design.php`, body).toPromise();

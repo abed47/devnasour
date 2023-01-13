@@ -336,6 +336,7 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
               files,
             })
             if (i === Object.keys(this.sizedSelected).length - 1){
+              this.layoutUtils.showSnack("success", "Mockup added to cart")
               this.router.navigate(["/cart"]);
               if(window){
                 window.scrollTo({
@@ -364,21 +365,5 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     //   quantities: this.product.priceList,
     //   size: this.selectedSize
     // });
-  }
-  
-  private detectMimeType(b64) {
-    var signatures = {
-      JVBERi0: "application/pdf",
-      R0lGODdh: "image/gif",
-      R0lGODlh: "image/gif",
-      iVBORw0KGgo: "image/png",
-      "/9j/": "image/jpg"
-    };
-
-    for (var s in signatures) {
-      if (b64.indexOf(s) === 0) {
-        return signatures[s];
-      }
-    }
   }
 }

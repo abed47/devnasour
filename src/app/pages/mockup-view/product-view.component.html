@@ -74,7 +74,7 @@
           <p class="title">Various versions</p>
 
           <button mat-raised-button color="accent" (click)="addToCart()">
-            <mat-icon>add_shopping_cart</mat-icon> Add to cart
+            <mat-icon>add_shopping_cart</mat-icon> Add design
           </button>
           <button mat-raised-button color="accent" [routerLink]="['/request-a-design']">CONTACT FOR DESIGN</button>
           
@@ -112,7 +112,7 @@
             </li> -->
             <li>
               <p>Size</p>
-              <p>{{ product.size }}</p>
+              <p>{{ product?.size || "( 0 . 0 . 0 . 0 )" }}</p>
             </li>
             <li>
               <p>Code</p>
