@@ -150,7 +150,7 @@ export class RequestService {
   }
 
   public getPrintType() {
-    return this.http.post(`${this.serverUrl}actions.php`,{
+    return this.http.post(`${this.serverUrl}get_data.php`,{
       action: 'get_decoration'
     }).toPromise();
   }

@@ -111,6 +111,21 @@
                 </mat-select>
             </li> -->
             <li>
+              <p>Decoration style</p>
+    
+                <mat-select
+                  [(ngModel)]="selectedPrintType"
+                  (valueChange)="handleDecorationChange($event)"
+                  class="select"
+                >
+                  <mat-option
+                    *ngFor="let item of printTypes"
+                    [value]="item.web_decoration_id"
+                    >{{ item.web_decoration_name }}</mat-option
+                  >
+                </mat-select>
+            </li>
+            <li>
               <p>Size</p>
               <p>{{ product?.size || "( 0 . 0 . 0 . 0 )" }}</p>
             </li>

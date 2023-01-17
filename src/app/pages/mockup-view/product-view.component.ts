@@ -8,6 +8,7 @@ import { RequestService } from 'src/app/services/request.service';
 import { SwiperOptions } from 'swiper';
 import Snap from 'snapsvg-cjs';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 // var s = Snap("#snappy");
@@ -63,7 +64,8 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     private request: RequestService,
     private cart: CartService,
     private favoriteService: FavoritesService,
-    private layoutUtils: LayoutUtilsService
+    private layoutUtils: LayoutUtilsService,
+    private authService: AuthService,
     ) { }
 
   ngOnInit(): void {
@@ -80,7 +82,9 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     this.relatedProductsList = [];
 
     //get print types
-    const pTypesRes = await this.request.getPrintType();
+    const pTypesRes: any = await this.request.getPrintType();
+    this.printTypes = pTypesRes?.data ?? []
+
     console.log("print types: ", pTypesRes)
 
     this.request.getMockups({ mockup_id: productId })
@@ -154,6 +158,17 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
   }
 
   public addToCart(): void{
+    if (!this.authService.getAuthStatus()?.loggedIn){
+      this.router.navigate(['/login']);
+      if(window){
+       window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "smooth",
+       });
+     }
+      return;
+   }
     if (!this.colorSelectionValid()) { return; }
     this.router.navigate([`/mockup-add-to-cart/${this.route.snapshot.params.id}/${this.selectedColor}`]);
   }
@@ -211,5 +226,9 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
       this.layoutUtils.showSnack("success", "Added to favorites");
       this.layoutUtils.checkCartItemChange();
     }
+  }
+
+  public handleDecorationChange(e: any) {
+    this.selectedPrintType = e;
   }
 }
