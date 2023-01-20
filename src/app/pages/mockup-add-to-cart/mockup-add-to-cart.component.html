@@ -72,14 +72,15 @@
                         <button mat-stroked-button color="secondary" (click)="bringImageToFront()">Move to front</button>
                         <button mat-stroked-button color="secondary" (click)="rotateImage()">Rotate</button>
                         <button mat-stroked-button color="secondary" (click)="onChangeImage($event)">Change</button>
+                        <button mat-stroked-button color="secondary" (click)="onDeleteImage($event)">Delete</button>
                     </div>
                 </mat-tab>
-                <mat-tab label="Specifications">
+                <mat-tab label="Quantity">
                     <div class="containe" style="display: flex; width: 100%; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                         <div class="slect" *ngFor="let size of product.sizes" style="box-sizing: border-box; padding: 5px; width: auto; max-width: 100px;">
                             <!-- <label>{{size.size_title}}</label> -->
                             <mat-form-field style="width: 100%;">
-                                <input matInput type="text" [(ngModel)]="sizedSelected[size.size_title]" [placeholder]="size.size_title" />
+                                <input matInput type="number" [(ngModel)]="sizedSelected[size.size_title]" [placeholder]="size.size_title" />
                             </mat-form-field>
                         </div>
                     </div>

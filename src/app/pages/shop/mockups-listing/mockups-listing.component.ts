@@ -68,7 +68,7 @@ export class MockupsListingComponent implements OnInit {
 
   public onMoveToPage(item: any){
     console.log(item);
-    this.router.navigate([`/shop/mockup/${item.id}/${item.name}`]);
+    this.router.navigate([`/shop/mockup/${item.id}/${item.name.replaceAll(" ", "-")}`]);
     if(window){
       window.scrollTo({
         top: 0,

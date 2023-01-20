@@ -85,17 +85,16 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
     const pTypesRes: any = await this.request.getPrintType();
     this.printTypes = pTypesRes?.data ?? []
 
-    console.log("print types: ", pTypesRes)
-
     this.request.getMockups({ mockup_id: productId })
     .then((r: any) => {
 
+      console.log("item: ", r.data)
       if (r && r?.status === 1){
+        // this.product.sizing = r?.data?.[0]?.web_mockup_sizing
         
         this.product.color = r?.data?.[0]?.colors;
         this.product.name = r?.data?.[0]?.web_mockup_title;
         this.product.images = r.data[0]?.attachments?.map(item => {
-          console.log(item);
           return new ImageItem({src: item, thumb: item})
         }) || [];
         this.product.description = r?.data?.[0]?.web_mockup_description;
@@ -103,16 +102,20 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
         this.product.price = r?.data?.[0]?.web_mockup_price;
         this.product.discount = +r?.data?.[0]?.web_mockup_discount;
         this.product.priceList = r?.data?.[0]?.quantity_pricing;
-        this.selectedPrice = r?.data?.[0]?.quantity_pricing[0].price;
-        this.selectedQuantity = r?.data?.[0]?.quantity_pricing[0].quantity;
+        this.selectedPrice = r?.data?.[0]?.quantity_pricing?.[0]?.price;
+        this.selectedQuantity = r?.data?.[0]?.quantity_pricing?.[0]?.quantity;
         this.product.shipping = r?.data?.[0]?.web_mockup_shipping;
-        this.product.sizing = r?.data?.[0]?.web_mockup_sizing;
         this.product.size = r?.data?.[0]?.web_mockup_size;
         this.product.farmer = r?.data?.[0]?.web_mockup_farmer;
         this.product.country = r?.data?.[0]?.web_country_name;
-        this.product.rating = +r.data[0]?.web_mockup_rate + 1 || 0;
-        this.product.sizes = r.data[0]?.web_mockup_sizing || [];
+        this.product.rating = +r?.data?.[0]?.web_mockup_rate + 1 || 0;
+        this.product.sizes = r?.data?.[0]?.web_mockup_sizing || [];
+        this.product.sizing = r?.data?.[0]?.web_mockup_sizing;
+        if (!this.product.price) {
+          this.product.price = +r?.data?.[0]?.web_mockup_price || 0
+        }
 
+        console.log(this.product.sizing)
         
 
         console.log(this.product, "sdfdsfsfdsfds");
@@ -169,12 +172,21 @@ export class MockupViewComponent implements OnInit, AfterViewChecked {
      }
       return;
    }
+    if (!this.decorationSelectionValid()) { return; }
     if (!this.colorSelectionValid()) { return; }
     this.router.navigate([`/mockup-add-to-cart/${this.route.snapshot.params.id}/${this.selectedColor}`]);
   }
 
   public onColorChange(c): void {
     this.selectedColor = c.color_id;
+  }
+
+  public decorationSelectionValid(): boolean {
+    if (this.printTypes?.length && !this.selectedPrintType) {
+      this.layoutUtilsService.showSnack('error', 'Please select decoration!');
+      return false;
+    }
+    return true;
   }
 
   public colorSelectionValid(): boolean {

@@ -198,6 +198,16 @@ export class MockupAddToCartComponent implements OnInit, AfterViewChecked, After
     this.imageUploadEl.nativeElement?.click();
   }
 
+  public onDeleteImage(e) {
+    const img2 = this.getCurrentImageObject();
+    if (img2) {
+      this.selectedFab.remove(img2);
+      // this.selectedFab.dirt
+      this.selectedFab.renderAll();
+      this.quotas[this.selectedSide].image = false;
+    }
+  }
+
   public onImageChange(e) {
     let f = e.target.files[0];
 

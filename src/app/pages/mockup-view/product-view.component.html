@@ -26,10 +26,6 @@
           <div class="information">
             <h2 class="title">Information</h2>
             <div class="block">
-              <h3 class="title">Shipping</h3>
-              <p class="content">{{ product.shipping }}</p>
-            </div>
-            <div class="block">
               <h3 class="title">Assistance</h3>
               <p class="content">
                 Contact us on 999999 or at info@devnasour.io
@@ -56,11 +52,11 @@
 
         <div class="pricing">
           <span class="price" [class.strike]="product.discount > 0"
-            >${{ selectedPrice }}</span
+            >${{ product.price }}</span
           >
           <span [hidden]="!product.discount" class="discounted-price"
             >${{
-              selectedPrice - (+selectedPrice * +product.discount) / 100
+              product.price - (+product.price * +product.discount) / 100
             }}</span
           >
           <span [hidden]="!product.discount" class="discount"
@@ -126,12 +122,12 @@
                 </mat-select>
             </li>
             <li>
-              <p>Size</p>
-              <p>{{ product?.size || "( 0 . 0 . 0 . 0 )" }}</p>
+              <p>Sizing</p>
+              <p>{{ product?.sizing || "( 0 . 0 . 0 . 0 )" }}</p>
             </li>
             <li>
               <p>Code</p>
-              <p>{{ product.country }}</p>
+              <p>{{ product?.country }}</p>
             </li>
           </ul>
         </div>
