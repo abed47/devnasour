@@ -1,0 +1,170 @@
+<div class="page-product-view">
+  <div class="page-container">
+    <app-bread-crumbs></app-bread-crumbs>
+
+    <section class="product">
+      <article class="l">
+        <div class="gallery-container">
+          <gallery
+            [thumbHeight]="100"
+            [title]="false"
+            [counter]="false"
+            imageSize="cover"
+            style="background-color: #fafafa"
+            [items]="product.images"
+            thumbMode="free"
+            id="galery324"
+          ></gallery>        
+        </div>
+
+        <div class="info">
+          <div class="description">
+            <h2 class="title">Description</h2>
+            <p class="content">{{ product.description }}</p>
+          </div>
+
+          <div class="information">
+            <h2 class="title">Information</h2>
+            <div class="block">
+              <h3 class="title">Assistance</h3>
+              <p class="content">
+                Contact us on 999999 or at info@devnasour.io
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="r">
+        <h1 class="title">{{ product.name }}</h1>
+
+        <div class="rating-container">
+          <ngx-material-rating
+            [value]="product.rating"
+            disabled
+          ></ngx-material-rating>
+        </div>
+
+        <div class="overview">
+          <p class="title">Overview</p>
+          <p class="content">{{ product.overview }}</p>
+        </div>
+
+        <div class="pricing">
+          <span class="price" [class.strike]="product.discount > 0"
+            >${{ product.price }}</span
+          >
+          <span [hidden]="!product.discount" class="discounted-price"
+            >${{
+              product.price - (+product.price * +product.discount) / 100
+            }}</span
+          >
+          <span [hidden]="!product.discount" class="discount"
+            >{{ product.discount }}%</span
+          >
+
+          <div class="r"><hr /></div>
+        </div>
+
+        <div class="actions">
+          <p class="title">Various versions</p>
+
+          <button mat-raised-button color="accent" (click)="addToCart()">
+            <mat-icon>add_shopping_cart</mat-icon> Add design
+          </button>
+          <button mat-raised-button color="accent" [routerLink]="['/request-a-design']">CONTACT FOR DESIGN</button>
+          
+
+          <div class="color-list" [class.active]="product.color?.length">
+            <div
+              class="color-list-item"
+              *ngFor="let item of product.color"
+              [class.selected]="item.color_id == selectedColor"
+              (click)="onColorChange(item)"
+            >
+
+              <div [ngStyle]="{backgroundColor: item.color_hex}"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="specifications">
+          <h1 class="title">Specifications</h1>
+          <ul>
+            <!-- <li>
+              <p>Quantity</p>
+    
+                <mat-select
+                  [(ngModel)]="selectedQuantity"
+                  (valueChange)="handlePriceChange($event)"
+                  class="select"
+                >
+                  <mat-option
+                    *ngFor="let item of product.priceList"
+                    [value]="item.quantity"
+                    >{{ item.quantity }}</mat-option
+                  >
+                </mat-select>
+            </li> -->
+            <li>
+              <p>Decoration style</p>
+    
+                <mat-select
+                  [(ngModel)]="selectedPrintType"
+                  (valueChange)="handleDecorationChange($event)"
+                  class="select"
+                >
+                  <mat-option
+                    *ngFor="let item of printTypes"
+                    [value]="item.web_decoration_id"
+                    >{{ item.web_decoration_name }}</mat-option
+                  >
+                </mat-select>
+            </li>
+            <li>
+              <p>Sizing</p>
+              <p>{{ product?.sizing || "( 0 . 0 . 0 . 0 )" }}</p>
+            </li>
+            <li>
+              <p>Code</p>
+              <p>{{ product?.country }}</p>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="related-products">
+      <h1>Related Products</h1>
+
+      <div class="products">
+        <div
+              *ngFor="let item of relatedProductsList"
+              class="list-item swiper-slide"
+              (click)="navigateTo(item.id, item.name)"
+            >
+              <img [src]="item.photo" alt="" />
+
+              <div class="bottom">
+                <ngx-material-rating
+                  class="rating"
+                  [max]="5"
+                  [disabled]="false"
+                  color="accent"
+                  value="2.5"
+                >
+                </ngx-material-rating>
+
+                <div class="name">
+                  <h1>{{ item.name }}</h1>
+
+                  <button mat-icon-button>
+                    <mat-icon>favorite_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+      </div>
+    </section>
+  </div>
+</div>

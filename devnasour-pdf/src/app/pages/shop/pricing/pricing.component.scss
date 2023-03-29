@@ -1,0 +1,151 @@
+@import "src/styles/styles.scss";
+
+.pricing-page{
+    width: 100%;
+    min-height: 100vh; 
+    @include init-flex(column, flex-start);
+    padding-top: 50px;
+    box-sizing: border-box;
+    position: relative;
+
+    .total-price{
+        width: 100%;
+        background-color: $color-primary;
+        color: white;
+        @include init-flex();
+        box-sizing: border-box;
+        padding: 25px 0;
+        position: sticky;
+        top: 0;
+        left: 0;
+
+        .title{
+            font-family: $font-base;
+            font-size: 18px;
+            margin-right: 50px;
+        }
+
+        .price{
+            font-family: $font-bold;
+            font-size: 18px;
+        }
+    }
+
+    .parameters-container{
+        width: 100%;
+        max-width: 1080px; 
+        @include init-flex(row, flex-start, flex-start);
+        margin-top: 50px;
+
+        .l{
+            width: 60%;
+
+            .f-w{
+                width: 100%;
+                @include init-flex(column, flex-start, flex-start);
+
+                label{
+                    color: $color-primary;
+                    margin-bottom: 15px;
+                }
+
+                .form-field{
+                    width: 100%;
+                }
+
+                .multiple-fields{
+                    margin-bottom: 25px;
+                    width: 100%;
+                    @include init-flex(row, space-between);
+                    flex-wrap: wrap;
+                    
+                    .form-field{
+                        width: 30%;
+                    }
+
+                    .option-btn{
+                        padding: 10px 35px;
+                        // border-color: $color-secondary;
+                        position: relative;
+                        .icon{
+                            display: none;
+                        }
+
+                        &.active{
+                            border-color: $color-primary;
+                            color: $color-primary;
+                            .icon{
+                                display: block;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .r{
+            width: 40%;
+            @include init-flex(column);
+
+            &>*{
+                margin: 25px 0;
+            }
+
+            img{
+                width: 80%;
+            }
+
+            .actions{
+                width: 70%;
+                @include init-flex(column);
+
+                &>*{
+                    margin: 25px;
+                }
+
+                button{
+                    width: 100%;
+                    border-radius: 0;
+                    padding: 5px;
+                }
+
+                .labeled{
+                    width: 100%;
+                    @include init-flex(column, flex-start, flex-start);
+                    label{
+                        margin-bottom: 15px;
+                        color: $color-primary;
+                    }
+
+                    .form-field{
+                        width: 100%;
+                    }
+                }
+
+                .labeled2{
+                    width: 100%;
+                    @include init-flex(column, flex-start, flex-start);
+
+                    label{
+                        color: $color-primary;
+                        margin-bottom: 25px;
+                    }
+                    
+                    p{
+                        color: $color-primary;
+                        width: 100%;
+                        text-align: center;
+                        margin: 15px 0;
+                    }
+
+                    button{
+                        border: 1px solid $color-secondary;
+                    }
+                }
+            }
+        }
+    }
+}

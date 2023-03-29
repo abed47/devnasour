@@ -1,0 +1,23 @@
+<div class="user-tool-bar">
+    <div class="l">
+        <button mat-icon-button (click)="onSidenavToggle()"><mat-icon>menu</mat-icon></button>
+    </div>
+
+    <div class="r">
+        
+        <button class="user-menu" mat-button [matMenuTriggerFor]="menu">
+            <div class="left-side">
+                <img [src]="currentUser?.web_user_photo || 'assets/images/user-placeholder.png'" alt="">
+            </div>
+            <div class="right-side">
+                <span>{{currentUser?.web_user_first_name || ""}} {{currentUser?.web_user_last_name || ""}}</span>
+                <span>{{currentUser?.web_user_email || ""}}</span>
+            </div>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onGoHome()">Home</button>
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+        </mat-menu>
+    </div>
+</div>

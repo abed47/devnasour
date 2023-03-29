@@ -1,0 +1,156 @@
+@import "src/styles/styles.scss";
+
+
+div.page-login{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+
+    .inner-wrapper{
+        width: 80%;
+        // height: 80%;
+        display: flex;
+        // padding: 50px 0;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        position: absolute;
+        transition: all 300ms ease-in-out;
+        
+        .l{
+            width: 45%;
+            // height: 100%;
+            box-shadow: 1px 2px 33px 6px rgba(0, 0, 0, .28);
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 300ms ease-in-out;
+
+
+            form{
+                box-sizing: border-box;
+                overflow: auto;
+                width: 100%;
+                padding: 10%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                // padding: 50px 0;
+
+                .f-box{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    a{
+                        color: black;
+                        border: none;
+                        text-decoration: none;
+                    }
+                }
+
+                h1{
+                    font-family: $font-bold;
+                    color: $color-primary;
+                    font-size: 40px;
+                    margin: 25px 0;
+                }
+
+                hr{
+                    width: 25%;
+                    border: none;
+                    border-bottom: 1px solid $color-secondary;
+                    margin-bottom: 50px;
+                }
+
+                .input{
+                    width: 100%;
+                    border-radius: 0px !important;
+
+                    .mat-form-field-outline-start, .mat-form-field-outline-end {
+                        border-radius: 0 !important;
+                    }
+                }
+
+                .btn{
+                    width: 100%;
+                    margin: 10px 0;
+                    border-radius: 0 !important;
+                    height: 50px;
+
+                    &.google{
+                        img{
+                            width: 40px;
+                        }
+                    }
+                    &.facebook{
+                        background-color: #3B5998 !important;
+                        img{
+                            width: 130px;
+                        }
+                    }
+                }
+
+                .register-text{
+                    color: #7A7A7A;
+                    font-size: 17px;
+                    font-family: $font-base;
+                    margin-top: 15px;
+
+                    a{
+                        color: $color-secondary;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        .r{
+            width: 90%;
+            height: 100%;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    div.page-login{
+        padding-top: 0;
+        .inner-wrapper{
+            width: 100%;
+            padding-top: 0;
+            
+            .l{
+                width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+                background-color: #fafafa;
+                padding-top: 0;
+
+                form{
+                    padding-top: 0;
+                }
+            }
+
+            .r{
+                opacity: 0;
+            }
+        }
+    }
+}

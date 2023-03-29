@@ -1,0 +1,13 @@
+<div class="content" mat-dialog-content>
+    <button mat-icon-button (click)="onImageClick()"><img src="../../../../../../assets/images/photo-primary.png" /></button>
+    
+    <input [value]="color" [(colorPicker)]="color" (click)="onColorClick()" style="width: 150px;" [style.background]="color" cpPosition="top-left" (colorPickerChange)="onColorChange($event)"/>
+
+    <button mat-icon-button (click)="onNoneClick()"><img src="../../../../../../assets/images/prohibition-primary.png" /></button>
+    
+    <input type="file" accept="image/*" class="hidden" #imageUpload (change)="onImageUpload($event)">
+</div>
+<div class="actions" mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onCloseClick()">Close</button>
+    <button mat-raised-button color="primary" (click)="onApplyClick()">apply</button>
+</div>

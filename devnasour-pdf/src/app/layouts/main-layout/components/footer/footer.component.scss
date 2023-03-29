@@ -1,0 +1,190 @@
+@import "src/styles/styles.scss";
+
+.main-layout-footer{
+    width: 100%;
+    height: 280px;
+    padding: 0px 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $color-primary;
+
+    
+
+    .logo{
+        width: 10%;
+    }
+
+    .lists{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 450px;
+
+        .links{
+            p.title{
+                margin: 0;
+                margin-bottom: 15px;
+                color: $color-white;
+                font-size: 16px;
+                font-family: $font-bold;
+            }
+
+            ul{
+                padding: 0;
+                list-style: none;
+
+                li{
+                    margin: 5px 0;
+                    a{
+                        color: $color-white;
+                        text-decoration: none;
+                        font-family: $font-base;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .addresses{
+            .l{
+                p{
+                    margin-top: 0;
+                    margin-bottom: 15px;
+                    font-size: 12px;
+                    font-family: $font-semibold;
+                    color: $color-white;
+                }
+            }
+        }
+    }
+
+    .news-subscription-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 30%;
+        max-width: 500px;
+
+        p{
+            font-family: $font-bold;
+            font-size: 16px;
+            color: $color-white;
+            margin: 15px 0;
+        }
+
+        .input-wrapper{
+            background-color: white;
+            padding: 1px;
+            border-radius: 25px;
+            // width: 500px;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            height: 50px;
+            margin-top: 25px;
+
+            input{
+                // width: 80%;
+                outline: none;
+                border: none;
+                box-sizing: border-box;
+                padding: 5px 25px;
+                font-family: $font-semibold;
+                font-size: 16px;
+                width: 70%;
+                &::placeholder{
+                    color: $text-color2;
+                }
+            }
+
+            .btn{
+                width: 30%;
+                background-color: $color-secondary;
+                border-radius: 25px;
+                color: $color-white;
+                font-family: $font-semibold;
+                font-size: 13px;
+
+            }
+        }
+    }
+
+    .d-sm{
+        display: none;
+    }
+    
+    .d-md{
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    
+    .d-md{
+        display: none !important;
+    }
+
+    .d-sm{
+        display: block !important;
+    }
+
+    footer.main-layout-footer{
+        flex-direction: column;
+        height: auto;
+        padding: 30px 0;
+
+        .news-subscription-container.d-sm{
+            width: 100%;
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+
+            .input-wrapper{
+                width: 90%;
+
+                input{
+                    width: 70%;
+                }
+
+                button{
+                    font-size: 15px;
+                    width: 30%;
+                }
+            }
+        }
+
+        .lists{
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            margin-bottom: 50px;
+
+            .addresses{
+                // display: none;
+                width: 60%;
+                box-sizing: border-box;
+                padding-left: 15px;
+
+                .l{
+                    p{
+                        font-size: 12px !important;
+                    }
+                }
+                
+            }
+
+            .links{
+                width: 40%;
+            }
+        }
+    }
+
+
+}

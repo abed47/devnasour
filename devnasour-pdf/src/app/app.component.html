@@ -1,0 +1,10 @@
+
+
+<div *ngIf="getIsLoading() | async" class="bar-loader">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div class="loader" [class.active]="loaderActive">
+    <mat-spinner></mat-spinner>
+</div>
+<router-outlet></router-outlet>

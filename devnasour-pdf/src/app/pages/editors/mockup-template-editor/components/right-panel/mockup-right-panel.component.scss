@@ -1,0 +1,249 @@
+@import 'src/styles/styles.scss';
+
+.right-panel{
+    width: 300px;
+    background-color: white;
+    height: 100%;
+    @include init-flex(column);
+    box-sizing: border-box;
+    padding-top: 130px;
+
+    .text-settings{
+        @include init-flex(column, flex-start);
+        width: 80%;
+        height: 80%;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .title{
+            @include init-flex(row, flex-start);
+            width: 100%;
+
+            img{
+                width: 20px;
+            }
+
+            h1{
+                margin: 0;
+                margin-left: 15px;
+                color: $color-primary;
+                font-size: 15px;
+                font-family: $font-base;
+            }
+        }
+
+        .dimensions-group{
+            @include init-flex(row, space-between);
+            flex-wrap: wrap;
+            margin-top: 10px;
+            // width: 90%;
+
+            span{
+                display: block;
+                width: 40%;
+                margin: 5px 0px;
+                position: relative;
+                
+                p.adornment{
+                    content: "W";
+                    position: absolute;
+                    right: 3px;
+                    top: 5px;
+                    z-index: 5;
+                    color: black;
+                    // background-color: red;
+                    width: 1rem;
+                    height: 100%;
+                    margin: 0;
+                    text-align: center;
+                    color: $color-secondary;
+                }
+                
+                input[type=number]{
+                    border: 1px solid $color-secondary;
+                    outline: none;
+                    width: 100%;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    padding-right: 0;
+                    box-sizing: border-box;
+                }
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    /* display: none; <- Crashes Chrome on hover */
+                    -webkit-appearance: none;
+                    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+                }
+            }
+
+
+        }
+
+        .alignment-toggle{
+            width: 100%;
+
+            .mat-button-toggle-button {
+                height: 2rem; // the modified height that I wanted.
+               }
+               
+               .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+                 line-height: 1rem; // default value is 48px. I wanted the height to be 2rem, but had to adjust this line-height to 1rem so that the icons were vertically centered.
+                }
+            
+            h1{
+                margin: 10px 0;
+                font-family: Poppins;
+                font-weight: normal;
+                font-size: 12px;
+                text-align: left;
+                color: $color-primary;
+            }
+
+
+            .btn-group{
+                border: 1px solid $color-secondary;
+                width: 100%;
+                box-sizing: border-box;
+
+                
+                .btn{
+                    height: 40px;
+                    padding: 0 3px;
+                    color: $color-secondary;
+                    width: 100%;               
+                    
+                    ::ng-deep .mat-button-toggle-label-content{
+                        line-height: 40px;
+                        padding: 0 5px;
+                    }
+                    
+                    &.mat-button-toggle-checked{
+                        background-color: rgba($color: $color-secondary, $alpha: .30);
+                    }
+                }
+
+            }
+        }
+
+        .font-settings{
+            width: 100%;
+            @include init-flex(column, flex-start, flex-start);
+            // margin: 10px 0;
+            margin-top: 10px;
+
+            h1{
+                margin: 0;
+                margin-bottom: 5px;
+                font-family: Poppins;
+                font-weight: normal;
+                font-size: 12px;
+                text-align: left;
+                color: $color-primary;
+            }  
+
+            .select-field{
+                width: 100%;
+             
+                ::ng-deep .ng-select-container{
+                    border-color: $color-secondary;
+                }
+            }
+            
+        }
+
+        .slider-with-input{
+            width: 100%;
+            @include init-flex(column, flex-start, flex-start);
+            margin-top: 15px;
+
+            h1{
+                margin: 0;
+                margin-bottom: 5px;
+                font-family: Poppins;
+                font-weight: normal;
+                font-size: 12px;
+                text-align: left;
+                color: $color-primary;
+            } 
+
+            .slider-container{
+                @include init-flex(row);
+
+                mat-slider{
+                    padding: 0;
+                    height: 30px;
+
+                    ::ng-deep .mat-slider-wrapper{
+                        top: 50%;
+                        left: 0;
+                    }
+                }
+
+                .input{
+                    display: block;
+                    width: 40%;
+                    margin: 5px 0px;
+                    position: relative;
+                    
+                    p.adornment{
+                        content: "W";
+                        position: absolute;
+                        right: 3px;
+                        top: 5px;
+                        z-index: 5;
+                        color: black;
+                        // background-color: red;
+                        width: 1rem;
+                        height: 100%;
+                        margin: 0;
+                        text-align: center;
+                        color: $color-secondary;
+                    }
+                    
+                    input[type=number]{
+                        border: 1px solid $color-secondary;
+                        outline: none;
+                        width: 100%;
+                        border-radius: 5px;
+                        padding: 5px 10px;
+                        padding-right: 0;
+                        box-sizing: border-box;
+                    }
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        /* display: none; <- Crashes Chrome on hover */
+                        -webkit-appearance: none;
+                        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+                    }
+                }
+            }
+        }
+
+        .tool{
+            h1{
+                margin: 0;
+                margin-bottom: 5px;
+                font-family: Poppins;
+                font-weight: normal;
+                font-size: 12px;
+                text-align: left;
+                color: $color-primary;
+            }
+
+            ::ng-deep .mat-form-field-infix{
+                padding: 10px 0;
+                border-top: none;
+            }
+        }
+
+        .delete-btn{
+            @include init-flex();
+
+            img{
+                width: 15px;
+                margin-right: 15px;
+            }
+        }
+    }
+
+}

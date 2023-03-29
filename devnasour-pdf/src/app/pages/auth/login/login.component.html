@@ -1,0 +1,55 @@
+<div class="page-login">
+    
+    <div class="inner-wrapper" #innerWrapper>
+
+        <div class="l">
+
+            <form [formGroup]="loginForm" (submit)="onLoginSubmit" #loginFormEl>
+                <h1>Welcome Back!</h1>
+
+                <hr class="mt-5" />
+
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" style="border-radius: 0px;">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" type="password">
+                </mat-form-field>
+
+                <div class="f-box input">
+                    <mat-checkbox color="accent" formControlName="stayLoggedIn">
+                        keep me logged in
+                    </mat-checkbox>
+
+                    <a [routerLink]="['/reset-password']">Forgot Password?</a>
+                </div>
+
+                <button mat-raised-button filled color="primary" class="btn" (click)="onLoginSubmit()" >Log in</button>
+                
+                <button mat-raised-button filled class="btn google" (click)="openSocial('google')">
+                    <img src="assets/images/google-logo.png" alt="login with google"/>
+                    Sign in with google
+                </button>
+                
+
+                <button mat-raised-button filled color="accent" class="btn facebook" type="submit" (click)="openSocial('facebook')">
+                    <img src="assets/images/facebook-logo.png" alt="login with facebook" />
+                </button>
+
+                <p class="register-text">
+                    Don't have and account? <a routerLink="/register">Sign up!</a>
+                </p>
+            </form>
+            
+        </div>
+    
+        <div class="r">
+            <img src="assets/images/login-img.png" alt="img" />
+        </div>
+
+    </div>
+
+</div>

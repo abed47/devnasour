@@ -1,0 +1,154 @@
+@import "src/styles/styles.scss";
+
+.order-view-page{
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    // height: 100%;
+
+    .order-view-page-container{
+        width: 100%;
+        max-width: 1080px;
+        box-sizing: border-box;
+        padding: 20px;
+        // height: 100%;
+
+        .header{
+            margin-bottom: 25px;
+            width: 100%;
+            @include init-flex(row, space-between);
+
+        }
+
+        main{
+            @include init-flex(row, space-between, flex-start);
+            height: 100%;
+
+            h3{
+                color: black;
+                font-size: 16px;
+                margin: 12px 0;
+                font-family: $font-medium;
+            }
+
+            .history{
+                width: 30%;
+                @include init-flex(column, flex-start, flex-start);
+
+                ul{
+                    padding: 0;
+                    list-style: none;
+
+                    li{
+                        @include init-flex(row, flex-start, flex-start);
+
+                        .l{
+                            @include init-flex(column, flex-start, center);
+                            margin-right: 15px;
+
+                            .circle{
+                                width: 20px;
+                            }
+                        }
+
+                        .r{
+                            .title{
+                                font-size: 14px;
+                                font-family: $font-medium;
+                                margin: 5px;
+                            }
+
+                            .detail{
+                                font-size: 12px;
+                                font-family: $font-base;
+                                margin: 5px;
+                            }
+                        }
+
+                        &:last-child{
+                            .l{
+                                .line{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .items{
+                width: 70%;
+                height: 100%;
+                @include init-flex(column, flex-start, flex-start);
+
+                .item-listing{
+                    width: 100%;
+
+                    .list-item{
+                        width: 100%;
+                        @include init-flex(row, flex-start, flex-start);
+                        margin: 15px 0;
+
+                        .l{
+                            width: 200px;
+
+                            img{
+                                width: 100%;
+                                height: 120px;
+                                object-fit: cover;
+                                border-radius: 15px;
+                            }
+                        }
+
+                        .r{
+                            width: calc(100% - 200px);
+                            height: 120px;
+                            // height: 100%;
+                            margin-left: 15px;
+                            @include init-flex(column, space-between, flex-start);
+
+                            .top{
+                                h5{
+                                    color: $color-primary;
+                                    font-size: 12px !important;
+                                    font-family: $font-base;
+                                    margin: 0;
+                                    margin-bottom: 5px;
+                                }
+
+                                p{
+                                    margin: 2px 0;
+                                    font-family: $font-base;
+                                    color: black;
+                                    font-size: 14px;
+                                }
+                            }
+
+                            .pricing-section{
+                                width: 100%;
+                                @include init-flex(row, space-between);
+                            }
+                        }
+                    }
+
+                }
+                
+                .totals{
+                    width: 100%;
+                    border-top: 2px solid #EFEFEF;
+                    padding-top: 15px;
+                    @include init-flex(column, flex-start, flex-start);
+
+                    div{
+                        @include init-flex(row, space-between);
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

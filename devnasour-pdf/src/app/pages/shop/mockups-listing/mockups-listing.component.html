@@ -1,0 +1,34 @@
+<main class="design-listing-page">
+    <section class="listing">
+      <header>
+          <h1>Recommended Mockups</h1>
+          <hr>
+      </header>
+      
+      <div class="list">
+          <div class="list-item" *ngFor="let item of productList" (click)="onMoveToPage(item)">
+            <img [src]="item.photo" alt="">
+              
+            <div class="ratings-wrapper">
+                  <ngx-material-rating class="rating" [max]="5" [disabled]="true" color="accent" [value]="item.rating">
+                </ngx-material-rating>
+            </div>
+    
+            <div class="summary">
+                <h3>{{item.name}}</h3>
+                <h2>TL {{item.price}}</h2>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <div class="pagination-container">
+      <mat-paginator 
+      [length]="totalRecords"
+      [pageSize]="15"
+      hidePageSize
+      (page)="onPageEvent($event)"
+      aria-label="Select page">
+      </mat-paginator>
+  </div>
+</main>

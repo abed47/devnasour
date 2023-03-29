@@ -1,0 +1,6 @@
+<div class="bread-crumbs">
+    <span class="el" *ngFor="let item of paths; let i = index" [class.active]="item.active" (click)="navigateTo(item, i)">
+        {{item.name}}
+        <mat-icon class="icon">chevron_right</mat-icon>
+    </span>
+</div>

@@ -1,0 +1,13 @@
+<div class="two-d-editor-container" tabindex="9999" (keydown)="handleDeleteObject($event)">
+  <two-d-top-nav></two-d-top-nav>
+  <div class="wrapper">
+    <two-d-side-nav></two-d-side-nav>
+    <div class="fab">
+      <canvas width="5000px" height="5000px" id="fabricSurface"></canvas>
+    </div>
+    <two-d-right-panel></two-d-right-panel>
+
+    <input type="file" #imageUploader class="hidden-file-input" (change)="handleImageSelected($event)" />
+    <input type="file" #fileUploader class="hidden-file-input" accept=".devnasour" (change)="handleUploadFile($event)" />
+  </div>
+</div>

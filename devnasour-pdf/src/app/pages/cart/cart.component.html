@@ -1,0 +1,350 @@
+<main class="cart-page">
+
+    <!-- <app-bread-crumbs></app-bread-crumbs> -->
+
+    <header>
+        <div class="stage" [class.active]="currentStage > 0">
+            <mat-icon class="icon">check_circle_outline</mat-icon>
+            <h3 class="title">Cart Items</h3>
+        </div>
+        <div class="stage" [class.active]="currentStage > 1">
+            <mat-icon class="icon">check_circle_outline</mat-icon>
+            <h3 class="title">Shipping And Checkout</h3>
+        </div>
+        <div class="stage" [class.active]="currentStage > 2">
+            <mat-icon class="icon">check_circle_outline</mat-icon>
+            <h3 class="title">Confirmation</h3>
+        </div>
+    </header>
+
+    <section class="cart-item-list" [hidden]="currentStage !== 1">
+        <h1 class="title">Cart</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <!-- <th>Price</th> -->
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cartItems;let i = index">
+                    <td class="img">
+                        <img [src]="item.photo" alt="">
+                    </td>
+
+                    <td class="details">
+                        <p>{{item.name}}</p>
+                        <p class="description">Description: {{item.description}}</p>
+                        <!-- <p>Size: {{item.size}}</p> -->
+                    </td>
+
+                    <!-- <td class="price"><h3>{{item.price}}TL</h3></td> -->
+
+                    <td class="quantity" [hidden]="item?.type === 'MOCKUP'">
+                        <mat-form-field>
+                            <mat-select [value]="item.quantity" (selectionChange)="handleItemQuantityChange(item, $event, i)">
+                                <mat-option *ngFor="let p of item.quantities" [value]="p.quantity">{{p.quantity}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    
+                    <td class="quantity" [hidden]="item?.type !== 'MOCKUP'">
+                        <p>{{item.quantity}}</p>
+                    </td>
+
+                    <td class="total">{{item.price}}TL</td>
+                    <td class="actions"><button mat-icon-button (click)="removeCartItem(i)"><mat-icon>delete_outline</mat-icon></button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <span>Total: </span> <span>{{calcCartTotal()}}TL</span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="shipping-voucher">
+    
+            <div class="voucher">
+                <h2>Voucher</h2>
+                <p>Enter your coupon if you have one</p>
+                <mat-form-field appearance="outline" class="font-field">
+                    <mat-label>Voucher code</mat-label>
+                    <input type="text" matInput [disabled]="promoId > 0" [(ngModel)]="voucherCode">
+                </mat-form-field>
+    
+                <button [disabled]="processing || promoId > 0" mat-raised-button color="accent" (click)="handleGetCoupon()">APPLY</button>
+            </div>
+    
+            <div class="totals">
+                <span>
+                    <p>Subtotal</p>
+                    <p>{{getTotals().subtotal}}</p>
+                </span>
+                <span>
+                    <p>Shipping</p>
+                    <p>{{getTotals().shipping}}</p>
+                </span>
+
+                <span [hidden]="promoId < 1">
+                    <p>Discount</p>
+                    <p>TL {{(getTotals().total / 100 ) * promoPercentage}}</p>
+                </span>
+                
+                <span class="total">
+                    <p>TOTAL</p>
+                    <p>{{getTotals().total}}</p>
+                </span>
+    
+                <button [disabled]="processing" mat-raised-button color="accent" (click)="onNext()">CHECKOUT</button>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="checkout-section" [hidden]="currentStage !== 2">
+        <h1 class="title">Checkout</h1>
+
+        <div class="table">
+            <div class="billing-details">
+                <div class="header">
+                    <h5>Billing Details</h5>
+                </div>
+
+                <div class="address-select-field-container">
+                    <mat-form-field appearance="outline" class="select f-w" >
+                        <mat-label>Address</mat-label>
+                        <mat-select [(ngModel)]="addressId" (valueChange)="handleAddressChange($event)">
+                            <mat-option [value]="-1">New Address</mat-option>
+                            <mat-option *ngFor="let c of addresses" [value]="c.addressId">{{c.addressName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+                <form [formGroup]="billingForm">
+
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>First Name</mat-label>
+                        <input type="text" matInput formControlName="firstName" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput formControlName="lastName" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Shipping address</mat-label>
+                        <textarea matInput formControlName="address"></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>City</mat-label>
+                        <input type="text" matInput formControlName="city" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="select h-w">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="country">
+                            <mat-option *ngFor="let c of countryList" [value]="c.countryNameEn">{{c.countryNameEn}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="select h-w">
+                        <mat-label>Province</mat-label>
+                        <input type="text" matInput formControlName="province">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Post Code/ZIP</mat-label>
+                        <input type="text" matInput formControlName="zip" />
+                    </mat-form-field>
+
+                    <!-- <mat-form-field appearance="outline" class="f-w">
+                        <mat-label>Phone</mat-label>
+                        <ngx-mat-intl-tel-input
+                        [preferredCountries]="['tr']"
+                        [enablePlaceholder]="true"
+                        [enableSearch]="true"
+                        name="phone"
+                        formControlName="phone"></ngx-mat-intl-tel-input>
+                    </mat-form-field> -->
+
+                    <mat-form-field appearance="outline" class="f-w" floatLabel="always">
+                        <mat-label>phone</mat-label>
+                        <input
+                        type="tel"
+                        name="phone"
+                        formControlName="phone"
+                        matInput ng2TelInput
+                        [ng2TelInputOptions]="{initialCountry: selectedPhoneCountry, separateDialCode:false}"
+                        (hasError)="hasError($event)"
+                        (ng2TelOutput)="getNumber($event)"
+                        (intlTelInputObject)="telInputObject($event)"
+                        (countryChange)="onCountryChange($event)"
+                        >
+                      </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Email Address</mat-label>
+                        <input type="text" matInput formControlName="email" />
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName="saveAddress">Save this information?</mat-checkbox>
+
+                    <div class="actions">
+                        <button [disabled]="processing" mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to shopping</button>
+                        <button [disabled]="processing" mat-raised-button color="accent" (click)="onNext()">Payment</button>
+                    </div>
+                </form>
+            </div>
+            <div class="order-list">
+                <div class="header">
+                    <h5>Your Order</h5>
+                </div>
+
+                <div class="item-list">
+                    <div *ngFor="let item of cartItems" class="item">
+                        <img [src]="item.photo" alt="">
+                        <div class="details">
+                            <p>{{item.name}}</p>
+                            <!-- <p>Color: {{item.color}}</p> -->
+                            <!-- <p>Size: {{item.size}}</p> -->
+                            <p class="price">TL {{item.price}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="pricings">
+                    <div class="item">
+                        <p>Subtotal</p>
+                        <p>TL {{getTotals().subtotal}}</p>
+                    </div>
+
+                    <div class="item">
+                        <p>Shipping</p>
+                        <p>TL {{getTotals().shipping}}</p>
+                    </div>
+
+                    <div class="item" [hidden]="promoId < 1">
+                        <p>Discount</p>
+                        <p>TL {{(getTotals().total / 100 ) * promoPercentage}}</p>
+                    </div>
+
+                    <div class="total">
+                        <p>Total</p>
+                        <p>TL {{getTotals().total}}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="payment-section" [hidden]="currentStage !== 3">
+        <h1 class="title">PAYMENT</h1>
+
+        <div class="table">
+            <div class="billing-details">
+                <div class="header">
+                    <h5>Shipping Information</h5>
+                </div>
+
+                <div class="address-display">
+                    <div class="actions" (click)="onBack()"><button mat-flat-button>Change</button></div>
+                    <ul class="address">
+                        <li>
+                            <p>Contact:</p> <p>{{getBillingDetailsValue("email")}}</p>
+                        </li>
+                        <li>
+                            <p>Ship to:</p> <p>{{getBillingDetailsValue("address")}}</p>
+                        </li>
+                        <li>
+                            <p>Method:</p> <p>shipping method</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <form>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Name On Card</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>Expiry Date</mat-label>
+                        <input type="date" matInput />
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline" class="input h-w">
+                        <mat-label>CVC</mat-label>
+                        <input type="text" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="input f-w">
+                        <mat-label>Card Number</mat-label>
+                        <input type="text" matInput />
+                        <mat-icon matSuffix>credit_card</mat-icon>
+                    </mat-form-field>
+
+                    <mat-checkbox>Save this information?</mat-checkbox>
+
+                    <div class="actions">
+                        <button [disabled]="processing" mat-stroked-button color="accent" class="outlined" (click)="onBack()">Back to Shipping</button>
+                        <button [disabled]="processing" mat-raised-button color="accent" (click)="confirmPayment()">Confirm</button>
+                    </div>
+                </form>
+            </div>
+            <div class="order-list">
+                <div class="header">
+                    <h5>Your Order</h5>
+                </div>
+
+                <div class="item-list">
+                    <div *ngFor="let item of cartItems" class="item">
+                        <img [src]="item.photo" alt="">
+                        <div class="details">
+                            <p>{{item.name}}</p>
+                            <!-- <p>Color: {{item.color}}</p> -->
+                            <!-- <p>Size: {{item.size}}</p> -->
+                            <p class="price">TL {{item.price}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="pricings">
+                    <div class="item">
+                        <p>Subtotal</p>
+                        <p>TL {{getTotals().subtotal}}</p>
+                    </div>
+
+                    <div class="item">
+                        <p>Shipping</p>
+                        <p>TL {{getTotals().shipping}}</p>
+                    </div>
+
+                    <div class="total">
+                        <p>Total</p>
+                        <p>TL {{getTotals().total}}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>

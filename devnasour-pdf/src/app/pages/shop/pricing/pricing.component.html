@@ -1,0 +1,141 @@
+<main class="pricing-page">
+    
+    <div class="total-price">
+        <span class="title">Total Price</span>
+        <span class="price">T.L.{{totalPrice}}</span>
+    </div>
+
+
+    <div class="parameters-container">
+        <div class="l">
+            
+            <div class="f-w">
+                <label>
+                    Product Selection
+                </label>
+                
+                <mat-form-field class="form-field" appearance="outline" color="accent">
+                    <mat-select>
+                        <mat-option value="option">Cardboard Squared Box</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="f-w mb-0">
+                <label>
+                    Dimensions
+                </label>
+                
+                <div class="multiple-fields mb-0">
+                    <mat-form-field class="form-field" appearance="outline" color="accent">
+                        <mat-label>X</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearance="outline" color="accent">
+                        <mat-label>Y</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" appearance="outline" color="accent">
+                        <mat-label>Z</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="f-w">
+                <label>
+                    Product Size
+                </label>
+                
+                <mat-form-field class="form-field" appearance="outline" color="accent">
+                    <mat-select>
+                        <mat-option value="option">16x25x20cm</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="f-w">
+                <label>
+                    Amount Ordered
+                </label>
+                
+                <mat-form-field class="form-field" appearance="outline" color="accent">
+                    <mat-select>
+                        <mat-option value="option">100 PCS</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="f-w">
+                <label>
+                    LID
+                </label>
+                
+                <div class="multiple-fields">
+                    <button mat-stroked-button color="accent" class="option-btn" (click)="onLidOptionsChange(null)">None</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option1"  (click)="onLidOptionsChange(0)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 1</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option2" (click)="onLidOptionsChange(1)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 2</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option3" (click)="onLidOptionsChange(2)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 3</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option4" (click)="onLidOptionsChange(3)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 4</button>
+                </div>
+            </div>
+
+            <div class="f-w">
+                <label>
+                    LID
+                </label>
+                
+                <div class="multiple-fields">
+                    <button mat-stroked-button color="accent" class="option-btn" (click)="onLidOptionsChange(null)">None</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option1"  (click)="onLidOptionsChange(0)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 1</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option2" (click)="onLidOptionsChange(1)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 2</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option3" (click)="onLidOptionsChange(2)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 3</button>
+                    <button mat-stroked-button color="accent" class="option-btn" [class.active]="lidOptions.option4" (click)="onLidOptionsChange(3)">
+                        <mat-icon class="icon">check_box</mat-icon>
+                        Option 4</button>
+                </div>
+            </div>
+        </div>
+        <div class="r">
+
+            <img src="assets/images/box-image.png" alt="">
+
+            <div class="actions">
+                <button mat-raised-button color="accent" ><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
+
+                <div class="labeled">
+                    <label class="click-label">Order Details</label>
+                    <mat-form-field appearance="outline" class="form-field" color="accent">
+                        <mat-label>Choose Details</mat-label>
+                        <mat-select>
+                            <mat-option>Option 1</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="labeled2">
+                    <label>Design File</label>
+
+                    <button mat-stroked-button color="accent" class="stroked">UPLOAD</button>
+                    <p>Or</p>
+                    <button mat-stroked-button color="accent" class="stroked">Contact Us</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

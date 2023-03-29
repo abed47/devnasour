@@ -1,0 +1,63 @@
+<div class="order-view-page">
+
+    <div class="order-view-page-container">
+        <div class="header"></div>
+
+        <main>
+            <div class="history">
+                <h3>History</h3>
+                <ul>
+                    <li *ngFor="let historyItem of history">
+                        <div class="l">
+                            <img src="assets/images/blue-circle-timeline.png" class="circle">
+                            <img src="assets/images/placeholder.svg" class="line">
+                        </div>
+                        <div class="r">
+                            <p class="title">{{historyItem.title}}</p>
+                            <p class="detail">{{formatDate(historyItem.date)}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="items">
+                <h3>Items</h3>
+
+                <div class="item-listing">
+                    <div class="list-item" *ngFor="let item of products">
+
+                        <div class="l">
+                            <img [src]="item?.web_product_attachment_1" alt="">
+                        </div>
+
+                        <div class="r">
+                            <div class="top">
+                                <h5>PRODUCT</h5>
+                                <p>{{item.web_product_name}}</p>
+                            </div>
+                            <div class="pricing-section">
+                                <span class="quantity"></span>
+                                <span class="price">% {{item.web_order_product_discount}}</span>
+                                <span class="total">TL {{item.web_order_product_price}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="totals">
+                    <div>
+                        <p>Subtotal</p>
+                        <p>TL {{calcOrderTotal()}}</p>
+                    </div>
+                    <div [hidden]="calcOrderTotal() == orderTotal">
+                        <p>Discount</p>
+                        <p>TL {{calcOrderTotal() - orderTotal}}</p>
+                    </div>
+                    <div>
+                        <p>Total</p>
+                        <p>TL {{orderTotal}}</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

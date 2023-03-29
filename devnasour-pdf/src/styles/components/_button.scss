@@ -1,0 +1,14 @@
+.btn{
+
+    &.round{
+        border-radius: 25px;
+    }
+
+
+    &.outline{
+        &-primary{
+            color: $color-primary;
+            border: 1px solid $color-primary;
+        }
+    }
+}

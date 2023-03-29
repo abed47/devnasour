@@ -1,0 +1,49 @@
+@import "src/styles/styles.scss";
+
+.user-tool-bar{
+    background-color: white;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    .l{}
+
+    .r{
+        // width: 200px;
+        .user-menu{
+            width: 100%;    
+            padding: 0;        
+            ::ng-deep .mat-button-wrapper{
+                @include init-flex(row, flex-start, center);
+                width: 100%;
+            }
+            .left-side{
+                @include init-flex();
+                img{
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+            .right-side{
+                @include init-flex(column, flex-start, flex-start);
+                margin-left: 15px;
+                span{
+                    margin: 0;
+                    font-size: 12px;
+                    line-height: 15px;
+
+                    &:first-child{
+                        font-size: 14px;
+                        font-family: $font-medium;
+                    }
+                }
+            }
+        }
+    }
+}

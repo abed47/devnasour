@@ -1,0 +1,79 @@
+<div class="page-register">
+
+    <div class="inner-wrapper">
+        <div class="l">
+
+            <div class="form-wrapper">
+                <form [formGroup]="registerForm" (submit)="onSubmit()">
+
+                    <div>
+                        <h1>Join Us!</h1>
+                        
+                        <hr/>
+
+                    </div>
+        
+                    <div class="form-group">
+                        <mat-form-field appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" matInput formControlName="firstName">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" matInput formControlName="lastName">
+                        </mat-form-field>
+                    </div>
+        
+                    <mat-form-field appearance="outline" class="input">
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput formControlName="email">
+                    </mat-form-field>
+        
+                    <mat-form-field appearance="outline" class="input" floatLabel="always">
+                        <mat-label>phone</mat-label>
+                        <input
+                        type="tel"
+                        name="phone"
+                        formControlName="phone"
+                        matInput ng2TelInput
+                        [ng2TelInputOptions]="{initialCountry: selectedPhoneCountry, separateDialCode:false}"
+                        (hasError)="hasError($event)"
+                        (intlTelInputObject)="telInputObject($event)"
+                        (countryChange)="onCountryChange($event)"
+                        >
+                      </mat-form-field>
+        
+                    <mat-form-field appearance="outline" class="input">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput formControlName="password">
+                    </mat-form-field>
+        
+                    <mat-form-field appearance="outline" class="input">
+                        <mat-label>Confirm Password</mat-label>
+                        <input type="password" matInput formControlName="passwordConfirm">
+                    </mat-form-field>
+        
+                    <div class="d-inline secondary">
+                        <mat-checkbox color="accent" [checked]="userType === 1" (change)="onUserTypeChange($event, 1)">Client</mat-checkbox>
+                        <mat-checkbox color="accent" [checked]="userType === 2" (change)="onUserTypeChange($event, 2)">Supplier</mat-checkbox>
+                    </div>
+        
+                    <div class="d-inline">
+                        <mat-checkbox [checked]="acceptedTerms" (change)="onTermsAcceptanceChange()">I agree to <a routerLink="/privacy-policy">terms, privacy policy and fees</a></mat-checkbox>
+                    </div>
+        
+                    <div class="d-inline">
+                        <mat-checkbox>Receive Email Updates</mat-checkbox>
+                    </div>
+        
+                    <button mat-raised-button color="primary" >Submit</button>
+    
+                    <p class="ahac">Already have a an account? <a routerLink="/login">Log in!</a></p>
+                </form>
+            </div>
+        </div>
+        <div class="r">
+            <img src="assets/images/register-pg.png" alt="">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,194 @@
+@import 'src/styles/styles.scss';
+
+.page-wrapper{
+    width: 100%;
+    // height: 100vh;
+    @include init-flex(column, start, start);
+    padding: 20px;
+    box-sizing: border-box;
+
+    .banners{
+        width: 100%;
+        display: flex;
+        @include init-flex(row, flex-start, flex-start);
+        flex-wrap: wrap;
+
+        .banner{
+            position: relative;
+            margin: 10px;
+            height: 50vh;
+            user-select: none;
+            cursor: pointer;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .info{
+                position: absolute;
+                z-index: 3;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0, .3);
+                box-sizing: border-box;
+                padding: 20px 30px;
+                @include init-flex();
+
+                .l{
+                    h1{
+                        color: white;
+                        font-size: 35px;
+                        margin-bottom: 25px;
+                        font-family: $font-medium;
+                    }
+
+                    h2{
+                        color: white;
+                        font-size: 45px;
+                        margin-bottom: 25px;
+                        font-family: $font-bold;
+                    }
+                }
+
+                .r{
+                    width: 50%;
+                    @include init-flex(row, end, start);
+                    height: 100%;
+
+                    p{
+                        // width: 200px;
+                        font-family: $font-base;
+                        color: white;
+                        font-size: 15px;
+
+                    }
+                }
+            }
+
+            &.l{
+                width: calc(100% - 20px);
+                .info{ justify-content: space-between;}
+            }
+
+            &:not(.l){
+                .info{
+                    justify-content: flex-start;
+                }
+            }
+
+            &.h{
+                width: calc(50% - 20px);
+                text-align: left;
+
+                .info .r{
+                    display: none;
+                }
+            }
+
+            &.q{
+                width: calc(25% - 20px);
+                .info .r{
+                    display: none;
+                }
+            }
+
+            &.th{
+                width: calc(75% - 20px);
+                .info .r{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .on-sale-item-list{
+        width: 100%;
+        margin-top: 25px;
+
+        .section-title{
+            position: relative;
+                width: auto;
+                color: $color-primary;
+                font-size: 22px;
+                font-family: $font-bold;
+                margin-bottom: 35px;
+    
+                &::after{
+                    content: "";
+                    border-bottom: 1px solid $color-secondary;
+                    height: 1px;
+                    width: 20%;
+                    position: absolute;
+                    bottom: -10px;
+                    left: 0;
+                    max-width: 100px;
+                }
+        }
+
+
+        .item-list{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            row-gap: 20px;
+            column-gap: 20px;
+            justify-items: flex-start;
+            align-content: flex-start;
+            padding-bottom: 50px;
+    
+    
+            .list-item{
+                background-color: white;
+                box-shadow: 1px 2px 6px rgba(0, 0, 0, .18);
+    
+                img{
+                    width: 100%;
+                    // height: 30px;
+                    height: 60%;
+                    object-fit: cover;
+                    min-height: 180px;
+                }
+    
+                .bottom{
+                    margin-bottom: 30px;
+                    .rating{
+                        width: 100%;
+                        
+                        &>*{
+                            font-size: 5px !important;
+                            display: flex;
+                            // flex-direction: column;
+                        }
+        
+                        ::ng-deep .mat-icon-button{
+                            width: 30px;
+                            height: 30px;
+                            text-align: center;
+                        }
+        
+                        ::ng-deep .mat-icon{
+                            font-size: 15px;
+                        }
+                    }
+                    
+                    .name{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 10px;
+    
+                        h1{
+                            margin: 0;
+                            font-size: 12px;
+                            font-family: $font-base;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
