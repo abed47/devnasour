@@ -13,7 +13,7 @@ import { BgSelectDialogComponent } from '../bg-select-dialog/bg-select-dialog.co
 })
 export class RightPanelComponent implements OnInit, OnDestroy {
 
-  public selectedObjectType: "text" | "image" | "shape" | "brush" | "path" | "group" | null = null;
+  public selectedObjectType: "text" | "image" | "shape" | "brush" | "path" | "group" | "templates" | null = null;
 
   public fontList = [
     'Dancing Script',
@@ -74,9 +74,9 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.editorService.getObjectSubject().subscribe((r: any) => this.handleObjectEvent(r)));
     this.subscriptions.push(this.editorService.getSelectionSubject().subscribe((r: any) => this.handleObjectSelection(r)));
     this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
-      if(r === "brush") this.selectedObjectType = "brush"
+      if(r === "brush") this.selectedObjectType = "brush";
+      if(r === "templates") this.selectedObjectType = "templates";
     }))
-    // this.subscriptions.push(this.)
   }
 
   public handleObjectSelection(e: {action: string, object: any, type: "text" | "image" | "shape" | "path" | null}){
@@ -175,19 +175,22 @@ export class RightPanelComponent implements OnInit, OnDestroy {
     this.editorService.updateObject("update", "update", { type: "path-fill", value: e, width: this.objWidth, height: this.objHeight, stroke: false});
   }
   
-    private handleFormatObjectType (e){
-      if(e === null) return null;
-      if(e === "text") return "text";
-      if(e === "rect" || e === "circle" || e === "triangle") return "shape"
-      if(e === "image") return "image";
-      if(e === "path") return "path";
-      if(e === "group") return "group";
-      return null
-    }
+  private handleFormatObjectType (e){
+    if(e === null) return null;
+    if(e === "text") return "text";
+    if(e === "rect" || e === "circle" || e === "triangle") return "shape"
+    if(e === "image") return "image";
+    if(e === "path") return "path";
+    if(e === "group") return "group";
+    return null
+  }
 
   public onDeleteClick(){
     this.editorService.generalEvent({type: "action", name: "delete-object"})
   }
 
-  
+  /*============================================TEMPLATE METHODS=====================================*/
+  getTemplates() {}
+  searchTemplates() {}
+  selectTemplate() {}
 }

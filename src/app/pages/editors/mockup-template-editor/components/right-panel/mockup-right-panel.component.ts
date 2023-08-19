@@ -13,7 +13,7 @@ import { MockupBgSelectDialogComponent } from '../bg-select-dialog/mockup-bg-sel
 })
 export class MockupRightPanelComponent implements OnInit, OnDestroy {
 
-  public selectedObjectType: "text" | "image" | "shape" | "brush" | "path" | "group" | null = null;
+  public selectedObjectType: "text" | "image" | "shape" | "brush" | "path" | "group" | "templates" | null = null;
 
   public fontList = [
     'Dancing Script',
@@ -74,8 +74,11 @@ export class MockupRightPanelComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.editorService.getObjectSubject().subscribe((r: any) => this.handleObjectEvent(r)));
     this.subscriptions.push(this.editorService.getSelectionSubject().subscribe((r: any) => this.handleObjectSelection(r)));
     this.subscriptions.push(this.editorService.getToolSubject().subscribe(r => {
-      if(r === "brush") this.selectedObjectType = "brush"
-    }))
+      console.log(r);
+      if(r === "brush") this.selectedObjectType = "brush";
+      if(r === "text") this.selectedObjectType = "text";
+      if(r === "templates") this.selectedObjectType = "templates";
+    }));
     // this.subscriptions.push(this.)
   }
 

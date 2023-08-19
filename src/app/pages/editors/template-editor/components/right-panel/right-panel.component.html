@@ -354,4 +354,14 @@
         </div>
 
     </div>
+
+    <div [hidden]="selectedObjectType !== 'templates'" class="templates-settings">
+        <div class="templates-container">
+            <mat-tab-group class="templates_container_tabs">
+                <mat-tab label="First" class="templates-container-tab"> Content 1 </mat-tab>
+                <mat-tab label="Second" class="templates-container-tab"> Content 2 </mat-tab>
+                <mat-tab label="Third" class="templates-container-tab"> Content 3 </mat-tab>
+              </mat-tab-group>
+        </div>
+    </div>
 </div>

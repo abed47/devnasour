@@ -1,7 +1,7 @@
 @import 'src/styles/styles.scss';
-
+$rightPanelWidth: 300px;
 .right-panel{
-    width: 300px;
+    width: $rightPanelWidth;
     background-color: white;
     height: 100%;
     @include init-flex(column);
@@ -246,4 +246,31 @@
         }
     }
 
+    .templates-settings{
+        width: 100%;
+        height: 100%;
+        .templates-container{
+            height: 100%;
+            // display: none;
+            ::ng-deep .mat-tab-labels {
+                width: $rightPanelWidth !important;
+                max-width: 0 !important;
+                min-width: $rightPanelWidth !important;
+            }
+            ::ng-deep .mat-tab-label {
+                max-width: calc($rightPanelWidth / 3) !important;
+                min-width: 0 !important;
+                width: 100px !important;
+                padding: 0 !important;
+            }
+            .templates_container_tabs {
+                width: 100%;
+                display: none !important;
+
+                
+            }
+        }
+    }
+
+    
 }

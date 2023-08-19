@@ -27,6 +27,7 @@ import { MockupRightPanelComponent } from 'src/app/pages/editors/mockup-template
 import { MockupSideNavComponent } from 'src/app/pages/editors/mockup-template-editor/components/side-nav/mockup-side-nav.component';
 import { MockupTopNavComponent } from 'src/app/pages/editors/mockup-template-editor/components/top-nav/mockup-top-nav.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
+    MatTabsModule,
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
